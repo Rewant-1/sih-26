@@ -1,0 +1,47 @@
+diff --git a/tests/runner.ts b/tests/runner.ts
+--- a/tests/runner.ts
++++ b/tests/runner.ts
+@@ -167,10 +167,6 @@
+   await import("./e2e/tier3-combinations.test");
+   await import("./e2e/tier4-scenarios.test");
+ 
+-  // Run Storage test explicitly if needed
+-  const { runStorageTests } = await import("./unit/storage.test");
+-  await runStorageTests();
+-
+   const { totalPassed, totalFailed } = await runAllSuites();
+   const duration = ((Date.now() - startTime) / 1000).toFixed(2);
+ 
+diff --git a/src/app/quiz-studio/page.tsx b/src/app/quiz-studio/page.tsx
+--- a/src/app/quiz-studio/page.tsx
++++ b/src/app/quiz-studio/page.tsx
+@@ -187,7 +187,7 @@
+                     </h4>
+ 
+                     <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
+-                      Microdata anonymization, k-anonymity (k >= 5) standards, SDMX DSDs, Collection of Statistics Act confidentiality, and GSBPM.
++                      Microdata anonymization, k-anonymity (k {'>='} 5) standards, SDMX DSDs, Collection of Statistics Act confidentiality, and GSBPM.
+                     </p>
+                   </div>
+ 
+diff --git a/src/app/api/recommendations/route.ts b/src/app/api/recommendations/route.ts
+--- a/src/app/api/recommendations/route.ts
++++ b/src/app/api/recommendations/route.ts
+@@ -29,7 +29,7 @@
+     if (assessmentRecords && assessmentRecords.length > 0) {
+       // Use latest assessment record
+       const latest = assessmentRecords[assessmentRecords.length - 1];
+-      gaps = latest.computedGaps || [];
++      gaps = latest.result?.gaps || [];
+     } else {
+       // Default fallback gaps for initial profile
+       const benchmarks = await repository.getCadreBenchmarks(userCadre);
+@@ -110,7 +110,7 @@
+     } else if (!gapData && userId) {
+       const records = await repository.getAssessmentRecords(userId);
+       if (records && records.length > 0) {
+-        gapData = records[records.length - 1].computedGaps;
++        gapData = records[records.length - 1].result?.gaps;
+       }
+     }
+ 

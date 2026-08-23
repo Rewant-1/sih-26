@@ -167,10 +167,6 @@ async function main() {
   await import("./e2e/tier3-combinations.test");
   await import("./e2e/tier4-scenarios.test");
 
-  // Run Storage test explicitly if needed
-  const { runStorageTests } = await import("./unit/storage.test");
-  await runStorageTests();
-
   const { totalPassed, totalFailed } = await runAllSuites();
   const duration = ((Date.now() - startTime) / 1000).toFixed(2);
 

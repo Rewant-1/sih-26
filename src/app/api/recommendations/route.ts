@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
     if (assessmentRecords && assessmentRecords.length > 0) {
       // Use latest assessment record
       const latest = assessmentRecords[assessmentRecords.length - 1];
-      gaps = latest.computedGaps || [];
+      gaps = latest.result?.gaps || [];
     } else {
       // Default fallback gaps for initial profile
       const benchmarks = await repository.getCadreBenchmarks(userCadre);
@@ -110,7 +110,7 @@ export async function POST(request: NextRequest) {
     } else if (!gapData && userId) {
       const records = await repository.getAssessmentRecords(userId);
       if (records && records.length > 0) {
-        gapData = records[records.length - 1].computedGaps;
+        gapData = records[records.length - 1].result?.gaps;
       }
     }
 

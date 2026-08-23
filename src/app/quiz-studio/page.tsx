@@ -187,7 +187,7 @@ export default function QuizStudioPage() {
                     </h4>
 
                     <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
-                      Microdata anonymization, k-anonymity (k >= 5) standards, SDMX DSDs, Collection of Statistics Act confidentiality, and GSBPM.
+                      Microdata anonymization, k-anonymity (k {'>='} 5) standards, SDMX DSDs, Collection of Statistics Act confidentiality, and GSBPM.
                     </p>
                   </div>
 
