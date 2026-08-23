@@ -1,0 +1,317 @@
+[
+  {
+    "identifier": "do_nssta_tpac_001",
+    "name": "Advanced National Accounts & Supply-Use Tables (SUT) Masterclass",
+    "code": "NSSTA-TPAC-2026-01",
+    "description": "Intensive 5-day residential programme on advanced SNA 2008 compilation, constructing Supply and Use Tables (SUT), double deflation, and reconciling informal sector estimates.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "National Statistical Systems Training Academy (NSSTA)",
+    "source": "NSSTA TPAC",
+    "deliveryMode": "Instructor-Led Classroom (NSSTA Greater Noida)",
+    "duration": "5 Days Residential (30 Hours)",
+    "durationMinutes": 1800,
+    "rating": 4.95,
+    "enrolledCount": 120,
+    "certificationAvailable": true,
+    "targetAudience": ["ISS_ASSISTANT_DIRECTOR"],
+    "competencies": [
+      {
+        "id": "STAT_NAT_02",
+        "name": "National Accounts Statistics & SUT Compilation",
+        "competencyArea": "Statistical Competencies",
+        "level": 4,
+        "weight": 1.0
+      },
+      {
+        "id": "STAT_ASI_04",
+        "name": "Industrial & Enterprise Statistics (ASI & Economic Census)",
+        "competencyArea": "Statistical Competencies",
+        "level": 4,
+        "weight": 0.8
+      }
+    ],
+    "learningOutcomes": [
+      "Construct balanced Supply and Use Tables (SUT) for 140 product and industry groups",
+      "Implement double deflation using producer price and trade indices",
+      "Model Financial Intermediation Services Indirectly Measured (FISIM) across institutional sectors"
+    ],
+    "tpacMetadata": {
+      "calendarYear": "2026-27",
+      "batchSchedule": "May 18-22, 2026",
+      "venue": "NSSTA Campus, Greater Noida, UP",
+      "courseDirector": "Additional Director General, NAD & NSSTA",
+      "nominationDeadline": "2026-04-30",
+      "targetParticipantsLimit": 35
+    }
+  },
+  {
+    "identifier": "do_nssta_tpac_002",
+    "name": "Executive Workshop on Index Numbers Revision (CPI, IIP & WPI)",
+    "code": "NSSTA-TPAC-2026-02",
+    "description": "High-level technical workshop on base year revisions, modernizing price collection, hedonic quality adjustment, and chain-base index methodologies.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "National Statistical Systems Training Academy (NSSTA)",
+    "source": "NSSTA TPAC",
+    "deliveryMode": "Instructor-Led Classroom (NSSTA Greater Noida)",
+    "duration": "3 Days Residential (18 Hours)",
+    "durationMinutes": 1080,
+    "rating": 4.85,
+    "enrolledCount": 140,
+    "certificationAvailable": true,
+    "targetAudience": ["ISS_ASSISTANT_DIRECTOR", "SENIOR_STATISTICAL_OFFICER"],
+    "competencies": [
+      {
+        "id": "STAT_IDX_03",
+        "name": "Index Numbers & Price Statistics (CPI, IIP, WPI)",
+        "competencyArea": "Statistical Competencies",
+        "level": 4,
+        "weight": 1.0
+      },
+      {
+        "id": "STAT_TSA_06",
+        "name": "Time Series Analysis & Seasonal Adjustment",
+        "competencyArea": "Statistical Competencies",
+        "level": 3,
+        "weight": 0.7
+      }
+    ],
+    "learningOutcomes": [
+      "Execute base-year revision workflows for CPI and IIP",
+      "Formulate weighting diagrams from Household Consumer Expenditure Survey microdata",
+      "Implement international hedonic pricing standards for high-tech commodities"
+    ],
+    "tpacMetadata": {
+      "calendarYear": "2026-27",
+      "batchSchedule": "June 15-17, 2026",
+      "venue": "NSSTA Campus, Greater Noida, UP",
+      "courseDirector": "Deputy Director General, Price Statistics Division",
+      "nominationDeadline": "2026-05-31",
+      "targetParticipantsLimit": 30
+    }
+  },
+  {
+    "identifier": "do_nssta_tpac_003",
+    "name": "Advanced Multi-Stage Sampling & Weight Calibration in NSS Rounds",
+    "code": "NSSTA-TPAC-2026-03",
+    "description": "Rigorous residential programme on probability sampling, master frame development, small area estimation, and survey weight calibration using auxiliary data.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "National Statistical Systems Training Academy (NSSTA)",
+    "source": "NSSTA TPAC",
+    "deliveryMode": "Instructor-Led Classroom (NSSTA Greater Noida)",
+    "duration": "5 Days Residential (30 Hours)",
+    "durationMinutes": 1800,
+    "rating": 4.9,
+    "enrolledCount": 110,
+    "certificationAvailable": true,
+    "targetAudience": ["ISS_ASSISTANT_DIRECTOR"],
+    "competencies": [
+      {
+        "id": "STAT_SMPL_01",
+        "name": "Sampling Design & Survey Methodology",
+        "competencyArea": "Statistical Competencies",
+        "level": 4,
+        "weight": 1.0
+      },
+      {
+        "id": "STAT_PRB_05",
+        "name": "Applied Probability & Inferential Estimation",
+        "competencyArea": "Statistical Competencies",
+        "level": 4,
+        "weight": 0.9
+      }
+    ],
+    "learningOutcomes": [
+      "Design complex multi-stage sampling plans optimizing survey precision vs operational cost",
+      "Implement Generalized Regression (GREG) and Small Area Estimation (SAE) models",
+      "Calibrate multi-stage survey weights using administrative register totals"
+    ],
+    "tpacMetadata": {
+      "calendarYear": "2026-27",
+      "batchSchedule": "July 20-24, 2026",
+      "venue": "NSSTA Campus, Greater Noida, UP",
+      "courseDirector": "Head of SDRD & Faculty, NSSTA",
+      "nominationDeadline": "2026-06-30",
+      "targetParticipantsLimit": 30
+    }
+  },
+  {
+    "identifier": "do_nssta_tpac_004",
+    "name": "Intensive Residential Bootcamp: Reproducible Analytical Pipelines (RAP) in R & Python",
+    "code": "NSSTA-TPAC-2026-04",
+    "description": "Hands-on coding bootcamp at NSSTA computing labs covering modern R package development, Polars high-performance data processing, version control with Git, and automated report pipelines.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "National Statistical Systems Training Academy (NSSTA)",
+    "source": "NSSTA TPAC",
+    "deliveryMode": "Instructor-Led Classroom (NSSTA Greater Noida)",
+    "duration": "5 Days Residential (30 Hours)",
+    "durationMinutes": 1800,
+    "rating": 4.95,
+    "enrolledCount": 160,
+    "certificationAvailable": true,
+    "targetAudience": ["ISS_ASSISTANT_DIRECTOR", "SENIOR_STATISTICAL_OFFICER"],
+    "competencies": [
+      {
+        "id": "TECH_R_01",
+        "name": "Statistical Computing with R for Official Statistics",
+        "competencyArea": "Technical Competencies",
+        "level": 4,
+        "weight": 1.0
+      },
+      {
+        "id": "TECH_PY_02",
+        "name": "Python for Data Engineering & Official Statistical Analytics",
+        "competencyArea": "Technical Competencies",
+        "level": 3,
+        "weight": 0.8
+      }
+    ],
+    "learningOutcomes": [
+      "Architect end-to-end reproducible analytical pipelines for official survey publications",
+      "Develop and document internal R packages conforming to NSO coding standards",
+      "Automate statistical bulletin generation with parameterized Quarto templates"
+    ],
+    "tpacMetadata": {
+      "calendarYear": "2026-27",
+      "batchSchedule": "August 17-21, 2026",
+      "venue": "Computer Lab 1, NSSTA Greater Noida",
+      "courseDirector": "Director, DIID & Technical Training Head, NSSTA",
+      "nominationDeadline": "2026-07-31",
+      "targetParticipantsLimit": 28
+    }
+  },
+  {
+    "identifier": "do_nssta_tpac_005",
+    "name": "Automated Microdata Scrutiny, Fellegi-Holt Validation & Imputation Workshop",
+    "code": "NSSTA-TPAC-2026-05",
+    "description": "Specialized training on statistical data editing, logical consistency matrices, Fellegi-Holt methodology, and modern multivariate imputation techniques.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "National Statistical Systems Training Academy (NSSTA)",
+    "source": "NSSTA TPAC",
+    "deliveryMode": "Instructor-Led Classroom (NSSTA Greater Noida)",
+    "duration": "4 Days Residential (24 Hours)",
+    "durationMinutes": 1440,
+    "rating": 4.8,
+    "enrolledCount": 130,
+    "certificationAvailable": true,
+    "targetAudience": ["ISS_ASSISTANT_DIRECTOR", "SENIOR_STATISTICAL_OFFICER"],
+    "competencies": [
+      {
+        "id": "TECH_VAL_05",
+        "name": "Automated Microdata Scrutiny, Validation & Imputation",
+        "competencyArea": "Technical Competencies",
+        "level": 4,
+        "weight": 1.0
+      },
+      {
+        "id": "TECH_R_01",
+        "name": "Statistical Computing with R for Official Statistics",
+        "competencyArea": "Technical Competencies",
+        "level": 3,
+        "weight": 0.6
+      }
+    ],
+    "learningOutcomes": [
+      "Formulate mathematical error localization rules minimizing data modification",
+      "Implement donor hot-deck and predictive mean matching for missing values",
+      "Evaluate post-imputation bias and variance distortion"
+    ],
+    "tpacMetadata": {
+      "calendarYear": "2026-27",
+      "batchSchedule": "September 14-17, 2026",
+      "venue": "NSSTA Campus, Greater Noida, UP",
+      "courseDirector": "Deputy Director General, Data Processing Division",
+      "nominationDeadline": "2026-08-31",
+      "targetParticipantsLimit": 30
+    }
+  },
+  {
+    "identifier": "do_nssta_tpac_006",
+    "name": "Microdata Anonymization & Statistical Disclosure Control (SDC) with sdcMicro",
+    "code": "NSSTA-TPAC-2026-06",
+    "description": "Hands-on lab course on protecting respondent confidentiality: measuring re-identification risk, implementing k-anonymity, l-diversity, perturbation, and releasing open microdata safely under the DPDP Act.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "National Statistical Systems Training Academy (NSSTA)",
+    "source": "NSSTA TPAC",
+    "deliveryMode": "Instructor-Led Classroom (NSSTA Greater Noida)",
+    "duration": "3 Days Residential (18 Hours)",
+    "durationMinutes": 1080,
+    "rating": 4.9,
+    "enrolledCount": 145,
+    "certificationAvailable": true,
+    "targetAudience": ["ISS_ASSISTANT_DIRECTOR", "SENIOR_STATISTICAL_OFFICER"],
+    "competencies": [
+      {
+        "id": "GOV_SDC_02",
+        "name": "Statistical Disclosure Control & Microdata Anonymization",
+        "competencyArea": "Digital Governance & Data Stewardship",
+        "level": 4,
+        "weight": 1.0
+      },
+      {
+        "id": "TECH_R_01",
+        "name": "Statistical Computing with R for Official Statistics",
+        "competencyArea": "Technical Competencies",
+        "level": 3,
+        "weight": 0.7
+      }
+    ],
+    "learningOutcomes": [
+      "Calculate global and individual re-identification disclosure risks using sdcMicro",
+      "Apply recoding, micro-aggregation, and local suppression to achieve k-anonymity (k>=5)",
+      "Audit microdata releases for compliance with DPDP Act and national data governance standards"
+    ],
+    "tpacMetadata": {
+      "calendarYear": "2026-27",
+      "batchSchedule": "October 12-14, 2026",
+      "venue": "Computer Lab 2, NSSTA Greater Noida",
+      "courseDirector": "Director (Data Stewardship), DIID",
+      "nominationDeadline": "2026-09-30",
+      "targetParticipantsLimit": 25
+    }
+  },
+  {
+    "identifier": "do_nssta_tpac_007",
+    "name": "Executive Leadership & Evidence-Based Policy Advisory for Senior Official Statisticians",
+    "code": "NSSTA-TPAC-2026-07",
+    "description": "Senior leadership programme on translating statistical intelligence into high-impact policy briefs for Cabinet Secretariat, NITI Aayog, and PMO, handling high-stakes media conferences, and safeguarding statistical integrity.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "National Statistical Systems Training Academy (NSSTA)",
+    "source": "NSSTA TPAC",
+    "deliveryMode": "Instructor-Led Classroom (NSSTA Greater Noida)",
+    "duration": "3 Days Residential (18 Hours)",
+    "durationMinutes": 1080,
+    "rating": 4.95,
+    "enrolledCount": 95,
+    "certificationAvailable": true,
+    "targetAudience": ["ISS_ASSISTANT_DIRECTOR"],
+    "competencies": [
+      {
+        "id": "BEH_POL_03",
+        "name": "Evidence-Based Policy Advisory & Insights Synthesis",
+        "competencyArea": "Behavioural & Managerial Competencies",
+        "level": 4,
+        "weight": 1.0
+      },
+      {
+        "id": "BEH_COM_05",
+        "name": "Statistical Data Storytelling, Visualization & Public Dissemination",
+        "competencyArea": "Behavioural & Managerial Competencies",
+        "level": 4,
+        "weight": 0.8
+      }
+    ],
+    "learningOutcomes": [
+      "Draft concise policy advisories summarizing complex socio-economic survey findings",
+      "Lead transparent official press conferences and handle adversarial media scrutiny",
+      "Uphold scientific objectivity and institutional independence under external pressures"
+    ],
+    "tpacMetadata": {
+      "calendarYear": "2026-27",
+      "batchSchedule": "November 23-25, 2026",
+      "venue": "Executive Training Hall, NSSTA Greater Noida",
+      "courseDirector": "Director General, NSO & Senior ISS Mentors",
+      "nominationDeadline": "2026-10-31",
+      "targetParticipantsLimit": 20
+    }
+  }
+]

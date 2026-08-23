@@ -1,0 +1,1191 @@
+[
+  {
+    "id": "STAT_SMPL_01",
+    "code": "STAT_SMPL_01",
+    "name": "Sampling Design & Survey Methodology",
+    "domain": "Statistical Competencies",
+    "domainCode": "STAT",
+    "description": "Principles of multi-stage stratified probability sampling, circular systematic sampling, sampling frames (Urban Frame Survey - UFS, Census enumeration blocks), and estimation in large-scale sample surveys (NSS, PLFS, ASUSE).",
+    "officialDivisionFocus": ["SDRD", "FOD", "SSSD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Identifies basic sampling terminology (SRS, stratified sampling, cluster sampling) and components of a sample frame.",
+        "behavioralIndicators": ["Can define sample frame and sampling unit", "Understands difference between probability and purposive sampling"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Applies standard sampling selection methods (random number tables, circular systematic sampling) for primary sampling units (PSUs).",
+        "behavioralIndicators": ["Executes circular systematic selection of households in CAPI", "Accurately calculates sampling intervals"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Executes multi-stage stratified survey designs, calculates multipliers and sample weights, and handles non-response adjustments.",
+        "behavioralIndicators": ["Computes design weights for PPSWR and SRSWOR", "Formulates post-stratification weight adjustments"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Formulates custom sampling designs for complex socio-economic surveys, optimizes sample allocation across strata, and minimizes design effects.",
+        "behavioralIndicators": ["Optimizes Neyman allocation across survey strata", "Models design effects (deff) in multi-stage surveys"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Designs national sampling frameworks, evaluates frame degradation, and advises the National Statistical Commission on survey methodologies.",
+        "behavioralIndicators": ["Directs national sampling master frame redesign", "Advises international bodies on survey methodology"]
+      }
+    ]
+  },
+  {
+    "id": "STAT_NAT_02",
+    "code": "STAT_NAT_02",
+    "name": "National Accounts Statistics & SUT Compilation",
+    "domain": "Statistical Competencies",
+    "domainCode": "STAT",
+    "description": "System of National Accounts (SNA 2008), gross domestic product (GDP), gross value added (GVA) by economic activity, Supply and Use Tables (SUT), and Sequence of Accounts.",
+    "officialDivisionFocus": ["NAD", "ESD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Understands macro-economic aggregates (GDP, GVA, NNI) and the distinction between constant and current prices.",
+        "behavioralIndicators": ["Explains nominal vs real GDP", "Differentiates factor cost, basic prices, and market prices"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Compiles sector-specific GVA for standard industries using direct reporting statements and administrative data.",
+        "behavioralIndicators": ["Extracts corporate financial data for manufacturing GVA", "Calculates intermediate consumption ratios"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Constructs Input-Output balance tables, applies double deflation methods, and reconciles production vs expenditure accounts.",
+        "behavioralIndicators": ["Implements double deflation on manufacturing and trade", "Reconciles discrepancies in GDP expenditure components"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Develops comprehensive Supply and Use Tables (SUT), estimates Financial Intermediation Services Indirectly Measured (FISIM), and models informal sector contribution.",
+        "behavioralIndicators": ["Constructs 140x140 product by industry SUT matrix", "Estimates FISIM allocation across institutional sectors"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Directs national base-year revision exercises, implements SNA updates, and represents India at UN Expert Group meetings on National Accounts.",
+        "behavioralIndicators": ["Leads national base year revision for National Accounts", "Authored official methodological manuals on SNA"]
+      }
+    ]
+  },
+  {
+    "id": "STAT_IDX_03",
+    "code": "STAT_IDX_03",
+    "name": "Index Numbers & Price Statistics (CPI, IIP, WPI)",
+    "domain": "Statistical Competencies",
+    "domainCode": "STAT",
+    "description": "Compilation methodologies for Consumer Price Index (CPI-Rural/Urban/Combined), Index of Industrial Production (IIP), Wholesale Price Index (WPI), Laspeyres, Paasche, and Fisher formulas, and chain-linking.",
+    "officialDivisionFocus": ["ESD", "FOD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Explains concepts of base year, price relative, basket of goods, and Laspeyres index formula.",
+        "behavioralIndicators": ["Understands weighting diagrams and elementary price relatives", "Knows current CPI base year and group classifications"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Scrutinizes monthly price quotations collected from urban/rural markets; verifies item substitutions.",
+        "behavioralIndicators": ["Validates field price schedules from selected market centers", "Handles temporary specification changes in representative items"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Calculates item-level, sub-group, and group indices; handles seasonal item imputations and missing price quotes.",
+        "behavioralIndicators": ["Applies geometric mean for elementary aggregates", "Implements carry-forward and cell-mean imputation for missing price quotes"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Formulates index weighting diagrams from Household Consumer Expenditure Survey (HCES) data; implements chain-base methodology.",
+        "behavioralIndicators": ["Derives state-level CPI weights from CES microdata", "Builds chain-linked IIP series bridging revisions"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Spearheads national price index revisions, quality adjustments (hedonic pricing), and harmonization with IMF/ILO standards.",
+        "behavioralIndicators": ["Chairs technical advisory committee on price statistics", "Standardizes scanner data ingestion for national CPI"]
+      }
+    ]
+  },
+  {
+    "id": "STAT_ASI_04",
+    "code": "STAT_ASI_04",
+    "name": "Industrial & Enterprise Statistics (ASI & Economic Census)",
+    "domain": "Statistical Competencies",
+    "domainCode": "STAT",
+    "description": "Annual Survey of Industries (ASI) framework, National Industrial Classification (NIC-2008), factory registration frame, capital structure, input-output ratios, and Economic Census.",
+    "officialDivisionFocus": ["ESD", "FOD", "DPD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Understands definitions of factory, fixed capital, working capital, gross output, and net value added under ASI.",
+        "behavioralIndicators": ["Identifies scope under Factories Act 1948 Sections 2m(i) and 2m(ii)", "Knows basic NIC 2-digit and 3-digit classifications"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Canvasses ASI schedule Part-I and Part-II; validates balance sheet entries against audited financial statements.",
+        "behavioralIndicators": ["Inspects factory profit & loss statements against canvassed schedule", "Scrutinizes energy consumption and raw material blocks"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Resolves unit-level non-response; performs block-level data scrutiny and consistency checks across capital and output accounts.",
+        "behavioralIndicators": ["Identifies negative value added anomalies and investigates causes", "Applies multiplier weighting across census and sample sectors"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Synthesizes annual industrial summary reports; links ASI microdata with MCA-21 database for corporate enterprise analytics.",
+        "behavioralIndicators": ["Integrates ASI survey frames with Ministry of Corporate Affairs data", "Models capital-labor substitution in Indian manufacturing"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Formulates national industrial survey policies, updates NIC classification codes, and modernizes enterprise statistical frameworks.",
+        "behavioralIndicators": ["Authors the national industrial statistics manual", "Leads the design and execution of nationwide Economic Censuses"]
+      }
+    ]
+  },
+  {
+    "id": "STAT_PRB_05",
+    "code": "STAT_PRB_05",
+    "name": "Applied Probability & Inferential Estimation",
+    "domain": "Statistical Competencies",
+    "domainCode": "STAT",
+    "description": "Probability distributions, asymptotic theory, variance estimation for complex survey designs (Jackknife, Balanced Repeated Replication - BRR, Linearization), and weight calibration.",
+    "officialDivisionFocus": ["SDRD", "NAD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Explains standard error, confidence intervals, p-values, and basic probability distributions.",
+        "behavioralIndicators": ["Understands central limit theorem in survey context", "Identifies normal, binomial, and Poisson distributions"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Calculates standard errors and confidence intervals for simple random samples and standard stratified estimators.",
+        "behavioralIndicators": ["Computes standard errors for sample means and proportions", "Performs hypothesis testing on survey sub-groups"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Computes design-based standard errors using Taylor series linearization or bootstrap methods for survey estimates.",
+        "behavioralIndicators": ["Estimates variance for ratio estimators in multi-stage surveys", "Implements Jackknife replication for complex indicators"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Implements Generalized Regression (GREG) estimation and calibration estimators using auxiliary administrative totals.",
+        "behavioralIndicators": ["Calibrates survey weights using rake algorithm against Census totals", "Develops empirical best linear unbiased predictors (EBLUP)"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Researches and develops novel Small Area Estimation (SAE) models to produce reliable district-level official indicators.",
+        "behavioralIndicators": ["Publishes peer-reviewed methodologies on official survey estimation", "Architects national SAE framework for disaggregated SDG metrics"]
+      }
+    ]
+  },
+  {
+    "id": "STAT_TSA_06",
+    "code": "STAT_TSA_06",
+    "name": "Time Series Analysis & Seasonal Adjustment",
+    "domain": "Statistical Competencies",
+    "domainCode": "STAT",
+    "description": "Stochastic processes, ARIMA/SARIMA modeling, trend-cycle decomposition, seasonal adjustment using X-13ARIMA-SEATS, and economic forecasting.",
+    "officialDivisionFocus": ["ESD", "NAD", "DIID"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Identifies components of a time series: trend, seasonality, cyclical, and irregular variations.",
+        "behavioralIndicators": ["Distinguishes between additive and multiplicative time series models", "Understands quarterly and monthly seasonality patterns"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Plots time series data, performs moving averages, and checks for basic stationarity (unit root tests).",
+        "behavioralIndicators": ["Conducts Augmented Dickey-Fuller tests in statistical software", "Computes moving average smoothers for monthly indicators"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Estimates ARIMA/SARIMA models and generates baseline short-term forecasts for key economic indicators.",
+        "behavioralIndicators": ["Diagnoses ACF and PACF plots for model identification", "Forecasts monthly inflation and industrial production indices"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Executes robust seasonal adjustment on monthly/quarterly series (IIP, CPI, GDP) using X-13ARIMA-SEATS protocols.",
+        "behavioralIndicators": ["Configures regARIMA models with trading day and holiday effects", "Evaluates spectral diagnostic tests for residual seasonality"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Establishes official seasonal adjustment standards for the National Statistical System and models structural macroeconomic breaks.",
+        "behavioralIndicators": ["Formulates the national policy for official seasonally adjusted releases", "Leads econometric modeling of structural macroeconomic shocks"]
+      }
+    ]
+  },
+  {
+    "id": "STAT_DMO_07",
+    "code": "STAT_DMO_07",
+    "name": "Demographic & Social Statistics (PLFS & SDG Framework)",
+    "domain": "Statistical Competencies",
+    "domainCode": "STAT",
+    "description": "Labour force metrics (UPSS, CWS, LFPR, WPR, UR), poverty metrics, health/education indicators, and SDG National Indicator Framework (NIF) monitoring.",
+    "officialDivisionFocus": ["SSSD", "FOD", "SDRD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Understands basic labour force concepts (Usual Principal & Subsidiary Status, Current Weekly Status) and SDG terminology.",
+        "behavioralIndicators": ["Defines LFPR, WPR, and Unemployment Rate according to NSS concepts", "Recognizes the 17 UN Sustainable Development Goals"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Canvasses PLFS household and person schedules; calculates elementary labour force participation rates.",
+        "behavioralIndicators": ["Canvasses 7-day activity recall matrices accurately in CAPI", "Calculates youth unemployment rates across states"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Generates quarterly and annual PLFS bulletin tables; tracks SDG baseline vs current milestone performance.",
+        "behavioralIndicators": ["Produces standard PLFS tabulation tables with statistical error bands", "Updates the SDG National Indicator Framework dashboard"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Evaluates structural shifts in informal employment, gender wage differentials, and multidimensional deprivation indices.",
+        "behavioralIndicators": ["Models transitions across employment statuses using longitudinal PLFS panels", "Analyzes time-use survey data for unpaid care work quantification"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Formulates national social statistics monitoring frameworks and guides inter-agency SDG data alignment with UN agencies.",
+        "behavioralIndicators": ["Directs national social indicator strategy with NITI Aayog", "Represents India at the UN Statistical Commission on Social Statistics"]
+      }
+    ]
+  },
+  {
+    "id": "STAT_ENV_08",
+    "code": "STAT_ENV_08",
+    "name": "Environmental-Economic Accounting (SEEA & EnviStats)",
+    "domain": "Statistical Competencies",
+    "domainCode": "STAT",
+    "description": "System of Environmental-Economic Accounting (SEEA-Central Framework & Ecosystem Accounting), natural capital accounting, and energy/water balance statistics.",
+    "officialDivisionFocus": ["SSSD", "NAD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Defines basic environmental indicators (greenhouse emissions, forest cover, ambient air quality metrics).",
+        "behavioralIndicators": ["Understands relationship between economic activity and environmental degradation", "Identifies primary national environmental data sources"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Compiles physical supply and use tables for energy and water from administrative reports.",
+        "behavioralIndicators": ["Extracts state-level mineral and forest extraction statistics", "Compiles basic energy balance accounts"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Formulates land cover and asset accounts; models ecosystem condition metrics in accordance with SEEA guidelines.",
+        "behavioralIndicators": ["Constructs physical asset accounts for forest and water resources", "Maps ecosystem extent using satellite land cover classifications"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Conducts economic valuation of ecosystem services and produces EnviStats India annual publications.",
+        "behavioralIndicators": ["Applies hedonic pricing and travel cost methods for ecosystem valuation", "Drafts comprehensive chapters for EnviStats India"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Integrates Green GDP and natural capital degradation metrics into the core National Accounts framework.",
+        "behavioralIndicators": ["Architects India's SEEA Ecosystem Accounting master framework", "Leads international technical discussions on natural capital accounting"]
+      }
+    ]
+  },
+  {
+    "id": "TECH_R_01",
+    "code": "TECH_R_01",
+    "name": "Statistical Computing with R for Official Statistics",
+    "domain": "Technical Competencies",
+    "domainCode": "TECH",
+    "description": "Data wrangling (dplyr, data.table), survey data analysis (survey, srvyr), SDMX connectors (rsdmx), and automated reporting (rmarkdown, knitr).",
+    "officialDivisionFocus": ["DIID", "SDRD", "DPD", "NAD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Executes basic R scripts, loads CSV/RData datasets, and runs summary statistics (summary(), table()).",
+        "behavioralIndicators": ["Loads data frames and examines column types in R", "Calculates basic unweighted summaries"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Cleans and transforms unit-level survey data using tidyverse verbs; generates basic exploratory charts (ggplot2).",
+        "behavioralIndicators": ["Performs filter, mutate, group_by operations on survey records", "Generates publication-quality histograms and scatter plots"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Configures complex survey designs using the survey package to produce weighted tabulations and standard errors.",
+        "behavioralIndicators": ["Constructs svydesign objects incorporating stratification and clustering", "Computes svymean and svyby with design-based standard errors"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Develops modular R packages and reusable data processing pipelines for high-volume survey microdata.",
+        "behavioralIndicators": ["Authors internal R packages with roxygen2 documentation", "Automates survey bulletin compilation with RMarkdown / Quarto"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Architects official R-based statistical infrastructure and mentors national analysts in reproducible analytical pipelines (RAP).",
+        "behavioralIndicators": ["Sets coding and quality standards for all R-based official statistics pipelines", "Leads reproducible analytical pipeline modernization across NSO"]
+      }
+    ]
+  },
+  {
+    "id": "TECH_PY_02",
+    "code": "TECH_PY_02",
+    "name": "Python for Data Engineering & Official Statistical Analytics",
+    "domain": "Technical Competencies",
+    "domainCode": "TECH",
+    "description": "Microdata processing (pandas, polars), numerical modeling (numpy, scipy, statsmodels), automated ETL, and API integration (FastAPI).",
+    "officialDivisionFocus": ["DIID", "DPD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Writes elementary Python scripts, loads tabular data with pandas, and executes basic data inspections.",
+        "behavioralIndicators": ["Reads CSV/Parquet files and checks shape, info, and nulls", "Writes basic conditional loops and functions"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Performs automated data cleaning, merges multiple administrative files, and exports standardized datasets.",
+        "behavioralIndicators": ["Executes joins, merges, and pivot tables across survey schedules", "Cleans string anomalies and standardizes date/code fields"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Implements automated ETL workflows, data validation pipelines, and time-series models using statsmodels.",
+        "behavioralIndicators": ["Builds automated ETL scripts connecting raw CAPI exports to analytical tables", "Fits ARIMA and regression models using statsmodels"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Builds scalable data pipelines utilizing polars / Dask for processing multi-gigabyte census and enterprise datasets.",
+        "behavioralIndicators": ["Optimizes memory and execution using lazy evaluation in Polars", "Deploys FastAPI services for internal microdata querying"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Deploys machine learning algorithms (automated industrial classification) into production statistical pipelines.",
+        "behavioralIndicators": ["Architects scalable cloud data pipelines for pan-India surveys", "Directs AI/ML model governance and accuracy benchmarks"]
+      }
+    ]
+  },
+  {
+    "id": "TECH_SQL_03",
+    "code": "TECH_SQL_03",
+    "name": "Relational Database Management & Complex SQL",
+    "domain": "Technical Competencies",
+    "domainCode": "TECH",
+    "description": "Relational schema design, PostgreSQL/PostGIS, complex analytical queries (window functions, CTEs), and indexing strategies for massive statistical datasets.",
+    "officialDivisionFocus": ["DIID", "DPD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Writes basic SELECT, WHERE, ORDER BY queries on single tables.",
+        "behavioralIndicators": ["Filters and sorts survey establishment records", "Calculates basic column aggregations (COUNT, SUM, AVG)"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Performs multi-table JOIN operations, GROUP BY aggregations, and subqueries on survey databases.",
+        "behavioralIndicators": ["Joins household and person level tables using composite primary keys", "Computes division-wise summaries with HAVING clauses"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Writes advanced SQL using Common Table Expressions (CTEs), window functions (ROW_NUMBER(), RANK()), and stored procedures.",
+        "behavioralIndicators": ["Uses partition by window functions for historical trend calculations", "Develops stored procedures for automated data ingestion checks"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Optimizes query execution plans, configures table partitioning, and manages high-availability statistical data warehouses.",
+        "behavioralIndicators": ["Analyzes EXPLAIN ANALYZE execution trees to optimize complex queries", "Implements table partitioning strategies for multi-year survey data"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Architects the enterprise relational and dimensional data warehouse architecture for MoSPI/DIID.",
+        "behavioralIndicators": ["Designs the national statistical warehouse star/snowflake schema", "Ensures enterprise ACID compliance and disaster recovery protocols"]
+      }
+    ]
+  },
+  {
+    "id": "TECH_CAPI_04",
+    "code": "TECH_CAPI_04",
+    "name": "Computer Assisted Personal Interviewing (CAPI) & Digital Capture",
+    "domain": "Technical Competencies",
+    "domainCode": "TECH",
+    "description": "Development and deployment of CAPI applications using CSPro, Blaise, or custom web/mobile platforms; skip logic, validation rules, and offline data synchronization.",
+    "officialDivisionFocus": ["FOD", "DPD", "DIID"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Operates CAPI mobile/tablet software for canvassing survey schedules in the field.",
+        "behavioralIndicators": ["Navigates tablet survey interface during household interview", "Performs daily local synchronization of canvassed schedules"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Identifies validation error prompts in CAPI apps and resolves data entry inconsistencies during respondent interviews.",
+        "behavioralIndicators": ["Interprets soft and hard edit warnings during field interviews", "Corrects typographical data errors in respondent presence"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Tests and debugs CAPI survey instruments; configures complex routing logic, rosters, and range checks.",
+        "behavioralIndicators": ["Validates skip logic and conditional roster loops before field rollout", "Extracts field paradata (time stamps, GPS coordinates)"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Authors complete CAPI survey applications (CSPro logic/Blaise code), including audio audit and GPS capture features.",
+        "behavioralIndicators": ["Programs complex multi-module survey schedules in CSPro/Blaise", "Configures server-side data reconciliation endpoints"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Directs the national transition to digital survey capture architectures and standardizes multi-mode data collection (CAPI/CATI/CAWI).",
+        "behavioralIndicators": ["Architects next-generation digital data collection standards for India", "Leads global technical consultations on mobile survey platforms"]
+      }
+    ]
+  },
+  {
+    "id": "TECH_VAL_05",
+    "code": "TECH_VAL_05",
+    "name": "Automated Microdata Scrutiny, Validation & Imputation",
+    "domain": "Technical Competencies",
+    "domainCode": "TECH",
+    "description": "Deterministic and probabilistic validation rules, out-of-range checks, logical consistency matrix, and item imputation methods (Hot-deck, Cold-deck, KNN, Multiple Imputation).",
+    "officialDivisionFocus": ["DPD", "FOD", "SDRD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Detects obvious outliers and missing fields during manual or basic programmatic scrutiny of survey schedules.",
+        "behavioralIndicators": ["Flags missing required fields in canvassed schedules", "Identifies impossible demographic relationships (e.g. child age > parent)"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Applies pre-programmed validation rulebooks to flag inconsistent records in survey microdata.",
+        "behavioralIndicators": ["Executes automated batch scrutiny scripts on regional data submissions", "Categorizes errors into warning vs fatal classification"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Formulates mathematical validation rules (using tools like R-validate); executes donor hot-deck imputations.",
+        "behavioralIndicators": ["Programs comprehensive validation rulesets across survey blocks", "Executes nearest-neighbor hot-deck imputation on item non-response"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Implements automated Fellegi-Holt editing systems and multi-variate predictive mean matching for complex surveys.",
+        "behavioralIndicators": ["Implements error localization models minimizing field changes", "Conducts sensitivity analysis on alternative imputation regimes"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Establishes national data scrutiny protocols, error tolerances, and benchmark imputation standards across all statistical divisions.",
+        "behavioralIndicators": ["Authors the national microdata editing and imputation guidelines", "Certifies final microdata quality prior to public release"]
+      }
+    ]
+  },
+  {
+    "id": "TECH_SDMX_06",
+    "code": "TECH_SDMX_06",
+    "name": "Statistical Data and Metadata eXchange (SDMX)",
+    "domain": "Technical Competencies",
+    "domainCode": "TECH",
+    "description": "SDMX 2.1/3.0 architecture, Data Structure Definitions (DSD), Concept Schemes, Codelists, Dataflows, and automated data exchange with international agencies (UN, IMF, World Bank).",
+    "officialDivisionFocus": ["DIID", "SSSD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Explains the purpose of SDMX in standardizing statistical data and metadata exchange.",
+        "behavioralIndicators": ["Identifies benefits of SDMX over unstructured spreadsheet exchanges", "Understands SDMX concepts of dimensions and attributes"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Validates SDMX-ML or SDMX-JSON datasets against published DSDs using standard registry tools.",
+        "behavioralIndicators": ["Uses SDMX matrix browser to inspect dataset structures", "Validates indicator payloads against official codelists"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Authors and maintains DSDs, Codelists, and Concept Schemes for national indicators.",
+        "behavioralIndicators": ["Builds national DSDs for SDG indicators using SDMX tools", "Maps internal database fields to international SDMX structures"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Configures SDMX REST APIs and automated data mapping between internal databases and SDMX dissemination endpoints.",
+        "behavioralIndicators": ["Deploys SDMX web services powering real-time data exchange", "Configures dataflow provisioning with international agencies"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Represents MoSPI on the International SDMX Working Group and leads the national implementation of the SDMX global registry.",
+        "behavioralIndicators": ["Directs the national SDMX architecture implementation across all ministries", "Contributes to global SDMX technical standard specifications"]
+      }
+    ]
+  },
+  {
+    "id": "TECH_GIS_07",
+    "code": "TECH_GIS_07",
+    "name": "Geospatial Analytics & GIS Integration for Official Statistics",
+    "domain": "Technical Competencies",
+    "domainCode": "TECH",
+    "description": "Geographic Information Systems (GIS), spatial sampling frames (UFS digitization), QGIS/ArcGIS, GeoJSON, spatial autocorrelation, and thematic statistical mapping.",
+    "officialDivisionFocus": ["FOD", "SDRD", "DIID"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Reads thematic maps and understands basic spatial data concepts (coordinates, layers, shapefiles).",
+        "behavioralIndicators": ["Interprets district-level statistical choropleth maps", "Understands latitude/longitude coordinates and GPS accuracy"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Generates district-level choropleth maps from tabular statistical outputs using QGIS.",
+        "behavioralIndicators": ["Joins tabular survey indicators to administrative boundary shapefiles", "Applies standard cartographic classification schemes"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Performs spatial joins between survey enumeration blocks and socio-economic microdata; validates UFS digital boundaries.",
+        "behavioralIndicators": ["Digitizes and audits Urban Frame Survey (UFS) block boundaries", "Performs point-in-polygon aggregations for spatial microdata"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Conducts spatial econometric modeling (spatial lag/error models) and builds interactive web-GIS dashboards (Leaflet/Mapbox).",
+        "behavioralIndicators": ["Computes Moran's I and Local Indicators of Spatial Association (LISA)", "Develops responsive web mapping applications for official data"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Directs the integration of the National Spatial Data Infrastructure (NSDI) with the National Statistical Registry.",
+        "behavioralIndicators": ["Architects the national geospatial-statistical data integration framework", "Leads UN-GGIM (Global Geospatial Information Management) initiatives"]
+      }
+    ]
+  },
+  {
+    "id": "GOV_DQAF_01",
+    "code": "GOV_DQAF_01",
+    "name": "Data Quality Assessment Framework (DQAF) & Quality Assurance",
+    "domain": "Digital Governance & Data Stewardship",
+    "domainCode": "GOV",
+    "description": "Application of IMF/UN/MoSPI Data Quality Assessment Frameworks; evaluation of integrity, methodological soundness, accuracy, reliability, serviceability, and accessibility.",
+    "officialDivisionFocus": ["SDRD", "DIID", "NAD", "ESD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Identifies the core dimensions of statistical data quality (timeliness, accuracy, relevance, accessibility).",
+        "behavioralIndicators": ["Understands why data quality matters in official policy formulation", "Recognizes key quality metrics in survey releases"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Implements standard data quality checklists during data entry and initial compilation stages.",
+        "behavioralIndicators": ["Applies division quality checklist to newly processed datasets", "Documents deviations from standard data collection protocols"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Conducts formal DQAF assessments on survey datasets and calculates response rates and sampling errors.",
+        "behavioralIndicators": ["Evaluates statistical outputs across all 5 IMF DQAF dimensions", "Computes item non-response rates and coefficients of variation"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Establishes division-wide Quality Assurance Guidelines (QAG) and leads quality audit missions across field units.",
+        "behavioralIndicators": ["Authors division-specific quality assurance guidelines", "Directs supervisory quality audit teams for national surveys"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Authors the National Quality Assurance Framework (NQAF) for the Indian Statistical System.",
+        "behavioralIndicators": ["Formulates the national statistical quality framework", "Represents India in international quality evaluation peer reviews"]
+      }
+    ]
+  },
+  {
+    "id": "GOV_SDC_02",
+    "code": "GOV_SDC_02",
+    "name": "Statistical Disclosure Control & Microdata Anonymization",
+    "domain": "Digital Governance & Data Stewardship",
+    "domainCode": "GOV",
+    "description": "Disclosure risk assessment, k-anonymity, l-diversity, t-closeness, perturbation methods (noise addition, micro-aggregation, data swapping), and differential privacy.",
+    "officialDivisionFocus": ["DIID", "DPD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Identifies direct identifiers (name, address, Aadhaar) and understands the requirement to strip PII from public datasets.",
+        "behavioralIndicators": ["Knows what constitutes personally identifiable information (PII)", "Ensures raw respondent identities are stripped prior to sharing"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Applies global recoding and top/bottom coding to indirect identifiers (age, district, income brackets).",
+        "behavioralIndicators": ["Implements top-coding on extreme income and wealth observations", "Recodes detailed 5-digit geographical codes into broader regional bands"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Uses tools like sdcMicro to measure re-identification risk and implement k-anonymity on survey microdata files.",
+        "behavioralIndicators": ["Calculates sample and population individual disclosure risks", "Executes k-anonymity (k>=5) and l-diversity algorithms on survey datasets"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Designs anonymization protocols for complex longitudinal and hierarchical datasets balancing privacy risk and analytical utility.",
+        "behavioralIndicators": ["Evaluates information loss metrics after micro-aggregation and noise addition", "Formulates anonymization pipelines for linked household-enterprise data"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Formulates the official MoSPI Microdata Dissemination & Anonymization Policy adhering to the Digital Personal Data Protection (DPDP) Act.",
+        "behavioralIndicators": ["Authors national statistical privacy and dissemination regulations", "Leads the adoption of differential privacy for official statistical products"]
+      }
+    ]
+  },
+  {
+    "id": "GOV_META_03",
+    "code": "GOV_META_03",
+    "name": "Metadata Standards & National Statistical Registries",
+    "domain": "Digital Governance & Data Stewardship",
+    "domainCode": "GOV",
+    "description": "Data Documentation Initiative (DDI-Codebook/Lifecycle), Dublin Core, ISO/IEC 11179 metadata registries, and statistical classification standards.",
+    "officialDivisionFocus": ["DIID", "SDRD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Understands the distinction between data and metadata; identifies basic metadata components (survey description, schedule).",
+        "behavioralIndicators": ["Explains why structured documentation is critical for statistical reuse", "Identifies survey title, round, and variable names in documentation"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Populates standard survey metadata templates conforming to DDI specifications for NSS rounds.",
+        "behavioralIndicators": ["Fills out standard study-level and file-level metadata templates", "Maintains variable code dictionaries with complete value labels"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Builds and validates complete DDI XML/JSON metadata packages including variable-level definitions and value labels.",
+        "behavioralIndicators": ["Authors DDI-compliant XML documentation packages using Nesstar Publisher", "Validates schema conformity of statistical metadata files"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Integrates statistical metadata registries with the National Data Governance Framework (NDGF).",
+        "behavioralIndicators": ["Builds searchable central metadata catalogs for cross-division discovery", "Maps national statistical definitions to ISO/IEC 11179 registries"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Leads national metadata architecture harmonization and establishes pan-government metadata interoperability standards.",
+        "behavioralIndicators": ["Authors the national statistical metadata mandate for all central ministries", "Chairs the national metadata governance council"]
+      }
+    ]
+  },
+  {
+    "id": "GOV_ETH_04",
+    "code": "GOV_ETH_04",
+    "name": "Official Statistics Ethics & Legal Frameworks",
+    "domain": "Digital Governance & Data Stewardship",
+    "domainCode": "GOV",
+    "description": "UN Fundamental Principles of Official Statistics (UN-FPOS), Collection of Statistics Act 2008 & Rules 2011, professional independence, and statistical confidentiality.",
+    "officialDivisionFocus": ["All Divisions", "NSSTA"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Understands the legal obligation of respondents to provide data under the Collection of Statistics Act.",
+        "behavioralIndicators": ["Knows statutory powers of statistical officers under the 2008 Act", "Recognizes legal duty to maintain absolute respondent confidentiality"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Adheres strictly to respondent confidentiality protocols and ethical field conduct during data collection.",
+        "behavioralIndicators": ["Secures physical and digital schedules against unauthorized disclosure", "Explains statutory protections to reluctant survey respondents"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Resolves legal compliance issues and non-response notices under the Collection of Statistics Act provisions.",
+        "behavioralIndicators": ["Issues statutory compliance notices for industrial establishment non-response", "Enforces data protection safeguards during third-party data processing"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Evaluates statistical processes against the 10 UN-FPOS principles and enforces institutional safeguards against data tampering.",
+        "behavioralIndicators": ["Conducts ethical audits of statistical workflows", "Defends professional independence in methodology and release timing"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Formulates legislative amendments to official statistics acts and defends statistical independence at national forums.",
+        "behavioralIndicators": ["Drafts national statistical legislation and statutory rules", "Safeguards the legal and ethical integrity of the National Statistical System"]
+      }
+    ]
+  },
+  {
+    "id": "GOV_OGD_05",
+    "code": "GOV_OGD_05",
+    "name": "Open Government Data Dissemination & API Stewardship",
+    "domain": "Digital Governance & Data Stewardship",
+    "domainCode": "GOV",
+    "description": "Open Data standards (machine-readability, open formats, open licenses), data.gov.in integration, NSO Data Portal, and RESTful API management.",
+    "officialDivisionFocus": ["DIID"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Identifies open data file formats (CSV, JSON) versus proprietary formats; understands open data portals.",
+        "behavioralIndicators": ["Understands why open non-proprietary formats promote transparency", "Navigates the national open data portal data.gov.in"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Prepares tabular data in open formats with standard documentation for public dissemination.",
+        "behavioralIndicators": ["Converts raw proprietary tabulations into machine-readable CSVs", "Formats clean headers without merged cells for automated parsing"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Configures datasets on the NSO Open Data Portal with proper licensing, tags, and data dictionary attachments.",
+        "behavioralIndicators": ["Publishes survey datasets with granular metadata and Open Government Data License", "Monitors dataset downloads and public user feedback"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Designs and deploys public API endpoints for programmatic access to official time series and macro indicators.",
+        "behavioralIndicators": ["Implements OpenAPI/Swagger documented endpoints for CPI/IIP indicators", "Sets up rate-limiting and cache headers for public dissemination APIs"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Champions national open data policy reforms and establishes automated cross-ministry data sharing protocols.",
+        "behavioralIndicators": ["Authors the national open statistical data strategy", "Directs pan-government API federation for official statistics"]
+      }
+    ]
+  },
+  {
+    "id": "GOV_SEC_06",
+    "code": "GOV_SEC_06",
+    "name": "Information Security & Cyber Hygiene in Statistical Infrastructure",
+    "domain": "Digital Governance & Data Stewardship",
+    "domainCode": "GOV",
+    "description": "ISO/IEC 27001 standards, CERT-In guidelines, role-based access control (RBAC), end-to-end data encryption, and secure cloud statistical operations.",
+    "officialDivisionFocus": ["DIID"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Practices strong password hygiene, two-factor authentication, and safe handling of institutional credentials.",
+        "behavioralIndicators": ["Uses multi-factor authentication on all official portals", "Recognizes phishing and social engineering attempts"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Applies encryption to microdata files at rest and in transit; enforces device security on field CAPI tablets.",
+        "behavioralIndicators": ["Encrypts sensitive survey microdata using AES-256 tools", "Ensures tablet remote wipe and lock features are activated"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Implements Role-Based Access Controls (RBAC) and audits user access logs on statistical processing servers.",
+        "behavioralIndicators": ["Configures granular database permissions based on official job cadre", "Reviews and audits server access logs for anomalous downloads"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Formulates disaster recovery and business continuity plans for critical national statistical registries.",
+        "behavioralIndicators": ["Conducts threat modeling and vulnerability scans on survey applications", "Designs geo-redundant backup strategies for the national statistical warehouse"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Directs institutional cyber security architecture and ensures compliance with national critical information infrastructure standards.",
+        "behavioralIndicators": ["Formulates the national statistical cybersecurity policy aligned with CERT-In", "Oversees national critical data infrastructure security audits"]
+      }
+    ]
+  },
+  {
+    "id": "GOV_AUD_07",
+    "code": "GOV_AUD_07",
+    "name": "Statistical Audit, Process Validation & System Documentation",
+    "domain": "Digital Governance & Data Stewardship",
+    "domainCode": "GOV",
+    "description": "Generic Statistical Business Process Model (GSBPM), internal quality audits, process metadata capture, and comprehensive statistical documentation.",
+    "officialDivisionFocus": ["SDRD", "DIID", "DPD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Maintains basic audit logs and activity records for assigned statistical tasks.",
+        "behavioralIndicators": ["Maintains record of data modifications and processing steps", "Follows standard folder structures and version naming"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Documents step-by-step data processing procedures following standard operating procedure (SOP) manuals.",
+        "behavioralIndicators": ["Writes detailed SOPs for recurring statistical compilation tasks", "Documents code alterations and calculation checks"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Maps division-level statistical workflows to GSBPM phases (Specify Needs, Design, Build, Collect, Process, Analyze, Disseminate, Evaluate).",
+        "behavioralIndicators": ["Audits division workflows against GSBPM 5.1 sub-processes", "Identifies bottlenecks in data processing and tabulation cycles"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Conducts formal peer reviews and statistical process audits on sister divisions to identify systemic biases.",
+        "behavioralIndicators": ["Leads comprehensive statistical audits of national survey rounds", "Issues formal audit reports with remediation action plans"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Institutionalizes GSBPM across all state and central statistical departments and oversees external international audits.",
+        "behavioralIndicators": ["Directs the national statistical business process modernization", "Leads peer-review missions across international statistical institutes"]
+      }
+    ]
+  },
+  {
+    "id": "BEH_FLD_01",
+    "code": "BEH_FLD_01",
+    "name": "Field Survey Team Management & High-Performance Supervision",
+    "domain": "Behavioural & Managerial Competencies",
+    "domainCode": "BEH",
+    "description": "Leading field investigators, managing survey logistics, optimizing route plans, resolving field emergencies, and maintaining team morale during intensive survey rounds.",
+    "officialDivisionFocus": ["FOD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Follows assigned field survey schedules and collaborates effectively within a field team.",
+        "behavioralIndicators": ["Punctual in field visits and adheres to tour programs", "Works constructively with fellow team investigators"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Coordinates daily survey logistics for a team of enumerators; resolves basic field administrative bottlenecks.",
+        "behavioralIndicators": ["Plans local travel routes to minimize transit time between sample villages", "Manages local logistical arrangements and administrative allowances"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Supervises multiple field squads; conducts spot checks, surprise re-interviews, and provides constructive feedback.",
+        "behavioralIndicators": ["Conducts independent re-interviews on 10% sample households", "Coaches junior investigators on respondent rapport and probing techniques"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Manages regional survey operations (FOD Regional Office); allocates manpower and budgets to hit target timelines.",
+        "behavioralIndicators": ["Allocates workloads across regional sub-offices to ensure zero round slippage", "Manages complex field logistics across difficult terrain and conflict areas"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Directs nationwide field survey execution strategies across all states and union territories.",
+        "behavioralIndicators": ["Directs national FOD operational machinery spanning 6 zonal and 50+ regional offices", "Pioneers nationwide field survey workforce modernization"]
+      }
+    ]
+  },
+  {
+    "id": "BEH_STK_02",
+    "code": "BEH_STK_02",
+    "name": "Stakeholder Consultation & Inter-Ministerial Data Coordination",
+    "domain": "Behavioural & Managerial Competencies",
+    "domainCode": "BEH",
+    "description": "Engaging with line ministries (Finance, Labour, Agriculture, Commerce), state statistical bureaus (DES), international agencies, and academic data users.",
+    "officialDivisionFocus": ["All Divisions", "NSSTA"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Participates respectfully in inter-departmental meetings and documents minutes of data sharing discussions.",
+        "behavioralIndicators": ["Listens actively to data requests from external stakeholders", "Accurately captures meeting minutes and action points"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Handles routine data requests from line ministries and provides standard clarification on published tables.",
+        "behavioralIndicators": ["Responds promptly and accurately to parliamentary and inter-ministerial queries", "Explains standard statistical concepts to non-statistician users"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Liaises with State Directorates of Economics & Statistics (DES) to harmonize state and central statistical estimates.",
+        "behavioralIndicators": ["Reconciles divergent methodology between central and state sample estimates", "Coordinates state-level training workshops for joint statistical rounds"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Chairs inter-ministerial technical working groups to resolve conflicting administrative data definitions.",
+        "behavioralIndicators": ["Harmonizes administrative data feeds from multiple ministries", "Builds consensus among competing departmental interests"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Negotiates high-level bilateral statistical cooperation agreements and leads national statistical consultations.",
+        "behavioralIndicators": ["Negotiates international statistical memoranda of understanding (MoUs)", "Leads national standing committee on official statistics consultations"]
+      }
+    ]
+  },
+  {
+    "id": "BEH_POL_03",
+    "code": "BEH_POL_03",
+    "name": "Evidence-Based Policy Advisory & Insights Synthesis",
+    "domain": "Behavioural & Managerial Competencies",
+    "domainCode": "BEH",
+    "description": "Translating raw statistical findings into concise, actionable policy briefs for the Prime Minister's Office, NITI Aayog, and Cabinet Secretariat.",
+    "officialDivisionFocus": ["NAD", "ESD", "SSSD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Summarizes high-level findings from statistical press releases accurately.",
+        "behavioralIndicators": ["Extracts headline numbers without distorting context", "Identifies key takeaway messages from official reports"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Drafts analytical notes highlighting notable trends and percentage changes for senior officials.",
+        "behavioralIndicators": ["Drafts clear executive summaries for division leadership", "Highlights statistical anomalies requiring executive attention"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Prepares comprehensive policy research briefs connecting statistical trends with current socio-economic issues.",
+        "behavioralIndicators": ["Authors policy research papers contextualizing survey findings", "Connects employment and price dynamics to government welfare schemes"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Advises senior policymakers on the statistical implications of policy interventions and economic shocks.",
+        "behavioralIndicators": ["Briefs Cabinet Ministers and Secretaries on macroeconomic forecasts", "Quantifies the expected impact of fiscal and monetary interventions"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Serves as chief statistical advisor to government leadership on macroeconomic and social policy strategies.",
+        "behavioralIndicators": ["Directly shapes national economic policy via authoritative statistical advisory", "Serves as key advisor to Prime Minister's Economic Advisory Council"]
+      }
+    ]
+  },
+  {
+    "id": "BEH_PRJ_04",
+    "code": "BEH_PRJ_04",
+    "name": "Project Monitoring, Milestone Tracking & IPMD Protocols",
+    "domain": "Behavioural & Managerial Competencies",
+    "domainCode": "BEH",
+    "description": "Infrastructure and Project Monitoring Division (IPMD) methodology, tracking Central Sector projects (Rs. 150 Crore and above), cost/time overrun analysis, and milestone tracking.",
+    "officialDivisionFocus": ["IPMD"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Understands the concepts of milestone tracking, Gantt charts, and project time/cost overruns.",
+        "behavioralIndicators": ["Explains why cost and time overruns occur in major infrastructure projects", "Reads project status dashboards accurately"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Updates project monitoring databases (Online Computerized Monitoring System - OCMS) with monthly progress data.",
+        "behavioralIndicators": ["Validates project progress reports submitted by public sector undertakings", "Calculates percentage physical and financial progress"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Analyzes project bottleneck reports; identifies critical paths and flags impending schedule slippages.",
+        "behavioralIndicators": ["Performs critical path analysis on delayed mega infrastructure projects", "Categorizes delay factors into land acquisition, environmental, or contractual"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Formulates comprehensive project evaluation reports for the Cabinet Committee on Infrastructure.",
+        "behavioralIndicators": ["Authors flash reports on central sector project status for Cabinet Secretariat", "Recommends milestone-linked intervention strategies to line ministries"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Modernizes the national project monitoring architecture and advises ministries on institutional risk mitigation.",
+        "behavioralIndicators": ["Directs the modernization of OCMS to real-time drone and IoT monitoring", "Advises union cabinet on national infrastructure risk mitigation"]
+      }
+    ]
+  },
+  {
+    "id": "BEH_COM_05",
+    "code": "BEH_COM_05",
+    "name": "Statistical Data Storytelling, Visualization & Public Dissemination",
+    "domain": "Behavioural & Managerial Competencies",
+    "domainCode": "BEH",
+    "description": "Communicating complex statistical findings to diverse audiences (media, academia, citizens) via infographics, dashboards, and transparent press briefings.",
+    "officialDivisionFocus": ["DIID", "SSSD", "NSSTA"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Prepares clean, well-formatted charts and tables avoiding misleading visual scales.",
+        "behavioralIndicators": ["Ensures chart axes start from zero and labels are clear", "Avoids 3D and distorted graphical representations"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Writes clear explanatory footnotes and summaries accompanying statistical releases.",
+        "behavioralIndicators": ["Drafts clear press note summaries explaining complex indices", "Explains statistical margins of error in non-technical terms"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Creates interactive visual dashboards and data stories that make complex survey results accessible to the public.",
+        "behavioralIndicators": ["Designs interactive web dashboards with intuitive drill-downs", "Translates dense statistical tables into engaging visual narratives"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Conducts high-stakes press briefings and effectively handles media scrutiny regarding statistical estimates.",
+        "behavioralIndicators": ["Conducts official press conferences during major survey releases", "Answers tough journalistic queries with composure and rigorous evidence"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Champions the public image and credibility of the National Statistical System through strategic national outreach.",
+        "behavioralIndicators": ["Leads national statistical literacy and public trust campaigns", "Speaks as authoritative voice for Indian statistics in global media"]
+      }
+    ]
+  },
+  {
+    "id": "BEH_ETH_06",
+    "code": "BEH_ETH_06",
+    "name": "Professional Integrity, Impartiality & Public Accountability",
+    "domain": "Behavioural & Managerial Competencies",
+    "domainCode": "BEH",
+    "description": "Upholding absolute scientific objectivity, resisting undue political or administrative pressure, and maintaining transparency in methodology and revisions.",
+    "officialDivisionFocus": ["All Divisions"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Demonstrates honesty, punctuality, and commitment to public service conduct rules.",
+        "behavioralIndicators": ["Follows civil service conduct rules and departmental integrity codes", "Maintains transparency in daily duties"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Reports data accurately without altering respondent inputs or trimming uncomfortable observations.",
+        "behavioralIndicators": ["Never modifies raw field records to fit expectations", "Reports data anomalies promptly to supervisors"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Identifies and reports conflicts of interest or methodological deviations in statistical processing.",
+        "behavioralIndicators": ["Discloses potential conflicts of interest immediately", "Enforces rigorous adherence to peer-reviewed methodology"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Upholds rigorous empirical standards and defends scientific methodology under external pressure.",
+        "behavioralIndicators": ["Stands firm on empirical statistical truth regardless of external reaction", "Ensures revision policies are published transparently in advance"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Serves as an institutional exemplar of ethical leadership and safeguards the public trust in official statistics.",
+        "behavioralIndicators": ["Acts as moral anchor and guardian of statistical independence in India", "Protects the sanctity and credibility of the National Statistical System"]
+      }
+    ]
+  },
+  {
+    "id": "BEH_INQ_07",
+    "code": "BEH_INQ_07",
+    "name": "Continuous Learning Orientation & Capacity Building Leadership",
+    "domain": "Behavioural & Managerial Competencies",
+    "domainCode": "BEH",
+    "description": "Fostering a culture of continuous learning, mentoring junior statisticians, driving institutional knowledge management, and adopting emerging methodologies.",
+    "officialDivisionFocus": ["NSSTA", "All Divisions"],
+    "rubrics": [
+      {
+        "level": 1,
+        "label": "Basic",
+        "description": "Shows eagerness to learn, completes mandatory iGOT training modules on time, and seeks technical guidance.",
+        "behavioralIndicators": ["Proactively completes assigned digital learning courses", "Asks constructive questions to learn from experienced peers"]
+      },
+      {
+        "level": 2,
+        "label": "Novice",
+        "description": "Applies newly acquired technical skills to improve efficiency in daily operational tasks.",
+        "behavioralIndicators": ["Applies new R or Excel techniques to automate routine tabulation", "Shares practical tips with immediate team members"]
+      },
+      {
+        "level": 3,
+        "label": "Proficient",
+        "description": "Acts as a peer mentor and contributes case studies and documentation to internal knowledge repositories.",
+        "behavioralIndicators": ["Mentors incoming Junior Statistical Officers during induction", "Authors troubleshooting guides for field inspection teams"]
+      },
+      {
+        "level": 4,
+        "label": "Advanced",
+        "description": "Designs and delivers training modules at NSSTA and departmental workshops on specialized topics.",
+        "behavioralIndicators": ["Delivers guest lectures and hands-on workshops at NSSTA Greater Noida", "Authors training manuals and curriculum modules"]
+      },
+      {
+        "level": 5,
+        "label": "Expert",
+        "description": "Formulates the Annual Capacity Building Plan (ACBP) and guides the strategic human capital development of the NSS.",
+        "behavioralIndicators": ["Directs the national statistical training architecture with Capacity Building Commission", "Champions lifelong learning and institutional innovation across India"]
+      }
+    ]
+  }
+]

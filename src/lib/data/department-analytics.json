@@ -1,0 +1,222 @@
+[
+  {
+    "divisionCode": "FOD",
+    "divisionName": "Field Operations Division",
+    "totalOfficers": 850,
+    "cadreBreakdown": {
+      "ISS_ASSISTANT_DIRECTOR": 45,
+      "SENIOR_STATISTICAL_OFFICER": 280,
+      "JUNIOR_STATISTICAL_OFFICER": 525
+    },
+    "domainAverages": {
+      "Statistical Competencies": 2.75,
+      "Technical Competencies": 2.60,
+      "Digital Governance & Data Stewardship": 2.80,
+      "Behavioural & Managerial Competencies": 3.40
+    },
+    "overallProficiency": 68.5,
+    "criticalGapsCount": 142,
+    "topDeficientCompetencies": [
+      {
+        "competencyId": "TECH_VAL_05",
+        "competencyName": "Automated Microdata Scrutiny, Validation & Imputation",
+        "domain": "Technical Competencies",
+        "averageScore": 2.45,
+        "benchmark": 3.65,
+        "gap": 1.20
+      },
+      {
+        "competencyId": "STAT_SMPL_01",
+        "competencyName": "Sampling Design & Survey Methodology",
+        "domain": "Statistical Competencies",
+        "averageScore": 2.30,
+        "benchmark": 3.20,
+        "gap": 0.90
+      },
+      {
+        "competencyId": "GOV_SDC_02",
+        "competencyName": "Statistical Disclosure Control & Microdata Anonymization",
+        "domain": "Digital Governance & Data Stewardship",
+        "averageScore": 2.05,
+        "benchmark": 2.85,
+        "gap": 0.80
+      }
+    ]
+  },
+  {
+    "divisionCode": "ESD",
+    "divisionName": "Economic Statistics Division",
+    "totalOfficers": 220,
+    "cadreBreakdown": {
+      "ISS_ASSISTANT_DIRECTOR": 35,
+      "SENIOR_STATISTICAL_OFFICER": 95,
+      "JUNIOR_STATISTICAL_OFFICER": 90
+    },
+    "domainAverages": {
+      "Statistical Competencies": 3.45,
+      "Technical Competencies": 3.10,
+      "Digital Governance & Data Stewardship": 3.25,
+      "Behavioural & Managerial Competencies": 3.30
+    },
+    "overallProficiency": 78.2,
+    "criticalGapsCount": 38,
+    "topDeficientCompetencies": [
+      {
+        "competencyId": "STAT_TSA_06",
+        "competencyName": "Time Series Analysis & Seasonal Adjustment",
+        "domain": "Statistical Competencies",
+        "averageScore": 2.20,
+        "benchmark": 3.20,
+        "gap": 1.00
+      },
+      {
+        "competencyId": "TECH_R_01",
+        "competencyName": "Statistical Computing with R for Official Statistics",
+        "domain": "Technical Competencies",
+        "averageScore": 2.50,
+        "benchmark": 3.35,
+        "gap": 0.85
+      },
+      {
+        "competencyId": "GOV_SDC_02",
+        "competencyName": "Statistical Disclosure Control & Microdata Anonymization",
+        "domain": "Digital Governance & Data Stewardship",
+        "averageScore": 2.40,
+        "benchmark": 3.20,
+        "gap": 0.80
+      }
+    ]
+  },
+  {
+    "divisionCode": "NAD",
+    "divisionName": "National Accounts Division",
+    "totalOfficers": 180,
+    "cadreBreakdown": {
+      "ISS_ASSISTANT_DIRECTOR": 40,
+      "SENIOR_STATISTICAL_OFFICER": 80,
+      "JUNIOR_STATISTICAL_OFFICER": 60
+    },
+    "domainAverages": {
+      "Statistical Competencies": 3.80,
+      "Technical Competencies": 3.20,
+      "Digital Governance & Data Stewardship": 3.50,
+      "Behavioural & Managerial Competencies": 3.60
+    },
+    "overallProficiency": 82.4,
+    "criticalGapsCount": 24,
+    "topDeficientCompetencies": [
+      {
+        "competencyId": "STAT_ENV_08",
+        "competencyName": "Environmental-Economic Accounting (SEEA & EnviStats)",
+        "domain": "Statistical Competencies",
+        "averageScore": 2.10,
+        "benchmark": 3.00,
+        "gap": 0.90
+      },
+      {
+        "competencyId": "TECH_PY_02",
+        "competencyName": "Python for Data Engineering & Official Statistical Analytics",
+        "domain": "Technical Competencies",
+        "averageScore": 2.15,
+        "benchmark": 2.90,
+        "gap": 0.75
+      },
+      {
+        "competencyId": "TECH_SDMX_06",
+        "competencyName": "Statistical Data and Metadata eXchange (SDMX)",
+        "domain": "Technical Competencies",
+        "averageScore": 2.30,
+        "benchmark": 3.00,
+        "gap": 0.70
+      }
+    ]
+  },
+  {
+    "divisionCode": "DIID",
+    "divisionName": "Data Informatics and Innovation Division",
+    "totalOfficers": 150,
+    "cadreBreakdown": {
+      "ISS_ASSISTANT_DIRECTOR": 30,
+      "SENIOR_STATISTICAL_OFFICER": 65,
+      "JUNIOR_STATISTICAL_OFFICER": 55
+    },
+    "domainAverages": {
+      "Statistical Competencies": 3.50,
+      "Technical Competencies": 4.10,
+      "Digital Governance & Data Stewardship": 4.20,
+      "Behavioural & Managerial Competencies": 3.70
+    },
+    "overallProficiency": 87.6,
+    "criticalGapsCount": 16,
+    "topDeficientCompetencies": [
+      {
+        "competencyId": "GOV_SDC_02",
+        "competencyName": "Statistical Disclosure Control & Microdata Anonymization",
+        "domain": "Digital Governance & Data Stewardship",
+        "averageScore": 3.10,
+        "benchmark": 3.80,
+        "gap": 0.70
+      },
+      {
+        "competencyId": "STAT_TSA_06",
+        "competencyName": "Time Series Analysis & Seasonal Adjustment",
+        "domain": "Statistical Competencies",
+        "averageScore": 2.70,
+        "benchmark": 3.30,
+        "gap": 0.60
+      },
+      {
+        "competencyId": "BEH_PRJ_04",
+        "competencyName": "Project Monitoring, Milestone Tracking & IPMD Protocols",
+        "domain": "Behavioural & Managerial Competencies",
+        "averageScore": 2.60,
+        "benchmark": 3.10,
+        "gap": 0.50
+      }
+    ]
+  },
+  {
+    "divisionCode": "SDRD",
+    "divisionName": "Survey Design and Research Division",
+    "totalOfficers": 190,
+    "cadreBreakdown": {
+      "ISS_ASSISTANT_DIRECTOR": 38,
+      "SENIOR_STATISTICAL_OFFICER": 82,
+      "JUNIOR_STATISTICAL_OFFICER": 70
+    },
+    "domainAverages": {
+      "Statistical Competencies": 4.15,
+      "Technical Competencies": 3.40,
+      "Digital Governance & Data Stewardship": 3.65,
+      "Behavioural & Managerial Competencies": 3.55
+    },
+    "overallProficiency": 84.1,
+    "criticalGapsCount": 21,
+    "topDeficientCompetencies": [
+      {
+        "competencyId": "TECH_PY_02",
+        "competencyName": "Python for Data Engineering & Official Statistical Analytics",
+        "domain": "Technical Competencies",
+        "averageScore": 2.25,
+        "benchmark": 3.10,
+        "gap": 0.85
+      },
+      {
+        "competencyId": "TECH_GIS_07",
+        "competencyName": "Geospatial Analytics & GIS Integration for Official Statistics",
+        "domain": "Technical Competencies",
+        "averageScore": 2.40,
+        "benchmark": 3.15,
+        "gap": 0.75
+      },
+      {
+        "competencyId": "GOV_SDC_02",
+        "competencyName": "Statistical Disclosure Control & Microdata Anonymization",
+        "domain": "Digital Governance & Data Stewardship",
+        "averageScore": 2.80,
+        "benchmark": 3.50,
+        "gap": 0.70
+      }
+    ]
+  }
+]

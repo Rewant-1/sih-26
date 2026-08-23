@@ -1,0 +1,33 @@
+{
+  "name": "mospi-skill-intelligence-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-Enabled Skill Intelligence & Learning Platform for Official Statistics (MoSPI / DIID, SIH 26101)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx tests/runner.ts"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.428.0",
+    "next": "^14.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.12.7",
+    "tailwind-merge": "^2.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.12",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.41",
+    "tailwindcss": "^3.4.10",
+    "tsx": "^4.17.0",
+    "typescript": "^5.5.4"
+  }
+}

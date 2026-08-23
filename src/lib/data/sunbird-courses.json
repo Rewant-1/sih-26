@@ -1,0 +1,523 @@
+[
+  {
+    "identifier": "do_igot_stat_001",
+    "name": "Foundations of National Accounts Statistics (SNA 2008)",
+    "code": "IGOT-STAT-01",
+    "description": "Comprehensive self-paced e-learning on System of National Accounts (SNA 2008) principles, GVA compilation at basic prices, and GDP aggregates for official statistical officers.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "iGOT Karmayogi Bharat",
+    "source": "iGOT Karmayogi",
+    "deliveryMode": "Self-Paced e-Learning",
+    "duration": "12 Hours",
+    "durationMinutes": 720,
+    "rating": 4.8,
+    "enrolledCount": 1420,
+    "certificationAvailable": true,
+    "targetAudience": ["ISS_ASSISTANT_DIRECTOR", "SENIOR_STATISTICAL_OFFICER", "JUNIOR_STATISTICAL_OFFICER"],
+    "competencies": [
+      {
+        "id": "STAT_NAT_02",
+        "name": "National Accounts Statistics & SUT Compilation",
+        "competencyArea": "Statistical Competencies",
+        "level": 3,
+        "weight": 1.0
+      },
+      {
+        "id": "STAT_SMPL_01",
+        "name": "Sampling Design & Survey Methodology",
+        "competencyArea": "Statistical Competencies",
+        "level": 2,
+        "weight": 0.5
+      }
+    ],
+    "learningOutcomes": [
+      "Understand SNA 2008 core accounting identities and sequence of accounts",
+      "Calculate GVA across primary, secondary, and tertiary sectors using enterprise financial returns",
+      "Distinguish between product taxes and production taxes in GDP valuation"
+    ],
+    "modules": [
+      {
+        "moduleId": "mod_sna_01",
+        "title": "Macroeconomic Aggregates & Valuation Standards",
+        "durationMinutes": 180,
+        "learningOutcomes": ["Mastering GDP, GVA, NNI concepts", "Factor cost vs basic prices"]
+      },
+      {
+        "moduleId": "mod_sna_02",
+        "title": "Sectoral GVA Compilation & Production Accounts",
+        "durationMinutes": 240,
+        "learningOutcomes": ["Compiling manufacturing and service sector value added", "Intermediate consumption deductions"]
+      },
+      {
+        "moduleId": "mod_sna_03",
+        "title": "Supply and Use Framework Fundamentals",
+        "durationMinutes": 300,
+        "learningOutcomes": ["Input-output balance mechanisms", "Trade and transport margins"]
+      }
+    ]
+  },
+  {
+    "identifier": "do_igot_stat_002",
+    "name": "Consumer Price Index (CPI) & Inflation Compilation Methodologies",
+    "code": "IGOT-STAT-02",
+    "description": "Essential training on price statistics collection, Modified Laspeyres index formulation, item substitution, and rural/urban market quotation validation.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "iGOT Karmayogi Bharat",
+    "source": "iGOT Karmayogi",
+    "deliveryMode": "Self-Paced e-Learning",
+    "duration": "10 Hours",
+    "durationMinutes": 600,
+    "rating": 4.7,
+    "enrolledCount": 1890,
+    "certificationAvailable": true,
+    "targetAudience": ["ISS_ASSISTANT_DIRECTOR", "SENIOR_STATISTICAL_OFFICER", "JUNIOR_STATISTICAL_OFFICER"],
+    "competencies": [
+      {
+        "id": "STAT_IDX_03",
+        "name": "Index Numbers & Price Statistics (CPI, IIP, WPI)",
+        "competencyArea": "Statistical Competencies",
+        "level": 3,
+        "weight": 1.0
+      },
+      {
+        "id": "STAT_PRB_05",
+        "name": "Applied Probability & Inferential Estimation",
+        "competencyArea": "Statistical Competencies",
+        "level": 2,
+        "weight": 0.4
+      }
+    ],
+    "learningOutcomes": [
+      "Master the Modified Laspeyres index calculation formula",
+      "Validate monthly price quotations from selected rural and urban retail markets",
+      "Handle missing price observations through geometric mean and carry-forward imputation"
+    ],
+    "modules": [
+      {
+        "moduleId": "mod_cpi_01",
+        "title": "Basket Selection & Weighting Diagrams",
+        "durationMinutes": 180,
+        "learningOutcomes": ["CES weighting derivation", "COICOP classification"]
+      },
+      {
+        "moduleId": "mod_cpi_02",
+        "title": "Price Scrutiny & Elementary Aggregates",
+        "durationMinutes": 220,
+        "learningOutcomes": ["Price relative calculation", "Outlier detection in monthly quotes"]
+      },
+      {
+        "moduleId": "mod_cpi_03",
+        "title": "Sub-Group and All-India Index Aggregation",
+        "durationMinutes": 200,
+        "learningOutcomes": ["State-level indices", "All-India general index synthesis"]
+      }
+    ]
+  },
+  {
+    "identifier": "do_igot_stat_003",
+    "name": "Sampling Theory and Survey Design in Official Statistics",
+    "code": "IGOT-STAT-03",
+    "description": "Comprehensive course on multi-stage stratified survey design, PPSWR, circular systematic sampling, sampling multipliers, and estimation for NSS rounds.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "iGOT Karmayogi Bharat",
+    "source": "iGOT Karmayogi",
+    "deliveryMode": "Self-Paced e-Learning",
+    "duration": "16 Hours",
+    "durationMinutes": 960,
+    "rating": 4.9,
+    "enrolledCount": 2150,
+    "certificationAvailable": true,
+    "targetAudience": ["ISS_ASSISTANT_DIRECTOR", "SENIOR_STATISTICAL_OFFICER"],
+    "competencies": [
+      {
+        "id": "STAT_SMPL_01",
+        "name": "Sampling Design & Survey Methodology",
+        "competencyArea": "Statistical Competencies",
+        "level": 3,
+        "weight": 1.0
+      },
+      {
+        "id": "STAT_PRB_05",
+        "name": "Applied Probability & Inferential Estimation",
+        "competencyArea": "Statistical Competencies",
+        "level": 3,
+        "weight": 0.8
+      }
+    ],
+    "learningOutcomes": [
+      "Formulate multi-stage stratified designs for national socio-economic surveys",
+      "Calculate exact sampling multipliers and weights for rural and urban sample units",
+      "Compute design effects (deff) and standard errors for complex survey estimators"
+    ]
+  },
+  {
+    "identifier": "do_igot_stat_004",
+    "name": "Annual Survey of Industries (ASI) Schedule Canvassing & Balance Sheet Analysis",
+    "code": "IGOT-STAT-04",
+    "description": "Detailed operational guide on canvassing ASI schedules, auditing factory profit & loss accounts, validating capital structure, and resolving unit-level non-response.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "iGOT Karmayogi Bharat",
+    "source": "iGOT Karmayogi",
+    "deliveryMode": "Self-Paced e-Learning",
+    "duration": "8 Hours",
+    "durationMinutes": 480,
+    "rating": 4.6,
+    "enrolledCount": 1640,
+    "certificationAvailable": true,
+    "targetAudience": ["SENIOR_STATISTICAL_OFFICER", "JUNIOR_STATISTICAL_OFFICER"],
+    "competencies": [
+      {
+        "id": "STAT_ASI_04",
+        "name": "Industrial & Enterprise Statistics (ASI & Economic Census)",
+        "competencyArea": "Statistical Competencies",
+        "level": 3,
+        "weight": 1.0
+      },
+      {
+        "id": "TECH_VAL_05",
+        "name": "Automated Microdata Scrutiny, Validation & Imputation",
+        "competencyArea": "Technical Competencies",
+        "level": 3,
+        "weight": 0.7
+      }
+    ],
+    "learningOutcomes": [
+      "Understand statutory requirements under the Collection of Statistics Act 2008 for ASI",
+      "Validate balance sheet fixed and working capital entries against audited company statements",
+      "Apply consistency cross-checks across energy consumption, wage blocks, and output accounts"
+    ]
+  },
+  {
+    "identifier": "do_igot_stat_005",
+    "name": "Time Series Analysis & Seasonal Adjustment with X-13ARIMA-SEATS",
+    "code": "IGOT-STAT-05",
+    "description": "Advanced training on stochastic time series decomposition, ARIMA modeling, calendar/trading day adjustments, and official seasonal adjustment pipelines.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "iGOT Karmayogi Bharat",
+    "source": "iGOT Karmayogi",
+    "deliveryMode": "Self-Paced e-Learning",
+    "duration": "14 Hours",
+    "durationMinutes": 840,
+    "rating": 4.8,
+    "enrolledCount": 980,
+    "certificationAvailable": true,
+    "targetAudience": ["ISS_ASSISTANT_DIRECTOR", "SENIOR_STATISTICAL_OFFICER"],
+    "competencies": [
+      {
+        "id": "STAT_TSA_06",
+        "name": "Time Series Analysis & Seasonal Adjustment",
+        "competencyArea": "Statistical Competencies",
+        "level": 4,
+        "weight": 1.0
+      },
+      {
+        "id": "TECH_R_01",
+        "name": "Statistical Computing with R for Official Statistics",
+        "competencyArea": "Technical Competencies",
+        "level": 3,
+        "weight": 0.6
+      }
+    ],
+    "learningOutcomes": [
+      "Diagnose ACF/PACF plots and test for time series stationarity",
+      "Execute X-13ARIMA-SEATS seasonal adjustment on monthly IIP and CPI series",
+      "Model holiday and trading day variations in Indian macroeconomic series"
+    ]
+  },
+  {
+    "identifier": "do_igot_tech_001",
+    "name": "R for Official Statistics: Survey Data Wrangling & Weighted Analysis",
+    "code": "IGOT-TECH-01",
+    "description": "Practical hands-on course covering R tidyverse verbs, survey design objects with the survey package, weighted microdata tabulations, and reproducible RMarkdown reports.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "iGOT Karmayogi Bharat",
+    "source": "iGOT Karmayogi",
+    "deliveryMode": "Self-Paced e-Learning",
+    "duration": "20 Hours",
+    "durationMinutes": 1200,
+    "rating": 4.9,
+    "enrolledCount": 3120,
+    "certificationAvailable": true,
+    "targetAudience": ["ISS_ASSISTANT_DIRECTOR", "SENIOR_STATISTICAL_OFFICER", "JUNIOR_STATISTICAL_OFFICER"],
+    "competencies": [
+      {
+        "id": "TECH_R_01",
+        "name": "Statistical Computing with R for Official Statistics",
+        "competencyArea": "Technical Competencies",
+        "level": 3,
+        "weight": 1.0
+      },
+      {
+        "id": "STAT_SMPL_01",
+        "name": "Sampling Design & Survey Methodology",
+        "competencyArea": "Statistical Competencies",
+        "level": 2,
+        "weight": 0.5
+      }
+    ],
+    "learningOutcomes": [
+      "Wrangle multi-gigabyte survey unit-level microdata using dplyr and data.table",
+      "Construct complex survey design objects in R with stratum and cluster specifications",
+      "Generate official weighted summary tables with Taylor linearization standard errors"
+    ]
+  },
+  {
+    "identifier": "do_igot_tech_002",
+    "name": "Python for High-Throughput Statistical Data Engineering",
+    "code": "IGOT-TECH-02",
+    "description": "Modern Python for statistical data engineering: high-speed dataframes with Polars/Pandas, automated ETL pipelines, data validation, and REST API integration.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "iGOT Karmayogi Bharat",
+    "source": "iGOT Karmayogi",
+    "deliveryMode": "Self-Paced e-Learning",
+    "duration": "18 Hours",
+    "durationMinutes": 1080,
+    "rating": 4.7,
+    "enrolledCount": 2400,
+    "certificationAvailable": true,
+    "targetAudience": ["ISS_ASSISTANT_DIRECTOR", "SENIOR_STATISTICAL_OFFICER"],
+    "competencies": [
+      {
+        "id": "TECH_PY_02",
+        "name": "Python for Data Engineering & Official Statistical Analytics",
+        "competencyArea": "Technical Competencies",
+        "level": 3,
+        "weight": 1.0
+      },
+      {
+        "id": "TECH_SQL_03",
+        "name": "Relational Database Management & Complex SQL",
+        "competencyArea": "Technical Competencies",
+        "level": 3,
+        "weight": 0.6
+      }
+    ],
+    "learningOutcomes": [
+      "Build automated data cleaning and transformation pipelines using Python and Polars",
+      "Process large census and enterprise datasets with minimal memory footprint",
+      "Develop internal microservices for automated statistical verification"
+    ]
+  },
+  {
+    "identifier": "do_igot_tech_003",
+    "name": "CAPI Survey Instrument Design & Mobile Field Deployment",
+    "code": "IGOT-TECH-03",
+    "description": "Mastering Computer Assisted Personal Interviewing (CAPI): designing mobile survey schedules in CSPro/Blaise, programming validation logic, and managing field synchronization.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "iGOT Karmayogi Bharat",
+    "source": "iGOT Karmayogi",
+    "deliveryMode": "Self-Paced e-Learning",
+    "duration": "12 Hours",
+    "durationMinutes": 720,
+    "rating": 4.8,
+    "enrolledCount": 1780,
+    "certificationAvailable": true,
+    "targetAudience": ["SENIOR_STATISTICAL_OFFICER", "JUNIOR_STATISTICAL_OFFICER"],
+    "competencies": [
+      {
+        "id": "TECH_CAPI_04",
+        "name": "Computer Assisted Personal Interviewing (CAPI) & Digital Capture",
+        "competencyArea": "Technical Competencies",
+        "level": 4,
+        "weight": 1.0
+      },
+      {
+        "id": "TECH_VAL_05",
+        "name": "Automated Microdata Scrutiny, Validation & Imputation",
+        "competencyArea": "Technical Competencies",
+        "level": 3,
+        "weight": 0.7
+      }
+    ],
+    "learningOutcomes": [
+      "Author structured CAPI survey questionnaires with dynamic skip logic and rosters",
+      "Embed realtime consistency checks and range validations in field instruments",
+      "Manage offline data synchronization, GPS tagging, and paradata audit trails"
+    ]
+  },
+  {
+    "identifier": "do_igot_tech_004",
+    "name": "SDMX 3.0 Standards & Global Statistical Metadata Exchange",
+    "code": "IGOT-TECH-04",
+    "description": "In-depth guide to Statistical Data and Metadata eXchange (SDMX): Data Structure Definitions (DSD), codelists, concept schemes, and automated international dissemination.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "iGOT Karmayogi Bharat",
+    "source": "iGOT Karmayogi",
+    "deliveryMode": "Self-Paced e-Learning",
+    "duration": "10 Hours",
+    "durationMinutes": 600,
+    "rating": 4.6,
+    "enrolledCount": 850,
+    "certificationAvailable": true,
+    "targetAudience": ["ISS_ASSISTANT_DIRECTOR", "SENIOR_STATISTICAL_OFFICER"],
+    "competencies": [
+      {
+        "id": "TECH_SDMX_06",
+        "name": "Statistical Data and Metadata eXchange (SDMX)",
+        "competencyArea": "Technical Competencies",
+        "level": 3,
+        "weight": 1.0
+      },
+      {
+        "id": "GOV_META_03",
+        "name": "Metadata Standards & National Statistical Registries",
+        "competencyArea": "Digital Governance & Data Stewardship",
+        "level": 3,
+        "weight": 0.8
+      }
+    ],
+    "learningOutcomes": [
+      "Understand the SDMX 3.0 information model and architecture",
+      "Construct DSDs and codelists for national SDG indicators",
+      "Configure automated SDMX endpoints for UN and IMF data reporting"
+    ]
+  },
+  {
+    "identifier": "do_igot_gov_001",
+    "name": "Data Quality Assessment Framework (DQAF) in Official Statistics",
+    "code": "IGOT-GOV-01",
+    "description": "Operationalizing the IMF/UN/MoSPI Data Quality Assessment Framework across survey lifecycles, evaluating accuracy, timeliness, methodological soundness, and serviceability.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "iGOT Karmayogi Bharat",
+    "source": "iGOT Karmayogi",
+    "deliveryMode": "Self-Paced e-Learning",
+    "duration": "8 Hours",
+    "durationMinutes": 480,
+    "rating": 4.7,
+    "enrolledCount": 1950,
+    "certificationAvailable": true,
+    "targetAudience": ["ISS_ASSISTANT_DIRECTOR", "SENIOR_STATISTICAL_OFFICER", "JUNIOR_STATISTICAL_OFFICER"],
+    "competencies": [
+      {
+        "id": "GOV_DQAF_01",
+        "name": "Data Quality Assessment Framework (DQAF) & Quality Assurance",
+        "competencyArea": "Digital Governance & Data Stewardship",
+        "level": 4,
+        "weight": 1.0
+      },
+      {
+        "id": "GOV_AUD_07",
+        "name": "Statistical Audit, Process Validation & System Documentation",
+        "competencyArea": "Digital Governance & Data Stewardship",
+        "level": 3,
+        "weight": 0.6
+      }
+    ],
+    "learningOutcomes": [
+      "Conduct systematic DQAF assessments on survey and administrative statistics",
+      "Quantify non-sampling errors, response attrition, and coverage deviations",
+      "Implement division-level Quality Assurance Guidelines"
+    ]
+  },
+  {
+    "identifier": "do_igot_gov_002",
+    "name": "Official Statistics Ethics, UN-FPOS & Collection of Statistics Act",
+    "code": "IGOT-GOV-02",
+    "description": "Essential legal and ethical foundations: 10 UN Fundamental Principles of Official Statistics, statutory powers and obligations under Collection of Statistics Act 2008, and respondent privacy.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "iGOT Karmayogi Bharat",
+    "source": "iGOT Karmayogi",
+    "deliveryMode": "Self-Paced e-Learning",
+    "duration": "6 Hours",
+    "durationMinutes": 360,
+    "rating": 4.9,
+    "enrolledCount": 3500,
+    "certificationAvailable": true,
+    "targetAudience": ["ISS_ASSISTANT_DIRECTOR", "SENIOR_STATISTICAL_OFFICER", "JUNIOR_STATISTICAL_OFFICER"],
+    "competencies": [
+      {
+        "id": "GOV_ETH_04",
+        "name": "Official Statistics Ethics & Legal Frameworks",
+        "competencyArea": "Digital Governance & Data Stewardship",
+        "level": 4,
+        "weight": 1.0
+      },
+      {
+        "id": "BEH_ETH_06",
+        "name": "Professional Integrity, Impartiality & Public Accountability",
+        "competencyArea": "Behavioural & Managerial Competencies",
+        "level": 4,
+        "weight": 0.9
+      }
+    ],
+    "learningOutcomes": [
+      "Interpret statutory provisions and penalties under the Collection of Statistics Act 2008",
+      "Uphold the 10 UN Fundamental Principles of Official Statistics in daily governance",
+      "Protect respondent confidentiality and prevent unauthorized microdata leaks"
+    ]
+  },
+  {
+    "identifier": "do_igot_beh_001",
+    "name": "Field Survey Team Leadership & High-Performance Enumeration Management",
+    "code": "IGOT-BEH-01",
+    "description": "Leadership and operational management for survey supervisors: team motivation, field conflict resolution, route optimization, inspection spot-checks, and quality assurance.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "iGOT Karmayogi Bharat",
+    "source": "iGOT Karmayogi",
+    "deliveryMode": "Self-Paced e-Learning",
+    "duration": "10 Hours",
+    "durationMinutes": 600,
+    "rating": 4.8,
+    "enrolledCount": 2100,
+    "certificationAvailable": true,
+    "targetAudience": ["SENIOR_STATISTICAL_OFFICER", "JUNIOR_STATISTICAL_OFFICER"],
+    "competencies": [
+      {
+        "id": "BEH_FLD_01",
+        "name": "Field Survey Team Management & High-Performance Supervision",
+        "competencyArea": "Behavioural & Managerial Competencies",
+        "level": 4,
+        "weight": 1.0
+      },
+      {
+        "id": "BEH_STK_02",
+        "name": "Stakeholder Consultation & Inter-Ministerial Data Coordination",
+        "competencyArea": "Behavioural & Managerial Competencies",
+        "level": 3,
+        "weight": 0.5
+      }
+    ],
+    "learningOutcomes": [
+      "Lead and motivate field enumeration squads across challenging survey environments",
+      "Execute rigorous supervisory spot checks and re-interviews",
+      "Optimize team tour programs to hit strict round completion deadlines"
+    ]
+  },
+  {
+    "identifier": "do_igot_beh_002",
+    "name": "Statistical Data Storytelling, Visualization & Public Dissemination",
+    "code": "IGOT-BEH-02",
+    "description": "Translating complex statistical metrics into clear visual narratives for policymakers, media, and citizens: dashboard design, press releases, and ethical data presentation.",
+    "framework": "MoSPI-FRAC-2026",
+    "organisation": "iGOT Karmayogi Bharat",
+    "source": "iGOT Karmayogi",
+    "deliveryMode": "Self-Paced e-Learning",
+    "duration": "8 Hours",
+    "durationMinutes": 480,
+    "rating": 4.7,
+    "enrolledCount": 1650,
+    "certificationAvailable": true,
+    "targetAudience": ["ISS_ASSISTANT_DIRECTOR", "SENIOR_STATISTICAL_OFFICER", "JUNIOR_STATISTICAL_OFFICER"],
+    "competencies": [
+      {
+        "id": "BEH_COM_05",
+        "name": "Statistical Data Storytelling, Visualization & Public Dissemination",
+        "competencyArea": "Behavioural & Managerial Competencies",
+        "level": 3,
+        "weight": 1.0
+      },
+      {
+        "id": "GOV_OGD_05",
+        "name": "Open Government Data Dissemination & API Stewardship",
+        "competencyArea": "Digital Governance & Data Stewardship",
+        "level": 3,
+        "weight": 0.6
+      }
+    ],
+    "learningOutcomes": [
+      "Create clear, non-misleading visual charts and infographics from official data",
+      "Draft concise press release summaries and executive briefings",
+      "Communicate statistical uncertainty and confidence intervals effectively"
+    ]
+  }
+]

@@ -1,0 +1,12 @@
+CENTRAL STATISTICS OFFICE (CSO), MoSPI
+METHODOLOGY FOR COMPILATION OF CONSUMER PRICE INDEX (BASE 2012=100)
+
+1. Scope and Weighting Diagram: The Consumer Price Index (CPI) measures the change over time in the general price level of consumer goods and services acquired by households. The current series uses Base Year 2012=100. Weighting diagrams are derived from the 68th Round Consumer Expenditure Survey (CES 2011-12).
+
+2. Compilation Formula: The index is compiled at the subgroup, group, and all-items levels using the Modified Laspeyres Index formula:
+   I = ( Sum ( W_i * (P_it / P_i0) ) ) / ( Sum ( W_i ) )
+where W_i is the base period expenditure weight of item i, P_it is the current month price relative, and P_i0 is the base year average price.
+
+3. Classification: Items are categorized using the COICOP (Classification of Individual Consumption According to Purpose) structure divided into 6 major groups: (1) Food & Beverages, (2) Pan, Tobacco & Intoxicants, (3) Clothing & Footwear, (4) Housing, (5) Fuel & Light, (6) Miscellaneous. Food and Beverages carries the highest weight of 45.86% in the All-India Combined basket.
+
+4. Seasonal Adjustment: Economic time series are seasonally adjusted using the X-13ARIMA-SEATS protocol. The regARIMA pre-treatment models deterministic calendar effects, moving holidays, and outlier interventions prior to seasonal filter application.

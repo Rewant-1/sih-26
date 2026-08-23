@@ -1,0 +1,8 @@
+MINISTRY OF ELECTRONICS & IT / MoSPI
+NATIONAL DATA GOVERNANCE FRAMEWORK POLICY (NDGFP) - DATA QUALITY AND STEWARDSHIP STANDARDS
+
+Section 4. Data Stewardship and Quality Assurance:
+4.1 Every participating Department shall designate a Data Protection and Stewardship Officer (DPSO) responsible for lifecycle dataset integrity.
+4.2 Microdata Anonymization Standards: Prior to releasing official microdata into the India Data Management Office (IDMO) portal, departments must apply k-anonymity (k >= 5) and l-diversity algorithms to prevent re-identification of survey respondents or enterprise establishments.
+4.3 Metadata Standards: All datasets must be cataloged using ISO 19115 and SDMX 2.1 schemas, containing complete Data Structure Definitions (DSD) and variable data dictionaries.
+4.4 Process Auditing: Division workflows shall adhere to the Generic Statistical Business Process Model (GSBPM) spanning the 8 canonical production phases.

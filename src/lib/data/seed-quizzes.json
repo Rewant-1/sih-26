@@ -1,0 +1,278 @@
+[
+  {
+    "id": "quiz-nss79-listing",
+    "title": "NSS 79th Round - Household Listing & Selection Procedures",
+    "description": "Comprehensive competency test on First Stage Unit (FSU) delineation, hamlet-group formation, circular systematic sampling, and Schedule 0.0 listing protocols.",
+    "sourceDocumentName": "NSS_79_Instructions_to_Field_Staff.pdf",
+    "sourceDocumentType": "PDF",
+    "detectedDomain": "Statistical Competencies",
+    "generatorSource": "GEMINI_AI",
+    "createdAt": "2026-08-23T10:15:00.000Z",
+    "totalQuestions": 5,
+    "timeLimitMinutes": 10,
+    "questions": [
+      {
+        "id": "q-nss-01",
+        "question": "In rural areas for the current NSS Round, what constitutes the First Stage Unit (FSU)?",
+        "options": [
+          "A Census Village as per the 2011 Population Census",
+          "An Urban Frame Survey (UFS) block with 100-120 households",
+          "A cluster of exactly 8 households selected via SRSWOR",
+          "The entire Gram Panchayat administrative boundary"
+        ],
+        "correctIndex": 0,
+        "bloomLevel": "Remember",
+        "difficulty": "easy",
+        "competencyId": "STAT_SMPL_01",
+        "competencyName": "Sampling Design & Survey Methodology",
+        "explanation": "Option A is correct: In rural sectors, the 2011 Census village is taken as the First Stage Unit (FSU). Option B describes the urban FSU (UFS block). Option C describes the Ultimate Stage Unit (USU) sample size. Option D is incorrect because Gram Panchayats typically encompass multiple villages.",
+        "referencePassage": "In the rural sector, the First Stage Units (FSUs) are the 2011 Census villages, whereas in the urban sector, the FSUs are the latest Urban Frame Survey (UFS) blocks.",
+        "keywords": ["nss", "fsu", "sampling", "village", "rural"]
+      },
+      {
+        "id": "q-nss-02",
+        "question": "Suppose an investigator encounters a large rural village with an estimated present population of 2,100 during the listing stage. According to NSS guidelines, how many hamlet-groups (hg) must be formed?",
+        "options": [
+          "1 hamlet-group (No subdivision required)",
+          "2 hamlet-groups",
+          "3 hamlet-groups",
+          "4 hamlet-groups"
+        ],
+        "correctIndex": 2,
+        "bloomLevel": "Apply",
+        "difficulty": "medium",
+        "competencyId": "STAT_SMPL_01",
+        "competencyName": "Sampling Design & Survey Methodology",
+        "explanation": "Option C is correct: According to NSS listing rules: population < 1,200 requires 1 hg; 1,200 to 1,799 requires 2 hg; 1,800 to 2,399 requires 3 hg; and 2,400 to 2,999 requires 4 hg. Since 2,100 falls in the range 1,800-2,399, exactly 3 hamlet-groups must be formed.",
+        "referencePassage": "If the estimated present population of the village is 1,800 to 2,399, the number of hamlet-groups to be formed is 3; if 2,400 to 2,999, the number of hamlet-groups to be formed is 4.",
+        "keywords": ["hamlet-group", "population", "nss", "listing", "subdivision"]
+      },
+      {
+        "id": "q-nss-03",
+        "question": "Which sampling technique is officially prescribed for selecting the 8 Ultimate Stage Units (Households) from the listing frame in Schedule 0.0?",
+        "options": [
+          "Circular Systematic Sampling with a random start",
+          "Simple Random Sampling with Replacement (SRSWR)",
+          "Purposive Quota Sampling based on investigator discretion",
+          "Single-stage Cluster Sampling of the nearest contiguous dwellings"
+        ],
+        "correctIndex": 0,
+        "bloomLevel": "Understand",
+        "difficulty": "easy",
+        "competencyId": "STAT_SMPL_01",
+        "competencyName": "Sampling Design & Survey Methodology",
+        "explanation": "Option A is correct: Official NSS methodology mandates Circular Systematic Sampling with a random start across the stratified household listing frame to ensure unbiased probability selection.",
+        "referencePassage": "In each selected FSU/hg, exactly 8 sample households shall be selected by Circular Systematic Sampling with a random start for canvassing Schedule 10.3.",
+        "keywords": ["circular systematic sampling", "households", "usu", "random start"]
+      },
+      {
+        "id": "q-nss-04",
+        "question": "In NSS estimation under Probability Proportional to Size with Replacement (PPSWR), what represents the sampling multiplier for the i-th FSU?",
+        "options": [
+          "M_i = Z / (n * Z_i), where Z is stratum total size and Z_i is FSU size",
+          "M_i = (n * Z_i) / Z, the direct probability of inclusion",
+          "M_i = N / n, the simple unweighted expansion factor",
+          "M_i = (N * n) / (Z_i * H), adjusted for total households"
+        ],
+        "correctIndex": 0,
+        "bloomLevel": "Analyze",
+        "difficulty": "hard",
+        "competencyId": "STAT_PRB_05",
+        "competencyName": "Applied Probability & Inferential Estimation",
+        "explanation": "Option A is correct: The inclusion probability for an FSU under PPSWR is p_i = Z_i / Z. For a sample of n FSUs, the design weight/multiplier is 1 / (n * p_i) = Z / (n * Z_i).",
+        "referencePassage": "For PPSWR sampling of FSUs, the sampling weight (multiplier) in the estimation formula is given by M_i = Z / (n_s * Z_si).",
+        "keywords": ["ppswr", "multiplier", "weights", "stratum", "estimation"]
+      },
+      {
+        "id": "q-nss-05",
+        "question": "If an investigator discovers during field scrutiny that a selected sample household has migrated permanently, what is the mandatory protocol?",
+        "options": [
+          "Record casualty status and select a substitute household strictly from the standby random selection list",
+          "Canvass the immediate adjacent neighbor household informally",
+          "Omit the sample record and re-weight remaining sample households post-facto",
+          "Leave the schedule blank and mark the hamlet as non-existent"
+        ],
+        "correctIndex": 0,
+        "bloomLevel": "Apply",
+        "difficulty": "medium",
+        "competencyId": "BEH_FLD_01",
+        "competencyName": "Field Survey Team Management & High-Performance Supervision",
+        "explanation": "Option A is correct: Official survey protocol prohibits informal ad-hoc substitution. If a casualty occurs, it must be officially coded, and substitution must be performed using the predefined alternate random selection sequence.",
+        "referencePassage": "In case a selected sample household cannot be canvassed due to permanent migration or refusal, substitution shall be made strictly in order of selection from the standby sample frame.",
+        "keywords": ["casualty", "substitution", "field scrutiny", "protocol"]
+      }
+    ]
+  },
+  {
+    "id": "quiz-cpi-methodology",
+    "title": "Consumer Price Index (CPI Base 2012) - Methodology & Aggregation",
+    "description": "Assessment of price collection, Modified Laspeyres index formulation, item baskets, weighting diagrams, and quality adjustment standards.",
+    "sourceDocumentName": "CPI_Compilation_Methodology_Note.pdf",
+    "sourceDocumentType": "PDF",
+    "detectedDomain": "Statistical Competencies",
+    "generatorSource": "GEMINI_AI",
+    "createdAt": "2026-08-23T11:00:00.000Z",
+    "totalQuestions": 4,
+    "timeLimitMinutes": 8,
+    "questions": [
+      {
+        "id": "q-cpi-01",
+        "question": "Which index formula is officially utilized by MoSPI to aggregate elementary price relatives into subgroup and group Consumer Price Indices?",
+        "options": [
+          "Modified Laspeyres price index formula with base-period expenditure weights",
+          "Paasche price index formula utilizing current-period consumption quantities",
+          "Fisher's Ideal Geometric Mean index formula",
+          "Carli unweighted arithmetic mean of price relatives"
+        ],
+        "correctIndex": 0,
+        "bloomLevel": "Remember",
+        "difficulty": "easy",
+        "competencyId": "STAT_IDX_03",
+        "competencyName": "Index Numbers & Price Statistics (CPI, IIP, WPI)",
+        "explanation": "Option A is correct: MoSPI's CPI (Rural, Urban, Combined) uses the Modified Laspeyres formula, aggregating elementary price relatives with fixed base-period consumption expenditure weights from the Consumer Expenditure Survey (CES 2011-12).",
+        "referencePassage": "The all-India and state-level CPI indices are compiled using the Modified Laspeyres Index formula using the weighting diagram derived from the Consumer Expenditure Survey 2011-12.",
+        "keywords": ["cpi", "laspeyres", "weights", "base year", "price relative"]
+      },
+      {
+        "id": "q-cpi-02",
+        "question": "In the All-India CPI (Combined) basket, which commodity group holds the largest percentage weight?",
+        "options": [
+          "Food and Beverages (approx. 45.86%)",
+          "Housing (approx. 21.60%)",
+          "Fuel and Light (approx. 15.20%)",
+          "Miscellaneous Services (approx. 32.10%)"
+        ],
+        "correctIndex": 0,
+        "bloomLevel": "Understand",
+        "difficulty": "medium",
+        "competencyId": "STAT_IDX_03",
+        "competencyName": "Index Numbers & Price Statistics (CPI, IIP, WPI)",
+        "explanation": "Option A is correct: Food and Beverages constitutes the largest group weight in the all-India CPI basket at approximately 45.86% (over 54% in rural and 36% in urban).",
+        "referencePassage": "Food and Beverages group carries the highest weight of 45.86% in the All-India Combined CPI basket.",
+        "keywords": ["cpi", "weighting diagram", "food and beverages", "basket"]
+      },
+      {
+        "id": "q-cpi-03",
+        "question": "When a specific brand or item specification is permanently discontinued in a selected market center, what is the prescribed procedure for the statistical investigator?",
+        "options": [
+          "Identify the most comparable substitute item with highest current sales volume and record overlapping prices for base-period linking",
+          "Drop the item entirely and rescale the weights of the remaining items",
+          "Carry forward the last recorded price indefinitely",
+          "Insert the average price of all items across the entire district"
+        ],
+        "correctIndex": 0,
+        "bloomLevel": "Apply",
+        "difficulty": "medium",
+        "competencyId": "STAT_IDX_03",
+        "competencyName": "Index Numbers & Price Statistics (CPI, IIP, WPI)",
+        "explanation": "Option A is correct: Official price statistics guidelines mandate selecting the most popular comparable substitute and collecting simultaneous prices for overlap linking to prevent artificial price jumps.",
+        "referencePassage": "In case of permanent non-availability of a selected item specification, a closely comparable substitute specification shall be selected with overlap pricing.",
+        "keywords": ["item substitution", "price collection", "overlap linking", "cpi"]
+      },
+      {
+        "id": "q-cpi-04",
+        "question": "Under the X-13ARIMA-SEATS seasonal adjustment protocol used for economic indicators, what is the primary objective of the regARIMA pre-adjustment step?",
+        "options": [
+          "To estimate and remove deterministic calendar effects (trading day variation, moving holidays, leap years) and detect outlier anomalies",
+          "To smooth out all long-term economic trend growth",
+          "To convert nominal index values into real chained volume measures",
+          "To impute missing data using linear interpolation"
+        ],
+        "correctIndex": 0,
+        "bloomLevel": "Analyze",
+        "difficulty": "hard",
+        "competencyId": "STAT_TSA_06",
+        "competencyName": "Time Series Analysis & Seasonal Adjustment",
+        "explanation": "Option A is correct: The regARIMA module models calendar effects (trading day and national holidays like Diwali) and identifies additive/transitory outliers prior to X-11 filter decomposition.",
+        "referencePassage": "The regARIMA pre-treatment models deterministic calendar effects, moving holidays, and outlier interventions prior to seasonal filter application.",
+        "keywords": ["time series", "x-13arima-seats", "regarima", "calendar effects"]
+      }
+    ]
+  },
+  {
+    "id": "quiz-ndgfp-governance",
+    "title": "National Data Governance & Statistical Disclosure Control (NDGFP)",
+    "description": "Evaluation of microdata anonymization standards, k-anonymity thresholds, DDI metadata registries, and UN-FPOS ethical principles.",
+    "sourceDocumentName": "NDGFP_Data_Governance_Guidelines.docx",
+    "sourceDocumentType": "DOCX",
+    "detectedDomain": "Digital Governance & Data Stewardship",
+    "generatorSource": "GEMINI_AI",
+    "createdAt": "2026-08-23T11:30:00.000Z",
+    "totalQuestions": 4,
+    "timeLimitMinutes": 8,
+    "questions": [
+      {
+        "id": "q-gov-01",
+        "question": "Under the National Data Governance Framework Policy (NDGFP), what minimum k-anonymity threshold is mandated prior to releasing public survey microdata?",
+        "options": [
+          "k >= 5 (Each combination of quasi-identifiers must be shared by at least 5 distinct individuals)",
+          "k >= 2 (Basic pairwise obscurity)",
+          "k >= 20 (Mandatory only for enterprise data)",
+          "No k-anonymity required if direct names are removed"
+        ],
+        "correctIndex": 0,
+        "bloomLevel": "Remember",
+        "difficulty": "easy",
+        "competencyId": "GOV_SDC_02",
+        "competencyName": "Statistical Disclosure Control & Microdata Anonymization",
+        "explanation": "Option A is correct: Under NDGFP standards, anonymized public microdata files must satisfy k-anonymity with k >= 5 to prevent re-identification attacks via linked auxiliary databases.",
+        "referencePassage": "Departments must apply k-anonymity (k >= 5) and l-diversity algorithms to prevent re-identification of survey respondents or enterprise establishments.",
+        "keywords": ["k-anonymity", "microdata", "anonymization", "privacy", "ndgfp"]
+      },
+      {
+        "id": "q-gov-02",
+        "question": "Under the Statistical Data and Metadata eXchange (SDMX) framework, what constitutes a Data Structure Definition (DSD)?",
+        "options": [
+          "A formal specification defining the Dimensions, Attributes, and Primary Measure of a statistical dataflow",
+          "A relational database schema script for PostgreSQL tables",
+          "The private encryption key used to sign official PDF releases",
+          "The user access control list for departmental server logins"
+        ],
+        "correctIndex": 0,
+        "bloomLevel": "Understand",
+        "difficulty": "medium",
+        "competencyId": "TECH_SDMX_06",
+        "competencyName": "Statistical Data and Metadata eXchange (SDMX)",
+        "explanation": "Option A is correct: In SDMX, a Data Structure Definition (DSD) defines the structure of multidimensional statistical datasets including Dimensions (identifiers), Attributes (metadata), and Measures (values).",
+        "referencePassage": "The SDMX Data Structure Definition (DSD) specifies the concept scheme, code lists, dimensions, and attributes required to interpret statistical time series data.",
+        "keywords": ["sdmx", "dsd", "metadata", "dimensions", "attributes"]
+      },
+      {
+        "id": "q-gov-03",
+        "question": "Under the Collection of Statistics Act 2008, what is the legal mandate regarding individual respondent information disclosed in official schedules?",
+        "options": [
+          "It is strictly confidential and inadmissible as evidence in court or for taxation/prosecution against the respondent",
+          "It can be shared with law enforcement agencies upon written police request",
+          "It becomes public property and can be published in unit-level identified form after 1 year",
+          "It may be used by the Income Tax department for audit reconciliations"
+        ],
+        "correctIndex": 0,
+        "bloomLevel": "Analyze",
+        "difficulty": "medium",
+        "competencyId": "GOV_ETH_04",
+        "competencyName": "Official Statistics Ethics & Legal Frameworks",
+        "explanation": "Option A is correct: Section 9 and 10 of the Collection of Statistics Act 2008 explicitly protect statistical confidentiality; individual returns cannot be used for taxation, law enforcement, or court prosecution.",
+        "referencePassage": "Information collected under the Collection of Statistics Act 2008 shall be used solely for statistical purposes and is strictly inadmissible as evidence in any legal proceeding against the respondent.",
+        "keywords": ["collection of statistics act", "confidentiality", "ethics", "un-fpos"]
+      },
+      {
+        "id": "q-gov-04",
+        "question": "Which international framework provides the 8 core phases for modeling official statistical business workflows (Specify Needs, Design, Build, Collect, Process, Analyze, Disseminate, Evaluate)?",
+        "options": [
+          "Generic Statistical Business Process Model (GSBPM)",
+          "ISO 9001 Quality Management System",
+          "COBIT IT Governance Framework",
+          "UN-SEEA Ecosystem Accounting Framework"
+        ],
+        "correctIndex": 0,
+        "bloomLevel": "Remember",
+        "difficulty": "easy",
+        "competencyId": "GOV_AUD_07",
+        "competencyName": "Statistical Audit, Process Validation & System Documentation",
+        "explanation": "Option A is correct: The UNECE Generic Statistical Business Process Model (GSBPM v5.1) defines the 8 standard phases of official statistical production adopted across MoSPI.",
+        "referencePassage": "The Generic Statistical Business Process Model (GSBPM) standardizes the 8 end-to-end phases of official statistical production from user needs identification to dissemination and evaluation.",
+        "keywords": ["gsbpm", "audit", "statistical business process", "unece"]
+      }
+    ]
+  }
+]
