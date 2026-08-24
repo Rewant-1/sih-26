@@ -24,16 +24,16 @@ export function Badge({
   ...props
 }: BadgeProps) {
   const variantClasses = {
-    default: "bg-slate-900 text-white border-transparent",
-    secondary: "bg-slate-100 text-slate-800 border-slate-200",
-    outline: "text-slate-800 border-slate-300 bg-transparent",
+    default: "bg-[#142446] text-white border-transparent",
+    secondary: "bg-[#B7C7D9]/30 text-[#142446] border-[#B7C7D9]",
+    outline: "text-[#142446] border-[#C7C2BA] bg-transparent",
     destructive: "bg-rose-100 text-rose-800 border-rose-200 font-medium",
     success: "bg-emerald-100 text-emerald-800 border-emerald-200 font-medium",
     warning: "bg-amber-100 text-amber-800 border-amber-200 font-medium",
-    saffron: "bg-amber-500/15 text-amber-700 border-amber-300 font-medium",
-    navy: "bg-indigo-950 text-white border-indigo-900 font-medium",
-    igot: "bg-orange-100 text-orange-800 border-orange-300 font-medium",
-    nssta: "bg-blue-100 text-blue-900 border-blue-300 font-medium",
+    saffron: "bg-[#D8921E]/15 text-[#D8921E] border-[#D8921E]/40 font-medium",
+    navy: "bg-[#142446] text-white border-[#1e3460] font-medium",
+    igot: "bg-[#B7C7D9]/30 text-[#142446] border-[#B7C7D9] font-medium",
+    nssta: "bg-[#475A6F]/20 text-[#142446] border-[#475A6F]/40 font-medium",
   };
 
   const sizeClasses = {

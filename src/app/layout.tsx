@@ -2,9 +2,18 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "MoSPI Skill Intelligence & Learning Platform",
+  title: "Karmasarthi — AI-Enabled Skill Intelligence Platform",
   description:
-    "AI-Enabled Skill Intelligence & Learning Platform for Official Statistics (MoSPI / DIID, SIH 26101)",
+    "Karmasarthi: AI-powered competency assessment, personalized learning pathways, and iGOT Karmayogi integration for India's Official Statistical System. A MoSPI / DIID initiative.",
+  keywords: [
+    "Karmasarthi",
+    "iGOT Karmayogi",
+    "MoSPI",
+    "statistical training",
+    "competency assessment",
+    "India AI learning",
+    "NSSTA",
+  ],
 };
 
 export default function RootLayout({
@@ -13,8 +22,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-slate-50 text-slate-900 antialiased selection:bg-amber-100 selection:text-amber-900">
+    <html lang="en" className="scroll-smooth">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
+      <body className="min-h-screen bg-[#f9f8f5] text-[#142446] antialiased">
         {children}
       </body>
     </html>

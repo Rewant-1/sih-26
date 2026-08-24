@@ -1,150 +1,160 @@
 import React from "react";
 import Link from "next/link";
-import { Badge } from "@/components/ui/Badge";
-import { Award, BookOpen, ExternalLink, Globe, Shield, Sparkles } from "lucide-react";
+import Image from "next/image";
+
+const platformLinks = [
+  { href: "/dashboard/learner", label: "Learner Dashboard" },
+  { href: "/dashboard/admin", label: "Admin Analytics" },
+  { href: "/acbp", label: "Annual Capacity Building Plan" },
+  { href: "/assessment", label: "Competency Self-Assessment" },
+  { href: "/catalog", label: "Course Catalog" },
+  { href: "/quiz-studio", label: "AI Quiz Studio" },
+];
+
+const institutionalLinks = [
+  { label: "Mission Karmayogi", href: "https://karmayogi.gov.in" },
+  { label: "iGOT Karmayogi Bharat", href: "https://igotkarmayogi.gov.in" },
+  { label: "NSSTA, Greater Noida", href: "#" },
+  { label: "MoSPI, Government of India", href: "https://mospi.gov.in" },
+];
 
 export function Footer() {
   return (
-    <footer className="w-full border-t border-slate-200 bg-slate-900 text-slate-300">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Col 1: Ministry Info */}
-          <div className="space-y-3 md:col-span-1">
-            <div className="flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#FF9933] text-slate-900 font-serif font-black text-lg">
-                M
+    <footer className="w-full bg-[#142446] text-[#B7C7D9]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8">
+
+        {/* Main grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-10 border-b border-[#1e3460]">
+
+          {/* Brand column */}
+          <div className="md:col-span-4 space-y-5">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/karmasarthi.png"
+                alt="Karmasarthi"
+                width={38}
+                height={38}
+                className="object-contain opacity-90"
+              />
+              <div>
+                <div className="flex items-baseline gap-2">
+                  <span
+                    className="font-semibold text-white text-[14px]"
+                    style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
+                  >
+                    कर्मसारथी
+                  </span>
+                  <span className="text-[#475A6F] text-xs select-none">|</span>
+                  <span className="font-semibold text-white text-[14px] tracking-widest uppercase">
+                    Karmasarthi
+                  </span>
+                </div>
+                <p className="text-[11px] text-[#475A6F] mt-0.5 tracking-wide">
+                  AI Skill Intelligence Platform
+                </p>
               </div>
-              <span className="font-bold text-white text-sm">
-                MoSPI Skill Intelligence
+            </div>
+
+            <p className="text-[12.5px] text-[#B7C7D9]/80 leading-relaxed max-w-xs">
+              Data Informatics and Innovation Division (DIID), Ministry of Statistics
+              and Programme Implementation, Government of India.
+            </p>
+
+            <div className="flex items-center gap-3 pt-1">
+              <span className="text-[10px] px-2.5 py-1 border border-[#D8921E]/60 text-[#D8921E] rounded font-medium tracking-wider uppercase">
+                SIH 26101
+              </span>
+              <span className="text-[10px] px-2.5 py-1 border border-[#1e3460] text-[#475A6F] rounded tracking-wider uppercase">
+                FRAC 2026
               </span>
             </div>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Data Informatics and Innovation Division (DIID), Ministry of
-              Statistics and Programme Implementation, Government of India.
-            </p>
-            <div className="flex flex-wrap gap-1.5 pt-1">
-              <Badge variant="saffron" size="sm">
-                SIH 26101
-              </Badge>
-              <Badge variant="navy" size="sm" className="bg-slate-800 text-slate-200 border-slate-700">
-                FRAC 2026
-              </Badge>
-            </div>
           </div>
 
-          {/* Col 2: Official Pillars */}
-          <div className="space-y-2.5">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200">
-              Institutional Framework
-            </h4>
-            <ul className="space-y-2 text-xs text-slate-400">
-              <li className="flex items-center gap-1.5">
-                <Shield className="h-3.5 w-3.5 text-[#FF9933]" />
-                <span>Mission Karmayogi (CBC)</span>
-              </li>
-              <li className="flex items-center gap-1.5">
-                <Globe className="h-3.5 w-3.5 text-blue-400" />
-                <span>iGOT Karmayogi Bharat</span>
-              </li>
-              <li className="flex items-center gap-1.5">
-                <Award className="h-3.5 w-3.5 text-[#138808]" />
-                <span>NSSTA Greater Noida (TPAC)</span>
-              </li>
-              <li className="flex items-center gap-1.5">
-                <BookOpen className="h-3.5 w-3.5 text-amber-400" />
-                <span>FRAC 4-Domain Taxonomy</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 3: Quick Navigation */}
-          <div className="space-y-2.5">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200">
+          {/* Platform links */}
+          <div className="md:col-span-3 space-y-4">
+            <h4 className="text-[11px] font-bold uppercase tracking-widest text-[#F3E7D1]">
               Platform Modules
             </h4>
-            <ul className="space-y-1.5 text-xs text-slate-400">
-              <li>
-                <Link
-                  href="/dashboard/learner"
-                  className="hover:text-white transition"
-                >
-                  Learner Dashboard & Radar
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/dashboard/admin"
-                  className="hover:text-white transition"
-                >
-                  Admin Division Heatmap
-                </Link>
-              </li>
-              <li>
-                <Link href="/acbp" className="hover:text-white transition">
-                  Annual Capacity Building Plan (ACBP)
-                </Link>
-              </li>
-              <li>
-                <Link href="/assessment" className="hover:text-white transition">
-                  Competency Self-Assessment
-                </Link>
-              </li>
-              <li>
-                <Link href="/catalog" className="hover:text-white transition">
-                  Unified Course Catalog
-                </Link>
-              </li>
-              <li>
-                <Link href="/quiz-studio" className="hover:text-white transition">
-                  AI Document-to-Quiz Studio
-                </Link>
-              </li>
+            <ul className="space-y-2.5">
+              {platformLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-[12.5px] text-[#B7C7D9]/80 hover:text-white transition-colors hover-underline"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Col 4: Official Cadres & Divisions */}
-          <div className="space-y-2.5">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200">
-              Target Statistical Cadres
+          {/* Institutional */}
+          <div className="md:col-span-3 space-y-4">
+            <h4 className="text-[11px] font-bold uppercase tracking-widest text-[#F3E7D1]">
+              Institutional Framework
             </h4>
-            <div className="space-y-1.5 text-xs text-slate-400">
-              <p>• Indian Statistical Service (ISS AD / DD / Dir)</p>
-              <p>• Senior Statistical Officer (SSO, Subordinate)</p>
-              <p>• Junior Statistical Officer (JSO, Subordinate)</p>
-              <div className="pt-2">
-                <span className="text-[11px] font-semibold text-slate-300 block mb-1">
-                  Key Divisions Covered:
-                </span>
-                <span className="font-mono text-[10px] text-slate-400">
-                  FOD • ESD • NAD • DIID • SDRD
-                </span>
-              </div>
-            </div>
+            <ul className="space-y-2.5">
+              {institutionalLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    rel="noopener noreferrer"
+                    className="text-[12.5px] text-[#B7C7D9]/80 hover:text-white transition-colors hover-underline"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Cadres */}
+          <div className="md:col-span-2 space-y-4">
+            <h4 className="text-[11px] font-bold uppercase tracking-widest text-[#F3E7D1]">
+              Statistical Cadres
+            </h4>
+            <ul className="space-y-2 text-[12px] text-[#B7C7D9]/70">
+              <li>ISS Assistant Director</li>
+              <li>Senior Statistical Officer</li>
+              <li>Junior Statistical Officer</li>
+              <li className="pt-2 text-[10px] font-mono text-[#475A6F]">
+                FOD · ESD · NAD · DIID · SDRD
+              </li>
+            </ul>
           </div>
         </div>
 
-        {/* Mock-Data Disclosure */}
-        <div className="mb-6 rounded-lg border border-amber-700/40 bg-amber-950/40 px-4 py-2.5 text-center text-xs text-amber-300/90">
-          <span className="font-semibold text-amber-200">ℹ Prototype Demo Data:</span>{" "}
-          Course catalog uses representative data, schema-matched to iGOT Karmayogi &amp; NSSTA TPAC. Assessment profiles are simulated for demonstration purposes.
+        {/* Disclaimer */}
+        <div className="py-5 border-b border-[#1e3460]">
+          <p className="text-[11px] text-[#475A6F] text-center leading-relaxed">
+            <span className="text-[#D8921E] font-medium">Prototype:</span>
+            &nbsp;Course catalog uses representative data schema-matched to iGOT Karmayogi and NSSTA TPAC.
+            Assessment profiles are simulated for demonstration purposes.
+          </p>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© 2026 Ministry of Statistics and Programme Implementation (MoSPI). All Rights Reserved.</p>
-          <div className="flex items-center gap-4">
-            <span>GIGW & Karmayogi Standard Compliant</span>
-            <span>•</span>
-            <span className="font-mono text-[11px]">API: /api/admin/analytics</span>
+        {/* Bottom bar */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-[11px] text-[#475A6F]">
+            &copy; 2026 Ministry of Statistics and Programme Implementation (MoSPI). All rights reserved.
+          </p>
+          <div className="flex items-center gap-4 text-[11px] text-[#475A6F]">
+            <span>GIGW Compliant</span>
+            <span className="text-[#1e3460]">·</span>
+            <span>Karmayogi Standard</span>
+            <span className="text-[#1e3460]">·</span>
+            <span className="font-mono text-[10px]">v1.0.0-beta</span>
           </div>
         </div>
       </div>
 
-      {/* Tricolor Bottom Accent */}
-      <div className="h-1 w-full flex">
-        <div className="h-full w-1/3 bg-[#FF9933]" />
-        <div className="h-full w-1/3 bg-white" />
-        <div className="h-full w-1/3 bg-[#138808]" />
+      {/* Tricolor bottom accent */}
+      <div className="tricolor-bar">
+        <span />
+        <span />
+        <span />
       </div>
     </footer>
   );

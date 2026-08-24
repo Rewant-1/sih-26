@@ -31,18 +31,18 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const variantClasses = {
       default:
-        "bg-slate-900 text-white hover:bg-slate-800 shadow-sm border border-transparent",
+        "bg-[#142446] text-white hover:bg-[#1e3460] shadow-sm border border-transparent",
       secondary:
-        "bg-slate-100 text-slate-900 hover:bg-slate-200 border border-slate-200",
+        "bg-[#B7C7D9]/30 text-[#142446] hover:bg-[#B7C7D9]/50 border border-[#B7C7D9]",
       outline:
-        "border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm",
-      ghost: "text-slate-700 hover:bg-slate-100 hover:text-slate-900",
+        "border border-[#C7C2BA] bg-white text-[#475A6F] hover:bg-[#F3E7D1]/40 hover:text-[#142446] shadow-sm",
+      ghost: "text-[#475A6F] hover:bg-[#F3E7D1]/50 hover:text-[#142446]",
       destructive:
         "bg-rose-600 text-white hover:bg-rose-700 shadow-sm border border-transparent",
       saffron:
-        "bg-[#FF9933] text-white hover:bg-[#CC7A29] shadow-sm font-medium border border-transparent focus-visible:ring-[#FF9933]",
+        "bg-[#D8921E] text-white hover:bg-[#e8a835] shadow-sm font-medium border border-transparent focus-visible:ring-[#D8921E]",
       navy:
-        "bg-[#000080] text-white hover:bg-[#1A1A99] shadow-sm font-medium border border-transparent focus-visible:ring-[#000080]",
+        "bg-[#142446] text-white hover:bg-[#1e3460] shadow-sm font-medium border border-transparent focus-visible:ring-[#142446]",
       success:
         "bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm font-medium border border-transparent",
     };
