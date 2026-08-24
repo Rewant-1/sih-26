@@ -38,27 +38,29 @@ export function SkillGapCard({ gaps, userId = "usr-jso-rajesh" }: SkillGapCardPr
 
   return (
     <div className="w-full space-y-4">
-      {/* Header Bar */}
-      <div className="pb-3 border-b border-[#C7C2BA]/40 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <div>
-          <div className="flex items-center gap-2">
-            <h3 className="text-base sm:text-lg text-[#142446] font-bold">
-              Prioritized Skill Gap Breakdown
-            </h3>
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#142446] text-white">
-              {gaps.length} Skills
-            </span>
+      {/* Header Bar (Clean Stacked Layout, No Congestion) */}
+      <div className="pb-3 border-b border-[#C7C2BA]/40 space-y-3">
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <div className="flex items-center gap-2">
+              <h3 className="text-base sm:text-lg text-[#142446] font-bold">
+                Prioritized Skill Gap Breakdown
+              </h3>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#142446] text-white">
+                {gaps.length} Competencies
+              </span>
+            </div>
+            <p className="text-xs text-[#475A6F] mt-0.5">
+              Transparent delta between Assessed Proficiency and Cadre Benchmark
+            </p>
           </div>
-          <p className="text-xs text-[#475A6F] mt-0.5">
-            Transparent delta between Assessed Proficiency and Cadre Benchmark
-          </p>
         </div>
 
-        {/* Quick Filter Pills */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
+        {/* Filter Pills with ample margin & clean palette */}
+        <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => setFilter("ALL")}
-            className={`text-xs px-2.5 py-1 rounded-full font-bold transition-colors ${
+            className={`text-xs px-3 py-1 rounded-full font-bold transition-colors ${
               filter === "ALL"
                 ? "bg-[#142446] text-white shadow-xs"
                 : "bg-[#FAF9F6] text-[#475A6F] border border-[#C7C2BA]/60 hover:text-[#142446]"
@@ -68,7 +70,7 @@ export function SkillGapCard({ gaps, userId = "usr-jso-rajesh" }: SkillGapCardPr
           </button>
           <button
             onClick={() => setFilter("CRITICAL")}
-            className={`text-xs px-2.5 py-1 rounded-full font-bold transition-colors flex items-center gap-1 ${
+            className={`text-xs px-3 py-1 rounded-full font-bold transition-colors flex items-center gap-1 ${
               filter === "CRITICAL"
                 ? "bg-[#142446] text-white shadow-xs"
                 : "bg-[#FAF9F6] text-[#142446] border border-[#C7C2BA]/60 hover:text-[#142446]"
@@ -78,7 +80,7 @@ export function SkillGapCard({ gaps, userId = "usr-jso-rajesh" }: SkillGapCardPr
           </button>
           <button
             onClick={() => setFilter("MODERATE")}
-            className={`text-xs px-2.5 py-1 rounded-full font-bold transition-colors flex items-center gap-1 ${
+            className={`text-xs px-3 py-1 rounded-full font-bold transition-colors flex items-center gap-1 ${
               filter === "MODERATE"
                 ? "bg-[#142446] text-white shadow-xs"
                 : "bg-[#FAF9F6] text-[#475A6F] border border-[#C7C2BA]/60 hover:text-[#142446]"
@@ -88,10 +90,10 @@ export function SkillGapCard({ gaps, userId = "usr-jso-rajesh" }: SkillGapCardPr
           </button>
           <button
             onClick={() => setFilter("PROFICIENT")}
-            className={`text-xs px-2.5 py-1 rounded-full font-bold transition-colors flex items-center gap-1 ${
+            className={`text-xs px-3 py-1 rounded-full font-bold transition-colors flex items-center gap-1 ${
               filter === "PROFICIENT"
                 ? "bg-[#142446] text-white shadow-xs"
-                : "bg-[#FAF9F6] text-[#166534] border border-[#C7C2BA]/60 hover:text-[#166534]"
+                : "bg-[#E8F5E9] text-[#166534] border border-[#2E7D32]/40 hover:bg-[#C8E6C9]"
             }`}
           >
             Met ({proficientGaps.length})

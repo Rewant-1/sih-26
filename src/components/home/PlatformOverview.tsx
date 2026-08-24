@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export function PlatformOverview() {
   const coreFeatures = [
@@ -47,37 +48,47 @@ export function PlatformOverview() {
         {/* Main Brand Showcase Row */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pb-12 border-b border-[#C7C2BA]/60">
           
-          {/* Large Logo & Brand Identity */}
-          <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
-            <div className="bg-white p-4 rounded-2xl shadow-sm border border-[#C7C2BA]/60 inline-block">
+          {/* Prominent Large Logo & Brand Identity */}
+          <div className="lg:col-span-6 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
+            <div className="bg-white p-5 rounded-2xl shadow-sm border border-[#C7C2BA]/60 inline-block">
               <Image
                 src="/karmasarthi.png"
                 alt="Karmasarthi Platform Logo"
-                width={280}
-                height={80}
+                width={360}
+                height={100}
                 priority
-                className="h-[64px] w-auto object-contain"
+                className="h-[80px] w-auto object-contain"
               />
             </div>
             
-            <div className="pt-2">
-              <span className="text-xs uppercase font-bold tracking-widest text-[#475A6F]">
-                Official Statistical Learning Platform
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#142446] tracking-tight mt-1">
+            <div className="pt-2 space-y-1">
+              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#142446] text-white text-[11px] font-bold">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#D8921E]" />
+                <span>Mission Karmayogi Statistical Extension</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#142446] tracking-tight">
                 How Karmasarthi Powers Your Upskilling
               </h2>
             </div>
           </div>
 
           {/* Simple, Human-Understandable Platform Overview */}
-          <div className="lg:col-span-7 space-y-3 text-center lg:text-left">
-            <p className="text-base sm:text-lg font-medium text-[#142446] leading-relaxed">
+          <div className="lg:col-span-6 space-y-3.5 text-center lg:text-left">
+            <p className="text-base sm:text-lg font-semibold text-[#142446] leading-relaxed">
               Designed as an intelligent companion for the <strong>Mission Karmayogi</strong> ecosystem, Karmasarthi eliminates guesswork in professional upskilling for statistical officers.
             </p>
             <p className="text-xs sm:text-sm text-[#475A6F] leading-relaxed">
               From field survey enumeration in FOD to national accounts modeling in NAD, every officer receives a clear, transparent pathway: assess your competencies, discover recommended courses, and test your mastery.
             </p>
+            <div className="pt-2">
+              <Link
+                href="/assessment"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#142446] text-white text-xs font-bold rounded-xl hover:bg-[#1e3460] transition-colors"
+              >
+                <span>Start Your Learning Journey</span>
+                <ArrowRight className="w-4 h-4 text-[#D8921E]" />
+              </Link>
+            </div>
           </div>
 
         </div>
@@ -90,7 +101,7 @@ export function PlatformOverview() {
                 <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-[#142446] text-white">
                   {feat.step}
                 </span>
-                <div className="h-px flex-1 bg-[#C7C2BA]/60" />
+                <div className="h-px flex-1 bg-[#B7C7D9]" />
               </div>
 
               <h3 className="text-base font-bold text-[#142446] leading-snug">
@@ -104,7 +115,7 @@ export function PlatformOverview() {
               <div className="pt-1">
                 <Link
                   href={feat.linkHref}
-                  className="text-xs font-bold text-[#142446] hover:text-[#475A6F] transition-colors"
+                  className="text-xs font-bold text-[#142446] hover:text-[#D8921E] transition-colors"
                 >
                   {feat.linkText}
                 </Link>

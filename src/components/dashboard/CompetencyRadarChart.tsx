@@ -9,20 +9,14 @@ import {
   PolarRadiusAxis,
   ResponsiveContainer,
   Tooltip,
-  Legend,
 } from "recharts";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { Badge } from "@/components/ui/Badge";
-import type { CompetencyDomain } from "@/lib/types";
 
 export interface RadarDataPoint {
   subject: string;
   assessed: number;
   benchmark: number;
-  domain?: CompetencyDomain;
   fullMark: number;
-  gap?: number;
+  domain?: string;
 }
 
 interface CompetencyRadarChartProps {
@@ -34,28 +28,17 @@ interface CompetencyRadarChartProps {
 
 export function CompetencyRadarChart({
   domainData,
-  detailedData = [],
+  detailedData,
   officerName = "Officer",
-  cadreName = "Cadre Benchmark",
+  cadreName = "Target Cadre",
 }: CompetencyRadarChartProps) {
-  const [viewMode, setViewMode] = useState<"domain" | "all">("domain");
-  const [selectedDomain, setSelectedDomain] = useState<string>("ALL");
+  const [viewMode, setViewMode] = useState<"domain" | "detailed">("domain");
 
-  const domainsList = [
-    "ALL",
-    "Statistical Competencies",
-    "Technical Competencies",
-    "Digital Governance & Data Stewardship",
-    "Behavioural & Managerial Competencies",
-  ];
+  const currentData =
+    viewMode === "detailed" && detailedData && detailedData.length > 0
+      ? detailedData
+      : domainData;
 
-  let displayData = viewMode === "domain" ? domainData : detailedData;
-
-  if (viewMode === "all" && selectedDomain !== "ALL") {
-    displayData = detailedData.filter((d) => d.domain === selectedDomain);
-  }
-
-  // Custom tooltip component
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
@@ -64,47 +47,43 @@ export function CompetencyRadarChart({
       const delta = assessed - benchmark;
 
       return (
-        <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-lg ring-1 ring-black/5 text-xs space-y-1.5 min-w-[200px]">
-          <p className="font-bold text-slate-900 border-b border-slate-100 pb-1">
+        <div className="rounded-xl border border-[#C7C2BA] bg-white p-3 shadow-lg text-xs space-y-1.5 min-w-[200px] z-50">
+          <p className="font-bold text-[#142446] border-b border-[#C7C2BA]/40 pb-1">
             {data.subject}
           </p>
           {data.domain && (
-            <p className="text-[11px] text-slate-500 font-medium">
+            <p className="text-[11px] text-[#475A6F] font-medium">
               Domain: {data.domain}
             </p>
           )}
-          <div className="flex justify-between items-center text-slate-700">
+          <div className="flex justify-between items-center text-[#475A6F]">
             <span className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-[#FF9933]" />
+              <span className="h-2 w-2 rounded-full bg-[#D8921E]" />
               Assessed Level:
             </span>
-            <span className="font-mono font-bold text-amber-700">
+            <span className="font-mono font-bold text-[#D8921E]">
               {assessed.toFixed(1)} / 5.0
             </span>
           </div>
-          <div className="flex justify-between items-center text-slate-700">
+          <div className="flex justify-between items-center text-[#475A6F]">
             <span className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-[#000080]" />
+              <span className="h-2 w-2 rounded-full bg-[#142446]" />
               Cadre Benchmark:
             </span>
-            <span className="font-mono font-bold text-indigo-900">
+            <span className="font-mono font-bold text-[#142446]">
               {benchmark.toFixed(1)} / 5.0
             </span>
           </div>
-          <div className="pt-1 border-t border-slate-100 flex justify-between items-center">
-            <span className="text-[11px] text-slate-500">Gap Status:</span>
-            {delta < -0.5 ? (
-              <Badge variant="destructive" size="sm">
-                Gap: {Math.abs(delta).toFixed(1)}
-              </Badge>
-            ) : delta < 0 ? (
-              <Badge variant="warning" size="sm">
-                Gap: {Math.abs(delta).toFixed(1)}
-              </Badge>
+          <div className="pt-1 border-t border-[#C7C2BA]/40 flex justify-between items-center">
+            <span className="text-[11px] text-[#475A6F]">Status:</span>
+            {delta < 0 ? (
+              <span className="text-[11px] font-bold text-[#142446] bg-[#FAF9F6] px-2 py-0.5 rounded border border-[#C7C2BA]">
+                Gap: {Math.abs(delta).toFixed(1)} Level{Math.abs(delta) > 1 ? "s" : ""}
+              </span>
             ) : (
-              <Badge variant="success" size="sm">
-                Proficient (+{delta.toFixed(1)})
-              </Badge>
+              <span className="text-[11px] font-bold text-[#166534] bg-[#E8F5E9] px-2 py-0.5 rounded border border-[#2E7D32]/40">
+                Benchmark Met ✓
+              </span>
             )}
           </div>
         </div>
@@ -114,121 +93,122 @@ export function CompetencyRadarChart({
   };
 
   return (
-    <Card className="w-full">
-      <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-2">
-        <div>
-          <div className="flex items-center gap-2">
-            <CardTitle className="text-base sm:text-lg">
-              FRAC Competency Radar Profile
-            </CardTitle>
-            <Badge variant="saffron" size="sm">
-              Level 1-5 Rubric
-            </Badge>
+    <div className="w-full space-y-4">
+      {/* Title and Controls (Clean Stacked Layout, Zero Overlap) */}
+      <div className="pb-3 border-b border-[#C7C2BA]/40 space-y-3">
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <div className="flex items-center gap-2">
+              <h3 className="text-base sm:text-lg font-bold text-[#142446]">
+                FRAC Competency Radar Profile
+              </h3>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#FAF9F6] text-[#475A6F] border border-[#C7C2BA]/60">
+                Level 1–5 Scale
+              </span>
+            </div>
+            <p className="text-xs text-[#475A6F] mt-0.5">
+              Direct comparison: Assessed Proficiency vs {cadreName}
+            </p>
           </div>
-          <CardDescription>
-            Direct comparison: Assessed Proficiency vs {cadreName}
-          </CardDescription>
         </div>
 
-        <div className="flex items-center gap-2">
-          <Tabs
-            defaultValue="domain"
-            value={viewMode}
-            onValueChange={(val: any) => setViewMode(val)}
-            className="w-auto"
-          >
-            <TabsList className="h-8">
-              <TabsTrigger value="domain" className="text-xs px-2.5 py-1">
-                4-Domain Summary
-              </TabsTrigger>
-              <TabsTrigger value="all" className="text-xs px-2.5 py-1">
-                Granular Competencies
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
-        </div>
-      </CardHeader>
-
-      <CardContent className="pt-2">
-        {/* Domain filter if granular mode */}
-        {viewMode === "all" && (
-          <div className="flex flex-wrap gap-1 mb-3 pt-1 border-t border-slate-100">
-            {domainsList.map((d) => (
-              <button
-                key={d}
-                onClick={() => setSelectedDomain(d)}
-                className={`text-[11px] px-2.5 py-1 rounded-md transition font-medium ${
-                  selectedDomain === d
-                    ? "bg-[#000080] text-white"
-                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                }`}
-              >
-                {d === "ALL" ? "All Domains" : d.split(" ")[0]}
-              </button>
-            ))}
+        {/* View Switcher Tabs (Own line to prevent any overlap) */}
+        {detailedData && detailedData.length > 0 && (
+          <div className="inline-flex items-center p-1 bg-[#FAF9F6] rounded-full border border-[#C7C2BA]/60">
+            <button
+              onClick={() => setViewMode("domain")}
+              className={`px-3 py-1 rounded-full text-xs font-semibold transition-colors ${
+                viewMode === "domain"
+                  ? "bg-[#142446] text-white shadow-xs"
+                  : "text-[#475A6F] hover:text-[#142446]"
+              }`}
+            >
+              4-Domain Summary
+            </button>
+            <button
+              onClick={() => setViewMode("detailed")}
+              className={`px-3 py-1 rounded-full text-xs font-semibold transition-colors ${
+                viewMode === "detailed"
+                  ? "bg-[#142446] text-white shadow-xs"
+                  : "text-[#475A6F] hover:text-[#142446]"
+              }`}
+            >
+              Granular Competencies
+            </button>
           </div>
         )}
+      </div>
 
-        <div className="h-[340px] sm:h-[380px] w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <RadarChart cx="50%" cy="50%" outerRadius="75%" data={displayData}>
-              <PolarGrid stroke="#cbd5e1" strokeDasharray="3 3" />
-              <PolarAngleAxis
-                dataKey="subject"
-                tick={{ fill: "#334155", fontSize: 11, fontWeight: 600 }}
-              />
-              <PolarRadiusAxis
-                angle={90}
-                domain={[0, 5]}
-                tick={{ fill: "#64748b", fontSize: 10 }}
-                tickCount={6}
-              />
-              <Tooltip content={<CustomTooltip />} />
-              <Legend
-                verticalAlign="bottom"
-                height={36}
-                wrapperStyle={{
-                  paddingTop: "12px",
-                  fontSize: "12px",
-                  fontWeight: 600,
-                }}
-              />
-              <Radar
-                name={`${officerName} (Assessed)`}
-                dataKey="assessed"
-                stroke="#FF9933"
-                fill="#FF9933"
-                fillOpacity={0.45}
-                strokeWidth={2}
-              />
-              <Radar
-                name="Cadre Benchmark"
-                dataKey="benchmark"
-                stroke="#000080"
-                fill="#000080"
-                fillOpacity={0.2}
-                strokeWidth={2}
-              />
-            </RadarChart>
-          </ResponsiveContainer>
-        </div>
+      {/* Radar Chart Visual */}
+      <div className="h-[340px] sm:h-[380px] w-full relative">
+        <ResponsiveContainer width="100%" height="100%">
+          <RadarChart
+            cx="50%"
+            cy="50%"
+            outerRadius="75%"
+            data={currentData}
+            margin={{ top: 15, right: 30, bottom: 15, left: 30 }}
+          >
+            <PolarGrid stroke="#B7C7D9" strokeDasharray="3 3" strokeOpacity={0.6} />
+            <PolarAngleAxis
+              dataKey="subject"
+              tick={{
+                fill: "#475A6F",
+                fontSize: viewMode === "domain" ? 11.5 : 9.5,
+                fontWeight: 600,
+              }}
+            />
+            <PolarRadiusAxis
+              angle={90}
+              domain={[0, 5]}
+              tick={{ fill: "#475A6F", fontSize: 10 }}
+              tickCount={6}
+              stroke="#B7C7D9"
+            />
+            <Tooltip content={<CustomTooltip />} />
+            
+            {/* 1. Assessed Proficiency Area (Saffron Gold with Subtle Fill) */}
+            <Radar
+              name={`${officerName} (Assessed)`}
+              dataKey="assessed"
+              stroke="#D8921E"
+              strokeWidth={2.5}
+              fill="#D8921E"
+              fillOpacity={0.25}
+            />
 
-        <div className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs text-slate-500">
-          <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#FF9933]" />
-              Assessed Level (1.0-5.0)
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#000080]" />
-              Cadre Target Level
-            </span>
-          </div>
-          <span className="font-mono text-[11px] text-slate-400">
-            Scale: 1 (Basic) to 5 (Expert)
+            {/* 2. Target Cadre Benchmark Line (Deep Navy Solid) */}
+            <Radar
+              name={`Cadre Benchmark (${cadreName})`}
+              dataKey="benchmark"
+              stroke="#142446"
+              strokeWidth={2}
+              strokeDasharray="4 4"
+              fill="#142446"
+              fillOpacity={0.08}
+            />
+          </RadarChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* Legend Footer */}
+      <div className="flex flex-wrap items-center justify-center gap-6 pt-2 border-t border-[#C7C2BA]/40 text-xs">
+        <div className="flex items-center gap-2">
+          <span className="h-3 w-3 rounded-full bg-[#D8921E]" />
+          <span className="font-semibold text-[#142446]">
+            {officerName} (Assessed)
           </span>
         </div>
-      </CardContent>
-    </Card>
+        <div className="flex items-center gap-2">
+          <span className="h-3 w-3 rounded-full bg-[#142446]" />
+          <span className="font-semibold text-[#142446]">
+            Cadre Benchmark
+          </span>
+        </div>
+        <span className="text-[11px] text-[#475A6F]">
+          Scale: 1 (Basic) to 5 (Expert)
+        </span>
+      </div>
+    </div>
   );
 }

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { ArrowRight, BookOpen, CheckCircle, GraduationCap } from "lucide-react";
 
 interface CadrePathway {
   id: string;
@@ -102,11 +103,12 @@ export function CadrePathways() {
         
         {/* Open Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[#C7C2BA]/40 mb-10">
-          <div className="space-y-1 max-w-2xl">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#142446]">
-              Cadre Pathways
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#142446] tracking-tight">
+          <div className="space-y-1.5 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF9F6] border border-[#B7C7D9] text-[#142446] text-xs font-bold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#D8921E]" />
+              <span>Cadre Pathways & Capacity Building</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#142446] tracking-tight">
               Role-Calibrated Learning Progression
             </h2>
             <p className="text-xs sm:text-sm text-[#475A6F] pt-1 leading-relaxed">
@@ -114,7 +116,7 @@ export function CadrePathways() {
             </p>
           </div>
 
-          {/* Cadre Selection Tabs (Clean Pill Style) */}
+          {/* Cadre Selection Tabs (Harmonized with Deep Navy, Saffron, Dusty Blue) */}
           <div className="flex flex-wrap gap-2">
             {CADRE_DATA.map((cadre) => {
               const isActive = cadre.id === activeCadreId;
@@ -122,10 +124,10 @@ export function CadrePathways() {
                 <button
                   key={cadre.id}
                   onClick={() => setActiveCadreId(cadre.id)}
-                  className={`px-4 py-2 rounded-full text-xs font-bold transition-colors ${
+                  className={`px-4 py-2.5 rounded-full text-xs font-bold transition-all ${
                     isActive
-                      ? "bg-[#142446] text-white shadow-xs"
-                      : "bg-[#FAF9F6] text-[#475A6F] hover:text-[#142446] hover:bg-[#B7C7D9]/20"
+                      ? "bg-[#142446] text-white shadow-sm ring-2 ring-[#D8921E]"
+                      : "bg-[#FAF9F6] text-[#475A6F] border border-[#B7C7D9] hover:text-[#142446] hover:bg-[#B7C7D9]/20"
                   }`}
                 >
                   {cadre.name}
@@ -135,17 +137,17 @@ export function CadrePathways() {
           </div>
         </div>
 
-        {/* Expansive Cadre Detail (No nested box container) */}
+        {/* Expansive Cadre Detail (Rich Color Accents, Non-Boxy) */}
         <div className="space-y-8">
           
           {/* Header Row */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2 mb-1">
+              <div className="flex items-center gap-2 mb-1.5">
                 <span className="text-xs font-bold uppercase text-[#475A6F]">
                   {activeCadre.cadre}
                 </span>
-                <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-[#FAF9F6] text-[#142446] border border-[#C7C2BA]/60">
+                <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#F3E7D1] text-[#142446] border border-[#C7C2BA]">
                   {activeCadre.badge}
                 </span>
               </div>
@@ -159,30 +161,37 @@ export function CadrePathways() {
 
             <Link
               href={`/assessment?user=${activeCadre.simulationUserId}`}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#142446] text-white text-xs font-bold rounded-lg hover:bg-[#1e3460] transition-colors shrink-0"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#D8921E] text-white text-xs sm:text-sm font-bold rounded-xl hover:bg-[#c48218] transition-colors shadow-sm shrink-0"
             >
-              <span>Assess This Cadre →</span>
+              <span>Assess This Cadre</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
-          {/* Two-Column Structured Info */}
+          {/* Two-Column Structured Info with Saffron, Dusty Blue, and Slate Blue */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 pt-4">
             
             {/* Core Competencies Target Column */}
-            <div className="lg:col-span-6 space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#142446] pb-2 border-b border-[#C7C2BA]/40">
-                Key Competencies & Target Levels
-              </h4>
-              <div className="divide-y divide-[#C7C2BA]/30">
+            <div className="lg:col-span-6 space-y-4">
+              <div className="flex items-center justify-between pb-2 border-b border-[#B7C7D9]">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#142446]">
+                  Key Competencies & Target Levels
+                </h4>
+                <span className="text-[11px] font-semibold text-[#475A6F]">
+                  FRAC Rubrics
+                </span>
+              </div>
+
+              <div className="divide-y divide-[#C7C2BA]/40">
                 {activeCadre.coreGapsTargeted.map((gap, i) => (
                   <div
                     key={i}
-                    className="py-3 flex items-start gap-3 first:pt-0"
+                    className="py-3.5 flex items-start gap-3 first:pt-0"
                   >
-                    <span className="w-5 h-5 rounded-full bg-[#142446] text-white flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
+                    <span className="w-6 h-6 rounded-full bg-[#B7C7D9] text-[#142446] flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 border border-[#142446]/20">
                       0{i + 1}
                     </span>
-                    <p className="text-xs font-medium text-[#142446] leading-snug">
+                    <p className="text-xs sm:text-sm font-semibold text-[#142446] leading-snug">
                       {gap}
                     </p>
                   </div>
@@ -195,19 +204,28 @@ export function CadrePathways() {
               
               {/* iGOT Karmayogi Courses */}
               <div className="space-y-3">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#142446] pb-2 border-b border-[#C7C2BA]/40">
-                  Recommended iGOT Karmayogi e-Learning
-                </h4>
-                <div className="divide-y divide-[#C7C2BA]/30">
+                <div className="flex items-center justify-between pb-2 border-b border-[#B7C7D9]">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#142446]">
+                    Recommended iGOT Karmayogi e-Learning
+                  </h4>
+                  <span className="text-[11px] font-semibold text-[#D8921E]">
+                    Self-Paced
+                  </span>
+                </div>
+
+                <div className="divide-y divide-[#C7C2BA]/40">
                   {activeCadre.recommendedIGOT.map((course, i) => (
                     <div
                       key={i}
-                      className="py-2.5 flex items-center justify-between gap-3 first:pt-0"
+                      className="py-3 flex items-center justify-between gap-3 first:pt-0"
                     >
-                      <p className="text-xs font-semibold text-[#142446]">
-                        {course}
-                      </p>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#FAF9F6] text-[#475A6F] border border-[#C7C2BA]/60 shrink-0">
+                      <div className="flex items-center gap-2">
+                        <GraduationCap className="w-4 h-4 text-[#475A6F] shrink-0" />
+                        <p className="text-xs sm:text-sm font-semibold text-[#142446]">
+                          {course}
+                        </p>
+                      </div>
+                      <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#FAF9F6] text-[#142446] border border-[#B7C7D9] shrink-0">
                         iGOT Free
                       </span>
                     </div>
@@ -217,19 +235,28 @@ export function CadrePathways() {
 
               {/* NSSTA TPAC Residential Modules */}
               <div className="space-y-3">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#142446] pb-2 border-b border-[#C7C2BA]/40">
-                  NSSTA Academy Training Programmes
-                </h4>
-                <div className="divide-y divide-[#C7C2BA]/30">
+                <div className="flex items-center justify-between pb-2 border-b border-[#B7C7D9]">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#142446]">
+                    NSSTA Academy Training Programmes
+                  </h4>
+                  <span className="text-[11px] font-semibold text-[#142446]">
+                    Greater Noida
+                  </span>
+                </div>
+
+                <div className="divide-y divide-[#C7C2BA]/40">
                   {activeCadre.recommendedNSSTA.map((course, i) => (
                     <div
                       key={i}
-                      className="py-2.5 flex items-center justify-between gap-3 first:pt-0"
+                      className="py-3 flex items-center justify-between gap-3 first:pt-0"
                     >
-                      <p className="text-xs font-semibold text-[#142446]">
-                        {course}
-                      </p>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#142446] text-white shrink-0">
+                      <div className="flex items-center gap-2">
+                        <BookOpen className="w-4 h-4 text-[#142446] shrink-0" />
+                        <p className="text-xs sm:text-sm font-semibold text-[#142446]">
+                          {course}
+                        </p>
+                      </div>
+                      <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#142446] text-white shrink-0">
                         NSSTA TPAC
                       </span>
                     </div>

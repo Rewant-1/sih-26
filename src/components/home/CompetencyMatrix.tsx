@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 interface DomainData {
   id: string;
@@ -151,11 +152,12 @@ export function CompetencyMatrix() {
         
         {/* Open Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-white/10 mb-10">
-          <div className="space-y-1 max-w-2xl">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#B7C7D9]">
-              FRAC Competency Framework
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+          <div className="space-y-1.5 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[#B7C7D9] text-xs font-bold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#D8921E]" />
+              <span>FRAC Competency Architecture</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
               Four Core Domains of Official Statistics
             </h2>
             <p className="text-xs sm:text-sm text-[#B7C7D9] pt-1 leading-relaxed">
@@ -163,7 +165,7 @@ export function CompetencyMatrix() {
             </p>
           </div>
 
-          {/* Domain Selection Tabs (Clean Deep Navy Pill Style) */}
+          {/* Domain Selection Tabs with Saffron Gold & Dusty Blue */}
           <div className="flex flex-wrap gap-2">
             {DOMAINS.map((domain) => {
               const isActive = domain.id === activeDomainId;
@@ -171,9 +173,9 @@ export function CompetencyMatrix() {
                 <button
                   key={domain.id}
                   onClick={() => setActiveDomainId(domain.id)}
-                  className={`px-4 py-2 rounded-full text-xs font-bold transition-colors ${
+                  className={`px-4 py-2.5 rounded-full text-xs font-bold transition-all ${
                     isActive
-                      ? "bg-white text-[#142446] shadow-sm"
+                      ? "bg-white text-[#142446] shadow-sm ring-2 ring-[#D8921E]"
                       : "bg-white/10 text-[#B7C7D9] hover:text-white hover:bg-white/15"
                   }`}
                 >
@@ -184,12 +186,17 @@ export function CompetencyMatrix() {
           </div>
         </div>
 
-        {/* Expansive Domain Content Area (No nested box container) */}
+        {/* Expansive Domain Content Area */}
         <div className="space-y-8">
           
-          {/* Domain Overview */}
+          {/* Domain Overview Row */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/10">
             <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#D8921E]">
+                  {activeDomain.badge}
+                </span>
+              </div>
               <h3 className="text-xl sm:text-2xl font-bold text-white">
                 {activeDomain.name}
               </h3>
@@ -197,12 +204,12 @@ export function CompetencyMatrix() {
                 {activeDomain.description}
               </p>
             </div>
-            <span className="text-xs font-semibold px-3 py-1.5 rounded-full bg-white/10 text-white border border-white/15 shrink-0 self-start md:self-center">
+            <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-[#B7C7D9] text-[#142446] shrink-0 self-start md:self-center">
               {activeDomain.cadreFocus}
             </span>
           </div>
 
-          {/* Structured Competencies List (Clean open rows) */}
+          {/* Structured Competencies List with Saffron and Dusty Blue Accents */}
           <div className="divide-y divide-white/10">
             {activeDomain.competencies.map((comp, idx) => (
               <div
@@ -211,20 +218,20 @@ export function CompetencyMatrix() {
               >
                 <div className="space-y-1 max-w-2xl">
                   <div className="flex items-center gap-3">
-                    <span className="w-5 h-5 rounded-full bg-white/15 text-white flex items-center justify-center text-[10px] font-bold shrink-0">
-                      {idx + 1}
+                    <span className="w-6 h-6 rounded-full bg-[#B7C7D9] text-[#142446] flex items-center justify-center text-xs font-bold shrink-0">
+                      0{idx + 1}
                     </span>
-                    <h4 className="text-sm font-bold text-white">
+                    <h4 className="text-sm sm:text-base font-bold text-white">
                       {comp.title}
                     </h4>
                   </div>
-                  <p className="text-xs text-[#B7C7D9] pl-8">
+                  <p className="text-xs text-[#B7C7D9] pl-9">
                     {comp.focus}
                   </p>
                 </div>
 
-                <div className="pl-8 sm:pl-0 shrink-0">
-                  <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white/10 text-[#B7C7D9] border border-white/15">
+                <div className="pl-9 sm:pl-0 shrink-0">
+                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-white/10 text-[#F3E7D1] border border-white/20">
                     {comp.level}
                   </span>
                 </div>
@@ -233,15 +240,16 @@ export function CompetencyMatrix() {
           </div>
 
           {/* Footer CTA */}
-          <div className="pt-6 border-t border-white/10 flex items-center justify-between">
+          <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
             <span className="text-xs text-[#B7C7D9]">
-              Ready to evaluate your competency level?
+              Ready to evaluate your competency level against official benchmarks?
             </span>
             <Link
               href="/assessment"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-[#142446] text-xs font-bold rounded-lg hover:bg-[#FAF9F6] transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#D8921E] text-white text-xs font-bold rounded-xl hover:bg-[#c48218] transition-colors shadow-sm"
             >
-              <span>Take Domain Assessment →</span>
+              <span>Take Domain Assessment</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
