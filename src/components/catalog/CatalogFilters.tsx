@@ -105,7 +105,7 @@ export function CatalogFilters({
   };
 
   return (
-    <div className="space-y-4 bg-white rounded-2xl border border-[#C7C2BA] p-5 shadow-xs">
+    <div className="space-y-4 pb-6 border-b border-[#C7C2BA]/40">
       {/* Top Row: Search bar & Dual-Source Radio Pills */}
       <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
         {/* Search Input */}

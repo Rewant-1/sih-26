@@ -30,7 +30,7 @@ export default function QuizStudioPage() {
               <span className="text-[#C7C2BA]">/</span>
               <span className="text-[#142446] font-medium">AI Quiz Studio</span>
             </div>
-            <h1 className="text-[28px] font-light text-[#142446]">
+            <h1 className="text-[28px] font-bold text-[#142446]">
               AI Document-to-Quiz Studio
             </h1>
             <p className="text-[14px] text-[#475A6F] mt-1 max-w-2xl">

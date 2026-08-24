@@ -165,31 +165,31 @@ function CourseCatalogContent() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
-        {/* Personalized Recommendations */}
+        {/* Personalized Recommendations (Open layout, no nested box) */}
         {topRecommendations.length > 0 && (
-          <div className="rounded-2xl border border-[#C7C2BA] bg-white p-6 shadow-xs">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
+          <div className="space-y-4">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#C7C2BA]/40">
               <div>
-                <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#F3E7D1] text-[#142446] border border-[#C7C2BA]">
-                  Personalized for You
+                <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#142446] text-white">
+                  Personalized Recommendations
                 </span>
-                <h2 className="text-[18px] font-bold text-[#142446] mt-1.5">
+                <h2 className="text-xl font-bold text-[#142446] mt-1.5">
                   Recommended for {activeOfficerName}
                 </h2>
-                <p className="text-[13px] text-[#475A6F] mt-0.5">
-                  Matched to your cadre profile and identified skill gaps.
+                <p className="text-xs text-[#475A6F] mt-0.5">
+                  Courses mapped directly to bridge your priority skill gaps.
                 </p>
               </div>
               <Link
                 href={`/dashboard/learner?user=${activeUserId}`}
-                className="text-[13px] font-semibold text-[#142446] hover:text-[#D8921E] transition-colors shrink-0"
+                className="text-xs font-bold text-[#142446] hover:text-[#475A6F] transition-colors shrink-0"
               >
                 View Full Roadmap →
               </Link>
             </div>
 
-            {/* Spotlight Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Spotlight Grid (Clean 3-column rows without outer container cage) */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {topRecommendations.map((rec) => (
                 <CourseCard
                   key={`rec-${rec.course.identifier}`}

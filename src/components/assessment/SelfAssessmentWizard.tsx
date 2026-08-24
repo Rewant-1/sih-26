@@ -513,115 +513,110 @@ export function SelfAssessmentWizard({
         </div>
       </div>
 
-      {/* ── STEP 0: Cadre Selection & Officer Profile ── */}
+      {/* ── STEP 0: Cadre Selection & Officer Profile (Open, Non-Boxy Layout) ── */}
       {currentStep === 0 && (
-        <div className="space-y-6">
-          <Card className="p-6 sm:p-8 border-[#C7C2BA] shadow-xs bg-white">
-            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[#C7C2BA]/40">
-              <div className="w-10 h-10 rounded-xl bg-[#FAF9F6] border border-[#C7C2BA] text-[#142446] flex items-center justify-center font-bold">
-                <Shield className="w-5 h-5 text-[#D8921E]" />
+        <div className="space-y-6 pt-2">
+          <div className="flex items-center gap-3 pb-4 border-b border-[#C7C2BA]/40">
+            <div>
+              <h2 className="text-xl font-bold text-[#142446]">
+                Step 1: Select Statistical Cadre & Target Benchmark
+              </h2>
+              <p className="text-xs text-[#475A6F] mt-0.5">
+                Cadre selection sets the official mandatory proficiency benchmarks across all 29 competencies.
+              </p>
+            </div>
+          </div>
+
+          {/* Cadre Cards Radio Selector */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {CADRE_OPTIONS.map((c) => {
+              const isSelected = selectedCadre === c.id;
+              return (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => handleCadreChange(c.id)}
+                  className={`p-5 rounded-xl border text-left transition-colors relative flex flex-col justify-between ${
+                    isSelected
+                      ? "border-[#142446] bg-[#FAF9F6] ring-1 ring-[#142446]"
+                      : "border-[#C7C2BA] bg-white hover:border-[#475A6F]"
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#142446] text-white">
+                        {c.badge}
+                      </span>
+                      {isSelected && (
+                        <span className="w-5 h-5 rounded-full bg-[#142446] text-white flex items-center justify-center text-xs">
+                          <Check className="w-3 h-3" />
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="text-base font-bold text-[#142446] mb-1">
+                      {c.name}
+                    </h3>
+                    <p className="text-xs text-[#475A6F] mb-3 font-medium">
+                      {c.classification}
+                    </p>
+                    <p className="text-xs text-[#475A6F] leading-relaxed">
+                      {c.description}
+                    </p>
+                  </div>
+
+                  <div className="mt-4 pt-3 border-t border-[#C7C2BA]/40 flex items-center justify-between text-xs text-[#475A6F]">
+                    <span>Benchmark Profile</span>
+                    <span className="font-semibold text-[#142446]">
+                      {isSelected ? "Active Target" : "Select Cadre"}
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Officer Details Setup (Clean Inline Form, No Box Container) */}
+          <div className="pt-6 border-t border-[#C7C2BA]/40 space-y-4">
+            <h4 className="text-sm font-bold text-[#142446]">
+              Officer Evaluation Profile Information
+            </h4>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="text-xs font-semibold text-[#142446] block mb-1">
+                  Officer Name
+                </label>
+                <input
+                  type="text"
+                  value={officerName}
+                  onChange={(e) => setOfficerName(e.target.value)}
+                  className="w-full text-xs font-medium px-3 py-2 rounded-lg border border-[#C7C2BA] bg-white focus:outline-hidden focus:ring-1 focus:ring-[#142446] text-[#142446]"
+                />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-[#142446]">
-                  Step 1: Select Statistical Cadre & Target Benchmark
-                </h2>
-                <p className="text-xs text-[#475A6F]">
-                  Cadre selection sets the official mandatory proficiency benchmarks across all 29 competencies.
-                </p>
+                <label className="text-xs font-semibold text-[#142446] block mb-1">
+                  Official Designation
+                </label>
+                <input
+                  type="text"
+                  value={officerDesignation}
+                  onChange={(e) => setOfficerDesignation(e.target.value)}
+                  className="w-full text-xs font-medium px-3 py-2 rounded-lg border border-[#C7C2BA] bg-white focus:outline-hidden focus:ring-1 focus:ring-[#142446] text-[#142446]"
+                />
+              </div>
+              <div>
+                <label className="text-xs font-semibold text-[#142446] block mb-1">
+                  MoSPI Division / Station
+                </label>
+                <input
+                  type="text"
+                  value={officerDivision}
+                  onChange={(e) => setOfficerDivision(e.target.value)}
+                  className="w-full text-xs font-medium px-3 py-2 rounded-lg border border-[#C7C2BA] bg-white focus:outline-hidden focus:ring-1 focus:ring-[#142446] text-[#142446]"
+                />
               </div>
             </div>
-
-            {/* Cadre Cards Radio Selector */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              {CADRE_OPTIONS.map((c) => {
-                const isSelected = selectedCadre === c.id;
-                return (
-                  <button
-                    key={c.id}
-                    type="button"
-                    onClick={() => handleCadreChange(c.id)}
-                    className={`p-5 rounded-xl border text-left transition-colors relative flex flex-col justify-between ${
-                      isSelected
-                        ? "border-[#142446] bg-[#FAF9F6] ring-1 ring-[#142446]"
-                        : "border-[#C7C2BA] bg-white hover:border-[#475A6F]"
-                    }`}
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#FAF9F6] text-[#142446] border border-[#C7C2BA]">
-                          {c.badge}
-                        </span>
-                        {isSelected && (
-                          <span className="w-5 h-5 rounded-full bg-[#142446] text-white flex items-center justify-center text-xs">
-                            <Check className="w-3 h-3" />
-                          </span>
-                        )}
-                      </div>
-                      <h3 className="text-base font-bold text-[#142446] mb-1">
-                        {c.name}
-                      </h3>
-                      <p className="text-xs text-[#475A6F] mb-3 font-medium">
-                        {c.classification}
-                      </p>
-                      <p className="text-xs text-[#475A6F] leading-relaxed">
-                        {c.description}
-                      </p>
-                    </div>
-
-                    <div className="mt-4 pt-3 border-t border-[#C7C2BA]/40 flex items-center justify-between text-xs text-[#475A6F]">
-                      <span>Benchmark Profile</span>
-                      <span className="font-semibold text-[#142446]">
-                        {isSelected ? "Active Target" : "Select Cadre"}
-                      </span>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Officer Details Setup */}
-            <div className="p-5 rounded-xl bg-[#FAF9F6] border border-[#C7C2BA] mb-6">
-              <h4 className="text-sm font-bold text-[#142446] mb-4 flex items-center gap-2">
-                <User className="w-4 h-4 text-[#475A6F]" />
-                Officer Evaluation Profile Information
-              </h4>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div>
-                  <label className="text-xs font-semibold text-[#142446] block mb-1">
-                    Officer Name
-                  </label>
-                  <input
-                    type="text"
-                    value={officerName}
-                    onChange={(e) => setOfficerName(e.target.value)}
-                    className="w-full text-xs font-medium px-3 py-2 rounded-lg border border-[#C7C2BA] bg-white focus:outline-hidden focus:ring-1 focus:ring-[#142446] text-[#142446]"
-                  />
-                </div>
-                <div>
-                  <label className="text-xs font-semibold text-[#142446] block mb-1">
-                    Official Designation
-                  </label>
-                  <input
-                    type="text"
-                    value={officerDesignation}
-                    onChange={(e) => setOfficerDesignation(e.target.value)}
-                    className="w-full text-xs font-medium px-3 py-2 rounded-lg border border-[#C7C2BA] bg-white focus:outline-hidden focus:ring-1 focus:ring-[#142446] text-[#142446]"
-                  />
-                </div>
-                <div>
-                  <label className="text-xs font-semibold text-[#142446] block mb-1">
-                    MoSPI Division / Station
-                  </label>
-                  <input
-                    type="text"
-                    value={officerDivision}
-                    onChange={(e) => setOfficerDivision(e.target.value)}
-                    className="w-full text-xs font-medium px-3 py-2 rounded-lg border border-[#C7C2BA] bg-white focus:outline-hidden focus:ring-1 focus:ring-[#142446] text-[#142446]"
-                  />
-                </div>
-              </div>
-            </div>
+          </div>
 
             {/* Step 1 Actions */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#C7C2BA]/40">
@@ -645,7 +640,6 @@ export function SelfAssessmentWizard({
                 Proceed to Statistical Competencies <ArrowRight className="w-4 h-4" />
               </Button>
             </div>
-          </Card>
         </div>
       )}
 

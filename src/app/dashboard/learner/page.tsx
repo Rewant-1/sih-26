@@ -230,117 +230,108 @@ function LearnerDashboardContent() {
       <div className="mx-auto max-w-7xl w-full px-4 py-6 sm:px-6 lg:px-8 flex-1 flex gap-6">
         <Sidebar currentUserId={user.id} />
 
-        <main className="flex-1 min-w-0 space-y-6">
-          {/* Officer Banner */}
-          <div className="border border-[#C7C2BA] bg-white rounded-2xl p-6 shadow-xs">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div>
-                <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#F3E7D1] text-[#142446] border border-[#C7C2BA]">
-                  {benchmark.cadreName} · FRAC Profile
+        <main className="flex-1 min-w-0 space-y-8">
+          {/* Officer Greeting (Open layout, no heavy box frame) */}
+          <div className="pb-6 border-b border-[#C7C2BA]/40 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#142446] text-white">
+                  {benchmark.cadreName}
                 </span>
-                <h1 className="text-[22px] font-bold text-[#142446] mt-2">
-                  Welcome back, {user.name}
-                </h1>
-                <p className="text-[13px] text-[#475A6F] mt-0.5">
-                  {user.designation} · {user.division}
-                </p>
+                <span className="text-xs text-[#475A6F] font-medium">
+                  {user.division}
+                </span>
               </div>
-              <div className="flex flex-wrap items-center gap-2">
-                <Link href={`/assessment?user=${user.id}`}>
-                  <Button size="sm" className="text-xs font-bold bg-[#D8921E] hover:bg-[#c27f14] text-white">
-                    <CheckCircle className="h-4 w-4 mr-1.5" />
-                    Update Assessment
-                  </Button>
-                </Link>
-                <Link href={`/quiz-studio?user=${user.id}`}>
-                  <Button variant="outline" size="sm" className="text-xs font-bold border-[#C7C2BA] text-[#142446] bg-white hover:bg-[#FAF9F6]">
-                    AI Quiz Studio
-                  </Button>
-                </Link>
-              </div>
+              <h1 className="text-2xl sm:text-3xl font-bold text-[#142446]">
+                Welcome back, {user.name}
+              </h1>
+              <p className="text-xs sm:text-sm text-[#475A6F] mt-0.5">
+                {user.designation} · Subordinate Statistical Service
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2 shrink-0">
+              <Link href={`/assessment?user=${user.id}`}>
+                <Button size="sm" className="text-xs font-bold bg-[#142446] hover:bg-[#1e3460] text-white">
+                  <CheckCircle className="h-4 w-4 mr-1.5" />
+                  Update Assessment
+                </Button>
+              </Link>
+              <Link href={`/quiz-studio?user=${user.id}`}>
+                <Button variant="outline" size="sm" className="text-xs font-bold border-[#C7C2BA] text-[#142446] bg-white hover:bg-[#FAF9F6]">
+                  AI Quiz Studio
+                </Button>
+              </Link>
             </div>
           </div>
 
-          {/* Quick Metrics Grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* KPI 1 */}
-            <Card className="p-4 bg-white border-[#C7C2BA]">
-              <div className="flex items-center justify-between text-xs text-[#475A6F] font-semibold">
-                <span>Competency Index</span>
-                <Target className="h-4 w-4 text-[#D8921E]" />
-              </div>
-              <div className="mt-2 flex items-baseline gap-2">
-                <span className="text-2xl font-bold text-[#142446]">
+          {/* Quick Metrics Ribbon (Clean, Dividers Instead of Cluttered Box Cards) */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pb-6 border-b border-[#C7C2BA]/40">
+            {/* Metric 1 */}
+            <div className="border-l-2 border-[#142446] pl-4 space-y-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#475A6F]">
+                Competency Index
+              </span>
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-2xl sm:text-3xl font-bold text-[#142446]">
                   {overallCompetencyIndex}%
                 </span>
-                <span className="text-xs text-[#475A6F]">
-                  of Cadre Benchmark
-                </span>
+                <span className="text-[11px] text-[#475A6F]">of Cadre Benchmark</span>
               </div>
               <Progress
                 value={overallCompetencyIndex}
                 variant="navy"
                 size="sm"
-                className="mt-2"
+                className="mt-1.5"
               />
-            </Card>
+            </div>
 
-            {/* KPI 2 */}
-            <Card className="p-4 bg-white border-[#C7C2BA]">
-              <div className="flex items-center justify-between text-xs text-[#475A6F] font-semibold">
-                <span>Critical Skill Gaps</span>
-                <AlertCircle className="h-4 w-4 text-[#142446]" />
-              </div>
-              <div className="mt-2 flex items-baseline gap-2">
-                <span className="text-2xl font-bold text-[#142446]">
+            {/* Metric 2 */}
+            <div className="border-l-2 border-[#142446] pl-4 space-y-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#475A6F]">
+                Critical Gaps
+              </span>
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-2xl sm:text-3xl font-bold text-[#142446]">
                   {criticalCount}
                 </span>
-                <span className="text-xs text-[#475A6F]">
-                  Priorities (&gt;= 2 Levels)
-                </span>
+                <span className="text-[11px] text-[#475A6F]">Priority Areas</span>
               </div>
-              <div className="mt-2 text-[11px] text-[#475A6F]">
+              <p className="text-[11px] text-[#475A6F]">
                 {moderateCount} moderate gaps identified
-              </div>
-            </Card>
+              </p>
+            </div>
 
-            {/* KPI 3 */}
-            <Card className="p-4 bg-white border-[#C7C2BA]">
-              <div className="flex items-center justify-between text-xs text-[#475A6F] font-semibold">
-                <span>Courses in Learning Path</span>
-                <BookOpen className="h-4 w-4 text-[#D8921E]" />
-              </div>
-              <div className="mt-2 flex items-baseline gap-2">
-                <span className="text-2xl font-bold text-[#142446]">
+            {/* Metric 3 */}
+            <div className="border-l-2 border-[#142446] pl-4 space-y-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#475A6F]">
+                Recommended Courses
+              </span>
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-2xl sm:text-3xl font-bold text-[#142446]">
                   {recommendations.length}
                 </span>
-                <span className="text-xs text-[#475A6F]">
-                  iGOT & NSSTA
-                </span>
+                <span className="text-[11px] text-[#475A6F]">iGOT & NSSTA</span>
               </div>
-              <div className="mt-2 text-[11px] text-[#475A6F]">
+              <p className="text-[11px] text-[#475A6F]">
                 {user.enrolledCourseIds.length} currently enrolled
-              </div>
-            </Card>
+              </p>
+            </div>
 
-            {/* KPI 4 */}
-            <Card className="p-4 bg-white border-[#C7C2BA]">
-              <div className="flex items-center justify-between text-xs text-[#475A6F] font-semibold">
-                <span>Benchmarked Strengths</span>
-                <Award className="h-4 w-4 text-[#142446]" />
-              </div>
-              <div className="mt-2 flex items-baseline gap-2">
-                <span className="text-2xl font-bold text-[#142446]">
+            {/* Metric 4 */}
+            <div className="border-l-2 border-[#142446] pl-4 space-y-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#475A6F]">
+                Benchmarked Strengths
+              </span>
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-2xl sm:text-3xl font-bold text-[#142446]">
                   {proficientCount}
                 </span>
-                <span className="text-xs text-[#475A6F]">
-                  Competencies Met
-                </span>
+                <span className="text-[11px] text-[#475A6F]">Competencies Met</span>
               </div>
-              <div className="mt-2 text-[11px] text-[#475A6F]">
+              <p className="text-[11px] text-[#475A6F]">
                 Eligible for peer mentorship
-              </div>
-            </Card>
+              </p>
+            </div>
           </div>
 
           {/* Row 1: Radar Chart & Prioritized Gaps Breakdown */}

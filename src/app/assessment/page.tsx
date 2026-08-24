@@ -24,7 +24,7 @@ export default async function AssessmentPage() {
             <span className="text-[#C7C2BA]">/</span>
             <span className="text-[#142446] font-medium">Self-Assessment</span>
           </div>
-          <h1 className="text-[28px] font-light text-[#142446]">
+          <h1 className="text-[28px] font-bold text-[#142446]">
             FRAC Competency Self-Assessment
           </h1>
           <p className="text-[14px] text-[#475A6F] mt-1">

@@ -169,29 +169,15 @@ export function Sidebar({ currentUserId }: SidebarProps) {
           </nav>
         </div>
 
-        {/* Framework Reference Box */}
-        <div className="rounded-xl border border-[#C7C2BA]/60 bg-[#FAF9F6] p-3 text-xs space-y-2">
+        {/* Framework Reference Info (Clean, No Box Frame) */}
+        <div className="pt-4 border-t border-[#C7C2BA]/40 text-xs space-y-1.5">
           <div className="flex items-center gap-1.5 font-bold text-[#142446]">
-            <ShieldCheck className="h-4 w-4 text-[#D8921E]" />
+            <ShieldCheck className="h-4 w-4 text-[#142446]" />
             <span>Mission Karmayogi FRAC</span>
           </div>
           <p className="text-[11px] text-[#475A6F] leading-relaxed">
             4 official statistical domains mapped across Level 1–5 proficiency scales.
           </p>
-          <div className="grid grid-cols-2 gap-1 pt-1 font-mono text-[10px] text-[#142446]">
-            <span className="bg-white border border-[#C7C2BA]/40 rounded px-1.5 py-0.5">
-              Statistical: 8
-            </span>
-            <span className="bg-white border border-[#C7C2BA]/40 rounded px-1.5 py-0.5">
-              Technical: 7
-            </span>
-            <span className="bg-white border border-[#C7C2BA]/40 rounded px-1.5 py-0.5">
-              Governance: 7
-            </span>
-            <span className="bg-white border border-[#C7C2BA]/40 rounded px-1.5 py-0.5">
-              Behavioural: 7
-            </span>
-          </div>
         </div>
       </div>
 

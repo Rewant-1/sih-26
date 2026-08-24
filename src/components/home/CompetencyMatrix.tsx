@@ -23,7 +23,7 @@ const DOMAINS: DomainData[] = [
     badge: "Core Methodology",
     description:
       "Methodological rigor covering national sample surveys, price indices, national accounting matrices, agricultural statistics, and SDG indicator tracking.",
-    cadreFocus: "High priority for Field Operations (FOD) & National Accounts (NAD)",
+    cadreFocus: "Field Operations (FOD) & National Accounts (NAD)",
     competencies: [
       {
         title: "Survey Design & Sampling Methods",
@@ -53,7 +53,7 @@ const DOMAINS: DomainData[] = [
     badge: "Modern Analytics",
     description:
       "Modern programming, big data analytics, automated pipelines, GIS spatial statistics, and machine learning methodologies for official data processing.",
-    cadreFocus: "High priority for Data Informatics and Innovation Division (DIID)",
+    cadreFocus: "Data Informatics and Innovation Division (DIID)",
     competencies: [
       {
         title: "Python & R for Statistical Computing",
@@ -83,7 +83,7 @@ const DOMAINS: DomainData[] = [
     badge: "Compliance & Trust",
     description:
       "Ensuring compliance with the Digital Personal Data Protection Act (DPDPA), cybersecurity protocols, government cloud infrastructure, and Open Data standards.",
-    cadreFocus: "Universal requirement across all statistical divisions and regional offices",
+    cadreFocus: "Universal requirement across all statistical divisions",
     competencies: [
       {
         title: "DPDPA 2023 Compliance & Data Ethics",
@@ -113,7 +113,7 @@ const DOMAINS: DomainData[] = [
     badge: "Leadership & Delivery",
     description:
       "Public sector leadership, cross-divisional project management, technical drafting, stakeholder communication, and high-impact policy briefs.",
-    cadreFocus: "Crucial for mid-level and senior officers leading teams and managing surveys",
+    cadreFocus: "Mid-level and senior officers leading statistical teams",
     competencies: [
       {
         title: "Technical Drafting & Analytical Reporting",
@@ -146,71 +146,64 @@ export function CompetencyMatrix() {
     DOMAINS.find((d) => d.id === activeDomainId) || DOMAINS[0];
 
   return (
-    <section className="bg-[#FAF9F6] border-t border-[#C7C2BA]/60 py-16 lg:py-24">
+    <section className="bg-[#142446] text-white py-16 lg:py-24 border-t border-[#1e3460]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[#C7C2BA]/60 mb-10">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-[#D8921E]">
+        {/* Open Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-white/10 mb-10">
+          <div className="space-y-1 max-w-2xl">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#B7C7D9]">
               FRAC Competency Framework
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#142446] tracking-tight mt-1">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Four Core Domains of Official Statistics
             </h2>
+            <p className="text-xs sm:text-sm text-[#B7C7D9] pt-1 leading-relaxed">
+              29 structured competencies spanning methodology, technical pipelines, digital governance, and administrative leadership under Mission Karmayogi.
+            </p>
           </div>
-          <p className="text-xs sm:text-sm text-[#475A6F] max-w-xl">
-            29 structured competencies spanning methodology, technical pipelines, digital governance, and administrative leadership under Mission Karmayogi.
-          </p>
+
+          {/* Domain Selection Tabs (Clean Deep Navy Pill Style) */}
+          <div className="flex flex-wrap gap-2">
+            {DOMAINS.map((domain) => {
+              const isActive = domain.id === activeDomainId;
+              return (
+                <button
+                  key={domain.id}
+                  onClick={() => setActiveDomainId(domain.id)}
+                  className={`px-4 py-2 rounded-full text-xs font-bold transition-colors ${
+                    isActive
+                      ? "bg-white text-[#142446] shadow-sm"
+                      : "bg-white/10 text-[#B7C7D9] hover:text-white hover:bg-white/15"
+                  }`}
+                >
+                  {domain.name.split(" ")[0]}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Domain Selection Tabs */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
-          {DOMAINS.map((domain) => {
-            const isActive = domain.id === activeDomainId;
-            return (
-              <button
-                key={domain.id}
-                onClick={() => setActiveDomainId(domain.id)}
-                className={`p-4 rounded-xl text-left border transition-colors ${
-                  isActive
-                    ? "bg-[#142446] text-white border-[#142446] shadow-sm"
-                    : "bg-white text-[#142446] border-[#C7C2BA] hover:bg-[#FAF9F6]"
-                }`}
-              >
-                <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded ${
-                  isActive ? "bg-white/20 text-white" : "bg-[#F3E7D1] text-[#142446]"
-                }`}>
-                  {domain.badge}
-                </span>
-                <p className="text-sm font-bold mt-2 leading-snug">
-                  {domain.name}
-                </p>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Expansive Domain Content Area */}
-        <div className="bg-white border border-[#C7C2BA] rounded-2xl p-6 sm:p-10 space-y-8">
+        {/* Expansive Domain Content Area (No nested box container) */}
+        <div className="space-y-8">
           
           {/* Domain Overview */}
-          <div className="pb-6 border-b border-[#C7C2BA]/60 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/10">
             <div>
-              <h3 className="text-xl sm:text-2xl font-bold text-[#142446]">
+              <h3 className="text-xl sm:text-2xl font-bold text-white">
                 {activeDomain.name}
               </h3>
-              <p className="text-xs sm:text-sm text-[#475A6F] mt-1.5 leading-relaxed max-w-3xl">
+              <p className="text-xs sm:text-sm text-[#B7C7D9] mt-1 leading-relaxed max-w-3xl">
                 {activeDomain.description}
               </p>
             </div>
-            <span className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-[#FAF9F6] text-[#142446] border border-[#C7C2BA] shrink-0 self-start md:self-center">
+            <span className="text-xs font-semibold px-3 py-1.5 rounded-full bg-white/10 text-white border border-white/15 shrink-0 self-start md:self-center">
               {activeDomain.cadreFocus}
             </span>
           </div>
 
-          {/* Structured Competencies Table/List (No generic cards) */}
-          <div className="divide-y divide-[#C7C2BA]/40">
+          {/* Structured Competencies List (Clean open rows) */}
+          <div className="divide-y divide-white/10">
             {activeDomain.competencies.map((comp, idx) => (
               <div
                 key={idx}
@@ -218,20 +211,20 @@ export function CompetencyMatrix() {
               >
                 <div className="space-y-1 max-w-2xl">
                   <div className="flex items-center gap-3">
-                    <span className="w-5 h-5 rounded-full bg-[#142446] text-white flex items-center justify-center text-[10px] font-bold shrink-0">
+                    <span className="w-5 h-5 rounded-full bg-white/15 text-white flex items-center justify-center text-[10px] font-bold shrink-0">
                       {idx + 1}
                     </span>
-                    <h4 className="text-sm font-bold text-[#142446]">
+                    <h4 className="text-sm font-bold text-white">
                       {comp.title}
                     </h4>
                   </div>
-                  <p className="text-xs text-[#475A6F] pl-8">
+                  <p className="text-xs text-[#B7C7D9] pl-8">
                     {comp.focus}
                   </p>
                 </div>
 
                 <div className="pl-8 sm:pl-0 shrink-0">
-                  <span className="text-xs font-semibold px-3 py-1 rounded bg-[#FAF9F6] text-[#142446] border border-[#C7C2BA]">
+                  <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white/10 text-[#B7C7D9] border border-white/15">
                     {comp.level}
                   </span>
                 </div>
@@ -240,16 +233,15 @@ export function CompetencyMatrix() {
           </div>
 
           {/* Footer CTA */}
-          <div className="pt-6 border-t border-[#C7C2BA]/60 flex items-center justify-between">
-            <span className="text-xs text-[#475A6F]">
-              Ready to assess your proficiency in this domain?
+          <div className="pt-6 border-t border-white/10 flex items-center justify-between">
+            <span className="text-xs text-[#B7C7D9]">
+              Ready to evaluate your competency level?
             </span>
             <Link
               href="/assessment"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#142446] text-white text-xs font-bold rounded-lg hover:bg-[#1e3460] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-[#142446] text-xs font-bold rounded-lg hover:bg-[#FAF9F6] transition-colors"
             >
-              <span>Take Domain Assessment</span>
-              <span>→</span>
+              <span>Take Domain Assessment →</span>
             </Link>
           </div>
 
