@@ -160,8 +160,8 @@ export function CourseGrid({
         </div>
       </div>
 
-      {/* Course Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Course Cards Grid (Spacious 2-column institutional layout) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {sortedCourses.map((course) => {
           const rec = recMap.get(course.identifier);
           const isEnrolled = enrolledCourseIds.includes(course.identifier);

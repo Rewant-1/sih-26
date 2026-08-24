@@ -50,11 +50,6 @@ const OFFICER_PROFILES: OfficerProfile[] = [
   },
 ];
 
-// Capsule navbar items strictly per instructions:
-// 1. Self-Assessment Scores
-// 2. Catalog
-// 3. AI Quiz Studio
-// 4. Learner Hub
 const capsuleNavLinks = [
   {
     href: "/assessment",
@@ -107,15 +102,15 @@ export function Header({
   };
 
   return (
-    <div className="w-full bg-white">
-      {/* ── Top Government Header Bar ── */}
+    <div className="w-full bg-white z-40 relative">
+      {/* ── Top Government Identity Strip ── */}
       <div className="bg-[#142446] text-[#B7C7D9] text-[11px] border-b border-[#1e3460]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <span className="font-medium tracking-wide text-white/90">
               Government of India
             </span>
-            <span className="text-[#475A6F]">|</span>
+            <span className="text-white/30">|</span>
             <span className="text-[#B7C7D9]">
               Ministry of Statistics & Programme Implementation
             </span>
@@ -124,7 +119,7 @@ export function Header({
             <span className="text-[#F3E7D1] font-medium">
               Mission Karmayogi
             </span>
-            <span className="text-[#475A6F]">·</span>
+            <span className="text-white/30">·</span>
             <span className="text-[#B7C7D9]">
               FRAC Competency Framework
             </span>
@@ -139,137 +134,31 @@ export function Header({
         <span />
       </div>
 
-      {/* ── Main White Header ── */}
-      <header className="w-full bg-white border-b border-[#C7C2BA]/40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[70px]">
-          {/* Logo & App Name */}
+      {/* ── Unified Single Header Bar with Embedded Deep Navy Capsule Navbar ── */}
+      <header className="w-full bg-white border-b border-[#C7C2BA]/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[74px] gap-4">
+          
+          {/* 1. Large Brand Logo */}
           <Link
             href={`/?user=${currentOfficer.id}`}
-            className="flex items-center gap-3.5"
+            className="flex items-center shrink-0"
             aria-label="Karmasarthi Home"
           >
-            <div className="relative flex items-center shrink-0">
-              <Image
-                src="/karmasarthi.png"
-                alt="Karmasarthi Logo"
-                width={500}
-                height={500}
-                priority
-                className="h-[44px] w-auto object-contain"
-              />
-            </div>
+            <Image
+              src="/karmasarthi.png"
+              alt="Karmasarthi Logo"
+              width={260}
+              height={70}
+              priority
+              className="h-[54px] w-auto object-contain"
+            />
           </Link>
 
-          {/* Right Action: Officer Profile Switcher (Personalization & Context) */}
-          <div className="relative">
-            <button
-              onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-              className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg border border-[#C7C2BA]/70 bg-[#FAF9F6] text-left"
-              aria-expanded={profileDropdownOpen}
-              aria-label="Switch officer profile"
-            >
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#142446] text-white text-[11px] font-semibold shrink-0">
-                {currentOfficer.avatarText}
-              </div>
-              <div className="text-left">
-                <div className="flex items-center gap-1.5">
-                  <p className="text-[12px] font-bold text-[#142446] leading-none">
-                    {currentOfficer.name}
-                  </p>
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D8921E]" />
-                </div>
-                <p className="text-[10px] text-[#475A6F] leading-tight mt-0.5">
-                  {currentOfficer.cadre} · {currentOfficer.division.split("(")[1]?.replace(")", "") || "MoSPI"}
-                </p>
-              </div>
-              <ChevronDown
-                className={`h-3.5 w-3.5 text-[#475A6F] transition-transform duration-150 ${
-                  profileDropdownOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-
-            {profileDropdownOpen && (
-              <>
-                <div
-                  className="fixed inset-0 z-40"
-                  onClick={() => setProfileDropdownOpen(false)}
-                />
-                <div className="absolute right-0 top-full mt-2 z-50 w-80 rounded-xl border border-[#C7C2BA]/80 bg-white shadow-lg p-1.5">
-                  <div className="px-3 py-2 border-b border-[#C7C2BA]/40">
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-[#475A6F]">
-                      Simulate Statistical Cadre
-                    </p>
-                    <p className="text-[11px] text-[#142446] font-medium mt-0.5">
-                      Select officer to test role-calibrated competency gap analysis
-                    </p>
-                  </div>
-                  <div className="py-1.5 space-y-1">
-                    {OFFICER_PROFILES.map((profile) => {
-                      const isSelected = profile.id === currentOfficer.id;
-                      return (
-                        <button
-                          key={profile.id}
-                          onClick={() => handleSelectOfficer(profile.id)}
-                          className={`flex w-full items-start gap-2.5 rounded-lg px-3 py-2.5 text-left ${
-                            isSelected
-                              ? "bg-[#F3E7D1] text-[#142446] border border-[#C7C2BA]/60"
-                              : "hover:bg-[#FAF9F6] text-[#475A6F]"
-                          }`}
-                        >
-                          <div
-                            className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${
-                              isSelected
-                                ? "bg-[#142446] text-white"
-                                : "bg-[#B7C7D9]/50 text-[#142446]"
-                            }`}
-                          >
-                            {profile.avatarText}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-[12px] font-semibold text-[#142446] truncate">
-                              {profile.name}
-                            </p>
-                            <p className="text-[11px] text-[#475A6F] truncate">
-                              {profile.designation}
-                            </p>
-                            <p className="text-[10px] text-[#475A6F]/80 truncate">
-                              {profile.division}
-                            </p>
-                          </div>
-                          {isSelected && (
-                            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-[#142446] text-white self-center">
-                              Active
-                            </span>
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
-                  <div className="px-3 py-2 border-t border-[#C7C2BA]/40 bg-[#FAF9F6] rounded-b-lg">
-                    <Link
-                      href={`/assessment?user=${currentOfficer.id}`}
-                      className="block text-center text-[11px] font-semibold text-[#142446] hover:text-[#D8921E] py-0.5"
-                      onClick={() => setProfileDropdownOpen(false)}
-                    >
-                      Open Assessment for {currentOfficer.name} →
-                    </Link>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-      </header>
-
-      {/* ── Floating Capsule Navigation Bar (Seamless, No Background Strip) ── */}
-      <div className="w-full bg-white pb-3 pt-1 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto flex items-center justify-center">
-          {/* Floating Capsule Container */}
+          {/* 2. Embedded Deep Navy Capsule Navbar */}
           <nav
             role="navigation"
             aria-label="Main Navigation"
-            className="inline-flex items-center gap-1.5 p-1 bg-[#FAF9F6] rounded-full border border-[#C7C2BA] shadow-xs"
+            className="hidden md:inline-flex items-center gap-1 p-1 bg-[#142446] rounded-full shadow-sm"
           >
             {capsuleNavLinks.map((link) => {
               const isActive =
@@ -280,10 +169,10 @@ export function Header({
                 <Link
                   key={link.href}
                   href={`${link.href}?user=${currentOfficer.id}`}
-                  className={`px-4 sm:px-5 py-1.5 rounded-full text-[13px] font-semibold transition-colors duration-150 text-center ${
+                  className={`px-4 lg:px-5 py-2 rounded-full text-[12.5px] font-semibold transition-colors text-center ${
                     isActive
-                      ? "bg-[#142446] text-white shadow-xs"
-                      : "text-[#475A6F] hover:text-[#142446] hover:bg-[#F3E7D1]/50"
+                      ? "bg-white text-[#142446] shadow-xs"
+                      : "text-[#B7C7D9] hover:text-white hover:bg-white/10"
                   }`}
                 >
                   {link.label}
@@ -291,8 +180,112 @@ export function Header({
               );
             })}
           </nav>
+
+          {/* 3. Compact Officer Profile Switcher (Clean, Non-Boxy) */}
+          <div className="relative shrink-0">
+            <button
+              onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
+              className="flex items-center gap-2.5 py-1 px-2.5 rounded-full hover:bg-[#FAF9F6] border border-transparent hover:border-[#C7C2BA]/60 transition-colors text-left"
+              aria-expanded={profileDropdownOpen}
+              aria-label="Switch officer profile"
+            >
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#142446] text-[#F3E7D1] text-[11px] font-bold shrink-0">
+                {currentOfficer.avatarText}
+              </div>
+              <div className="hidden sm:block text-left">
+                <p className="text-[12px] font-bold text-[#142446] leading-none">
+                  {currentOfficer.name}
+                </p>
+                <p className="text-[10px] text-[#475A6F] mt-0.5 leading-none">
+                  {currentOfficer.cadre}
+                </p>
+              </div>
+              <ChevronDown
+                className={`h-3.5 w-3.5 text-[#475A6F] transition-transform duration-150 ${
+                  profileDropdownOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            {/* Profile Dropdown Popover */}
+            {profileDropdownOpen && (
+              <>
+                <div
+                  className="fixed inset-0 z-40"
+                  onClick={() => setProfileDropdownOpen(false)}
+                />
+                <div className="absolute right-0 top-full mt-2 z-50 w-72 rounded-xl border border-[#C7C2BA] bg-white shadow-xl p-2 space-y-1">
+                  <div className="px-3 py-2 border-b border-[#C7C2BA]/40">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-[#475A6F]">
+                      Switch Official Cadre
+                    </p>
+                    <p className="text-[11px] text-[#142446] font-medium mt-0.5">
+                      Preview tailored competency benchmarks & courses
+                    </p>
+                  </div>
+                  <div className="py-1 space-y-1">
+                    {OFFICER_PROFILES.map((profile) => {
+                      const isSelected = profile.id === currentOfficer.id;
+                      return (
+                        <button
+                          key={profile.id}
+                          onClick={() => handleSelectOfficer(profile.id)}
+                          className={`w-full flex items-center gap-2.5 p-2 rounded-lg text-left transition-colors ${
+                            isSelected
+                              ? "bg-[#FAF9F6] border border-[#C7C2BA]"
+                              : "hover:bg-[#FAF9F6]"
+                          }`}
+                        >
+                          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#142446] text-white text-[10px] font-bold shrink-0">
+                            {profile.avatarText}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[12px] font-semibold text-[#142446] truncate">
+                              {profile.name}
+                            </p>
+                            <p className="text-[10px] text-[#475A6F] truncate">
+                              {profile.designation}
+                            </p>
+                          </div>
+                          {isSelected && (
+                            <span className="text-[9.5px] font-bold px-1.5 py-0.5 rounded bg-[#142446] text-white">
+                              Active
+                            </span>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+
         </div>
-      </div>
+
+        {/* Mobile Navigation Drop (Visible on Small Screens) */}
+        <div className="md:hidden flex items-center justify-center p-2 bg-[#142446] overflow-x-auto gap-1">
+          {capsuleNavLinks.map((link) => {
+            const isActive =
+              pathname === link.matchPath ||
+              (link.matchPath.length > 1 && pathname?.startsWith(link.matchPath));
+
+            return (
+              <Link
+                key={link.href}
+                href={`${link.href}?user=${currentOfficer.id}`}
+                className={`px-3 py-1.5 rounded-full text-[11.5px] font-semibold shrink-0 ${
+                  isActive
+                    ? "bg-white text-[#142446]"
+                    : "text-[#B7C7D9] hover:text-white"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </div>
+      </header>
     </div>
   );
 }
