@@ -126,34 +126,35 @@ export function Header({
           {/* Brand */}
           <Link
             href="/"
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-3.5 group py-1"
             aria-label="Karmasarthi Home"
           >
-            <div className="flex items-center gap-3">
+            <div className="relative flex items-center justify-center p-1 rounded-lg bg-white border border-[#e8e4dc] shadow-sm group-hover:border-[#B7C7D9] transition-all">
               <Image
                 src="/karmasarthi.png"
                 alt="Karmasarthi"
-                width={36}
-                height={36}
-                className="object-contain"
+                width={44}
+                height={44}
+                priority
+                className="object-contain transition-transform duration-300 group-hover:scale-105"
               />
-              <div className="flex flex-col leading-tight">
-                <div className="flex items-baseline gap-2">
-                  <span
-                    className="font-devanagari font-semibold text-[#142446] text-[13px] leading-none"
-                    style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
-                  >
-                    कर्मसारथी
-                  </span>
-                  <span className="text-[#C7C2BA] text-[11px] font-light select-none">|</span>
-                  <span className="font-sans font-semibold text-[#142446] text-[13px] leading-none tracking-wide uppercase">
-                    Karmasarthi
-                  </span>
-                </div>
-                <span className="text-[10px] text-[#475A6F] font-normal tracking-wide mt-0.5 hidden sm:block">
-                  AI Skill Intelligence Platform &nbsp;·&nbsp; MoSPI
+            </div>
+            <div className="flex flex-col leading-tight">
+              <div className="flex items-baseline gap-2">
+                <span
+                  className="font-devanagari font-bold text-[#142446] text-[15px] leading-none"
+                  style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
+                >
+                  कर्मसारथी
+                </span>
+                <span className="text-[#C7C2BA] text-xs font-light select-none">|</span>
+                <span className="font-sans font-bold text-[#142446] text-[14px] leading-none tracking-wider uppercase">
+                  Karmasarthi
                 </span>
               </div>
+              <span className="text-[10.5px] text-[#475A6F] font-medium tracking-wide mt-1 hidden sm:block">
+                AI Skill Intelligence Platform &nbsp;·&nbsp; MoSPI / DIID
+              </span>
             </div>
           </Link>
 

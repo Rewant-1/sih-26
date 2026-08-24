@@ -28,29 +28,31 @@ export function Footer() {
 
           {/* Brand column */}
           <div className="md:col-span-4 space-y-5">
-            <div className="flex items-center gap-3">
-              <Image
-                src="/karmasarthi.png"
-                alt="Karmasarthi"
-                width={38}
-                height={38}
-                className="object-contain opacity-90"
-              />
+            <div className="flex items-center gap-3.5">
+              <div className="p-1.5 rounded-lg bg-white/95 border border-[#1e3460] shadow-sm">
+                <Image
+                  src="/karmasarthi.png"
+                  alt="Karmasarthi"
+                  width={46}
+                  height={46}
+                  className="object-contain"
+                />
+              </div>
               <div>
                 <div className="flex items-baseline gap-2">
                   <span
-                    className="font-semibold text-white text-[14px]"
+                    className="font-devanagari font-bold text-white text-[16px]"
                     style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
                   >
                     कर्मसारथी
                   </span>
                   <span className="text-[#475A6F] text-xs select-none">|</span>
-                  <span className="font-semibold text-white text-[14px] tracking-widest uppercase">
+                  <span className="font-sans font-bold text-white text-[15px] tracking-wider uppercase">
                     Karmasarthi
                   </span>
                 </div>
-                <p className="text-[11px] text-[#475A6F] mt-0.5 tracking-wide">
-                  AI Skill Intelligence Platform
+                <p className="text-[11px] text-[#B7C7D9] mt-0.5 tracking-wide font-medium">
+                  AI Skill Intelligence Platform &nbsp;·&nbsp; MoSPI
                 </p>
               </div>
             </div>
