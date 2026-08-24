@@ -136,7 +136,7 @@ export function Header({
 
       {/* ── Unified Single Header Bar with Embedded Deep Navy Capsule Navbar ── */}
       <header className="w-full bg-white border-b border-[#C7C2BA]/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[74px] gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[86px] gap-4">
           
           {/* 1. Large Brand Logo */}
           <Link
@@ -147,10 +147,10 @@ export function Header({
             <Image
               src="/karmasarthi.png"
               alt="Karmasarthi Logo"
-              width={260}
-              height={70}
+              width={320}
+              height={90}
               priority
-              className="h-[54px] w-auto object-contain"
+              className="h-[64px] w-auto object-contain"
             />
           </Link>
 

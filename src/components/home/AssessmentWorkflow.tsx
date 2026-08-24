@@ -7,7 +7,6 @@ interface SampleDocument {
   id: string;
   title: string;
   division: string;
-  pages: number;
   sampleQuestion: {
     question: string;
     options: string[];
@@ -20,9 +19,8 @@ interface SampleDocument {
 const SAMPLE_DOCS: SampleDocument[] = [
   {
     id: "nss-79",
-    title: "NSS 79th Round: Survey on AYUSH & Domestic Tourism",
+    title: "NSS 79th Round Manual",
     division: "Field Operations Division (FOD)",
-    pages: 48,
     sampleQuestion: {
       question:
         "In NSS Household Survey sampling design, what constitutes the First Stage Unit (FSU) in the rural sector?",
@@ -33,16 +31,15 @@ const SAMPLE_DOCS: SampleDocument[] = [
         "D. Agricultural Holding Cluster",
       ],
       correctIdx: 1,
-      bloomLevel: "Bloom: Understand",
+      bloomLevel: "Bloom: Conceptual Understanding",
       rationale:
         "According to Chapter 2 of the NSS 79th Round Manual, 2011 Census villages constitute the FSUs in rural sectors, with hamlet-group formation where village population exceeds 1200.",
     },
   },
   {
     id: "cpi-manual",
-    title: "Consumer Price Index (Base 2012=100) Methodology",
+    title: "Consumer Price Index Methodology",
     division: "Economic Statistics Division (ESD)",
-    pages: 36,
     sampleQuestion: {
       question:
         "Which aggregation formula is officially adopted by MoSPI for compiling the All-India Consumer Price Index (Rural/Urban)?",
@@ -53,16 +50,15 @@ const SAMPLE_DOCS: SampleDocument[] = [
         "D. Fisher Ideal Geometric Index",
       ],
       correctIdx: 1,
-      bloomLevel: "Bloom: Apply",
+      bloomLevel: "Bloom: Methodological Application",
       rationale:
         "MoSPI compiles CPI using the Modified Laspeyres Price Index formula with base-year consumption expenditure weights derived from the Consumer Expenditure Survey.",
     },
   },
   {
     id: "sna-guide",
-    title: "System of National Accounts: Gross Value Added Compilation",
+    title: "National Accounts Compilation Guide",
     division: "National Accounts Division (NAD)",
-    pages: 62,
     sampleQuestion: {
       question:
         "Under the revised National Accounts series (2011-12 base), GDP at Market Prices is derived as:",
@@ -73,7 +69,7 @@ const SAMPLE_DOCS: SampleDocument[] = [
         "D. NDP at Basic Prices + Subsidies on Production",
       ],
       correctIdx: 0,
-      bloomLevel: "Bloom: Analyze",
+      bloomLevel: "Bloom: Analytical Derivation",
       rationale:
         "As per SNA 2008 guidelines adopted by NAD, GDP at Market Prices = GVA at Basic Prices + Product Taxes – Product Subsidies.",
     },
@@ -90,33 +86,31 @@ export function AssessmentWorkflow() {
   const q = selectedDoc.sampleQuestion;
 
   return (
-    <section className="bg-white border-t border-[#C7C2BA]/60 py-16 lg:py-24">
+    <section className="bg-white py-16 lg:py-24 border-t border-[#C7C2BA]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[#C7C2BA]/60 mb-10">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-[#D8921E]">
-              AI Document-to-Quiz Technology
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#142446] tracking-tight mt-1">
-              Extract Objective Assessments from MoSPI Manuals
-            </h2>
-          </div>
-          <p className="text-xs sm:text-sm text-[#475A6F] max-w-xl">
-            Upload survey instructions, index methodology circulars, or national accounts manuals to automatically generate Bloom-weighted MCQs with verified citations.
+        {/* Open Editorial Section Header */}
+        <div className="max-w-3xl mb-12 space-y-2">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#142446]">
+            Interactive AI Studio Feature
+          </span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#142446] tracking-tight">
+            Turn Any Official Manual into Instant Practice Quizzes
+          </h2>
+          <p className="text-sm sm:text-base text-[#475A6F] leading-relaxed pt-1">
+            Test yourself on real survey manuals and guidelines. Karmasarthi extracts core concepts, creates multiple choice questions, and verifies answers with official citations.
           </p>
         </div>
 
-        {/* Interactive Document Selector & Question Preview (Spacious, No Boxy Cards) */}
-        <div className="border border-[#C7C2BA] rounded-2xl bg-[#FAF9F6] p-6 sm:p-10 space-y-8">
+        {/* Two-Column Open Product Demo (No Heavy Outer Box) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
-          {/* Document Tabs */}
-          <div>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#475A6F] block mb-3">
-              Select Sample Official Document:
-            </span>
-            <div className="flex flex-wrap gap-2.5">
+          {/* Left Column: Document Switcher */}
+          <div className="lg:col-span-4 space-y-4">
+            <p className="text-xs font-bold uppercase tracking-wider text-[#475A6F]">
+              Select a Manual to Preview:
+            </p>
+            <div className="space-y-2">
               {SAMPLE_DOCS.map((doc) => {
                 const isActive = doc.id === selectedDocId;
                 return (
@@ -127,53 +121,67 @@ export function AssessmentWorkflow() {
                       setSelectedOption(null);
                       setShowAnswer(false);
                     }}
-                    className={`px-4 py-2.5 rounded-lg text-xs font-semibold border transition-colors text-left ${
+                    className={`w-full text-left p-4 rounded-xl transition-all ${
                       isActive
-                        ? "bg-[#142446] text-white border-[#142446]"
-                        : "bg-white text-[#142446] border-[#C7C2BA] hover:bg-[#F3E7D1]/50"
+                        ? "bg-[#142446] text-white shadow-sm"
+                        : "bg-[#FAF9F6] text-[#142446] hover:bg-[#B7C7D9]/20"
                     }`}
                   >
-                    <span>{doc.title}</span>
-                    <span className="text-[10px] opacity-75 ml-2">
-                      ({doc.division})
-                    </span>
+                    <p className="text-sm font-bold leading-tight">
+                      {doc.title}
+                    </p>
+                    <p className={`text-xs mt-1 ${isActive ? "text-[#B7C7D9]" : "text-[#475A6F]"}`}>
+                      {doc.division}
+                    </p>
                   </button>
                 );
               })}
             </div>
+
+            <div className="pt-4 border-t border-[#C7C2BA]/40">
+              <Link
+                href="/quiz-studio"
+                className="inline-flex items-center gap-2 text-xs font-bold text-[#142446] hover:text-[#475A6F] transition-colors"
+              >
+                <span>Upload your own PDF in AI Studio</span>
+                <span>→</span>
+              </Link>
+            </div>
           </div>
 
-          {/* Generated MCQ Sandbox */}
-          <div className="bg-white border border-[#C7C2BA] rounded-xl p-6 sm:p-8 space-y-6">
+          {/* Right Column: Live Interactive Question Sandbox */}
+          <div className="lg:col-span-8 space-y-6 bg-[#FAF9F6] p-6 sm:p-8 rounded-2xl">
             
             {/* Question Header */}
-            <div className="flex items-center justify-between gap-4 pb-4 border-b border-[#C7C2BA]/40">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#D8921E]">
+            <div className="flex items-center justify-between gap-4 pb-3 border-b border-[#C7C2BA]/40">
+              <span className="text-xs font-bold text-[#142446] uppercase tracking-wider">
                 {q.bloomLevel}
               </span>
-              <span className="text-xs font-semibold px-2.5 py-0.5 rounded bg-[#FAF9F6] text-[#475A6F] border border-[#C7C2BA]">
+              <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white text-[#475A6F] border border-[#C7C2BA]/60">
                 Official Benchmark Question
               </span>
             </div>
 
             {/* Question Stem */}
-            <p className="text-sm sm:text-base font-bold text-[#142446] leading-relaxed">
+            <p className="text-base sm:text-lg font-bold text-[#142446] leading-snug">
               {q.question}
             </p>
 
-            {/* Options */}
+            {/* Options with Proper Green for Correct Answers */}
             <div className="space-y-2.5">
               {q.options.map((opt, idx) => {
                 const isSelected = selectedOption === idx;
                 const isCorrect = idx === q.correctIdx;
 
-                let optionClasses = "border-[#C7C2BA] bg-white text-[#142446] hover:bg-[#FAF9F6]";
+                let optionStyle = "bg-white text-[#142446] border border-[#C7C2BA]/60 hover:border-[#142446]";
+                
+                // Show clean Green for correct answers
                 if (showAnswer && isCorrect) {
-                  optionClasses = "border-[#142446] bg-[#F3E7D1] text-[#142446] font-semibold";
+                  optionStyle = "bg-[#E8F5E9] text-[#1B5E20] border-2 border-[#2E7D32] font-semibold";
                 } else if (showAnswer && isSelected && !isCorrect) {
-                  optionClasses = "border-[#142446] bg-white text-[#142446]";
+                  optionStyle = "bg-white text-[#B71C1C] border border-[#B71C1C]";
                 } else if (isSelected) {
-                  optionClasses = "border-[#142446] bg-[#FAF9F6] font-semibold";
+                  optionStyle = "bg-white text-[#142446] border-2 border-[#142446] font-semibold";
                 }
 
                 return (
@@ -183,11 +191,11 @@ export function AssessmentWorkflow() {
                       setSelectedOption(idx);
                       setShowAnswer(true);
                     }}
-                    className={`p-3.5 rounded-lg border text-xs sm:text-sm cursor-pointer transition-colors flex items-center justify-between ${optionClasses}`}
+                    className={`p-3.5 rounded-xl text-xs sm:text-sm cursor-pointer transition-all flex items-center justify-between ${optionStyle}`}
                   >
                     <span>{opt}</span>
                     {showAnswer && isCorrect && (
-                      <span className="text-xs font-bold text-[#142446] ml-2">
+                      <span className="text-xs font-bold text-[#1B5E20] bg-white px-2 py-0.5 rounded-md border border-[#2E7D32]/40 ml-2 shrink-0">
                         ✓ Correct Key
                       </span>
                     )}
@@ -198,7 +206,7 @@ export function AssessmentWorkflow() {
 
             {/* Official Rationale & Source Excerpt */}
             {showAnswer && (
-              <div className="p-4 rounded-lg bg-[#FAF9F6] border border-[#C7C2BA] space-y-1.5 text-xs text-[#475A6F]">
+              <div className="p-4 rounded-xl bg-white border-l-4 border-[#2E7D32] text-xs text-[#475A6F] space-y-1">
                 <p className="font-bold text-[#142446]">
                   Verified Pedagogical Rationale:
                 </p>
@@ -208,17 +216,16 @@ export function AssessmentWorkflow() {
               </div>
             )}
 
-            {/* Actions */}
-            <div className="pt-4 border-t border-[#C7C2BA]/40 flex items-center justify-between">
+            {/* Action CTA */}
+            <div className="pt-2 flex items-center justify-between">
               <span className="text-xs text-[#475A6F]">
-                Generate assessments from your own PDF guidelines
+                Click any option to test your understanding.
               </span>
               <Link
                 href="/quiz-studio"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#142446] text-white text-xs font-bold rounded-lg hover:bg-[#1e3460] transition-colors"
+                className="px-5 py-2.5 bg-[#142446] text-white text-xs font-bold rounded-lg hover:bg-[#1e3460] transition-colors"
               >
-                <span>Open AI Quiz Studio</span>
-                <span>→</span>
+                Open Full Quiz Studio →
               </Link>
             </div>
 
