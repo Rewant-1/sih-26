@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -50,12 +50,32 @@ const OFFICER_PROFILES: OfficerProfile[] = [
   },
 ];
 
-const navLinks = [
-  { href: "/assessment", label: "Self-Assessment" },
-  { href: "/catalog", label: "Course Catalog" },
-  { href: "/quiz-studio", label: "AI Quiz Studio" },
-  { href: "/dashboard/learner", label: "Learner Hub" },
-  { href: "/dashboard/admin", label: "Admin" },
+// Capsule navbar items strictly per instructions:
+// 1. Self-Assessment Scores
+// 2. Catalog
+// 3. AI Quiz Studio
+// 4. Learner Hub
+const capsuleNavLinks = [
+  {
+    href: "/assessment",
+    label: "Self-Assessment Scores",
+    matchPath: "/assessment",
+  },
+  {
+    href: "/catalog",
+    label: "Catalog",
+    matchPath: "/catalog",
+  },
+  {
+    href: "/quiz-studio",
+    label: "AI Quiz Studio",
+    matchPath: "/quiz-studio",
+  },
+  {
+    href: "/dashboard/learner",
+    label: "Learner Hub",
+    matchPath: "/dashboard/learner",
+  },
 ];
 
 export function Header({
@@ -69,18 +89,11 @@ export function Header({
   const router = useRouter();
   const searchParams = useSearchParams();
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   const currentUserId =
     activeUserId || searchParams?.get("user") || "usr-jso-rajesh";
   const currentOfficer =
     OFFICER_PROFILES.find((p) => p.id === currentUserId) || OFFICER_PROFILES[0];
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 8);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const handleSelectOfficer = (officerId: string) => {
     setProfileDropdownOpen(false);
@@ -94,96 +107,83 @@ export function Header({
   };
 
   return (
-    <>
-      {/* Government top bar */}
-      <div className="bg-[#142446] text-[#B7C7D9] text-[11px]">
+    <div className="w-full bg-white">
+      {/* ── Top Government Header Bar ── */}
+      <div className="bg-[#142446] text-[#B7C7D9] text-[11px] border-b border-[#1e3460]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex justify-between items-center">
-          <span className="font-medium tracking-wide">
-            Government of India &nbsp;·&nbsp; Ministry of Statistics and Programme Implementation
-          </span>
-          <span className="hidden sm:block">
-            Mission Karmayogi &nbsp;·&nbsp; FRAC Framework
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="font-medium tracking-wide text-white/90">
+              Government of India
+            </span>
+            <span className="text-[#475A6F]">|</span>
+            <span className="text-[#B7C7D9]">
+              Ministry of Statistics & Programme Implementation
+            </span>
+          </div>
+          <div className="hidden sm:flex items-center gap-3 text-[11px]">
+            <span className="text-[#F3E7D1] font-medium">
+              Mission Karmayogi
+            </span>
+            <span className="text-[#475A6F]">·</span>
+            <span className="text-[#B7C7D9]">
+              FRAC Competency Framework
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* Tricolor ribbon */}
+      {/* ── National Tricolor Accent Ribbon ── */}
       <div className="tricolor-bar">
         <span />
         <span />
         <span />
       </div>
 
-      {/* Main header */}
-      <header
-        className={`sticky top-0 z-40 w-full bg-white border-b transition-shadow duration-300 ${
-          scrolled ? "border-[#B7C7D9] shadow-sm" : "border-[#e8e4dc]"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[64px]">
-
-          {/* Logo only — no text */}
+      {/* ── Main White Header ── */}
+      <header className="w-full bg-white border-b border-[#C7C2BA]/40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[70px]">
+          {/* Logo & App Name */}
           <Link
-            href="/"
-            className="flex items-center group"
+            href={`/?user=${currentOfficer.id}`}
+            className="flex items-center gap-3.5"
             aria-label="Karmasarthi Home"
           >
-            <Image
-              src="/karmasarthi.png"
-              alt="Karmasarthi"
-              width={200}
-              height={200}
-              priority
-              className="object-contain transition-opacity duration-200 group-hover:opacity-80"
-            />
+            <div className="relative flex items-center shrink-0">
+              <Image
+                src="/karmasarthi.png"
+                alt="Karmasarthi Logo"
+                width={500}
+                height={500}
+                priority
+                className="h-[44px] w-auto object-contain"
+              />
+            </div>
           </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-0.5">
-            {navLinks.map((link) => {
-              const isActive =
-                pathname === link.href ||
-                (link.href.length > 1 && pathname?.startsWith(link.href));
-              return (
-                <Link
-                  key={link.href}
-                  href={`${link.href}?user=${currentOfficer.id}`}
-                  className={`relative px-3.5 py-2 text-[13px] font-medium transition-colors ${
-                    isActive
-                      ? "text-[#142446]"
-                      : "text-[#475A6F] hover:text-[#142446]"
-                  }`}
-                >
-                  {link.label}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-3.5 right-3.5 h-[2px] bg-[#D8921E] rounded-t-sm" />
-                  )}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Officer profile switcher */}
+          {/* Right Action: Officer Profile Switcher (Personalization & Context) */}
           <div className="relative">
             <button
               onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[#e8e4dc] hover:border-[#B7C7D9] hover:bg-[#f9f8f5] transition text-left"
+              className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg border border-[#C7C2BA]/70 bg-[#FAF9F6] text-left"
               aria-expanded={profileDropdownOpen}
               aria-label="Switch officer profile"
             >
-              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#142446] text-white text-[10px] font-semibold shrink-0">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#142446] text-white text-[11px] font-semibold shrink-0">
                 {currentOfficer.avatarText}
               </div>
-              <div className="hidden md:block">
-                <p className="text-[12px] font-semibold text-[#142446] leading-tight">
-                  {currentOfficer.name}
-                </p>
-                <p className="text-[10px] text-[#475A6F] leading-tight">
-                  {currentOfficer.cadre}
+              <div className="text-left">
+                <div className="flex items-center gap-1.5">
+                  <p className="text-[12px] font-bold text-[#142446] leading-none">
+                    {currentOfficer.name}
+                  </p>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#D8921E]" />
+                </div>
+                <p className="text-[10px] text-[#475A6F] leading-tight mt-0.5">
+                  {currentOfficer.cadre} · {currentOfficer.division.split("(")[1]?.replace(")", "") || "MoSPI"}
                 </p>
               </div>
               <ChevronDown
-                className={`h-3 w-3 text-[#475A6F] transition-transform duration-200 ${
+                className={`h-3.5 w-3.5 text-[#475A6F] transition-transform duration-150 ${
                   profileDropdownOpen ? "rotate-180" : ""
                 }`}
               />
@@ -195,59 +195,64 @@ export function Header({
                   className="fixed inset-0 z-40"
                   onClick={() => setProfileDropdownOpen(false)}
                 />
-                <div className="absolute right-0 top-full mt-2 z-50 w-72 rounded-xl border border-[#e8e4dc] bg-white shadow-xl">
-                  <div className="px-4 py-3 border-b border-[#e8e4dc]">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-[#475A6F]">
-                      Simulate Officer Profile
+                <div className="absolute right-0 top-full mt-2 z-50 w-80 rounded-xl border border-[#C7C2BA]/80 bg-white shadow-lg p-1.5">
+                  <div className="px-3 py-2 border-b border-[#C7C2BA]/40">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-[#475A6F]">
+                      Simulate Statistical Cadre
                     </p>
-                    <p className="text-[11px] text-[#475A6F] mt-0.5">
-                      Switch cadre to test adaptive gap analysis
+                    <p className="text-[11px] text-[#142446] font-medium mt-0.5">
+                      Select officer to test role-calibrated competency gap analysis
                     </p>
                   </div>
-                  <div className="p-2 space-y-0.5">
-                    {OFFICER_PROFILES.map((profile) => (
-                      <button
-                        key={profile.id}
-                        onClick={() => handleSelectOfficer(profile.id)}
-                        className={`flex w-full items-start gap-2.5 rounded-lg px-3 py-2.5 text-left transition ${
-                          profile.id === currentOfficer.id
-                            ? "bg-[#F3E7D1]/60 text-[#142446]"
-                            : "hover:bg-[#f9f8f5] text-[#475A6F]"
-                        }`}
-                      >
-                        <div
-                          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold ${
-                            profile.id === currentOfficer.id
-                              ? "bg-[#142446] text-white"
-                              : "bg-[#B7C7D9]/40 text-[#142446]"
+                  <div className="py-1.5 space-y-1">
+                    {OFFICER_PROFILES.map((profile) => {
+                      const isSelected = profile.id === currentOfficer.id;
+                      return (
+                        <button
+                          key={profile.id}
+                          onClick={() => handleSelectOfficer(profile.id)}
+                          className={`flex w-full items-start gap-2.5 rounded-lg px-3 py-2.5 text-left ${
+                            isSelected
+                              ? "bg-[#F3E7D1] text-[#142446] border border-[#C7C2BA]/60"
+                              : "hover:bg-[#FAF9F6] text-[#475A6F]"
                           }`}
                         >
-                          {profile.avatarText}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-[12px] font-semibold text-[#142446] truncate">
-                            {profile.name}
-                          </p>
-                          <p className="text-[11px] text-[#475A6F] truncate">
-                            {profile.designation}
-                          </p>
-                          <p className="text-[10px] text-[#C7C2BA] truncate mt-0.5">
-                            {profile.division}
-                          </p>
-                        </div>
-                        {profile.id === currentOfficer.id && (
-                          <div className="w-1.5 h-1.5 rounded-full bg-[#D8921E] self-center shrink-0" />
-                        )}
-                      </button>
-                    ))}
+                          <div
+                            className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${
+                              isSelected
+                                ? "bg-[#142446] text-white"
+                                : "bg-[#B7C7D9]/50 text-[#142446]"
+                            }`}
+                          >
+                            {profile.avatarText}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[12px] font-semibold text-[#142446] truncate">
+                              {profile.name}
+                            </p>
+                            <p className="text-[11px] text-[#475A6F] truncate">
+                              {profile.designation}
+                            </p>
+                            <p className="text-[10px] text-[#475A6F]/80 truncate">
+                              {profile.division}
+                            </p>
+                          </div>
+                          {isSelected && (
+                            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-[#142446] text-white self-center">
+                              Active
+                            </span>
+                          )}
+                        </button>
+                      );
+                    })}
                   </div>
-                  <div className="px-4 py-3 border-t border-[#e8e4dc]">
+                  <div className="px-3 py-2 border-t border-[#C7C2BA]/40 bg-[#FAF9F6] rounded-b-lg">
                     <Link
                       href={`/assessment?user=${currentOfficer.id}`}
-                      className="block text-center text-[11px] font-medium text-[#142446] hover:text-[#D8921E] transition-colors py-1"
+                      className="block text-center text-[11px] font-semibold text-[#142446] hover:text-[#D8921E] py-0.5"
                       onClick={() => setProfileDropdownOpen(false)}
                     >
-                      Begin Assessment as {currentOfficer.name.split(" ")[0]}
+                      Open Assessment for {currentOfficer.name} →
                     </Link>
                   </div>
                 </div>
@@ -256,6 +261,38 @@ export function Header({
           </div>
         </div>
       </header>
-    </>
+
+      {/* ── Floating Capsule Navigation Bar (Seamless, No Background Strip) ── */}
+      <div className="w-full bg-white pb-3 pt-1 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto flex items-center justify-center">
+          {/* Floating Capsule Container */}
+          <nav
+            role="navigation"
+            aria-label="Main Navigation"
+            className="inline-flex items-center gap-1.5 p-1 bg-[#FAF9F6] rounded-full border border-[#C7C2BA] shadow-xs"
+          >
+            {capsuleNavLinks.map((link) => {
+              const isActive =
+                pathname === link.matchPath ||
+                (link.matchPath.length > 1 && pathname?.startsWith(link.matchPath));
+
+              return (
+                <Link
+                  key={link.href}
+                  href={`${link.href}?user=${currentOfficer.id}`}
+                  className={`px-4 sm:px-5 py-1.5 rounded-full text-[13px] font-semibold transition-colors duration-150 text-center ${
+                    isActive
+                      ? "bg-[#142446] text-white shadow-xs"
+                      : "text-[#475A6F] hover:text-[#142446] hover:bg-[#F3E7D1]/50"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+      </div>
+    </div>
   );
 }

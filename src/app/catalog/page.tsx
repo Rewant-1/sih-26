@@ -4,18 +4,7 @@ import React, { useState, useEffect, useMemo, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
-  Award,
-  BookOpen,
-  Building2,
   CheckCircle2,
-  Compass,
-  GraduationCap,
-  Layers,
-  Sparkles,
-  Users,
-  ChevronRight,
-  RefreshCw,
-  SlidersHorizontal,
 } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -25,13 +14,9 @@ import {
 } from "@/components/catalog/CatalogFilters";
 import { CourseGrid } from "@/components/catalog/CourseGrid";
 import { CourseCard } from "@/components/catalog/CourseCard";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
 import type { SunbirdCBCourse, CourseRecommendation } from "@/lib/types/sunbird";
 import type { CadreId } from "@/lib/types/frac";
 import {
-  recommendCoursesForGaps,
   filterCourseCatalog,
 } from "@/lib/engine/recommendation-engine";
 
@@ -44,7 +29,6 @@ function CourseCatalogContent() {
   const [recommendations, setRecommendations] = useState<CourseRecommendation[]>([]);
   const [enrolledCourseIds, setEnrolledCourseIds] = useState<string[]>([]);
   const [activeOfficerName, setActiveOfficerName] = useState<string>("Rajesh Kumar");
-  const [activeCadre, setActiveCadre] = useState<CadreId>("JUNIOR_STATISTICAL_OFFICER");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [enrollmentToast, setEnrollmentToast] = useState<string | null>(null);
 
@@ -78,7 +62,6 @@ function CourseCatalogContent() {
           setRecommendations(recData.recommendations || []);
           if (recData.userProfile) {
             setActiveOfficerName(recData.userProfile.name);
-            setActiveCadre(recData.userProfile.cadre);
             setEnrolledCourseIds(recData.userProfile.enrolledCourseIds || []);
           }
         }
@@ -129,51 +112,51 @@ function CourseCatalogContent() {
   }, [recommendations]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f9f8f5]">
+    <div className="min-h-screen flex flex-col bg-[#FAF9F6]">
       <Header activeUserId={activeUserId} />
 
       {/* Enrollment Toast */}
       {enrollmentToast && (
-        <div className="fixed bottom-6 right-6 z-50 max-w-md bg-[#142446] text-white p-4 rounded-xl shadow-xl border border-[#1e3460] flex items-start gap-3">
+        <div className="fixed bottom-6 right-6 z-50 max-w-md bg-white text-[#142446] p-4 rounded-xl shadow-lg border border-[#C7C2BA] flex items-start gap-3">
           <CheckCircle2 className="w-5 h-5 text-[#D8921E] shrink-0 mt-0.5" />
           <div>
-            <p className="font-semibold text-[13px] mb-0.5">Enrollment Confirmed</p>
-            <p className="text-[#B7C7D9] text-[12px] leading-snug">{enrollmentToast}</p>
+            <p className="font-bold text-[13px] mb-0.5">Enrollment Confirmed</p>
+            <p className="text-[#475A6F] text-[12px] leading-snug">{enrollmentToast}</p>
           </div>
           <button
             onClick={() => setEnrollmentToast(null)}
-            className="text-[#B7C7D9] hover:text-white text-xs ml-auto"
+            className="text-[#475A6F] hover:text-[#142446] text-xs ml-auto"
           >
             ✕
           </button>
         </div>
       )}
 
-      {/* Page Title Bar */}
-      <div className="bg-[#142446] text-white">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-10">
-          <div className="flex items-center gap-2 text-[12px] text-[#B7C7D9] mb-3">
+      {/* Page Title Bar (Light Theme) */}
+      <div className="bg-white border-b border-[#C7C2BA]/60">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex items-center gap-2 text-[12px] text-[#475A6F] mb-2">
             <Link href="/" className="hover:text-[#D8921E] transition-colors">Home</Link>
-            <span className="text-[#475A6F]">/</span>
-            <span className="text-white font-medium">Course Catalog</span>
+            <span className="text-[#C7C2BA]">/</span>
+            <span className="text-[#142446] font-medium">Course Catalog</span>
           </div>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-              <h1 className="text-[32px] sm:text-[40px] font-light text-white mb-2">
+              <h1 className="text-[28px] sm:text-[32px] font-bold text-[#142446] leading-tight">
                 Course Catalog
               </h1>
-              <p className="text-[14px] text-[#B7C7D9] max-w-2xl leading-relaxed">
+              <p className="text-[14px] text-[#475A6F] max-w-2xl mt-1 leading-relaxed">
                 {courses.length} accredited training programmes mapped to FRAC competencies — iGOT Karmayogi and NSSTA TPAC.
               </p>
             </div>
-            <div className="flex gap-8 shrink-0">
-              <div className="text-right">
-                <div className="text-[32px] font-light text-white">{igotCount}</div>
-                <div className="text-[11px] text-[#B7C7D9] uppercase tracking-wider">iGOT Courses</div>
+            <div className="flex gap-6 shrink-0">
+              <div className="p-3 bg-[#FAF9F6] border border-[#C7C2BA]/60 rounded-xl text-center min-w-[100px]">
+                <div className="text-[24px] font-bold text-[#142446] leading-none">{igotCount}</div>
+                <div className="text-[10px] font-bold text-[#475A6F] uppercase tracking-wider mt-1">iGOT Courses</div>
               </div>
-              <div className="text-right">
-                <div className="text-[32px] font-light text-white">{nsstaCount}</div>
-                <div className="text-[11px] text-[#B7C7D9] uppercase tracking-wider">NSSTA TPAC</div>
+              <div className="p-3 bg-[#FAF9F6] border border-[#C7C2BA]/60 rounded-xl text-center min-w-[100px]">
+                <div className="text-[24px] font-bold text-[#142446] leading-none">{nsstaCount}</div>
+                <div className="text-[10px] font-bold text-[#475A6F] uppercase tracking-wider mt-1">NSSTA TPAC</div>
               </div>
             </div>
           </div>
@@ -181,14 +164,16 @@ function CourseCatalogContent() {
       </div>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 flex-1 w-full space-y-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
         {/* Personalized Recommendations */}
         {topRecommendations.length > 0 && (
-          <div className="rounded-xl border border-[#e8e4dc] bg-white p-6">
+          <div className="rounded-2xl border border-[#C7C2BA] bg-white p-6 shadow-xs">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
               <div>
-                <p className="text-[11px] uppercase tracking-[0.18em] text-[#D8921E] font-semibold mb-1">Personalized for You</p>
-                <h2 className="text-[18px] font-semibold text-[#142446]">
+                <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#F3E7D1] text-[#142446] border border-[#C7C2BA]">
+                  Personalized for You
+                </span>
+                <h2 className="text-[18px] font-bold text-[#142446] mt-1.5">
                   Recommended for {activeOfficerName}
                 </h2>
                 <p className="text-[13px] text-[#475A6F] mt-0.5">
@@ -260,7 +245,7 @@ export default function CourseCatalogPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#f9f8f5] flex items-center justify-center">
+        <div className="min-h-screen bg-[#FAF9F6] flex items-center justify-center">
           <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#142446] border-t-transparent" />
         </div>
       }

@@ -1,18 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import React, { useState } from "react";
 import Link from "next/link";
-import {
-  Compass,
-  GraduationCap,
-  Sparkles,
-  BarChart3,
-  FileCheck2,
-  Users2,
-  ArrowRight,
-  CheckCircle2,
-} from "lucide-react";
 
 interface HubItem {
   id: string;
@@ -23,7 +12,6 @@ interface HubItem {
   highlights: string[];
   href: string;
   actionText: string;
-  icon: React.ElementType;
   metric: string;
   metricLabel: string;
 }
@@ -43,7 +31,6 @@ const HUBS: HubItem[] = [
     ],
     href: "/assessment",
     actionText: "Launch Competency Hub",
-    icon: Compass,
     metric: "29",
     metricLabel: "Competencies Mapped",
   },
@@ -61,7 +48,6 @@ const HUBS: HubItem[] = [
     ],
     href: "/catalog",
     actionText: "Explore Learning Hub",
-    icon: GraduationCap,
     metric: "120+",
     metricLabel: "Curated Modules",
   },
@@ -75,11 +61,10 @@ const HUBS: HubItem[] = [
     highlights: [
       "Automated MCQ generation from NSS manuals and guidelines",
       "Instant evaluation with detailed rationale for every answer",
-      "Bilingual support in English and Hindi for nationwide reach",
+      "Standard and custom assessment difficulty tiers",
     ],
     href: "/quiz-studio",
     actionText: "Open Quiz Studio",
-    icon: Sparkles,
     metric: "Instant",
     metricLabel: "MCQ Generation",
   },
@@ -97,256 +82,122 @@ const HUBS: HubItem[] = [
     ],
     href: "/dashboard/admin",
     actionText: "View Analytics Hub",
-    icon: BarChart3,
-    metric: "5",
-    metricLabel: "Divisions Covered",
-  },
-  {
-    id: "acbp",
-    title: "ACBP 2026–27 Planning Hub",
-    subtitle: "Annual Capacity Building Plan",
-    category: "Strategic Planning",
-    description:
-      "Structured framework for drafting, validating, and submitting the Annual Capacity Building Plan in full compliance with Capacity Building Commission (CBC) guidelines.",
-    highlights: [
-      "Automated ACBP generation from aggregated division gaps",
-      "Prioritized budget and training slot allocation",
-      "Alignment with national statistical priorities and SDGs",
-    ],
-    href: "/acbp",
-    actionText: "Access ACBP Planner",
-    icon: FileCheck2,
-    metric: "100%",
-    metricLabel: "CBC Compliant",
-  },
-  {
-    id: "cadre",
-    title: "Cadre Progression Hub",
-    subtitle: "Role-Based Capacity Building",
-    category: "Career Pathways",
-    description:
-      "Tailored developmental journeys for Indian Statistical Service (ISS) officers, Senior Statistical Officers (SSO), and Junior Statistical Officers (JSO).",
-    highlights: [
-      "Customized progression roadmaps from JSO to Senior Leadership",
-      "Hands-on lab recommendations in Python, R, GIS, and Cloud",
-      "Continuous progress sync with Karmayogi Bharat profile",
-    ],
-    href: "/dashboard/learner",
-    actionText: "View Cadre Hub",
-    icon: Users2,
-    metric: "3",
-    metricLabel: "Official Cadres",
+    metric: "5 Divisions",
+    metricLabel: "Workforce Visibility",
   },
 ];
 
 export function KarmasarthiHubs() {
-  const [activeIdx, setActiveIdx] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [activeHubId, setActiveHubId] = useState<string>("competency");
 
-  // Orbital positions for 6 nodes on circle
-  const nodePositions = [
-    { top: "6%", left: "50%", transform: "translate(-50%, 0)" }, // Top
-    { top: "27%", right: "6%", transform: "translate(0, -50%)" }, // Top Right
-    { bottom: "27%", right: "6%", transform: "translate(0, 50%)" }, // Bottom Right
-    { bottom: "6%", left: "50%", transform: "translate(-50%, 0)" }, // Bottom
-    { bottom: "27%", left: "6%", transform: "translate(0, 50%)" }, // Bottom Left
-    { top: "27%", left: "6%", transform: "translate(0, -50%)" }, // Top Left
-  ];
-
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    const timer = setInterval(() => {
-      setActiveIdx((prev) => (prev + 1) % HUBS.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [isAutoPlaying]);
-
-  const activeHub = HUBS[activeIdx];
-  const ActiveIcon = activeHub.icon;
+  const activeHub = HUBS.find((h) => h.id === activeHubId) || HUBS[0];
 
   return (
-    <section className="bg-white border-t border-[#e8e4dc] py-20 lg:py-28 overflow-hidden relative">
-      {/* Background Decorative Chevrons (echoing Karmayogi government aesthetic) */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 opacity-10 pointer-events-none hidden xl:block">
-        <svg viewBox="0 0 400 400" className="w-full h-full text-[#475A6F]" fill="none" stroke="currentColor" strokeWidth="32">
-          <path d="M120 40 L280 200 L120 360" />
-          <path d="M220 40 L380 200 L220 360" />
-        </svg>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section className="bg-[#FAF9F6] border-t border-[#C7C2BA]/60 py-16 lg:py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F3E7D1]/60 border border-[#e8d8b8] text-[#142446] text-[11px] font-semibold tracking-wider uppercase mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#D8921E]" />
-            Official Statistics Capacity Ecosystem
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[#C7C2BA]/60 mb-10">
+          <div>
+            <span className="text-xs font-bold uppercase tracking-wider text-[#D8921E]">
+              Core Intelligence Ecosystem
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#142446] tracking-tight mt-1">
+              Integrated Modules of Karmasarthi
+            </h2>
           </div>
-          <h2
-            className="text-[32px] sm:text-[42px] font-light text-[#142446] leading-tight"
-            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-          >
-            Karmasarthi Intelligence Hubs
-          </h2>
-          <p className="text-[14px] sm:text-[15px] text-[#475A6F] max-w-2xl mx-auto mt-3 leading-relaxed font-normal">
-            An interconnected intelligence network powering every facet of statistical capacity building — from competency mapping to AI-generated assessments.
+          <p className="text-xs sm:text-sm text-[#475A6F] max-w-xl">
+            A unified platform architecture connecting self-assessments, tailored learning catalogs, document-to-quiz generation, and leadership analytics.
           </p>
         </div>
 
-        {/* Main Interactive Hub Container */}
-        <div
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center"
-          onMouseEnter={() => setIsAutoPlaying(false)}
-          onMouseLeave={() => setIsAutoPlaying(true)}
-        >
-          {/* Left: Orbital Radial System */}
-          <div className="lg:col-span-6 flex justify-center items-center py-6">
-            <div className="relative w-[340px] h-[340px] sm:w-[420px] sm:h-[420px]">
-              
-              {/* Ambient radial glow */}
-              <div className="absolute inset-0 rounded-full bg-[#F3E7D1]/30 blur-2xl pointer-events-none" />
-
-              {/* Outer Orbit Ring */}
-              <div className="absolute inset-4 rounded-full border border-[#D8921E]/30" />
-
-              {/* Middle Orbit Ring */}
-              <div className="absolute inset-16 rounded-full border border-[#D8921E]/40" />
-
-              {/* Inner Orbit Ring */}
-              <div className="absolute inset-28 rounded-full border border-[#D8921E]/50" />
-
-              {/* Center Emblem Core */}
-              <div className="absolute inset-0 m-auto w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-white border-2 border-[#D8921E] shadow-md flex flex-col items-center justify-center p-3 z-10">
-                <div className="relative w-14 h-14 sm:w-16 sm:h-16">
-                  <Image
-                    src="/karmasarthi.png"
-                    alt="Karmasarthi Central Emblem"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <span className="text-[9px] font-devanagari font-bold text-[#142446] tracking-tight mt-1">
-                  कर्मसारथी
+        {/* Hub Tabs */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
+          {HUBS.map((hub) => {
+            const isActive = hub.id === activeHubId;
+            return (
+              <button
+                key={hub.id}
+                onClick={() => setActiveHubId(hub.id)}
+                className={`p-4 rounded-xl text-left border transition-colors ${
+                  isActive
+                    ? "bg-[#142446] text-white border-[#142446] shadow-sm"
+                    : "bg-white text-[#142446] border-[#C7C2BA] hover:bg-[#FAF9F6]"
+                }`}
+              >
+                <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded ${
+                  isActive ? "bg-white/20 text-white" : "bg-[#F3E7D1] text-[#142446]"
+                }`}>
+                  {hub.category}
                 </span>
-              </div>
+                <p className="text-sm font-bold mt-2 leading-snug">
+                  {hub.title}
+                </p>
+              </button>
+            );
+          })}
+        </div>
 
-              {/* 6 Orbiting Node Buttons */}
-              {HUBS.map((hub, idx) => {
-                const IconComponent = hub.icon;
-                const isActive = activeIdx === idx;
-                const pos = nodePositions[idx];
-
-                return (
-                  <button
-                    key={hub.id}
-                    onClick={() => setActiveIdx(idx)}
-                    className={`absolute flex flex-col items-center justify-center rounded-full transition-all duration-300 z-20 ${
-                      isActive
-                        ? "w-14 h-14 sm:w-16 sm:h-16 bg-[#142446] text-white shadow-lg ring-4 ring-[#D8921E] scale-110"
-                        : "w-11 h-11 sm:w-13 sm:h-13 bg-white text-[#142446] border-2 border-[#B7C7D9] hover:border-[#D8921E] hover:scale-105 shadow-sm"
-                    }`}
-                    style={pos as React.CSSProperties}
-                    aria-label={hub.title}
-                  >
-                    <IconComponent
-                      className={`transition-colors ${
-                        isActive
-                          ? "w-6 h-6 text-[#F3E7D1]"
-                          : "w-5 h-5 text-[#475A6F]"
-                      }`}
-                    />
-                    <span className="sr-only">{hub.title}</span>
-                  </button>
-                );
-              })}
+        {/* Expansive Hub Detail View */}
+        <div className="bg-white border border-[#C7C2BA] rounded-2xl p-6 sm:p-10 space-y-8">
+          
+          {/* Header Row with Metric */}
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-[#C7C2BA]/60">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#D8921E]">
+                {activeHub.category}
+              </span>
+              <h3 className="text-xl sm:text-2xl font-bold text-[#142446] mt-0.5">
+                {activeHub.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-[#475A6F] mt-1.5 leading-relaxed max-w-2xl">
+                {activeHub.description}
+              </p>
             </div>
-          </div>
 
-          {/* Right: Hub Detail Showcase Card */}
-          <div className="lg:col-span-6">
-            <div className="bg-[#f9f8f5] border border-[#e8e4dc] rounded-2xl p-7 sm:p-9 shadow-sm relative">
-              
-              {/* Category & Status Bar */}
-              <div className="flex items-center justify-between gap-4 pb-5 border-b border-[#e8e4dc]">
-                <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-lg bg-[#142446] text-[#F3E7D1]">
-                    <ActiveIcon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-[10.5px] font-bold uppercase tracking-widest text-[#D8921E]">
-                      {activeHub.category}
-                    </span>
-                    <p className="text-[12px] text-[#475A6F] font-medium">
-                      {activeHub.subtitle}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="text-right">
-                  <span className="text-[18px] font-bold text-[#142446] leading-none block">
-                    {activeHub.metric}
-                  </span>
-                  <span className="text-[10px] text-[#475A6F] uppercase tracking-wider font-medium">
-                    {activeHub.metricLabel}
-                  </span>
-                </div>
-              </div>
-
-              {/* Title & Description */}
-              <div className="py-6 space-y-4">
-                <h3
-                  className="text-[24px] sm:text-[28px] font-light text-[#142446] leading-snug"
-                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                >
-                  {activeHub.title}
-                </h3>
-                <p className="text-[14px] text-[#475A6F] leading-relaxed">
-                  {activeHub.description}
+            <div className="flex items-center gap-6 p-4 rounded-xl bg-[#FAF9F6] border border-[#C7C2BA] shrink-0">
+              <div className="text-right">
+                <p className="text-2xl sm:text-3xl font-bold text-[#142446] leading-none">
+                  {activeHub.metric}
+                </p>
+                <p className="text-[11px] text-[#475A6F] font-medium mt-1">
+                  {activeHub.metricLabel}
                 </p>
               </div>
 
-              {/* Highlight Bullets */}
-              <div className="space-y-2.5 pb-6 border-b border-[#e8e4dc]">
-                {activeHub.highlights.map((item, i) => (
-                  <div key={i} className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#D8921E] shrink-0 mt-0.5" />
-                    <span className="text-[13px] text-[#142446] leading-snug font-medium">
-                      {item}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Footer Controls & CTA */}
-              <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-                {/* Pagination Dots */}
-                <div className="flex items-center gap-1.5">
-                  {HUBS.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setActiveIdx(i)}
-                      className={`h-1.5 rounded-full transition-all duration-300 ${
-                        activeIdx === i
-                          ? "w-7 bg-[#D8921E]"
-                          : "w-2 bg-[#C7C2BA] hover:bg-[#475A6F]"
-                      }`}
-                      aria-label={`Go to slide ${i + 1}`}
-                    />
-                  ))}
-                </div>
-
-                {/* Direct Action Link */}
-                <Link
-                  href={activeHub.href}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#142446] text-white text-[13px] font-semibold rounded-lg hover:bg-[#1e3460] transition-colors shadow-sm"
-                >
-                  <span>{activeHub.actionText}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-
+              <Link
+                href={activeHub.href}
+                className="px-4 py-2.5 bg-[#142446] text-white text-xs font-bold rounded-lg hover:bg-[#1e3460] transition-colors shrink-0"
+              >
+                <span>{activeHub.actionText} →</span>
+              </Link>
             </div>
           </div>
+
+          {/* Highlights List */}
+          <div className="space-y-3">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#142446]">
+              Key Capabilities & Outcomes:
+            </h4>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {activeHub.highlights.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="p-4 rounded-xl bg-[#FAF9F6] border border-[#C7C2BA]/60 space-y-1.5"
+                >
+                  <span className="w-5 h-5 rounded-full bg-[#F3E7D1] text-[#142446] flex items-center justify-center text-[10px] font-bold">
+                    0{idx + 1}
+                  </span>
+                  <p className="text-xs font-medium text-[#142446] leading-snug">
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
+
       </div>
     </section>
   );

@@ -2,12 +2,12 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Users, ArrowRight, CheckCircle2, BookOpen } from "lucide-react";
 
 interface CadrePathway {
   id: string;
   name: string;
   cadre: string;
+  badge: string;
   typicalRoles: string;
   coreGapsTargeted: string[];
   recommendedIGOT: string[];
@@ -20,11 +20,12 @@ const CADRE_DATA: CadrePathway[] = [
     id: "jso",
     name: "Junior Statistical Officer (JSO)",
     cadre: "Subordinate Statistical Service (SSS)",
+    badge: "Group B Non-Gazetted",
     typicalRoles:
       "Primary data collection, field enumeration, schedule verification, survey scrutiny in Field Operations Division (FOD) and regional sub-offices.",
     coreGapsTargeted: [
-      "Survey Design & Sampling Verification (Rubric L2 → L3)",
-      "Python & R for Automated Scrutiny",
+      "Survey Design & Sampling Verification (Rubric Level 2 → Level 3)",
+      "Python & R for Automated Field Scrutiny",
       "Field Data Quality & Non-Sampling Error Minimization",
       "DPDPA Data Privacy Protocols in Household Surveys",
     ],
@@ -43,10 +44,11 @@ const CADRE_DATA: CadrePathway[] = [
     id: "sso",
     name: "Senior Statistical Officer (SSO)",
     cadre: "Subordinate Statistical Service (SSS / Senior)",
+    badge: "Group B Gazetted",
     typicalRoles:
       "Inspection of field units, compilation of price indices (CPI/WPI/IIP), secondary data harmonization, and technical scrutiny in ESD & NAD.",
     coreGapsTargeted: [
-      "Price Index Number Compilation & Chain-linking (L3 → L4)",
+      "Price Index Number Compilation & Chain-linking (Level 3 → Level 4)",
       "SQL & Big Data Warehousing in MoSPI Pipelines",
       "Data Quality Assurance Framework (NDQAF)",
       "Technical Drafting & Analytical Report Writing",
@@ -66,10 +68,11 @@ const CADRE_DATA: CadrePathway[] = [
     id: "iss-ad",
     name: "Assistant Director (ISS AD)",
     cadre: "Indian Statistical Service (Group A Central Service)",
+    badge: "Group A Gazetted",
     typicalRoles:
       "National Accounts compilation, survey sampling frame design, AI/ML adoption, inter-ministerial statistical coordination, and policy briefs.",
     coreGapsTargeted: [
-      "System of National Accounts (SNA 2008 / L4 → L5)",
+      "System of National Accounts (SNA 2008 / Level 4 → Level 5)",
       "AI/ML Applications in Remote Sensing & Official Data",
       "Government Cloud Architecture & MeghRaj Integration",
       "Strategic Statistical Vision & Cabinet Note Formulation",
@@ -94,154 +97,147 @@ export function CadrePathways() {
     CADRE_DATA.find((c) => c.id === activeCadreId) || CADRE_DATA[0];
 
   return (
-    <section className="bg-[#f9f8f5] border-t border-[#e8e4dc] py-20 lg:py-28">
+    <section className="bg-white border-t border-[#C7C2BA]/60 py-16 lg:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[#C7C2BA]/60 mb-10">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.18em] text-[#D8921E] font-semibold mb-2">
-              Cadre-Specific Pathways
-            </p>
-            <h2
-              className="text-[32px] sm:text-[40px] font-light text-[#142446] leading-tight"
-              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-            >
-              Tailored Capacity Building for Every Rank.
+            <span className="text-xs font-bold uppercase tracking-wider text-[#D8921E]">
+              Cadre Pathways & Capacity Building
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#142446] tracking-tight mt-1">
+              Role-Calibrated Learning Progression
             </h2>
           </div>
-          <p className="text-[13.5px] text-[#475A6F] max-w-md">
-            Customized gap analysis and training pathways aligned with Indian Statistical Service (ISS) and Subordinate Statistical Service (SSS) career trajectories.
+          <p className="text-xs sm:text-sm text-[#475A6F] max-w-xl">
+            Each statistical cadre features predefined FRAC competency benchmarks, target proficiencies, and direct course pathways across iGOT Karmayogi and NSSTA TPAC.
           </p>
         </div>
 
-        {/* Cadre Selector Tabs */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-8">
-          {CADRE_DATA.map((item) => {
-            const isActive = item.id === activeCadreId;
+        {/* Cadre Selection Tabs (Clean Pill Style) */}
+        <div className="flex flex-wrap gap-2.5 mb-10">
+          {CADRE_DATA.map((cadre) => {
+            const isActive = cadre.id === activeCadreId;
             return (
               <button
-                key={item.id}
-                onClick={() => setActiveCadreId(item.id)}
-                className={`p-5 rounded-xl border text-left transition-all duration-200 ${
+                key={cadre.id}
+                onClick={() => setActiveCadreId(cadre.id)}
+                className={`px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-colors text-left border ${
                   isActive
-                    ? "bg-[#142446] text-white border-[#142446] shadow-md ring-2 ring-[#D8921E]"
-                    : "bg-white text-[#475A6F] border-[#e8e4dc] hover:border-[#B7C7D9] hover:bg-[#F3E7D1]/20"
+                    ? "bg-[#142446] text-white border-[#142446]"
+                    : "bg-[#FAF9F6] text-[#142446] border-[#C7C2BA] hover:bg-[#F3E7D1]/50"
                 }`}
               >
-                <span
-                  className={`text-[10px] font-bold uppercase tracking-wider block mb-1 ${
-                    isActive ? "text-[#D8921E]" : "text-[#475A6F]"
-                  }`}
-                >
-                  {item.cadre}
+                <span>{cadre.name}</span>
+                <span className={`ml-2 text-[10px] uppercase font-bold px-1.5 py-0.5 rounded ${
+                  isActive ? "bg-white/20 text-white" : "bg-[#F3E7D1] text-[#142446]"
+                }`}>
+                  {cadre.badge}
                 </span>
-                <h3
-                  className={`text-[15px] font-semibold leading-tight ${
-                    isActive ? "text-white" : "text-[#142446]"
-                  }`}
-                >
-                  {item.name}
-                </h3>
               </button>
             );
           })}
         </div>
 
-        {/* Selected Cadre Detail Card */}
-        <div className="bg-white border border-[#e8e4dc] rounded-2xl p-7 sm:p-9 shadow-sm">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-[#f0ece4]">
+        {/* Expansive Cadre Detail View (No generic card grids) */}
+        <div className="border border-[#C7C2BA] rounded-2xl bg-[#FAF9F6] p-6 sm:p-10 space-y-8">
+          
+          {/* Header Row */}
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-[#C7C2BA]/60">
             <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-[10.5px] font-bold uppercase tracking-widest text-[#D8921E]">
-                  {activeCadre.cadre}
-                </span>
-              </div>
-              <h3
-                className="text-[24px] font-semibold text-[#142446] leading-tight"
-                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-              >
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#475A6F]">
+                {activeCadre.cadre}
+              </span>
+              <h3 className="text-xl sm:text-2xl font-bold text-[#142446] mt-0.5">
                 {activeCadre.name}
               </h3>
-              <p className="text-[13.5px] text-[#475A6F] mt-2 max-w-3xl leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#475A6F] mt-2 leading-relaxed max-w-3xl">
                 {activeCadre.typicalRoles}
               </p>
             </div>
 
             <Link
-              href={`/dashboard/learner?user=${activeCadre.simulationUserId}`}
-              className="inline-flex items-center gap-2 px-5 py-3 bg-[#142446] text-white text-[13px] font-semibold rounded-lg hover:bg-[#1e3460] transition-colors shadow-sm self-start lg:self-auto shrink-0"
+              href={`/assessment?user=${activeCadre.simulationUserId}`}
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#142446] text-white text-xs font-bold rounded-lg hover:bg-[#1e3460] transition-colors shrink-0"
             >
-              <span>Simulate Cadre Dashboard</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>Assess This Cadre</span>
+              <span>→</span>
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6">
+          {/* Two-Column Structured Info */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
-            {/* Left: Core Skill Gaps Targeted */}
-            <div className="lg:col-span-6 space-y-3">
-              <h4 className="text-[12px] font-bold uppercase tracking-wider text-[#142446]">
-                Priority Competency Gaps Addressed
+            {/* Core Competencies Target Column */}
+            <div className="lg:col-span-6 space-y-4">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#142446] pb-2 border-b border-[#C7C2BA]/40">
+                Key Competencies & Target Rubrics
               </h4>
               <div className="space-y-2.5">
                 {activeCadre.coreGapsTargeted.map((gap, i) => (
                   <div
                     key={i}
-                    className="p-3 rounded-lg bg-[#f9f8f5] border border-[#f0ece4] flex items-start gap-2.5"
+                    className="p-3 rounded-lg bg-white border border-[#C7C2BA]/60 flex items-start gap-3"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-[#D8921E] shrink-0 mt-0.5" />
-                    <span className="text-[13px] text-[#142446] font-medium leading-snug">
-                      {gap}
+                    <span className="w-5 h-5 rounded-full bg-[#F3E7D1] text-[#142446] flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
+                      0{i + 1}
                     </span>
+                    <p className="text-xs font-medium text-[#142446] leading-snug">
+                      {gap}
+                    </p>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Right: Recommended Courses */}
-            <div className="lg:col-span-6 space-y-4">
-              <div>
-                <h4 className="text-[12px] font-bold uppercase tracking-wider text-[#142446] mb-2">
-                  iGOT Karmayogi Bharat Modules
+            {/* Recommended Learning Pathways Column */}
+            <div className="lg:col-span-6 space-y-6">
+              
+              {/* iGOT Karmayogi Courses */}
+              <div className="space-y-3">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#142446] pb-2 border-b border-[#C7C2BA]/40">
+                  Recommended iGOT Karmayogi e-Learning
                 </h4>
                 <div className="space-y-2">
                   {activeCadre.recommendedIGOT.map((course, i) => (
                     <div
                       key={i}
-                      className="p-2.5 rounded-lg bg-[#F3E7D1]/30 border border-[#e8d8b8] flex items-center justify-between"
+                      className="p-3 rounded-lg bg-white border border-[#C7C2BA]/60 flex items-center justify-between gap-3"
                     >
-                      <span className="text-[12.5px] text-[#142446] font-medium">
+                      <p className="text-xs font-semibold text-[#142446]">
                         {course}
-                      </span>
-                      <span className="text-[10px] font-semibold px-2 py-0.5 bg-white rounded text-[#D8921E] border border-[#e8d8b8]">
-                        iGOT
+                      </p>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#FAF9F6] text-[#475A6F] border border-[#C7C2BA] shrink-0">
+                        iGOT Free
                       </span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div>
-                <h4 className="text-[12px] font-bold uppercase tracking-wider text-[#142446] mb-2">
-                  NSSTA Greater Noida Programmes
+              {/* NSSTA TPAC Residential Modules */}
+              <div className="space-y-3">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#142446] pb-2 border-b border-[#C7C2BA]/40">
+                  NSSTA Academy Training Programmes (TPAC)
                 </h4>
                 <div className="space-y-2">
                   {activeCadre.recommendedNSSTA.map((course, i) => (
                     <div
                       key={i}
-                      className="p-2.5 rounded-lg bg-[#B7C7D9]/20 border border-[#B7C7D9]/40 flex items-center justify-between"
+                      className="p-3 rounded-lg bg-white border border-[#C7C2BA]/60 flex items-center justify-between gap-3"
                     >
-                      <span className="text-[12.5px] text-[#142446] font-medium">
+                      <p className="text-xs font-semibold text-[#142446]">
                         {course}
-                      </span>
-                      <span className="text-[10px] font-semibold px-2 py-0.5 bg-white rounded text-[#142446] border border-[#B7C7D9]/40">
-                        NSSTA TPAC
+                      </p>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#F3E7D1] text-[#142446] border border-[#C7C2BA] shrink-0">
+                        NSSTA Greater Noida
                       </span>
                     </div>
                   ))}
                 </div>
               </div>
+
             </div>
 
           </div>
