@@ -28,48 +28,23 @@ export function Footer() {
 
           {/* Brand column */}
           <div className="md:col-span-4 space-y-5">
-            <div className="flex items-center gap-3.5">
-              <div className="p-1.5 rounded-lg bg-white/95 border border-[#1e3460] shadow-sm">
-                <Image
-                  src="/karmasarthi.png"
-                  alt="Karmasarthi"
-                  width={46}
-                  height={46}
-                  className="object-contain"
-                />
-              </div>
-              <div>
-                <div className="flex items-baseline gap-2">
-                  <span
-                    className="font-devanagari font-bold text-white text-[16px]"
-                    style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
-                  >
-                    कर्मसारथी
-                  </span>
-                  <span className="text-[#475A6F] text-xs select-none">|</span>
-                  <span className="font-sans font-bold text-white text-[15px] tracking-wider uppercase">
-                    Karmasarthi
-                  </span>
-                </div>
-                <p className="text-[11px] text-[#B7C7D9] mt-0.5 tracking-wide font-medium">
-                  AI Skill Intelligence Platform &nbsp;·&nbsp; MoSPI
-                </p>
-              </div>
-            </div>
+            <Image
+              src="/karmasarthi.png"
+              alt="Karmasarthi"
+              width={52}
+              height={52}
+              className="object-contain"
+            />
 
-            <p className="text-[12.5px] text-[#B7C7D9]/80 leading-relaxed max-w-xs">
-              Data Informatics and Innovation Division (DIID), Ministry of Statistics
-              and Programme Implementation, Government of India.
+            <p className="text-[13px] text-[#B7C7D9] leading-relaxed max-w-xs">
+              AI-enabled competency assessment and personalized learning for India&apos;s Official Statistical System.
             </p>
 
-            <div className="flex items-center gap-3 pt-1">
-              <span className="text-[10px] px-2.5 py-1 border border-[#D8921E]/60 text-[#D8921E] rounded font-medium tracking-wider uppercase">
-                SIH 26101
-              </span>
-              <span className="text-[10px] px-2.5 py-1 border border-[#1e3460] text-[#475A6F] rounded tracking-wider uppercase">
-                FRAC 2026
-              </span>
-            </div>
+            <p className="text-[12px] text-[#475A6F]">
+              Data Informatics and Innovation Division (DIID)<br />
+              Ministry of Statistics and Programme Implementation<br />
+              Government of India
+            </p>
           </div>
 
           {/* Platform links */}

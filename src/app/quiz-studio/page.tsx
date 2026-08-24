@@ -1,41 +1,16 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import {
-  Sparkles,
-  BookOpen,
-  Layers,
-  Clock,
-  ArrowRight,
-  CheckCircle2,
-  Cpu,
-  FileText,
-  Play,
-} from "lucide-react";
+import { Clock } from "lucide-react";
 import type { Quiz } from "../../lib/types";
 import { DocumentUploader } from "../../components/quiz/DocumentUploader";
 import { QuizRunner } from "../../components/quiz/QuizRunner";
+import { Header } from "../../components/layout/Header";
+import { Footer } from "../../components/layout/Footer";
+import Link from "next/link";
 
 export default function QuizStudioPage() {
   const [activeQuiz, setActiveQuiz] = useState<Quiz | null>(null);
-  const [seedQuizzes, setSeedQuizzes] = useState<Quiz[]>([]);
-  const [isLoadingQuizzes, setIsLoadingQuizzes] = useState(true);
-
-  // Load pre-seeded official quizzes on mount
-  useEffect(() => {
-    async function loadQuizzes() {
-      try {
-        const res = await fetch("/api/courses?loadQuizzes=true").catch(() => null);
-        // If there is no specific endpoint or if we fetch seed quizzes directly:
-        // We can fetch from local or seed quizzes
-      } catch (err) {
-        console.error("Failed to load quizzes:", err);
-      } finally {
-        setIsLoadingQuizzes(false);
-      }
-    }
-    loadQuizzes();
-  }, []);
 
   const handleQuizGenerated = (quiz: Quiz) => {
     setActiveQuiz(quiz);
@@ -43,170 +18,132 @@ export default function QuizStudioPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-100/70 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto space-y-8">
-        {/* Main Header / Breadcrumb */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div className="min-h-screen flex flex-col bg-[#f9f8f5]">
+      <Header />
+
+      {/* Page Title Bar */}
+      <div className="bg-white border-b border-[#e8e4dc]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-6 flex items-center justify-between">
           <div>
-            <div className="flex items-center space-x-2 text-blue-700 text-xs font-bold uppercase tracking-wider mb-1">
-              <span>MoSPI Skill Intelligence Platform</span>
-              <span>/</span>
-              <span>AI Assessment Studio (R3)</span>
+            <div className="flex items-center gap-2 text-[12px] text-[#475A6F] mb-2">
+              <Link href="/" className="hover:text-[#D8921E] transition-colors">Home</Link>
+              <span className="text-[#C7C2BA]">/</span>
+              <span className="text-[#142446] font-medium">AI Quiz Studio</span>
             </div>
-            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-[28px] font-light text-[#142446]">
               AI Document-to-Quiz Studio
             </h1>
-            <p className="text-slate-600 text-sm mt-1 max-w-2xl">
-              Upload official survey manuals, circulars, or governance notes to generate
-              rigorous multiple-choice assessments aligned with Mission Karmayogi's FRAC framework.
+            <p className="text-[14px] text-[#475A6F] mt-1 max-w-2xl">
+              Upload official survey manuals, circulars, or methodology notes to generate Bloom-weighted MCQs aligned with the FRAC framework.
             </p>
           </div>
-
           {activeQuiz && (
             <button
               onClick={() => setActiveQuiz(null)}
-              className="px-4 py-2 text-sm font-semibold text-slate-700 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 transition-colors shadow-sm self-start"
+              className="px-4 py-2 text-[13px] font-medium text-[#142446] border border-[#e8e4dc] rounded-lg hover:border-[#B7C7D9] hover:bg-white transition-colors self-start"
             >
-              ← Back to Studio Generator
+              ← Back to Studio
             </button>
           )}
         </div>
+      </div>
 
-        {/* If an active quiz is selected/generated, render QuizRunner */}
+      {/* Main Content */}
+      <div className="flex-1 max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-12 py-10 space-y-8">
         {activeQuiz ? (
-          <div className="space-y-6">
-            <QuizRunner
-              quiz={activeQuiz}
-              userId="usr-jso-rajesh"
-              userCadre="JUNIOR_STATISTICAL_OFFICER"
-            />
-          </div>
+          <QuizRunner
+            quiz={activeQuiz}
+            userId="usr-jso-rajesh"
+            userCadre="JUNIOR_STATISTICAL_OFFICER"
+          />
         ) : (
-          /* Studio Generator View */
-          <div className="space-y-8">
+          <>
             <DocumentUploader onQuizGenerated={handleQuizGenerated} />
 
-            {/* Pre-Seeded Official Assessment Bank */}
-            <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8 space-y-6">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+            {/* Pre-seeded Assessment Bank */}
+            <div className="bg-white border border-[#e8e4dc] rounded-xl p-7">
+              <div className="flex items-center justify-between pb-5 border-b border-[#e8e4dc]">
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900 flex items-center">
-                    <BookOpen className="w-5 h-5 mr-2 text-blue-600" />
-                    Pre-Seeded Official MoSPI Assessment Bank
-                  </h3>
-                  <p className="text-xs text-slate-500 mt-0.5">
-                    Validated official benchmark quizzes covering NSS 79th Round, CPI Base 2012, and NDGFP standards.
+                  <h2 className="text-[18px] font-semibold text-[#142446]">
+                    Official MoSPI Assessment Bank
+                  </h2>
+                  <p className="text-[13px] text-[#475A6F] mt-0.5">
+                    Validated benchmark quizzes — NSS 79th Round, CPI Base 2012, and NDGFP standards.
                   </p>
                 </div>
-                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
+                <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#F3E7D1] text-[#D8921E] border border-[#e4d0a0]">
                   Ready to Practice
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                {/* Seed Quiz 1 */}
-                <div className="flex flex-col justify-between p-5 rounded-xl border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all bg-white group">
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800">
-                        Statistical
-                      </span>
-                      <span className="text-xs text-slate-400 font-medium flex items-center">
-                        <Clock className="w-3.5 h-3.5 mr-1" /> 10 mins
-                      </span>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-5">
+                {[
+                  {
+                    domain: "Statistical",
+                    title: "NSS 79th Round: Listing & Sampling",
+                    desc: "First Stage Unit delineation, hamlet-group formation, circular systematic sampling, and PPSWR multipliers.",
+                    questions: 5,
+                    time: "10 mins",
+                    href: "/quiz-runner/quiz-nss79-listing",
+                  },
+                  {
+                    domain: "Statistical",
+                    title: "CPI (Base 2012=100) Methodology",
+                    desc: "Modified Laspeyres formulation, COICOP basket weights, seasonal adjustment, and price collection protocols.",
+                    questions: 4,
+                    time: "8 mins",
+                    href: "/quiz-runner/quiz-cpi-methodology",
+                  },
+                  {
+                    domain: "Governance",
+                    title: "National Data Governance (NDGFP)",
+                    desc: "Microdata anonymization, k-anonymity standards, SDMX DSDs, Collection of Statistics Act, and GSBPM.",
+                    questions: 4,
+                    time: "8 mins",
+                    href: "/quiz-runner/quiz-ndgfp-governance",
+                  },
+                ].map((quiz, i) => (
+                  <div
+                    key={i}
+                    className="flex flex-col justify-between p-5 rounded-xl border border-[#e8e4dc] hover:border-[#B7C7D9] transition-colors bg-[#f9f8f5]"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded bg-[#F3E7D1] text-[#D8921E] border border-[#e4d0a0]">
+                          {quiz.domain}
+                        </span>
+                        <span className="text-[12px] text-[#475A6F] flex items-center gap-1">
+                          <Clock className="w-3.5 h-3.5" />
+                          {quiz.time}
+                        </span>
+                      </div>
+                      <h3 className="text-[15px] font-semibold text-[#142446] leading-snug">
+                        {quiz.title}
+                      </h3>
+                      <p className="text-[12.5px] text-[#475A6F] leading-relaxed">
+                        {quiz.desc}
+                      </p>
                     </div>
-
-                    <h4 className="font-bold text-slate-900 text-base group-hover:text-blue-700 transition-colors">
-                      NSS 79th Round: Listing & Sampling
-                    </h4>
-
-                    <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
-                      First Stage Unit (FSU) delineation, hamlet-group formation rules, circular systematic sampling, and PPSWR multipliers.
-                    </p>
-                  </div>
-
-                  <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-xs text-slate-500 font-semibold">5 Questions</span>
-                    <a
-                      href="/quiz-runner/quiz-nss79-listing"
-                      className="inline-flex items-center space-x-1 px-3 py-1.5 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-xs font-bold transition-all shadow-sm"
-                    >
-                      <Play className="w-3.5 h-3.5 mr-1 fill-current" />
-                      <span>Take Quiz</span>
-                    </a>
-                  </div>
-                </div>
-
-                {/* Seed Quiz 2 */}
-                <div className="flex flex-col justify-between p-5 rounded-xl border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all bg-white group">
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800">
-                        Statistical
+                    <div className="pt-4 mt-4 border-t border-[#e8e4dc] flex items-center justify-between">
+                      <span className="text-[12px] text-[#475A6F] font-medium">
+                        {quiz.questions} Questions
                       </span>
-                      <span className="text-xs text-slate-400 font-medium flex items-center">
-                        <Clock className="w-3.5 h-3.5 mr-1" /> 8 mins
-                      </span>
+                      <Link
+                        href={quiz.href}
+                        className="px-3.5 py-1.5 bg-[#142446] hover:bg-[#1e3460] text-white text-[12px] font-semibold rounded-lg transition-colors"
+                      >
+                        Take Quiz
+                      </Link>
                     </div>
-
-                    <h4 className="font-bold text-slate-900 text-base group-hover:text-blue-700 transition-colors">
-                      CPI (Base 2012=100) Methodology
-                    </h4>
-
-                    <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
-                      Modified Laspeyres price index formulation, COICOP basket weights, seasonal adjustment with X-13ARIMA-SEATS, and price collection.
-                    </p>
                   </div>
-
-                  <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-xs text-slate-500 font-semibold">4 Questions</span>
-                    <a
-                      href="/quiz-runner/quiz-cpi-methodology"
-                      className="inline-flex items-center space-x-1 px-3 py-1.5 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-xs font-bold transition-all shadow-sm"
-                    >
-                      <Play className="w-3.5 h-3.5 mr-1 fill-current" />
-                      <span>Take Quiz</span>
-                    </a>
-                  </div>
-                </div>
-
-                {/* Seed Quiz 3 */}
-                <div className="flex flex-col justify-between p-5 rounded-xl border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all bg-white group">
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
-                        Governance
-                      </span>
-                      <span className="text-xs text-slate-400 font-medium flex items-center">
-                        <Clock className="w-3.5 h-3.5 mr-1" /> 8 mins
-                      </span>
-                    </div>
-
-                    <h4 className="font-bold text-slate-900 text-base group-hover:text-blue-700 transition-colors">
-                      National Data Governance (NDGFP)
-                    </h4>
-
-                    <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
-                      Microdata anonymization, k-anonymity (k {'>='} 5) standards, SDMX DSDs, Collection of Statistics Act confidentiality, and GSBPM.
-                    </p>
-                  </div>
-
-                  <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-xs text-slate-500 font-semibold">4 Questions</span>
-                    <a
-                      href="/quiz-runner/quiz-ndgfp-governance"
-                      className="inline-flex items-center space-x-1 px-3 py-1.5 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-xs font-bold transition-all shadow-sm"
-                    >
-                      <Play className="w-3.5 h-3.5 mr-1 fill-current" />
-                      <span>Take Quiz</span>
-                    </a>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
-          </div>
+          </>
         )}
       </div>
-    </main>
+
+      <Footer />
+    </div>
   );
 }

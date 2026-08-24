@@ -66,13 +66,13 @@ function AdminDashboardContent() {
 
   if (isLoading || !acbpPlan || divisions.length === 0) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+      <div className="min-h-screen bg-[#f9f8f5] flex flex-col justify-between">
         <Header activeUserId={userId} />
         <div className="flex-1 flex items-center justify-center p-12">
           <div className="flex flex-col items-center gap-3">
-            <div className="h-8 w-8 animate-spin rounded-full border-4 border-[#000080] border-t-transparent" />
-            <p className="text-sm font-semibold text-slate-600">
-              Aggregating MoSPI Division Analytics & ACBP Matrix...
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#142446] border-t-transparent" />
+            <p className="text-[13px] font-medium text-[#475A6F]">
+              Loading analytics...
             </p>
           </div>
         </div>
@@ -95,47 +95,35 @@ function AdminDashboardContent() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#f9f8f5] flex flex-col justify-between">
       <Header activeUserId={userId} />
 
-      <div className="mx-auto max-w-7xl w-full px-4 py-6 sm:px-6 lg:px-8 flex-1 flex gap-6">
+      <div className="mx-auto max-w-7xl w-full px-6 py-6 sm:px-8 lg:px-12 flex-1 flex gap-6">
         <Sidebar currentUserId={userId} />
 
         <main className="flex-1 min-w-0 space-y-6">
-          {/* Executive Header Banner */}
-          <div className="rounded-2xl border border-slate-200 bg-gradient-to-r from-[#000080] via-[#0B132B] to-slate-950 p-6 text-white shadow-lg relative overflow-hidden">
-            <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div className="space-y-1.5">
-                <div className="flex flex-wrap items-center gap-2">
-                  <Badge variant="saffron" size="sm">
-                    DIID Executive Intelligence
-                  </Badge>
-                  <span className="text-xs text-slate-300 font-mono">
-                    MoSPI Division Competency Matrix
-                  </span>
-                </div>
-                <h1 className="text-2xl font-bold tracking-tight text-white">
-                  Leadership Competency & Capacity Dashboard
+          {/* Page Header */}
+          <div className="border border-[#e8e4dc] bg-white rounded-xl p-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[#D8921E] font-semibold mb-1">DIID Analytics</p>
+                <h1 className="text-[24px] font-light text-[#142446]">
+                  Leadership Competency Dashboard
                 </h1>
-                <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
-                  Real-time aggregation across FOD, ESD, NAD, DIID, and SDRD. Mapped to Mission Karmayogi FRAC framework and NSSTA TPAC 2026-27 training planner.
+                <p className="text-[13px] text-[#475A6F] mt-1 max-w-2xl">
+                  Division competency aggregates across FOD, ESD, NAD, DIID, and SDRD — mapped to FRAC and NSSTA TPAC 2026-27.
                 </p>
               </div>
-
               <div className="flex flex-wrap items-center gap-2">
                 <Link href="/acbp">
                   <Button variant="saffron" size="sm" className="text-xs font-semibold">
                     <FileCheck2 className="h-4 w-4 mr-1.5" />
-                    ACBP 2026-27 Plan
+                    ACBP 2026-27
                   </Button>
                 </Link>
                 <Link href="/dashboard/learner">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="text-xs font-semibold bg-white/10 text-white border-white/30 hover:bg-white/20"
-                  >
-                    Learner Profile View →
+                  <Button variant="outline" size="sm" className="text-xs font-semibold border-[#e8e4dc] text-[#142446] hover:bg-[#f9f8f5]">
+                    Learner View
                   </Button>
                 </Link>
               </div>

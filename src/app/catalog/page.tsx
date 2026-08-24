@@ -129,107 +129,77 @@ function CourseCatalogContent() {
   }, [recommendations]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50/50">
+    <div className="min-h-screen flex flex-col bg-[#f9f8f5]">
       <Header activeUserId={activeUserId} />
 
-      {/* Floating Enrollment Toast Notification */}
+      {/* Enrollment Toast */}
       {enrollmentToast && (
-        <div className="fixed bottom-6 right-6 z-50 max-w-md bg-slate-900 text-white p-4 rounded-xl shadow-2xl border border-slate-700 flex items-start gap-3 animate-in slide-in-from-bottom-5 fade-in-50">
-          <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-          <div className="text-xs">
-            <p className="font-semibold text-sm mb-0.5">Enrollment Confirmed</p>
-            <p className="text-slate-300 leading-snug">{enrollmentToast}</p>
+        <div className="fixed bottom-6 right-6 z-50 max-w-md bg-[#142446] text-white p-4 rounded-xl shadow-xl border border-[#1e3460] flex items-start gap-3">
+          <CheckCircle2 className="w-5 h-5 text-[#D8921E] shrink-0 mt-0.5" />
+          <div>
+            <p className="font-semibold text-[13px] mb-0.5">Enrollment Confirmed</p>
+            <p className="text-[#B7C7D9] text-[12px] leading-snug">{enrollmentToast}</p>
           </div>
           <button
             onClick={() => setEnrollmentToast(null)}
-            className="text-slate-400 hover:text-white text-xs ml-auto"
+            className="text-[#B7C7D9] hover:text-white text-xs ml-auto"
           >
             ✕
           </button>
         </div>
       )}
 
-      {/* Hero Banner */}
-      <section className="bg-gradient-to-b from-slate-900 via-slate-900 to-[#000080] text-white py-10 px-4 sm:px-6 lg:px-8 border-b border-slate-800 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]" />
-        
-        <div className="max-w-7xl mx-auto relative z-10">
-          {/* Breadcrumbs */}
-          <div className="flex items-center gap-2 text-xs text-slate-400 mb-4">
-            <Link href="/" className="hover:text-white transition-colors">
-              Home
-            </Link>
-            <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-amber-400 font-medium">Course Catalog</span>
+      {/* Page Title Bar */}
+      <div className="bg-[#142446] text-white">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-10">
+          <div className="flex items-center gap-2 text-[12px] text-[#B7C7D9] mb-3">
+            <Link href="/" className="hover:text-[#D8921E] transition-colors">Home</Link>
+            <span className="text-[#475A6F]">/</span>
+            <span className="text-white font-medium">Course Catalog</span>
           </div>
-
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-semibold mb-3 backdrop-blur-sm">
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                <span>Mission Karmayogi • Sunbird-CB &amp; NSSTA TPAC Repository</span>
-              </div>
-              <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white mb-2">
-                MoSPI Capacity Building Course Catalog
+              <h1 className="text-[32px] sm:text-[40px] font-light text-white mb-2">
+                Course Catalog
               </h1>
-              <p className="text-sm sm:text-base text-slate-300 max-w-2xl font-light leading-relaxed">
-                Discover {courses.length} accredited training programmes mapped to official FRAC competencies—uniting online micro-learning on iGOT Karmayogi and intensive residential masterclasses at NSSTA Greater Noida.
+              <p className="text-[14px] text-[#B7C7D9] max-w-2xl leading-relaxed">
+                {courses.length} accredited training programmes mapped to FRAC competencies — iGOT Karmayogi and NSSTA TPAC.
               </p>
             </div>
-
-            {/* Quick Stats Pill Strip */}
-            <div className="flex flex-wrap gap-2.5 shrink-0">
-              <div className="bg-white/10 backdrop-blur-md border border-white/15 px-3.5 py-2.5 rounded-xl text-center min-w-[90px]">
-                <div className="text-xl font-bold text-white">{courses.length}</div>
-                <div className="text-[10px] text-slate-300 uppercase tracking-wider font-medium">
-                  Total Courses
-                </div>
+            <div className="flex gap-8 shrink-0">
+              <div className="text-right">
+                <div className="text-[32px] font-light text-white">{igotCount}</div>
+                <div className="text-[11px] text-[#B7C7D9] uppercase tracking-wider">iGOT Courses</div>
               </div>
-
-              <div className="bg-amber-500/15 backdrop-blur-md border border-amber-400/30 px-3.5 py-2.5 rounded-xl text-center min-w-[90px]">
-                <div className="text-xl font-bold text-amber-400">{igotCount}</div>
-                <div className="text-[10px] text-amber-200 uppercase tracking-wider font-medium">
-                  iGOT e-Learning
-                </div>
-              </div>
-
-              <div className="bg-blue-500/15 backdrop-blur-md border border-blue-400/30 px-3.5 py-2.5 rounded-xl text-center min-w-[90px]">
-                <div className="text-xl font-bold text-blue-300">{nsstaCount}</div>
-                <div className="text-[10px] text-blue-200 uppercase tracking-wider font-medium">
-                  NSSTA TPAC
-                </div>
+              <div className="text-right">
+                <div className="text-[32px] font-light text-white">{nsstaCount}</div>
+                <div className="text-[11px] text-[#B7C7D9] uppercase tracking-wider">NSSTA TPAC</div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
-        {/* Spotlight Banner: Personalized Recommendations */}
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 flex-1 w-full space-y-8">
+        {/* Personalized Recommendations */}
         {topRecommendations.length > 0 && (
-          <div className="rounded-2xl border border-amber-200 bg-gradient-to-r from-amber-50/90 via-orange-50/50 to-amber-50/90 p-6 shadow-xs relative overflow-hidden">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+          <div className="rounded-xl border border-[#e8e4dc] bg-white p-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
               <div>
-                <div className="flex items-center gap-2">
-                  <div className="p-1.5 rounded-lg bg-amber-500 text-slate-950 font-bold">
-                    <Sparkles className="w-4 h-4" />
-                  </div>
-                  <h2 className="text-base font-bold text-slate-900">
-                    Prioritized Recommendations for {activeOfficerName} ({activeCadre.replace(/_/g, " ")})
-                  </h2>
-                </div>
-                <p className="text-xs text-slate-600 mt-1">
-                  Engine has identified targeted skill gaps and matched optimal courses across iGOT and NSSTA to accelerate your cadre progression.
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[#D8921E] font-semibold mb-1">Personalized for You</p>
+                <h2 className="text-[18px] font-semibold text-[#142446]">
+                  Recommended for {activeOfficerName}
+                </h2>
+                <p className="text-[13px] text-[#475A6F] mt-0.5">
+                  Matched to your cadre profile and identified skill gaps.
                 </p>
               </div>
-
               <Link
                 href={`/dashboard/learner?user=${activeUserId}`}
-                className="inline-flex items-center text-xs font-bold text-amber-900 hover:text-amber-950 bg-amber-200/80 hover:bg-amber-300/80 px-3.5 py-2 rounded-lg transition-colors shrink-0"
+                className="text-[13px] font-semibold text-[#142446] hover:text-[#D8921E] transition-colors shrink-0"
               >
-                <span>View Full Learning Roadmap</span>
-                <ChevronRight className="w-3.5 h-3.5 ml-1" />
+                View Full Roadmap →
               </Link>
             </div>
 
@@ -290,8 +260,8 @@ export default function CourseCatalogPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-[#000080] border-t-transparent" />
+        <div className="min-h-screen bg-[#f9f8f5] flex items-center justify-center">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#142446] border-t-transparent" />
         </div>
       }
     >

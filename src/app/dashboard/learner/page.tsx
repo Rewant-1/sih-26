@@ -89,13 +89,13 @@ function LearnerDashboardContent() {
 
   if (isLoading || !user || !benchmark) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+      <div className="min-h-screen bg-[#f9f8f5] flex flex-col justify-between">
         <Header activeUserId={userId} />
         <div className="flex-1 flex items-center justify-center p-12">
           <div className="flex flex-col items-center gap-3">
-            <div className="h-8 w-8 animate-spin rounded-full border-4 border-[#000080] border-t-transparent" />
-            <p className="text-sm font-semibold text-slate-600">
-              Loading Officer FRAC Competency Profile...
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#142446] border-t-transparent" />
+            <p className="text-[13px] font-medium text-[#475A6F]">
+              Loading profile...
             </p>
           </div>
         </div>
@@ -236,39 +236,30 @@ function LearnerDashboardContent() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#f9f8f5] flex flex-col justify-between">
       <Header
         activeUserId={user.id}
         onUserChange={(newId) => router.push(`/dashboard/learner?user=${newId}`)}
       />
 
-      <div className="mx-auto max-w-7xl w-full px-4 py-6 sm:px-6 lg:px-8 flex-1 flex gap-6">
+      <div className="mx-auto max-w-7xl w-full px-6 py-6 sm:px-8 lg:px-12 flex-1 flex gap-6">
         <Sidebar currentUserId={user.id} />
 
         <main className="flex-1 min-w-0 space-y-6">
-          {/* Officer Welcome & Cadre Banner */}
-          <div className="rounded-2xl border border-slate-200 bg-gradient-to-r from-slate-900 via-[#000080] to-[#0B132B] p-6 text-white shadow-lg relative overflow-hidden">
-            {/* Background Decorative Pattern */}
-            <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-radial-gradient from-white/10 to-transparent pointer-events-none opacity-40" />
-
-            <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div className="space-y-1.5">
-                <div className="flex flex-wrap items-center gap-2">
-                  <Badge variant="saffron" size="sm">
-                    FRAC Profile Active
-                  </Badge>
-                  <span className="text-xs text-slate-300 font-mono">
-                    Cadre: {benchmark.cadreName}
-                  </span>
-                </div>
-                <h1 className="text-2xl font-bold tracking-tight text-white">
+          {/* Officer Banner */}
+          <div className="border border-[#e8e4dc] bg-white rounded-xl p-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[#D8921E] font-semibold mb-1">
+                  {benchmark.cadreName} · FRAC Profile
+                </p>
+                <h1 className="text-[24px] font-light text-[#142446]">
                   Welcome back, {user.name}
                 </h1>
-                <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
-                  {user.designation} • {user.division}. Your competency benchmarks are calibrated to official Mission Karmayogi standards for the {benchmark.cadreName} role.
+                <p className="text-[13px] text-[#475A6F] mt-1">
+                  {user.designation} · {user.division}
                 </p>
               </div>
-
               <div className="flex flex-wrap items-center gap-2">
                 <Link href={`/assessment?user=${user.id}`}>
                   <Button variant="saffron" size="sm" className="text-xs font-semibold">
@@ -277,12 +268,7 @@ function LearnerDashboardContent() {
                   </Button>
                 </Link>
                 <Link href={`/quiz-studio?user=${user.id}`}>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="text-xs font-semibold bg-white/10 text-white border-white/30 hover:bg-white/20"
-                  >
-                    <Sparkles className="h-4 w-4 mr-1.5 text-amber-300" />
+                  <Button variant="outline" size="sm" className="text-xs font-semibold border-[#e8e4dc] text-[#142446] hover:bg-[#f9f8f5]">
                     AI Quiz Studio
                   </Button>
                 </Link>

@@ -51,12 +51,11 @@ const OFFICER_PROFILES: OfficerProfile[] = [
 ];
 
 const navLinks = [
-  { href: "/dashboard/learner", label: "Learner Hub" },
-  { href: "/dashboard/admin", label: "Admin Dashboard" },
-  { href: "/acbp", label: "ACBP 2026–27" },
   { href: "/assessment", label: "Self-Assessment" },
   { href: "/catalog", label: "Course Catalog" },
   { href: "/quiz-studio", label: "AI Quiz Studio" },
+  { href: "/dashboard/learner", label: "Learner Hub" },
+  { href: "/dashboard/admin", label: "Admin" },
 ];
 
 export function Header({
@@ -97,13 +96,13 @@ export function Header({
   return (
     <>
       {/* Government top bar */}
-      <div className="bg-[#142446] text-white text-[11px]">
+      <div className="bg-[#142446] text-[#B7C7D9] text-[11px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex justify-between items-center">
-          <span className="text-[#B7C7D9] font-medium tracking-wide">
+          <span className="font-medium tracking-wide">
             Government of India &nbsp;·&nbsp; Ministry of Statistics and Programme Implementation
           </span>
-          <span className="text-[#B7C7D9] hidden sm:block">
-            Mission Karmayogi &nbsp;·&nbsp; FRAC Framework &nbsp;·&nbsp; SIH 26101
+          <span className="hidden sm:block">
+            Mission Karmayogi &nbsp;·&nbsp; FRAC Framework
           </span>
         </div>
       </div>
@@ -121,41 +120,22 @@ export function Header({
           scrolled ? "border-[#B7C7D9] shadow-sm" : "border-[#e8e4dc]"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[60px]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[64px]">
 
-          {/* Brand */}
+          {/* Logo only — no text */}
           <Link
             href="/"
-            className="flex items-center gap-3.5 group py-1"
+            className="flex items-center group"
             aria-label="Karmasarthi Home"
           >
-            <div className="relative flex items-center justify-center p-1 rounded-lg bg-white border border-[#e8e4dc] shadow-sm group-hover:border-[#B7C7D9] transition-all">
-              <Image
-                src="/karmasarthi.png"
-                alt="Karmasarthi"
-                width={44}
-                height={44}
-                priority
-                className="object-contain transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-            <div className="flex flex-col leading-tight">
-              <div className="flex items-baseline gap-2">
-                <span
-                  className="font-devanagari font-bold text-[#142446] text-[15px] leading-none"
-                  style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
-                >
-                  कर्मसारथी
-                </span>
-                <span className="text-[#C7C2BA] text-xs font-light select-none">|</span>
-                <span className="font-sans font-bold text-[#142446] text-[14px] leading-none tracking-wider uppercase">
-                  Karmasarthi
-                </span>
-              </div>
-              <span className="text-[10.5px] text-[#475A6F] font-medium tracking-wide mt-1 hidden sm:block">
-                AI Skill Intelligence Platform &nbsp;·&nbsp; MoSPI / DIID
-              </span>
-            </div>
+            <Image
+              src="/karmasarthi.png"
+              alt="Karmasarthi"
+              width={200}
+              height={200}
+              priority
+              className="object-contain transition-opacity duration-200 group-hover:opacity-80"
+            />
           </Link>
 
           {/* Desktop nav */}
@@ -168,7 +148,7 @@ export function Header({
                 <Link
                   key={link.href}
                   href={`${link.href}?user=${currentOfficer.id}`}
-                  className={`relative px-3.5 py-1.5 text-[12.5px] font-medium rounded-md transition-colors hover-underline ${
+                  className={`relative px-3.5 py-2 text-[13px] font-medium transition-colors ${
                     isActive
                       ? "text-[#142446]"
                       : "text-[#475A6F] hover:text-[#142446]"
@@ -187,7 +167,7 @@ export function Header({
           <div className="relative">
             <button
               onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[#e8e4dc] bg-[#F3E7D1]/40 hover:bg-[#F3E7D1]/80 transition text-left text-xs"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[#e8e4dc] hover:border-[#B7C7D9] hover:bg-[#f9f8f5] transition text-left"
               aria-expanded={profileDropdownOpen}
               aria-label="Switch officer profile"
             >
@@ -215,8 +195,8 @@ export function Header({
                   className="fixed inset-0 z-40"
                   onClick={() => setProfileDropdownOpen(false)}
                 />
-                <div className="absolute right-0 top-full mt-2 z-50 w-72 rounded-xl border border-[#e8e4dc] bg-white shadow-xl ring-1 ring-[#142446]/5">
-                  <div className="px-4 py-3 border-b border-[#f0ece4]">
+                <div className="absolute right-0 top-full mt-2 z-50 w-72 rounded-xl border border-[#e8e4dc] bg-white shadow-xl">
+                  <div className="px-4 py-3 border-b border-[#e8e4dc]">
                     <p className="text-[10px] font-bold uppercase tracking-widest text-[#475A6F]">
                       Simulate Officer Profile
                     </p>
@@ -232,14 +212,14 @@ export function Header({
                         className={`flex w-full items-start gap-2.5 rounded-lg px-3 py-2.5 text-left transition ${
                           profile.id === currentOfficer.id
                             ? "bg-[#F3E7D1]/60 text-[#142446]"
-                            : "hover:bg-[#f7f5f1] text-[#475A6F]"
+                            : "hover:bg-[#f9f8f5] text-[#475A6F]"
                         }`}
                       >
                         <div
                           className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold ${
                             profile.id === currentOfficer.id
                               ? "bg-[#142446] text-white"
-                              : "bg-[#B7C7D9]/50 text-[#142446]"
+                              : "bg-[#B7C7D9]/40 text-[#142446]"
                           }`}
                         >
                           {profile.avatarText}
@@ -261,10 +241,10 @@ export function Header({
                       </button>
                     ))}
                   </div>
-                  <div className="px-4 py-3 border-t border-[#f0ece4]">
+                  <div className="px-4 py-3 border-t border-[#e8e4dc]">
                     <Link
                       href={`/assessment?user=${currentOfficer.id}`}
-                      className="block text-center text-[11px] font-medium text-[#142446] hover-underline py-1"
+                      className="block text-center text-[11px] font-medium text-[#142446] hover:text-[#D8921E] transition-colors py-1"
                       onClick={() => setProfileDropdownOpen(false)}
                     >
                       Begin Assessment as {currentOfficer.name.split(" ")[0]}
