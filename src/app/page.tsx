@@ -117,7 +117,7 @@ export default async function HomePage() {
 
           <div className="flex flex-wrap justify-center gap-4">
             <Link
-              href="/assessment"
+              href="/login"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-slate-950 font-bold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all"
             >
               <span>Start Competency Assessment</span>
@@ -239,7 +239,7 @@ export default async function HomePage() {
                 Sunbird &amp; NSSTA Adapter (R2)
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed mb-4">
-                Dual-source catalog architecture uniting iGOT Karmayogi micro-courses and NSSTA TPAC residential training with semantic gap matching algorithms.
+                Dual-source catalog architecture uniting iGOT Karmayogi micro-courses and NSSTA TPAC residential training with competency-matched gap closure algorithms.
               </p>
             </div>
             <Link

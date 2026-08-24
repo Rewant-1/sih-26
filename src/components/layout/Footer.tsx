@@ -123,6 +123,12 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Mock-Data Disclosure */}
+        <div className="mb-6 rounded-lg border border-amber-700/40 bg-amber-950/40 px-4 py-2.5 text-center text-xs text-amber-300/90">
+          <span className="font-semibold text-amber-200">ℹ Prototype Demo Data:</span>{" "}
+          Course catalog uses representative data, schema-matched to iGOT Karmayogi &amp; NSSTA TPAC. Assessment profiles are simulated for demonstration purposes.
+        </div>
+
         {/* Bottom Bar */}
         <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p>© 2026 Ministry of Statistics and Programme Implementation (MoSPI). All Rights Reserved.</p>

@@ -171,7 +171,7 @@ export function RubricModal({
                     {onSelectRating && (
                       <Button
                         size="sm"
-                        variant={isCurrent ? "primary" : "outline"}
+                        variant={isCurrent ? "navy" : "outline"}
                         onClick={() => {
                           onSelectRating(rubric.level);
                         }}

@@ -736,7 +736,7 @@ export function SelfAssessmentWizard({
                       <div className="mt-4">
                         <Progress
                           value={Math.min(100, score)}
-                          variant={isHigh ? "success" : isMedium ? "default" : "warning"}
+                          variant={isHigh ? "green" : isMedium ? "default" : "amber"}
                           className="h-2"
                         />
                       </div>
@@ -910,7 +910,7 @@ export function SelfAssessmentWizard({
 
                         <td className="py-3.5 px-3 whitespace-nowrap">
                           {gap.severity === "CRITICAL" && (
-                            <Badge variant="danger">Critical Gap</Badge>
+                            <Badge variant="destructive">Critical Gap</Badge>
                           )}
                           {gap.severity === "MODERATE" && (
                             <Badge variant="warning">Moderate Gap</Badge>
@@ -919,7 +919,7 @@ export function SelfAssessmentWizard({
                             <Badge variant="success">Proficient</Badge>
                           )}
                           {gap.severity === "SURPLUS" && (
-                            <Badge variant="primary">Surplus (+{gap.rawDelta})</Badge>
+                            <Badge variant="navy">Surplus (+{gap.rawDelta})</Badge>
                           )}
                         </td>
 

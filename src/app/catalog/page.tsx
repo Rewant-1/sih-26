@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
@@ -35,7 +35,7 @@ import {
   filterCourseCatalog,
 } from "@/lib/engine/recommendation-engine";
 
-export default function CourseCatalogPage() {
+function CourseCatalogContent() {
   const searchParams = useSearchParams();
   const activeUserId = searchParams?.get("user") || "usr-jso-rajesh";
 
@@ -110,7 +110,13 @@ export default function CourseCatalogPage() {
 
   // Filter courses in memory
   const filteredCourses = useMemo(() => {
-    return filterCourseCatalog(courses, filters);
+    return filterCourseCatalog(courses, {
+      source: filters.source === "ALL" ? undefined : filters.source,
+      domain: filters.domain === "ALL" ? undefined : filters.domain,
+      cadre: filters.cadre === "ALL" ? undefined : filters.cadre,
+      level: filters.level === "ALL" ? undefined : filters.level,
+      search: filters.search || undefined,
+    } as any);
   }, [courses, filters]);
 
   // Counts
@@ -277,5 +283,19 @@ export default function CourseCatalogPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function CourseCatalogPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-[#000080] border-t-transparent" />
+        </div>
+      }
+    >
+      <CourseCatalogContent />
+    </Suspense>
   );
 }

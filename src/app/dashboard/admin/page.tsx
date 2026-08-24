@@ -32,6 +32,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { DivisionHeatmap } from "@/components/dashboard/DivisionHeatmap";
 import { CadreDistributionChart } from "@/components/dashboard/CadreDistributionChart";
 import { ACBPRecommendationTable } from "@/components/dashboard/ACBPRecommendationTable";
+import { GapTrendChart } from "@/components/dashboard/GapTrendChart";
 import { repository } from "@/lib/storage/repository";
 import type { DivisionAggregateMetric, ACBPPlan } from "@/lib/types";
 
@@ -223,6 +224,9 @@ function AdminDashboardContent() {
 
           {/* Row 1: Division Heatmap Matrix */}
           <DivisionHeatmap divisions={divisions} />
+
+          {/* Row 1.5: Gap Reduction Trend Chart */}
+          <GapTrendChart />
 
           {/* Row 2: Cadre Analytics Bar Chart & High-Deficiency Highlights */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
