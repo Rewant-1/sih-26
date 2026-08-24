@@ -81,7 +81,7 @@ function AdminDashboardContent() {
     );
   }
 
-  // Calculate high-level KPIs
+  // Calculate high-level KPIs from division data
   const totalOfficers = divisions.reduce((acc, d) => acc + d.totalOfficers, 0);
   const avgProficiency = Number(
     (
@@ -93,6 +93,40 @@ function AdminDashboardContent() {
     (acc, d) => acc + d.criticalGapsCount,
     0
   );
+
+  // Compute cadre breakdown from division data
+  const cadreAgg: Record<string, number> = {};
+  for (const d of divisions) {
+    if (d.cadreBreakdown) {
+      for (const [cadre, count] of Object.entries(d.cadreBreakdown)) {
+        cadreAgg[cadre] = (cadreAgg[cadre] || 0) + (count as number);
+      }
+    }
+  }
+  const cadreLabel = Object.entries(cadreAgg)
+    .map(([k, v]) => {
+      const short = k.includes("ASSISTANT") ? "ISS AD" : k.includes("SENIOR") ? "SSO" : "JSO";
+      return `${short}: ${v}`;
+    })
+    .join(" • ");
+
+  // Compute top shortages from division deficiency data
+  const shortageMap: Record<string, { id: string; name: string; gap: number; divisions: string[] }> = {};
+  for (const d of divisions) {
+    for (const def of d.topDeficientCompetencies || []) {
+      if (!shortageMap[def.competencyId]) {
+        shortageMap[def.competencyId] = { id: def.competencyId, name: def.competencyName, gap: 0, divisions: [] };
+      }
+      shortageMap[def.competencyId].gap = Math.max(shortageMap[def.competencyId].gap, def.gap);
+      shortageMap[def.competencyId].divisions.push(d.divisionCode || d.divisionName);
+    }
+  }
+  const topShortages = Object.values(shortageMap)
+    .sort((a, b) => b.gap - a.gap)
+    .slice(0, 3);
+
+  // Derive highest-gap division for display
+  const worstDivision = [...divisions].sort((a, b) => b.criticalGapsCount - a.criticalGapsCount)[0];
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
@@ -159,7 +193,7 @@ function AdminDashboardContent() {
                 </span>
               </div>
               <div className="mt-2 text-[11px] text-slate-500 font-mono">
-                ISS AD: 188 • SSO: 522 • JSO: 880
+                {cadreLabel}
               </div>
             </Card>
 
@@ -198,7 +232,7 @@ function AdminDashboardContent() {
                 </span>
               </div>
               <div className="mt-2 text-[11px] text-slate-500">
-                Highest in FOD (142) & ESD (38)
+                Highest in {worstDivision.divisionCode || worstDivision.divisionName.split(" ")[0]} ({worstDivision.criticalGapsCount})
               </div>
             </Card>
 
@@ -226,7 +260,7 @@ function AdminDashboardContent() {
           <DivisionHeatmap divisions={divisions} />
 
           {/* Row 1.5: Gap Reduction Trend Chart */}
-          <GapTrendChart />
+          <GapTrendChart divisions={divisions} />
 
           {/* Row 2: Cadre Analytics Bar Chart & High-Deficiency Highlights */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -253,61 +287,37 @@ function AdminDashboardContent() {
                     </Badge>
                   </div>
                 </CardHeader>
-
                 <CardContent className="space-y-3">
-                  {/* Shortage 1 */}
-                  <div className="p-3 rounded-lg border border-rose-200 bg-rose-50/50 space-y-1">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="font-mono font-bold text-slate-900">
-                        TECH_VAL_05
-                      </span>
-                      <Badge variant="destructive" size="sm">
-                        Gap: -1.20
-                      </Badge>
-                    </div>
-                    <p className="text-xs font-semibold text-slate-900">
-                      Automated Microdata Scrutiny & Imputation
-                    </p>
-                    <p className="text-[11px] text-slate-600">
-                      Primary impact: Field Operations Division (525 JSOs)
-                    </p>
-                  </div>
-
-                  {/* Shortage 2 */}
-                  <div className="p-3 rounded-lg border border-rose-200 bg-rose-50/50 space-y-1">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="font-mono font-bold text-slate-900">
-                        STAT_TSA_06
-                      </span>
-                      <Badge variant="destructive" size="sm">
-                        Gap: -1.00
-                      </Badge>
-                    </div>
-                    <p className="text-xs font-semibold text-slate-900">
-                      Time Series Analysis & Seasonal Adjustment
-                    </p>
-                    <p className="text-[11px] text-slate-600">
-                      Primary impact: Economic Statistics Division (95 SSOs)
-                    </p>
-                  </div>
-
-                  {/* Shortage 3 */}
-                  <div className="p-3 rounded-lg border border-amber-200 bg-amber-50/50 space-y-1">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="font-mono font-bold text-slate-900">
-                        GOV_SDC_02
-                      </span>
-                      <Badge variant="warning" size="sm">
-                        Gap: -0.80
-                      </Badge>
-                    </div>
-                    <p className="text-xs font-semibold text-slate-900">
-                      Statistical Disclosure Control & Anonymization
-                    </p>
-                    <p className="text-[11px] text-slate-600">
-                      Affects 4 divisions (FOD, ESD, DIID, SDRD)
-                    </p>
-                  </div>
+                  {topShortages.map((shortage, idx) => {
+                    const isCritical = shortage.gap >= 0.9;
+                    return (
+                      <div
+                        key={shortage.id}
+                        className={`p-3 rounded-lg border space-y-1 ${
+                          isCritical
+                            ? "border-rose-200 bg-rose-50/50"
+                            : "border-amber-200 bg-amber-50/50"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="font-mono font-bold text-slate-900">
+                            {shortage.id}
+                          </span>
+                          <Badge variant={isCritical ? "destructive" : "warning"} size="sm">
+                            Gap: -{shortage.gap.toFixed(2)}
+                          </Badge>
+                        </div>
+                        <p className="text-xs font-semibold text-slate-900">
+                          {shortage.name}
+                        </p>
+                        <p className="text-[11px] text-slate-600">
+                          {shortage.divisions.length > 1
+                            ? `Affects ${shortage.divisions.length} divisions (${shortage.divisions.join(", ")})`
+                            : `Primary impact: ${shortage.divisions[0]}`}
+                        </p>
+                      </div>
+                    );
+                  })}
 
                   <div className="pt-2">
                     <Link href="/acbp">

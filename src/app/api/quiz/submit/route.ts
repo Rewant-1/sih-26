@@ -45,6 +45,26 @@ export async function POST(req: NextRequest) {
       await repository.saveQuizAttempt(attempt);
     }
 
+    // Closed-loop: update user competency profile with quiz-derived proficiency
+    if (attempt.scoringResult?.competencyBreakdown) {
+      const user = await repository.getUserProfile(userId);
+      if (user) {
+        const ratings = { ...(user.assessedRatings || {}) };
+        for (const [compId, score] of Object.entries(attempt.scoringResult.competencyBreakdown)) {
+          const quizLevel = Math.round(score.assessedProficiencyLevel);
+          const existing = ratings[compId] ?? 0;
+          // Weighted blend: 40% quiz evidence + 60% prior self-assessment (or quiz-only if no prior)
+          ratings[compId] = existing > 0
+            ? Math.round((existing * 0.6 + quizLevel * 0.4) * 10) / 10
+            : quizLevel;
+        }
+        user.assessedRatings = ratings;
+        if (!user.quizHistoryIds) user.quizHistoryIds = [];
+        user.quizHistoryIds.push(attempt.id);
+        await repository.saveUserProfile(user);
+      }
+    }
+
     return NextResponse.json({
       success: true,
       attempt,
