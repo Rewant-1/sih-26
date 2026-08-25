@@ -1,33 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 15, 23, 42;
-  --background-rgb: 248, 250, 252;
+  --navy:      #142446;
+  --navy-light: #1e3460;
+  --slate-blue: #475A6F;
+  --dusty:     #B7C7D9;
+  --ivory:     #F3E7D1;
+  --saffron:   #D8921E;
+  --stone:     #C7C2BA;
+
+  --foreground: var(--navy);
+  --background: #f7f5f1;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background-color: rgb(var(--background-rgb));
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--navy);
+  background-color: #f9f8f5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  letter-spacing: -0.01em;
 }
 
-/* Custom scrollbars */
+/* Selection */
+::selection {
+  background: rgba(183, 199, 217, 0.4);
+  color: var(--navy);
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
-
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #eeebe5;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--stone);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--slate-blue);
 }
 
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+/* Utility: Saffron underline accent */
+.accent-underline {
+  position: relative;
+  display: inline-block;
+}
+.accent-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background: var(--saffron);
+}
+
+/* Utility: animated underline on hover */
+.hover-underline {
+  position: relative;
+}
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1px;
+  background: var(--saffron);
+  transition: width 0.3s ease;
+}
+.hover-underline:hover::after {
+  width: 100%;
+}
+
+/* Tricolor ribbon */
+.tricolor-bar {
+  height: 3px;
+  display: flex;
+}
+.tricolor-bar > span:nth-child(1) { flex: 1; background: #FF9933; }
+.tricolor-bar > span:nth-child(2) { flex: 1; background: #FFFFFF; }
+.tricolor-bar > span:nth-child(3) { flex: 1; background: #138808; }
+
+/* Clean divider */
+.section-divider {
+  width: 48px;
+  height: 2px;
+  background: var(--saffron);
+  margin: 0 auto;
+}
+
+/* Stat counter animation */
+@keyframes stat-appear {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.stat-animate {
+  animation: stat-appear 0.5s ease-out forwards;
+}
+
+/* Nav active indicator */
+.nav-active-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--saffron);
+  display: inline-block;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--saffron);
+  outline-offset: 2px;
   border-radius: 3px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+/* Smooth transitions for interactive elements */
+a, button {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+/* Section fade-in animation */
+@keyframes section-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-section {
+  animation: section-fade-up 0.6s ease-out forwards;
+}
+.animate-section-delay-1 { animation-delay: 0.1s; opacity: 0; animation-fill-mode: forwards; animation-name: section-fade-up; animation-duration: 0.6s; animation-timing-function: ease-out; }
+.animate-section-delay-2 { animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards; animation-name: section-fade-up; animation-duration: 0.6s; animation-timing-function: ease-out; }
+.animate-section-delay-3 { animation-delay: 0.3s; opacity: 0; animation-fill-mode: forwards; animation-name: section-fade-up; animation-duration: 0.6s; animation-timing-function: ease-out; }
+
+/* Devanagari font */
+.font-devanagari {
+  font-family: 'Noto Sans Devanagari', sans-serif;
 }

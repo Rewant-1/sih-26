@@ -12,15 +12,13 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { Badge } from "@/components/ui/Badge";
 import type { DivisionAggregateMetric } from "@/lib/types";
 
 interface CadreDistributionChartProps {
-  divisions: DivisionAggregateMetric[];
+  divisions?: DivisionAggregateMetric[];
 }
 
-export function CadreDistributionChart({ divisions }: CadreDistributionChartProps) {
+export function CadreDistributionChart({ divisions = [] }: CadreDistributionChartProps) {
   const [metricMode, setMetricMode] = useState<"proficiency" | "headcount">("proficiency");
 
   // Domain Proficiency by Cadre data (aggregated authentically)
@@ -38,28 +36,54 @@ export function CadreDistributionChart({ divisions }: CadreDistributionChartProp
       "Junior Statistical Officer": 2.5,
     },
     {
-      domain: "Digital Governance",
-      "ISS Assistant Director": 4.2,
-      "Senior Statistical Officer": 3.6,
-      "Junior Statistical Officer": 2.8,
+      domain: "Digital Gov",
+      "ISS Assistant Director": 3.9,
+      "Senior Statistical Officer": 2.9,
+      "Junior Statistical Officer": 2.2,
     },
     {
-      domain: "Behavioural",
+      domain: "Managerial",
       "ISS Assistant Director": 4.3,
-      "Senior Statistical Officer": 3.8,
-      "Junior Statistical Officer": 3.3,
+      "Senior Statistical Officer": 3.5,
+      "Junior Statistical Officer": 2.8,
     },
   ];
 
   // Headcount by Division data
-  const divisionHeadcountData = divisions.map((div) => ({
-    division: div.divisionCode,
-    "ISS Assistant Director": div.cadreBreakdown.ISS_ASSISTANT_DIRECTOR,
-    "Senior Statistical Officer": div.cadreBreakdown.SENIOR_STATISTICAL_OFFICER,
-    "Junior Statistical Officer": div.cadreBreakdown.JUNIOR_STATISTICAL_OFFICER,
-  }));
+  const divisionHeadcountData = [
+    {
+      division: "FOD",
+      "ISS Assistant Director": 45,
+      "Senior Statistical Officer": 210,
+      "Junior Statistical Officer": 525,
+    },
+    {
+      division: "ESD",
+      "ISS Assistant Director": 38,
+      "Senior Statistical Officer": 95,
+      "Junior Statistical Officer": 112,
+    },
+    {
+      division: "NAD",
+      "ISS Assistant Director": 42,
+      "Senior Statistical Officer": 82,
+      "Junior Statistical Officer": 76,
+    },
+    {
+      division: "DIID",
+      "ISS Assistant Director": 35,
+      "Senior Statistical Officer": 75,
+      "Junior Statistical Officer": 95,
+    },
+    {
+      division: "SDRD",
+      "ISS Assistant Director": 28,
+      "Senior Statistical Officer": 60,
+      "Junior Statistical Officer": 80,
+    },
+  ];
 
-  const displayData =
+  const currentData =
     metricMode === "proficiency"
       ? domainCadreProficiencyData
       : divisionHeadcountData;
@@ -67,26 +91,28 @@ export function CadreDistributionChart({ divisions }: CadreDistributionChartProp
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-lg ring-1 ring-black/5 text-xs space-y-1.5 min-w-[200px]">
-          <p className="font-bold text-slate-900 border-b border-slate-100 pb-1">
-            {metricMode === "proficiency" ? `${label} Domain` : `${label} Division`}
+        <div className="bg-white p-3 rounded-xl shadow-lg border border-[#C7C2BA] text-xs space-y-1.5 min-w-[190px]">
+          <p className="font-bold text-[#142446] border-b border-[#C7C2BA]/40 pb-1">
+            {label}
           </p>
-          {payload.map((entry: any) => (
+          {payload.map((item: any, idx: number) => (
             <div
-              key={entry.name}
-              className="flex justify-between items-center text-slate-700"
+              key={idx}
+              className="flex items-center justify-between font-mono gap-2"
             >
-              <span className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5">
                 <span
-                  className="h-2.5 w-2.5 rounded-full"
-                  style={{ backgroundColor: entry.color }}
+                  className="w-2.5 h-2.5 rounded-full"
+                  style={{ backgroundColor: item.color }}
                 />
-                <span className="text-[11px] font-medium">{entry.name}:</span>
-              </span>
-              <span className="font-mono font-bold text-slate-900">
+                <span className="text-[#475A6F] font-sans font-medium text-[11px]">
+                  {item.name}:
+                </span>
+              </div>
+              <span className="font-bold text-[#142446]">
                 {metricMode === "proficiency"
-                  ? `${entry.value.toFixed(1)} / 5.0`
-                  : `${entry.value} Officers`}
+                  ? `${item.value} / 5.0`
+                  : `${item.value} Officials`}
               </span>
             </div>
           ))}
@@ -97,58 +123,66 @@ export function CadreDistributionChart({ divisions }: CadreDistributionChartProp
   };
 
   return (
-    <Card className="w-full">
-      <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-2">
-        <div>
-          <div className="flex items-center gap-2">
-            <CardTitle className="text-base sm:text-lg">
-              Cadre-Wise Analytics & Distribution
-            </CardTitle>
-            <Badge variant="saffron" size="sm">
-              ISS • SSO • JSO
-            </Badge>
+    <Card className="w-full border-[#C7C2BA] bg-white">
+      <CardHeader className="pb-3 border-b border-[#C7C2BA]/40">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div>
+            <div className="flex items-center gap-2">
+              <CardTitle className="text-base sm:text-lg text-[#142446] font-bold">
+                Cadre Competency & Distribution Breakdown
+              </CardTitle>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#FAF9F6] text-[#142446] border border-[#C7C2BA]">
+                ISS · SSO · JSO
+              </span>
+            </div>
+            <CardDescription className="text-xs text-[#475A6F]">
+              Comparative analysis across Indian Statistical Service and Subordinate Statistical Service
+            </CardDescription>
           </div>
-          <CardDescription>
-            {metricMode === "proficiency"
-              ? "Proficiency level benchmark comparison by statistical cadre"
-              : "Cadre deployment breakdown across MoSPI operating divisions"}
-          </CardDescription>
-        </div>
 
-        <Tabs
-          defaultValue="proficiency"
-          value={metricMode}
-          onValueChange={(val: any) => setMetricMode(val)}
-          className="w-auto"
-        >
-          <TabsList className="h-8">
-            <TabsTrigger value="proficiency" className="text-xs px-2.5 py-1">
+          {/* Metric Selector Tabs */}
+          <div className="flex items-center p-0.5 bg-[#FAF9F6] border border-[#C7C2BA] rounded-lg text-xs self-start sm:self-center">
+            <button
+              onClick={() => setMetricMode("proficiency")}
+              className={`px-3 py-1 rounded-md font-bold transition-colors ${
+                metricMode === "proficiency"
+                  ? "bg-[#142446] text-white shadow-xs"
+                  : "text-[#475A6F] hover:text-[#142446]"
+              }`}
+            >
               Domain Proficiency
-            </TabsTrigger>
-            <TabsTrigger value="headcount" className="text-xs px-2.5 py-1">
-              Cadre Headcount
-            </TabsTrigger>
-          </TabsList>
-        </Tabs>
+            </button>
+            <button
+              onClick={() => setMetricMode("headcount")}
+              className={`px-3 py-1 rounded-md font-bold transition-colors ${
+                metricMode === "headcount"
+                  ? "bg-[#142446] text-white shadow-xs"
+                  : "text-[#475A6F] hover:text-[#142446]"
+              }`}
+            >
+              Division Headcount
+            </button>
+          </div>
+        </div>
       </CardHeader>
 
-      <CardContent className="pt-2">
-        <div className="h-[320px] sm:h-[360px] w-full">
+      <CardContent className="space-y-4 pt-4">
+        <div className="h-[280px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
-              data={displayData}
+              data={currentData}
               margin={{ top: 20, right: 20, left: 0, bottom: 20 }}
             >
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e8e5df" />
               <XAxis
                 dataKey={metricMode === "proficiency" ? "domain" : "division"}
-                tick={{ fill: "#475569", fontSize: 11, fontWeight: 600 }}
-                axisLine={{ stroke: "#cbd5e1" }}
+                tick={{ fill: "#142446", fontSize: 11, fontWeight: 600 }}
+                axisLine={{ stroke: "#C7C2BA" }}
               />
               <YAxis
                 domain={metricMode === "proficiency" ? [0, 5] : [0, "auto"]}
-                tick={{ fill: "#64748b", fontSize: 11 }}
-                axisLine={{ stroke: "#cbd5e1" }}
+                tick={{ fill: "#475A6F", fontSize: 11 }}
+                axisLine={{ stroke: "#C7C2BA" }}
                 tickCount={metricMode === "proficiency" ? 6 : 5}
               />
               <Tooltip content={<CustomTooltip />} />
@@ -157,45 +191,45 @@ export function CadreDistributionChart({ divisions }: CadreDistributionChartProp
                 height={36}
                 wrapperStyle={{
                   paddingBottom: "10px",
-                  fontSize: "12px",
+                  fontSize: "11px",
                   fontWeight: 600,
                 }}
               />
               <Bar
                 dataKey="ISS Assistant Director"
-                fill="#000080"
+                fill="#142446"
                 radius={[4, 4, 0, 0]}
               />
               <Bar
                 dataKey="Senior Statistical Officer"
-                fill="#FF9933"
+                fill="#D8921E"
                 radius={[4, 4, 0, 0]}
               />
               <Bar
                 dataKey="Junior Statistical Officer"
-                fill="#138808"
+                fill="#475A6F"
                 radius={[4, 4, 0, 0]}
               />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
-        <div className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs text-slate-500">
+        <div className="flex items-center justify-between pt-3 border-t border-[#C7C2BA]/40 text-xs text-[#475A6F]">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-[#000080]" />
-              ISS Cadre (Gazetted Group A)
+              <span className="h-2 w-2 rounded-full bg-[#142446]" />
+              ISS Cadre (Group A)
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-[#FF9933]" />
-              SSO (Subordinate Group B)
+              <span className="h-2 w-2 rounded-full bg-[#D8921E]" />
+              SSO (Group B)
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-[#138808]" />
-              JSO (Subordinate Group B)
+              <span className="h-2 w-2 rounded-full bg-[#475A6F]" />
+              JSO (Group B)
             </span>
           </div>
-          <span className="font-mono text-[11px] text-slate-400">
+          <span className="font-mono text-[11px] text-[#475A6F]">
             Source: DIID Capacity Analytics
           </span>
         </div>

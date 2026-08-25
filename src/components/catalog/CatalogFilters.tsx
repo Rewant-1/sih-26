@@ -12,7 +12,7 @@ import {
   X,
 } from "lucide-react";
 import type { CompetencyDomain, CadreId, ProficiencyLevel } from "@/lib/types/frac";
-import type { CourseSource, DeliveryMode } from "@/lib/types/sunbird";
+import type { CourseSource } from "@/lib/types/sunbird";
 import { Button } from "@/components/ui/Button";
 
 export interface FilterState {
@@ -105,25 +105,25 @@ export function CatalogFilters({
   };
 
   return (
-    <div className="space-y-4 bg-white rounded-2xl border border-slate-200 p-5 shadow-xs">
+    <div className="space-y-4 pb-6 border-b border-[#C7C2BA]/40">
       {/* Top Row: Search bar & Dual-Source Radio Pills */}
       <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
         {/* Search Input */}
         <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475A6F]" />
           <input
             type="text"
-            placeholder="Search by course title, code (e.g. STAT-01), competency (SNA, R, SDC), or outcome..."
+            placeholder="Search by course title, code (e.g. STAT-01), competency (SNA, R, SDC)..."
             value={filters.search}
             onChange={(e) =>
               onFilterChange({ ...filters, search: e.target.value })
             }
-            className="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#000080] focus:bg-white transition-all shadow-xs"
+            className="w-full pl-10 pr-10 py-2.5 bg-[#FAF9F6] border border-[#C7C2BA] rounded-xl text-sm text-[#142446] placeholder:text-[#475A6F] focus:outline-hidden focus:ring-1 focus:ring-[#142446] focus:bg-white transition-colors"
           />
           {filters.search && (
             <button
               onClick={() => onFilterChange({ ...filters, search: "" })}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#475A6F] hover:text-[#142446] p-1"
               aria-label="Clear search"
             >
               <X className="w-3.5 h-3.5" />
@@ -131,29 +131,35 @@ export function CatalogFilters({
           )}
         </div>
 
-        {/* Source Badge Tabs */}
-        <div className="flex items-center gap-1.5 p-1 bg-slate-100/90 rounded-xl border border-slate-200 self-start lg:self-center shrink-0">
+        {/* Source Badge Tabs (No Gradients) */}
+        <div className="flex items-center gap-1.5 p-1 bg-[#FAF9F6] rounded-xl border border-[#C7C2BA] self-start lg:self-center shrink-0">
           <button
             onClick={() => handleSourceChange("ALL")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
               filters.source === "ALL"
-                ? "bg-white text-slate-900 shadow-xs"
-                : "text-slate-600 hover:text-slate-900"
+                ? "bg-[#142446] text-white shadow-xs"
+                : "text-[#475A6F] hover:text-[#142446]"
             }`}
           >
-            <BookOpen className="w-3.5 h-3.5 text-slate-500" />
+            <BookOpen className="w-3.5 h-3.5" />
             <span>All Sources</span>
-            <span className="ml-1 text-[10px] px-1.5 py-0.2 rounded-full bg-slate-200/80 text-slate-700">
+            <span
+              className={`ml-1 text-[10px] px-1.5 py-0.2 rounded-full ${
+                filters.source === "ALL"
+                  ? "bg-white/20 text-white"
+                  : "bg-white text-[#142446] border border-[#C7C2BA]"
+              }`}
+            >
               {totalCoursesCount}
             </span>
           </button>
 
           <button
             onClick={() => handleSourceChange("iGOT Karmayogi")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
               filters.source === "iGOT Karmayogi"
-                ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-xs"
-                : "text-slate-600 hover:text-orange-900"
+                ? "bg-[#D8921E] text-white shadow-xs"
+                : "text-[#475A6F] hover:text-[#142446]"
             }`}
           >
             <GraduationCap className="w-3.5 h-3.5" />
@@ -163,7 +169,7 @@ export function CatalogFilters({
                 className={`ml-1 text-[10px] px-1.5 py-0.2 rounded-full ${
                   filters.source === "iGOT Karmayogi"
                     ? "bg-white/20 text-white"
-                    : "bg-orange-100 text-orange-800"
+                    : "bg-white text-[#142446] border border-[#C7C2BA]"
                 }`}
               >
                 {igotCount}
@@ -173,10 +179,10 @@ export function CatalogFilters({
 
           <button
             onClick={() => handleSourceChange("NSSTA TPAC")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
               filters.source === "NSSTA TPAC"
-                ? "bg-gradient-to-r from-blue-900 to-indigo-900 text-white shadow-xs"
-                : "text-slate-600 hover:text-blue-900"
+                ? "bg-[#142446] text-white shadow-xs"
+                : "text-[#475A6F] hover:text-[#142446]"
             }`}
           >
             <Building2 className="w-3.5 h-3.5" />
@@ -186,7 +192,7 @@ export function CatalogFilters({
                 className={`ml-1 text-[10px] px-1.5 py-0.2 rounded-full ${
                   filters.source === "NSSTA TPAC"
                     ? "bg-white/20 text-white"
-                    : "bg-blue-100 text-blue-900"
+                    : "bg-white text-[#142446] border border-[#C7C2BA]"
                 }`}
               >
                 {nsstaCount}
@@ -196,11 +202,11 @@ export function CatalogFilters({
         </div>
       </div>
 
-      {/* Second Row: Detailed Dropdown Selectors */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2 border-t border-slate-100">
+      {/* Second Row: Dropdown Selects for Faceted Filtering */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-3 border-t border-[#C7C2BA]/40">
         {/* Domain Filter */}
         <div>
-          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+          <label className="text-[11px] font-bold text-[#475A6F] uppercase tracking-wider block mb-1">
             FRAC Domain
           </label>
           <select
@@ -211,7 +217,7 @@ export function CatalogFilters({
                 domain: e.target.value as CompetencyDomain | "ALL",
               })
             }
-            className="w-full py-2 px-3 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#000080] focus:bg-white"
+            className="w-full py-2 px-3 bg-[#FAF9F6] border border-[#C7C2BA] rounded-lg text-xs font-medium text-[#142446] focus:outline-hidden focus:ring-1 focus:ring-[#142446] focus:bg-white"
           >
             {DOMAINS.map((d) => (
               <option key={d.value} value={d.value}>
@@ -223,7 +229,7 @@ export function CatalogFilters({
 
         {/* Cadre Filter */}
         <div>
-          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+          <label className="text-[11px] font-bold text-[#475A6F] uppercase tracking-wider block mb-1">
             Target Cadre
           </label>
           <select
@@ -234,7 +240,7 @@ export function CatalogFilters({
                 cadre: e.target.value as CadreId | "ALL",
               })
             }
-            className="w-full py-2 px-3 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#000080] focus:bg-white"
+            className="w-full py-2 px-3 bg-[#FAF9F6] border border-[#C7C2BA] rounded-lg text-xs font-medium text-[#142446] focus:outline-hidden focus:ring-1 focus:ring-[#142446] focus:bg-white"
           >
             {CADRES.map((c) => (
               <option key={c.value} value={c.value}>
@@ -246,7 +252,7 @@ export function CatalogFilters({
 
         {/* Delivery Mode Filter */}
         <div>
-          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+          <label className="text-[11px] font-bold text-[#475A6F] uppercase tracking-wider block mb-1">
             Delivery Mode
           </label>
           <select
@@ -254,7 +260,7 @@ export function CatalogFilters({
             onChange={(e) =>
               onFilterChange({ ...filters, deliveryMode: e.target.value })
             }
-            className="w-full py-2 px-3 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#000080] focus:bg-white"
+            className="w-full py-2 px-3 bg-[#FAF9F6] border border-[#C7C2BA] rounded-lg text-xs font-medium text-[#142446] focus:outline-hidden focus:ring-1 focus:ring-[#142446] focus:bg-white"
           >
             {DELIVERY_MODES.map((m) => (
               <option key={m.value} value={m.value}>
@@ -264,92 +270,71 @@ export function CatalogFilters({
           </select>
         </div>
 
-        {/* Proficiency Level Filter */}
+        {/* Competency Level Filter */}
         <div>
-          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+          <label className="text-[11px] font-bold text-[#475A6F] uppercase tracking-wider block mb-1">
             Competency Level
           </label>
           <select
             value={filters.level}
-            onChange={(e) =>
+            onChange={(e) => {
+              const val = e.target.value;
               onFilterChange({
                 ...filters,
-                level:
-                  e.target.value === "ALL"
-                    ? "ALL"
-                    : (Number(e.target.value) as ProficiencyLevel),
-              })
-            }
-            className="w-full py-2 px-3 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#000080] focus:bg-white"
+                level: val === "ALL" ? "ALL" : (Number(val) as ProficiencyLevel),
+              });
+            }}
+            className="w-full py-2 px-3 bg-[#FAF9F6] border border-[#C7C2BA] rounded-lg text-xs font-medium text-[#142446] focus:outline-hidden focus:ring-1 focus:ring-[#142446] focus:bg-white"
           >
-            {PROFICIENCY_LEVELS.map((lvl) => (
-              <option key={String(lvl.value)} value={String(lvl.value)}>
-                {lvl.label}
+            {PROFICIENCY_LEVELS.map((l) => (
+              <option key={String(l.value)} value={String(l.value)}>
+                {l.label}
               </option>
             ))}
           </select>
         </div>
       </div>
 
-      {/* Active Filter Chips & Clear Action */}
+      {/* Active Filter Indicators & Reset Button */}
       {activeFiltersCount > 0 && (
-        <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100 text-xs">
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-slate-500 font-medium">Active Filters:</span>
+        <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-[#C7C2BA]/40 text-xs">
+          <div className="flex flex-wrap items-center gap-1.5 text-[#475A6F]">
+            <span className="font-semibold text-[#142446]">Active Filters:</span>
             {filters.source !== "ALL" && (
-              <span className="inline-flex items-center gap-1 bg-slate-100 text-slate-800 px-2 py-0.5 rounded-md border border-slate-200">
-                Source: <strong>{filters.source}</strong>
-                <button
-                  onClick={() => handleSourceChange("ALL")}
-                  className="hover:text-rose-600"
-                >
-                  <X className="w-3 h-3" />
-                </button>
+              <span className="px-2 py-0.5 rounded bg-[#FAF9F6] border border-[#C7C2BA] text-[#142446] font-medium">
+                Source: {filters.source}
               </span>
             )}
             {filters.domain !== "ALL" && (
-              <span className="inline-flex items-center gap-1 bg-slate-100 text-slate-800 px-2 py-0.5 rounded-md border border-slate-200">
-                Domain: <strong>{filters.domain.split(" ")[0]}</strong>
-                <button
-                  onClick={() => onFilterChange({ ...filters, domain: "ALL" })}
-                  className="hover:text-rose-600"
-                >
-                  <X className="w-3 h-3" />
-                </button>
+              <span className="px-2 py-0.5 rounded bg-[#FAF9F6] border border-[#C7C2BA] text-[#142446] font-medium">
+                Domain: {filters.domain.replace(" Competencies", "")}
               </span>
             )}
             {filters.cadre !== "ALL" && (
-              <span className="inline-flex items-center gap-1 bg-slate-100 text-slate-800 px-2 py-0.5 rounded-md border border-slate-200">
-                Cadre: <strong>{filters.cadre}</strong>
-                <button
-                  onClick={() => onFilterChange({ ...filters, cadre: "ALL" })}
-                  className="hover:text-rose-600"
-                >
-                  <X className="w-3 h-3" />
-                </button>
+              <span className="px-2 py-0.5 rounded bg-[#FAF9F6] border border-[#C7C2BA] text-[#142446] font-medium">
+                Cadre: {filters.cadre.replace("_", " ")}
               </span>
             )}
-            {filters.search.trim() && (
-              <span className="inline-flex items-center gap-1 bg-slate-100 text-slate-800 px-2 py-0.5 rounded-md border border-slate-200">
-                &ldquo;{filters.search}&rdquo;
-                <button
-                  onClick={() => onFilterChange({ ...filters, search: "" })}
-                  className="hover:text-rose-600"
-                >
-                  <X className="w-3 h-3" />
-                </button>
+            {filters.level !== "ALL" && (
+              <span className="px-2 py-0.5 rounded bg-[#FAF9F6] border border-[#C7C2BA] text-[#142446] font-medium">
+                Level: L{filters.level}
+              </span>
+            )}
+            {filters.search && (
+              <span className="px-2 py-0.5 rounded bg-[#FAF9F6] border border-[#C7C2BA] text-[#142446] font-medium">
+                &quot;{filters.search}&quot;
               </span>
             )}
           </div>
 
           <Button
-            variant="ghost"
             size="sm"
+            variant="ghost"
             onClick={handleReset}
-            className="text-xs text-rose-600 hover:text-rose-700 hover:bg-rose-50 h-7 px-2"
+            className="text-xs text-[#475A6F] hover:text-[#142446] gap-1 h-7 px-2"
           >
-            <RotateCcw className="w-3 h-3 mr-1" />
-            <span>Reset All ({activeFiltersCount})</span>
+            <RotateCcw className="w-3 h-3" />
+            <span>Reset All Filters</span>
           </Button>
         </div>
       )}

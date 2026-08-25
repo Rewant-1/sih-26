@@ -7,69 +7,55 @@ import {
   Award,
   Building2,
   Calendar,
-  CheckCircle2,
-  Clock,
   Download,
-  FileCheck,
-  FileSpreadsheet,
-  Flame,
+  FileCheck2,
   GraduationCap,
-  Layers,
-  MapPin,
-  Printer,
-  Shield,
-  Sparkles,
-  TrendingUp,
+  Search,
   Users,
 } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Footer } from "@/components/layout/Footer";
-import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
-import { Progress } from "@/components/ui/Progress";
-import { ACBPRecommendationTable } from "@/components/dashboard/ACBPRecommendationTable";
+import { Card } from "@/components/ui/Card";
 import { repository } from "@/lib/storage/repository";
-import type { ACBPPlan, DivisionAggregateMetric } from "@/lib/types";
+import type { ACBPPlan, ACBPBatchPlan } from "@/lib/types";
 
-function ACBPPageContent() {
+function ACBPContent() {
   const searchParams = useSearchParams();
   const userId = searchParams?.get("user") || "usr-dir-sunita";
 
   const [plan, setPlan] = useState<ACBPPlan | null>(null);
-  const [divisions, setDivisions] = useState<DivisionAggregateMetric[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [divisionFilter, setDivisionFilter] = useState<string>("ALL");
+  const [channelFilter, setChannelFilter] = useState<string>("ALL");
+  const [priorityFilter, setPriorityFilter] = useState<string>("ALL");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     async function loadData() {
       setIsLoading(true);
       try {
-        const [planData, divData] = await Promise.all([
-          repository.getACBPPlan("2026-27"),
-          repository.getDivisionAggregateData(),
-        ]);
-        setPlan(planData);
-        setDivisions(divData);
+        const data = await repository.getACBPPlan("2026-27");
+        setPlan(data);
       } catch (err) {
         console.error("Failed to load ACBP plan:", err);
       } finally {
         setIsLoading(false);
       }
     }
-
     loadData();
   }, []);
 
   if (isLoading || !plan) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+      <div className="min-h-screen bg-[#FAF9F6] flex flex-col justify-between">
         <Header activeUserId={userId} />
         <div className="flex-1 flex items-center justify-center p-12">
           <div className="flex flex-col items-center gap-3">
-            <div className="h-8 w-8 animate-spin rounded-full border-4 border-[#000080] border-t-transparent" />
-            <p className="text-sm font-semibold text-slate-600">
-              Compiling Annual Capacity Building Plan (ACBP 2026-27)...
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#142446] border-t-transparent" />
+            <p className="text-[13px] font-medium text-[#475A6F]">
+              Loading ACBP plan...
             </p>
           </div>
         </div>
@@ -78,209 +64,307 @@ function ACBPPageContent() {
     );
   }
 
+  // Filter batches
+  const filteredBatches = plan.batches.filter((b) => {
+    if (
+      divisionFilter !== "ALL" &&
+      !b.targetDivisions.some((div) => div.toLowerCase().includes(divisionFilter.toLowerCase()))
+    ) {
+      return false;
+    }
+    if (channelFilter !== "ALL" && b.source !== channelFilter) {
+      return false;
+    }
+    if (priorityFilter !== "ALL" && b.priority !== priorityFilter) {
+      return false;
+    }
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      return (
+        b.batchId.toLowerCase().includes(q) ||
+        b.courseTitle.toLowerCase().includes(q) ||
+        b.targetCompetencyName.toLowerCase().includes(q)
+      );
+    }
+    return true;
+  });
+
   const nsstaBatches = plan.batches.filter((b) => b.source === "NSSTA TPAC");
   const igotBatches = plan.batches.filter((b) => b.source === "iGOT Karmayogi");
   const criticalBatches = plan.batches.filter((b) => b.priority === "CRITICAL");
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#FAF9F6] flex flex-col justify-between">
       <Header activeUserId={userId} />
 
       <div className="mx-auto max-w-7xl w-full px-4 py-6 sm:px-6 lg:px-8 flex-1 flex gap-6">
         <Sidebar currentUserId={userId} />
 
         <main className="flex-1 min-w-0 space-y-6">
-          {/* Executive Header Banner */}
-          <div className="rounded-2xl border border-slate-200 bg-gradient-to-r from-[#000080] via-[#0B132B] to-slate-900 p-6 text-white shadow-lg relative overflow-hidden">
-            <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          {/* Executive Header Banner (Light Theme) */}
+          <div className="rounded-2xl border border-[#C7C2BA] bg-white p-6 text-[#142446] shadow-xs">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="space-y-1.5">
                 <div className="flex flex-wrap items-center gap-2">
-                  <Badge variant="saffron" size="sm">
+                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#F3E7D1] text-[#142446] border border-[#C7C2BA]">
                     MoSPI Capacity Building Commission
-                  </Badge>
-                  <span className="text-xs text-slate-300 font-mono">
+                  </span>
+                  <span className="text-xs text-[#475A6F] font-mono">
                     Financial Year 2026-27
                   </span>
                 </div>
-                <h1 className="text-2xl font-bold tracking-tight text-white">
+                <h1 className="text-2xl font-bold tracking-tight text-[#142446]">
                   Annual Capacity Building Plan (ACBP 2026-27)
                 </h1>
-                <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
-                  Automated strategic training plan aligning identified MoSPI
-                  competency deficits to NSSTA TPAC residential programs and iGOT
-                  Karmayogi digital learning modules.
+                <p className="text-xs text-[#475A6F] max-w-2xl leading-relaxed">
+                  Automated strategic training plan aligning identified MoSPI competency deficits to NSSTA TPAC residential programs and iGOT self-paced courses.
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2">
+              <div className="flex items-center gap-3">
                 <Button
-                  variant="saffron"
                   size="sm"
-                  onClick={() => window.print()}
-                  className="text-xs font-semibold"
+                  variant="outline"
+                  onClick={() => {
+                    const csvContent =
+                      "data:text/csv;charset=utf-8," +
+                      "BatchID,CourseTitle,Source,TargetCompetency,TargetDivisions,OfficersNominated,Schedule,Priority\n" +
+                      plan.batches
+                        .map(
+                          (b) =>
+                            `"${b.batchId}","${b.courseTitle}","${b.source}","${b.targetCompetencyName}","${b.targetDivisions.join("; ")}",${b.recommendedOfficersCount},"${b.scheduleWindow || "Q1 2026-27"}","${b.priority}"`
+                        )
+                        .join("\n");
+                    const encodedUri = encodeURI(csvContent);
+                    const link = document.createElement("a");
+                    link.setAttribute("href", encodedUri);
+                    link.setAttribute("download", "MoSPI_ACBP_2026-27_Batches.csv");
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                  className="text-xs font-semibold border-[#C7C2BA] text-[#142446] bg-white hover:bg-[#FAF9F6]"
                 >
-                  <Printer className="h-4 w-4 mr-1.5" />
-                  Print Official Summary
+                  <Download className="h-3.5 w-3.5 mr-1 text-[#475A6F]" />
+                  Export Plan (CSV)
                 </Button>
                 <Link href="/dashboard/admin">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="text-xs font-semibold bg-white/10 text-white border-white/30 hover:bg-white/20"
-                  >
-                    Division Analytics →
+                  <Button size="sm" className="text-xs font-bold bg-[#142446] hover:bg-[#1e3460] text-white">
+                    Leadership Dashboard
                   </Button>
                 </Link>
               </div>
             </div>
           </div>
 
-          {/* Key Capacity Building Statistics */}
+          {/* Quick Metrics Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Metric 1 */}
-            <Card className="p-4 bg-white">
-              <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
-                <span>Total Targeted Officers</span>
-                <Users className="h-4 w-4 text-[#000080]" />
+            <Card className="p-4 bg-white border-[#C7C2BA]">
+              <div className="flex items-center justify-between text-xs text-[#475A6F] font-semibold">
+                <span>Total Planned Batches</span>
+                <Calendar className="h-4 w-4 text-[#D8921E]" />
               </div>
               <div className="mt-2 flex items-baseline gap-2">
-                <span className="text-2xl font-black font-mono text-slate-900">
-                  {plan.totalOfficersTargeted}
-                </span>
-                <span className="text-xs text-slate-500 font-medium">
-                  Nominations
-                </span>
-              </div>
-              <div className="mt-2 text-[11px] text-slate-500">
-                Covers ~36% of all statistical personnel
-              </div>
-            </Card>
-
-            {/* Metric 2 */}
-            <Card className="p-4 bg-white">
-              <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
-                <span>Total Training Batches</span>
-                <Calendar className="h-4 w-4 text-[#FF9933]" />
-              </div>
-              <div className="mt-2 flex items-baseline gap-2">
-                <span className="text-2xl font-black font-mono text-[#000080]">
+                <span className="text-2xl font-bold text-[#142446]">
                   {plan.totalBatches}
                 </span>
-                <span className="text-xs text-slate-500 font-medium">
-                  Planned Batches
+                <span className="text-xs text-[#475A6F]">
+                  FY 2026-27
                 </span>
               </div>
-              <div className="mt-2 text-[11px] text-slate-500 font-mono">
-                {nsstaBatches.length} NSSTA • {igotBatches.length} iGOT
+              <div className="mt-2 text-[11px] text-[#475A6F]">
+                {criticalBatches.length} critical priority batches
               </div>
             </Card>
 
-            {/* Metric 3 */}
-            <Card className="p-4 bg-white">
-              <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
-                <span>Critical Priority Batches</span>
-                <Flame className="h-4 w-4 text-rose-600" />
+            <Card className="p-4 bg-white border-[#C7C2BA]">
+              <div className="flex items-center justify-between text-xs text-[#475A6F] font-semibold">
+                <span>Officers Targeted</span>
+                <Users className="h-4 w-4 text-[#142446]" />
               </div>
               <div className="mt-2 flex items-baseline gap-2">
-                <span className="text-2xl font-black font-mono text-rose-600">
-                  {criticalBatches.length}
+                <span className="text-2xl font-bold text-[#142446]">
+                  {plan.totalOfficersTargeted.toLocaleString()}
                 </span>
-                <span className="text-xs text-slate-500 font-medium">
-                  Urgent Actions
+                <span className="text-xs text-[#475A6F]">
+                  Officials
                 </span>
               </div>
-              <div className="mt-2 text-[11px] text-slate-500">
-                Addressing Microdata, Time Series & SDC
+              <div className="mt-2 text-[11px] text-[#475A6F]">
+                Across 5 MoSPI divisions
               </div>
             </Card>
 
-            {/* Metric 4 */}
-            <Card className="p-4 bg-white">
-              <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
-                <span>NSSTA Greater Noida Venue</span>
-                <MapPin className="h-4 w-4 text-blue-600" />
+            <Card className="p-4 bg-white border-[#C7C2BA]">
+              <div className="flex items-center justify-between text-xs text-[#475A6F] font-semibold">
+                <span>NSSTA Residential</span>
+                <Building2 className="h-4 w-4 text-[#142446]" />
               </div>
               <div className="mt-2 flex items-baseline gap-2">
-                <span className="text-2xl font-black font-mono text-blue-900">
+                <span className="text-2xl font-bold text-[#142446]">
                   {nsstaBatches.length}
                 </span>
-                <span className="text-xs text-slate-500 font-medium">
-                  Residential Batches
+                <span className="text-xs text-[#475A6F]">
+                  Workshops
                 </span>
               </div>
-              <div className="mt-2 text-[11px] text-slate-500 font-mono">
-                TPAC 2026-27 Approved
+              <div className="mt-2 text-[11px] text-[#475A6F]">
+                Greater Noida Campus
+              </div>
+            </Card>
+
+            <Card className="p-4 bg-white border-[#C7C2BA]">
+              <div className="flex items-center justify-between text-xs text-[#475A6F] font-semibold">
+                <span>iGOT Karmayogi Online</span>
+                <GraduationCap className="h-4 w-4 text-[#D8921E]" />
+              </div>
+              <div className="mt-2 flex items-baseline gap-2">
+                <span className="text-2xl font-bold text-[#142446]">
+                  {igotBatches.length}
+                </span>
+                <span className="text-xs text-[#475A6F]">
+                  Courses
+                </span>
+              </div>
+              <div className="mt-2 text-[11px] text-[#475A6F]">
+                Continuous digital learning
               </div>
             </Card>
           </div>
 
-          {/* Division Allocation Breakdown Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
-            {divisions.map((div) => {
-              const count = plan.summaryByDivision[div.divisionName] || 0;
-              return (
-                <div
-                  key={div.divisionCode}
-                  className="rounded-xl border border-slate-200 bg-white p-3.5 space-y-1.5 shadow-xs"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-slate-900 bg-slate-100 px-2 py-0.5 rounded">
-                      {div.divisionCode}
-                    </span>
-                    <Badge variant="navy" size="sm">
-                      {count} Officers
-                    </Badge>
-                  </div>
-                  <p className="text-xs font-semibold text-slate-800 line-clamp-1">
-                    {div.divisionName}
-                  </p>
-                  <p className="text-[10px] text-slate-500 font-mono">
-                    Total Strength: {div.totalOfficers}
-                  </p>
-                  <Progress
-                    value={Math.round((count / div.totalOfficers) * 100)}
-                    variant="saffron"
-                    size="sm"
-                    className="mt-1"
+          {/* Batches Table & Filter Controls */}
+          <div className="rounded-2xl border border-[#C7C2BA] bg-white p-6 shadow-xs space-y-4">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-[#C7C2BA]/40">
+              <div>
+                <h3 className="text-base font-bold text-[#142446]">
+                  ACBP 2026-27 Training Batch Allocation Plan
+                </h3>
+                <p className="text-xs text-[#475A6F] mt-0.5">
+                  Showing {filteredBatches.length} of {plan.batches.length} allocated batches
+                </p>
+              </div>
+
+              {/* Filters */}
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="relative">
+                  <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-[#475A6F]" />
+                  <input
+                    type="text"
+                    placeholder="Search batch, course, skill..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-8 pr-3 py-1.5 text-xs bg-[#FAF9F6] border border-[#C7C2BA] rounded-lg text-[#142446] placeholder:text-[#475A6F] focus:outline-hidden focus:ring-1 focus:ring-[#142446]"
                   />
                 </div>
-              );
-            })}
-          </div>
 
-          {/* Main Interactive ACBP Table */}
-          <ACBPRecommendationTable plan={plan} showExportButton={true} />
+                <select
+                  value={divisionFilter}
+                  onChange={(e) => setDivisionFilter(e.target.value)}
+                  className="py-1.5 px-2.5 text-xs bg-[#FAF9F6] border border-[#C7C2BA] rounded-lg text-[#142446] focus:outline-hidden focus:ring-1 focus:ring-[#142446]"
+                >
+                  <option value="ALL">All MoSPI Divisions</option>
+                  <option value="Field">FOD (Field Operations)</option>
+                  <option value="Economic">ESD (Economic Statistics)</option>
+                  <option value="National">NAD (National Accounts)</option>
+                  <option value="Informatics">DIID (Data Informatics)</option>
+                  <option value="Research">SDRD (Survey Design)</option>
+                </select>
 
-          {/* Execution Guidelines Box */}
-          <Card className="border-blue-200 bg-blue-50/50">
-            <CardHeader className="pb-2">
-              <div className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-[#000080]" />
-                <CardTitle className="text-sm font-bold text-[#000080]">
-                  ACBP 2026-27 Implementation Directives
-                </CardTitle>
+                <select
+                  value={channelFilter}
+                  onChange={(e) => setChannelFilter(e.target.value)}
+                  className="py-1.5 px-2.5 text-xs bg-[#FAF9F6] border border-[#C7C2BA] rounded-lg text-[#142446] focus:outline-hidden focus:ring-1 focus:ring-[#142446]"
+                >
+                  <option value="ALL">All Delivery Channels</option>
+                  <option value="NSSTA TPAC">NSSTA TPAC (Residential)</option>
+                  <option value="iGOT Karmayogi">iGOT Karmayogi (e-Learning)</option>
+                </select>
+
+                <select
+                  value={priorityFilter}
+                  onChange={(e) => setPriorityFilter(e.target.value)}
+                  className="py-1.5 px-2.5 text-xs bg-[#FAF9F6] border border-[#C7C2BA] rounded-lg text-[#142446] focus:outline-hidden focus:ring-1 focus:ring-[#142446]"
+                >
+                  <option value="ALL">All Priorities</option>
+                  <option value="CRITICAL">Critical Priority</option>
+                  <option value="HIGH">High Priority</option>
+                  <option value="MEDIUM">Medium Priority</option>
+                </select>
               </div>
-            </CardHeader>
-            <CardContent className="text-xs text-slate-700 space-y-2">
-              <p>
-                1. <strong>Subordinate Statistical Cadre Priority</strong>: 70% of
-                NSSTA residential batch seats are reserved for JSO/SSO officers
-                with identified deficits in Microdata Validation (<code>TECH_VAL_05</code>)
-                and Survey Sampling (<code>STAT_SMPL_01</code>).
-              </p>
-              <p>
-                2. <strong>iGOT e-Learning Compliance</strong>: Officers nominated
-                for digital batches must complete the modules on iGOT Karmayogi
-                Bharat within 45 days of enrollment to receive official FRAC
-                competency credentialing.
-              </p>
-              <p>
-                3. <strong>Annual Reporting</strong>: All batch completion records
-                are automatically synchronized with the MoSPI DIID Central Skill
-                Repository.
-              </p>
-            </CardContent>
-          </Card>
+            </div>
+
+            {/* Table */}
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead>
+                  <tr className="border-b border-[#C7C2BA] font-bold text-[#475A6F] uppercase tracking-wider">
+                    <th className="pb-3 pr-3">Batch ID</th>
+                    <th className="pb-3 px-3">Course Title</th>
+                    <th className="pb-3 px-3 text-center">Channel</th>
+                    <th className="pb-3 px-3">Target Competency</th>
+                    <th className="pb-3 px-3">Target Divisions</th>
+                    <th className="pb-3 px-3 text-center">Officers</th>
+                    <th className="pb-3 px-3">Schedule</th>
+                    <th className="pb-3 pl-3 text-center">Priority</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#C7C2BA]/40">
+                  {filteredBatches.map((batch: ACBPBatchPlan) => (
+                    <tr key={batch.batchId} className="hover:bg-[#FAF9F6] transition-colors">
+                      <td className="py-3 pr-3 font-mono font-bold text-[#142446]">
+                        {batch.batchId}
+                      </td>
+                      <td className="py-3 px-3 max-w-xs">
+                        <p className="font-bold text-[#142446] line-clamp-1">
+                          {batch.courseTitle}
+                        </p>
+                        <p className="text-[10px] text-[#475A6F]">
+                          {batch.estimatedHours}h · {batch.cadreTarget.join(", ")}
+                        </p>
+                      </td>
+                      <td className="py-3 px-3 text-center">
+                        <span
+                          className={`inline-block text-[10px] font-bold px-2 py-0.5 rounded ${
+                            batch.source === "NSSTA TPAC"
+                              ? "bg-[#142446] text-white"
+                              : "bg-[#F3E7D1] text-[#142446] border border-[#C7C2BA]"
+                          }`}
+                        >
+                          {batch.source === "NSSTA TPAC" ? "NSSTA" : "iGOT"}
+                        </span>
+                      </td>
+                      <td className="py-3 px-3">
+                        <p className="font-semibold text-[#142446]">{batch.targetCompetencyName}</p>
+                        <p className="text-[10px] font-mono text-[#475A6F]">
+                          {batch.targetCompetencyId} · {batch.targetDomain.split(" ")[0]}
+                        </p>
+                      </td>
+                      <td className="py-3 px-3 font-medium text-[#142446]">
+                        {batch.targetDivisions.join(", ")}
+                      </td>
+                      <td className="py-3 px-3 text-center font-bold font-mono text-[#142446]">
+                        {batch.recommendedOfficersCount}
+                      </td>
+                      <td className="py-3 px-3 text-[#475A6F]">
+                        {batch.scheduleWindow || "Q1 2026-27"}
+                      </td>
+                      <td className="py-3 pl-3 text-center">
+                        <span
+                          className={`inline-block text-[10px] font-bold px-2 py-0.5 rounded ${
+                            batch.priority === "CRITICAL"
+                              ? "bg-[#142446] text-white"
+                              : "bg-[#FAF9F6] text-[#142446] border border-[#C7C2BA]"
+                          }`}
+                        >
+                          {batch.priority}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </main>
       </div>
 
@@ -293,12 +377,12 @@ export default function ACBPPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-[#000080] border-t-transparent" />
+        <div className="min-h-screen bg-[#FAF9F6] flex items-center justify-center">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#142446] border-t-transparent" />
         </div>
       }
     >
-      <ACBPPageContent />
+      <ACBPContent />
     </Suspense>
   );
 }

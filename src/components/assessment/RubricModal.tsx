@@ -1,16 +1,13 @@
 "use client";
 
 import React, { useEffect } from "react";
-import type { Competency, RubricDescriptor } from "@/lib/types";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
+import type { Competency } from "@/lib/types";
 import {
   X,
   BookOpen,
   Award,
   CheckCircle2,
   Target,
-  Sparkles,
   Building2,
 } from "lucide-react";
 
@@ -50,155 +47,124 @@ export function RubricModal({
 
   if (!isOpen || !competency) return null;
 
-  const levelColors: Record<number, { border: string; bg: string; text: string }> = {
-    1: { border: "border-slate-300", bg: "bg-slate-50", text: "text-slate-700" },
-    2: { border: "border-blue-300", bg: "bg-blue-50/50", text: "text-blue-700" },
-    3: { border: "border-emerald-300", bg: "bg-emerald-50/50", text: "text-emerald-700" },
-    4: { border: "border-amber-300", bg: "bg-amber-50/50", text: "text-amber-700" },
-    5: { border: "border-purple-300", bg: "bg-purple-50/50", text: "text-purple-700" },
-  };
-
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#142446]/40 backdrop-blur-xs"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="rubric-modal-title"
     >
       <div
-        className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-slate-200 animate-in zoom-in-95 duration-200"
+        className="bg-white rounded-2xl shadow-xl max-w-3xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-[#C7C2BA]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="p-6 bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950 text-white flex items-start justify-between">
+        <div className="p-6 bg-[#FAF9F6] border-b border-[#C7C2BA] text-[#142446] flex items-start justify-between">
           <div className="space-y-2 max-w-[85%]">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded text-xs font-mono font-bold bg-amber-400/20 text-amber-300 border border-amber-400/30">
+              <span className="px-2.5 py-0.5 rounded text-xs font-mono font-bold bg-[#F3E7D1] text-[#142446] border border-[#C7C2BA]">
                 {competency.code || competency.id}
               </span>
-              <span className="px-2.5 py-0.5 rounded text-xs font-medium bg-slate-700 text-slate-200">
+              <span className="px-2.5 py-0.5 rounded text-xs font-semibold bg-white border border-[#C7C2BA] text-[#475A6F]">
                 {competency.domain}
               </span>
               {competency.officialDivisionFocus && competency.officialDivisionFocus.length > 0 && (
-                <div className="flex items-center gap-1 text-xs text-slate-300">
-                  <Building2 className="w-3.5 h-3.5 text-slate-400" />
+                <div className="flex items-center gap-1 text-xs text-[#475A6F]">
+                  <Building2 className="w-3.5 h-3.5 text-[#475A6F]" />
                   <span>Divisions: {competency.officialDivisionFocus.join(", ")}</span>
                 </div>
               )}
             </div>
-            <h2 id="rubric-modal-title" className="text-xl font-bold text-white tracking-tight">
+            <h2 id="rubric-modal-title" className="text-xl font-bold text-[#142446] tracking-tight">
               {competency.name}
             </h2>
-            <p className="text-sm text-slate-300 line-clamp-2 leading-relaxed">
+            <p className="text-sm text-[#475A6F] line-clamp-2 leading-relaxed">
               {competency.description}
             </p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+            className="p-2 rounded-lg text-[#475A6F] hover:text-[#142446] hover:bg-[#F3E7D1] transition-colors"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Modal Body: Rubric Levels 1 to 5 */}
-        <div className="p-6 overflow-y-auto space-y-4 flex-1 bg-slate-50/50">
-          <div className="flex items-center justify-between pb-2 border-b border-slate-200 text-xs font-semibold text-slate-500 uppercase tracking-wider">
-            <span>Official FRAC Proficiency Scale (Levels 1-5)</span>
-            <div className="flex items-center gap-4">
+        {/* Modal Body - 5 Proficiency Levels */}
+        <div className="p-6 overflow-y-auto space-y-4 flex-1 bg-white">
+          <div className="flex items-center justify-between pb-2 border-b border-[#C7C2BA]/40 text-xs text-[#475A6F]">
+            <span>Official FRAC Behavioral Descriptors (Level 1–5)</span>
+            <div className="flex items-center gap-4 font-medium">
               {benchmarkRating && (
-                <span className="flex items-center gap-1 text-amber-600 font-medium normal-case">
-                  <Target className="w-3.5 h-3.5" /> Target: Level {benchmarkRating}
+                <span className="flex items-center gap-1 text-[#142446]">
+                  <Target className="w-3.5 h-3.5 text-[#D8921E]" /> Cadre Target: L{benchmarkRating}
                 </span>
               )}
               {currentRating && (
-                <span className="flex items-center gap-1 text-indigo-600 font-medium normal-case">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> Current: Level {currentRating}
+                <span className="flex items-center gap-1 text-[#142446]">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#142446]" /> Current: L{currentRating}
                 </span>
               )}
             </div>
           </div>
 
           <div className="space-y-3">
-            {competency.rubrics.map((rubric: RubricDescriptor) => {
+            {competency.rubrics.map((rubric) => {
               const isCurrent = currentRating === rubric.level;
               const isBenchmark = benchmarkRating === rubric.level;
-              const col = levelColors[rubric.level] || levelColors[1];
 
               return (
                 <div
                   key={rubric.level}
-                  className={`p-4 rounded-xl border transition-all duration-200 ${
+                  onClick={() => onSelectRating && onSelectRating(rubric.level)}
+                  className={`p-4 rounded-xl border transition-all cursor-pointer relative ${
                     isCurrent
-                      ? "border-indigo-500 bg-indigo-50/40 ring-2 ring-indigo-500/20 shadow-sm"
+                      ? "border-[#142446] bg-[#FAF9F6] ring-1 ring-[#142446]"
                       : isBenchmark
-                      ? "border-amber-400 bg-amber-50/30"
-                      : `bg-white ${col.border} hover:border-slate-400`
+                      ? "border-[#D8921E] bg-[#F3E7D1]/30"
+                      : "border-[#C7C2BA]/60 bg-white hover:border-[#C7C2BA] hover:bg-[#FAF9F6]"
                   }`}
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-center gap-2.5">
-                      <div
-                        className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-sm ${
-                          isCurrent
-                            ? "bg-indigo-600 text-white"
-                            : isBenchmark
-                            ? "bg-amber-500 text-white"
-                            : "bg-slate-200 text-slate-700"
-                        }`}
-                      >
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="w-6 h-6 rounded-full bg-[#142446] text-white flex items-center justify-center text-xs font-bold shrink-0">
                         {rubric.level}
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
-                          Level {rubric.level}: {rubric.label}
-                          {isCurrent && (
-                            <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700 flex items-center gap-1">
-                              <CheckCircle2 className="w-3 h-3" /> Your Selected Rating
-                            </span>
-                          )}
-                          {isBenchmark && (
-                            <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 flex items-center gap-1">
-                              <Target className="w-3 h-3" /> Cadre Target Benchmark
-                            </span>
-                          )}
-                        </h4>
-                      </div>
+                      </span>
+                      <h3 className="text-sm font-bold text-[#142446]">
+                        {rubric.label}
+                      </h3>
                     </div>
 
-                    {onSelectRating && (
-                      <Button
-                        size="sm"
-                        variant={isCurrent ? "navy" : "outline"}
-                        onClick={() => {
-                          onSelectRating(rubric.level);
-                        }}
-                        className="text-xs h-8 px-3"
-                      >
-                        {isCurrent ? "Selected" : `Set Level ${rubric.level}`}
-                      </Button>
-                    )}
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      {isBenchmark && (
+                        <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#D8921E] text-white flex items-center gap-1">
+                          <Target className="w-3 h-3" /> Cadre Target
+                        </span>
+                      )}
+                      {isCurrent && (
+                        <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#142446] text-white flex items-center gap-1">
+                          <CheckCircle2 className="w-3 h-3" /> Selected
+                        </span>
+                      )}
+                    </div>
                   </div>
 
-                  <p className="mt-2 text-sm text-slate-700 leading-relaxed pl-9">
+                  <p className="text-xs text-[#475A6F] leading-relaxed mb-3">
                     {rubric.description}
                   </p>
 
                   {rubric.behavioralIndicators && rubric.behavioralIndicators.length > 0 && (
-                    <div className="mt-3 pl-9 pt-2 border-t border-slate-200/60">
-                      <span className="text-xs font-semibold text-slate-500 block mb-1.5 flex items-center gap-1">
-                        <Sparkles className="w-3 h-3 text-amber-500" /> Behavioral Indicators:
-                      </span>
+                    <div className="pt-2.5 border-t border-[#C7C2BA]/40 space-y-1">
+                      <p className="text-[11px] font-bold text-[#142446]">
+                        Observable Behavioral Indicators:
+                      </p>
                       <ul className="space-y-1">
-                        {rubric.behavioralIndicators.map((ind, idx) => (
-                          <li
-                            key={idx}
-                            className="text-xs text-slate-600 flex items-start gap-1.5"
-                          >
-                            <span className="text-slate-400 mt-1">•</span>
-                            <span>{ind}</span>
+                        {rubric.behavioralIndicators.map((indicator, idx) => (
+                          <li key={idx} className="text-xs text-[#475A6F] flex items-start gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#D8921E] mt-1.5 shrink-0" />
+                            <span>{indicator}</span>
                           </li>
                         ))}
                       </ul>
@@ -211,14 +177,16 @@ export function RubricModal({
         </div>
 
         {/* Modal Footer */}
-        <div className="p-4 bg-white border-t border-slate-200 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs text-slate-500">
-            <BookOpen className="w-4 h-4 text-slate-400" />
-            <span>Mission Karmayogi FRAC Competency Taxonomy (MoSPI/CBC)</span>
-          </div>
-          <Button variant="outline" size="sm" onClick={onClose}>
-            Close
-          </Button>
+        <div className="p-4 bg-[#FAF9F6] border-t border-[#C7C2BA] flex items-center justify-between">
+          <p className="text-xs text-[#475A6F]">
+            Click any level above to set your self-assessed proficiency.
+          </p>
+          <button
+            onClick={onClose}
+            className="px-4 py-2 rounded-lg bg-[#142446] text-white text-xs font-semibold hover:bg-[#1e3460] transition-colors"
+          >
+            Close Rubric
+          </button>
         </div>
       </div>
     </div>

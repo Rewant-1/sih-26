@@ -2,18 +2,15 @@
 
 import React, { useState } from "react";
 import {
-  AlertTriangle,
+  AlertCircle,
   Building2,
   ChevronRight,
-  Flame,
   Info,
   Layers,
-  Sparkles,
-  TrendingDown,
+  Target,
   Users,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
 import type { DivisionAggregateMetric, CompetencyDomain } from "@/lib/types";
 
 interface DivisionHeatmapProps {
@@ -31,8 +28,8 @@ const DOMAINS: CompetencyDomain[] = [
 const DOMAIN_SHORT_NAMES: Record<CompetencyDomain, string> = {
   "Statistical Competencies": "Statistical",
   "Technical Competencies": "Technical",
-  "Digital Governance & Data Stewardship": "Digital Gov & SDC",
-  "Behavioural & Managerial Competencies": "Behavioural",
+  "Digital Governance & Data Stewardship": "Digital Gov",
+  "Behavioural & Managerial Competencies": "Managerial",
 };
 
 export function DivisionHeatmap({
@@ -49,92 +46,86 @@ export function DivisionHeatmap({
   const selectedDivision =
     divisions.find((d) => d.divisionCode === selectedDivCode) || divisions[0];
 
-  // Helper for color coding heat map cell
+  // Helper for color coding heat map cell using strict palette
   const getCellColor = (score: number) => {
     if (score < 2.5) {
-      return "bg-rose-500 text-white hover:bg-rose-600 ring-rose-400";
+      return "bg-[#F3E7D1] text-[#142446] border border-[#C7C2BA] font-bold";
     }
     if (score < 3.2) {
-      return "bg-amber-400 text-slate-950 hover:bg-amber-500 ring-amber-300";
+      return "bg-[#B7C7D9] text-[#142446] font-bold";
     }
     if (score < 3.8) {
-      return "bg-emerald-500 text-white hover:bg-emerald-600 ring-emerald-400";
+      return "bg-[#475A6F] text-white font-bold";
     }
-    return "bg-emerald-700 text-white hover:bg-emerald-800 ring-emerald-500";
-  };
-
-  const getCellBgLight = (score: number) => {
-    if (score < 2.5) return "bg-rose-50 text-rose-800 border-rose-200";
-    if (score < 3.2) return "bg-amber-50 text-amber-800 border-amber-200";
-    return "bg-emerald-50 text-emerald-800 border-emerald-200";
+    return "bg-[#142446] text-white font-bold";
   };
 
   return (
-    <Card className="w-full">
-      <CardHeader className="pb-3">
+    <Card className="w-full border-[#C7C2BA] bg-white">
+      <CardHeader className="pb-3 border-b border-[#C7C2BA]/40">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <div>
             <div className="flex items-center gap-2">
-              <CardTitle className="text-base sm:text-lg">
+              <CardTitle className="text-base sm:text-lg text-[#142446] font-bold">
                 MoSPI Division Competency Heatmap Matrix
               </CardTitle>
-              <Badge variant="navy" size="sm">
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#FAF9F6] text-[#142446] border border-[#C7C2BA]">
                 5 Divisions
-              </Badge>
+              </span>
             </div>
-            <CardDescription>
+            <CardDescription className="text-xs text-[#475A6F]">
               Aggregate domain proficiency averages across official MoSPI statistical divisions
             </CardDescription>
           </div>
 
           {/* Color Legend */}
-          <div className="flex items-center gap-2 text-[11px] font-medium bg-slate-50 p-2 rounded-lg border border-slate-200">
-            <span className="text-slate-500 font-semibold">Scale (1-5):</span>
+          <div className="flex items-center gap-3 text-[11px] font-medium bg-[#FAF9F6] p-2 rounded-lg border border-[#C7C2BA]">
+            <span className="text-[#475A6F] font-bold">Scale (1-5):</span>
             <div className="flex items-center gap-1">
-              <span className="h-3 w-3 rounded bg-rose-500" />
-              <span>&lt; 2.5 (Critical)</span>
+              <span className="h-3 w-3 rounded bg-[#F3E7D1] border border-[#C7C2BA]" />
+              <span className="text-[#142446]">&lt; 2.5 (Priority Gap)</span>
             </div>
             <div className="flex items-center gap-1">
-              <span className="h-3 w-3 rounded bg-amber-400" />
-              <span>2.5 - 3.2 (Moderate)</span>
+              <span className="h-3 w-3 rounded bg-[#B7C7D9]" />
+              <span className="text-[#142446]">2.5 - 3.2</span>
             </div>
             <div className="flex items-center gap-1">
-              <span className="h-3 w-3 rounded bg-emerald-600" />
-              <span>&gt; 3.2 (Proficient)</span>
+              <span className="h-3 w-3 rounded bg-[#142446]" />
+              <span className="text-[#142446]">&gt; 3.2 (Benchmark)</span>
             </div>
           </div>
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-6 pt-4">
         {/* Interactive Heatmap Matrix */}
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
+          <table className="w-full border-collapse text-xs">
             <thead>
-              <tr className="border-b border-slate-200">
-                <th className="text-left py-3 px-3 text-xs font-bold uppercase tracking-wider text-slate-500 w-44">
+              <tr className="border-b border-[#C7C2BA]">
+                <th className="text-left py-3 px-3 font-bold uppercase tracking-wider text-[#475A6F] w-44">
                   Division / Cadre
                 </th>
-                <th className="text-center py-3 px-2 text-xs font-bold uppercase tracking-wider text-slate-500">
+                <th className="text-center py-3 px-2 font-bold uppercase tracking-wider text-[#475A6F]">
                   Officers
                 </th>
                 {DOMAINS.map((domain) => (
                   <th
                     key={domain}
-                    className="text-center py-3 px-2 text-xs font-bold text-slate-700 min-w-[120px]"
+                    className="text-center py-3 px-2 font-bold text-[#142446] min-w-[110px]"
                   >
                     {DOMAIN_SHORT_NAMES[domain]}
                   </th>
                 ))}
-                <th className="text-center py-3 px-2 text-xs font-bold uppercase tracking-wider text-slate-500">
+                <th className="text-center py-3 px-2 font-bold uppercase tracking-wider text-[#475A6F]">
                   Index
                 </th>
-                <th className="text-center py-3 px-2 text-xs font-bold uppercase tracking-wider text-slate-500">
+                <th className="text-center py-3 px-2 font-bold uppercase tracking-wider text-[#475A6F]">
                   Deficits
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-[#C7C2BA]/40">
               {divisions.map((div) => {
                 const isSelected = div.divisionCode === selectedDivCode;
 
@@ -145,10 +136,10 @@ export function DivisionHeatmap({
                       setSelectedDivCode(div.divisionCode);
                       onSelectDivision?.(div);
                     }}
-                    className={`cursor-pointer transition-all ${
+                    className={`cursor-pointer transition-colors ${
                       isSelected
-                        ? "bg-slate-100/90 font-medium"
-                        : "hover:bg-slate-50/70"
+                        ? "bg-[#FAF9F6] font-medium"
+                        : "hover:bg-[#FAF9F6]/60"
                     }`}
                   >
                     <td className="py-3 px-3">
@@ -156,21 +147,19 @@ export function DivisionHeatmap({
                         <span
                           className={`font-mono text-xs px-2 py-0.5 rounded font-bold ${
                             isSelected
-                              ? "bg-[#000080] text-white"
-                              : "bg-slate-200 text-slate-700"
+                              ? "bg-[#142446] text-white"
+                              : "bg-[#FAF9F6] text-[#142446] border border-[#C7C2BA]"
                           }`}
                         >
                           {div.divisionCode}
                         </span>
-                        <div className="flex flex-col">
-                          <span className="text-xs font-semibold text-slate-900 leading-tight">
-                            {div.divisionName}
-                          </span>
-                        </div>
+                        <span className="text-xs font-bold text-[#142446] leading-tight">
+                          {div.divisionName}
+                        </span>
                       </div>
                     </td>
 
-                    <td className="text-center py-3 px-2 text-xs font-mono font-medium text-slate-600">
+                    <td className="text-center py-3 px-2 font-mono font-medium text-[#475A6F]">
                       {div.totalOfficers.toLocaleString()}
                     </td>
 
@@ -187,12 +176,12 @@ export function DivisionHeatmap({
                               })
                             }
                             onMouseLeave={() => setHoveredCell(null)}
-                            className={`mx-auto flex h-9 w-24 items-center justify-center rounded-lg text-xs font-mono font-bold transition-transform shadow-xs ${getCellColor(
+                            className={`mx-auto flex h-8 w-20 items-center justify-center rounded-lg text-xs font-mono transition-transform ${getCellColor(
                               score
                             )} ${
                               hoveredCell?.divisionCode === div.divisionCode &&
                               hoveredCell?.domain === domain
-                                ? "scale-105 ring-2"
+                                ? "ring-2 ring-[#142446]"
                                 : ""
                             }`}
                           >
@@ -203,20 +192,14 @@ export function DivisionHeatmap({
                     })}
 
                     <td className="text-center py-3 px-2">
-                      <span className="inline-flex items-center justify-center font-mono text-xs font-bold px-2 py-1 rounded-md bg-slate-100 text-slate-900 border border-slate-200">
+                      <span className="inline-flex items-center justify-center font-mono text-xs font-bold px-2 py-1 rounded bg-[#FAF9F6] text-[#142446] border border-[#C7C2BA]">
                         {div.overallProficiency}%
                       </span>
                     </td>
 
                     <td className="text-center py-3 px-2">
-                      <span
-                        className={`inline-flex items-center gap-1 font-mono text-xs font-bold px-2 py-1 rounded-md ${
-                          div.criticalGapsCount > 50
-                            ? "bg-rose-100 text-rose-800 border border-rose-200"
-                            : "bg-amber-100 text-amber-800 border border-amber-200"
-                        }`}
-                      >
-                        <Flame className="h-3 w-3" />
+                      <span className="inline-flex items-center gap-1 font-mono text-xs font-bold px-2 py-1 rounded bg-white text-[#142446] border border-[#C7C2BA]">
+                        <AlertCircle className="h-3 w-3 text-[#D8921E]" />
                         {div.criticalGapsCount}
                       </span>
                     </td>
@@ -229,65 +212,57 @@ export function DivisionHeatmap({
 
         {/* Selected Division Deep Dive Drawer / Panel */}
         {selectedDivision && (
-          <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-slate-200 pb-3">
+          <div className="rounded-xl border border-[#C7C2BA] bg-[#FAF9F6] p-4 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-[#C7C2BA]/40 pb-3">
               <div>
                 <div className="flex items-center gap-2">
-                  <Building2 className="h-4 w-4 text-[#000080]" />
-                  <h4 className="text-sm font-bold text-slate-900">
+                  <Building2 className="h-4 w-4 text-[#142446]" />
+                  <h4 className="text-sm font-bold text-[#142446]">
                     {selectedDivision.divisionName} ({selectedDivision.divisionCode})
                   </h4>
-                  <Badge variant="navy" size="sm">
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-white text-[#142446] border border-[#C7C2BA]">
                     {selectedDivision.totalOfficers} Officers Total
-                  </Badge>
+                  </span>
                 </div>
-                <p className="text-xs text-slate-500 mt-0.5">
-                  Cadre Breakdown: {selectedDivision.cadreBreakdown.ISS_ASSISTANT_DIRECTOR} ISS AD •{" "}
-                  {selectedDivision.cadreBreakdown.SENIOR_STATISTICAL_OFFICER} SSO •{" "}
-                  {selectedDivision.cadreBreakdown.JUNIOR_STATISTICAL_OFFICER} JSO
+                <p className="text-xs text-[#475A6F] mt-0.5">
+                  Cadre Breakdown: {selectedDivision.cadreBreakdown.ISS_ASSISTANT_DIRECTOR} ISS AD · {selectedDivision.cadreBreakdown.SENIOR_STATISTICAL_OFFICER} SSO · {selectedDivision.cadreBreakdown.JUNIOR_STATISTICAL_OFFICER} JSO
                 </p>
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="text-xs text-slate-500">Overall Proficiency:</span>
-                <span className="text-sm font-mono font-bold text-[#000080]">
+                <span className="text-xs text-[#475A6F]">Overall Division Index:</span>
+                <span className="font-mono text-sm font-bold text-[#142446]">
                   {selectedDivision.overallProficiency}%
                 </span>
               </div>
             </div>
 
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                  Top Priority Deficiencies in {selectedDivision.divisionCode}
-                </span>
-                <span className="text-[11px] text-slate-400">
-                  Recommended for ACBP 2026-27 Allocation
-                </span>
-              </div>
+            {/* Top Critical Competencies for Selected Division */}
+            <div className="space-y-2">
+              <h5 className="text-xs font-bold text-[#142446] uppercase tracking-wider">
+                Priority Deficiencies in {selectedDivision.divisionCode}
+              </h5>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {selectedDivision.topDeficientCompetencies.map((def, idx) => (
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {(selectedDivision.topDeficientCompetencies || []).map((comp) => (
                   <div
-                    key={def.competencyId}
-                    className="rounded-lg border border-slate-200 bg-white p-3 space-y-1.5 shadow-xs"
+                    key={comp.competencyId}
+                    className="p-3 bg-white rounded-lg border border-[#C7C2BA] space-y-1"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-mono text-[10px] font-bold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
-                        #{idx + 1} {def.competencyId}
+                      <span className="font-mono text-[10px] font-bold text-[#475A6F]">
+                        {comp.competencyId}
                       </span>
-                      <Badge variant="destructive" size="sm">
-                        Gap: -{def.gap.toFixed(2)}
-                      </Badge>
+                      <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#FAF9F6] text-[#142446] border border-[#C7C2BA]">
+                        Gap: -{comp.gap.toFixed(1)}
+                      </span>
                     </div>
-
-                    <p className="text-xs font-semibold text-slate-900 line-clamp-1">
-                      {def.competencyName}
+                    <p className="font-bold text-xs text-[#142446] line-clamp-1">
+                      {comp.competencyName}
                     </p>
-
-                    <div className="flex justify-between items-center text-[11px] text-slate-500 font-mono pt-1">
-                      <span>Avg Score: {def.averageScore.toFixed(2)}</span>
-                      <span>Target: {def.benchmark.toFixed(2)}</span>
+                    <div className="flex justify-between items-center text-[10px] text-[#475A6F] pt-1 border-t border-[#C7C2BA]/30">
+                      <span>Assessed: {comp.averageScore.toFixed(1)}</span>
+                      <span>Target: {comp.benchmark.toFixed(1)}</span>
                     </div>
                   </div>
                 ))}

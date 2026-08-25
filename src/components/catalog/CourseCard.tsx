@@ -2,27 +2,14 @@
 
 import React, { useState } from "react";
 import {
-  Award,
-  BookOpen,
   Building2,
-  Calendar,
-  Check,
-  CheckCircle2,
   Clock,
   ExternalLink,
   GraduationCap,
-  Info,
-  MapPin,
-  Sparkles,
-  Star,
-  Users,
-  ChevronDown,
-  ChevronUp,
+  Target,
 } from "lucide-react";
 import type { SunbirdCBCourse } from "@/lib/types/sunbird";
-import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
 
 export interface CourseCardProps {
   course: SunbirdCBCourse;
@@ -39,11 +26,9 @@ export function CourseCard({
   onEnroll,
   relevanceScore,
   recommendationReason,
-  matchedCompetenciesCount,
 }: CourseCardProps) {
   const [enrolled, setEnrolled] = useState(isEnrolled);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
-  const [showOutcomes, setShowOutcomes] = useState(false);
   const [isEnrolling, setIsEnrolling] = useState(false);
 
   const handleEnrollClick = (e: React.MouseEvent) => {
@@ -57,348 +42,184 @@ export function CourseCard({
       if (onEnroll) {
         onEnroll(course.identifier);
       }
-    }, 400);
+    }, 300);
   };
 
   const isNSSTA = course.source === "NSSTA TPAC";
 
   return (
     <>
-      <Card className="flex flex-col justify-between overflow-hidden border-slate-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-slate-300 relative group">
-        {/* Top Highlight Stripe */}
-        <div
-          className={`h-1.5 w-full ${
-            isNSSTA
-              ? "bg-gradient-to-r from-blue-700 via-indigo-800 to-blue-900"
-              : "bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600"
-          }`}
-        />
-
-        <div className="p-5 flex-1 flex flex-col">
-          {/* Header Bar: Badges & Relevance */}
-          <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-            <div className="flex flex-wrap items-center gap-1.5">
-              {/* Source Badge */}
-              <Badge
-                variant={isNSSTA ? "nssta" : "igot"}
-                size="sm"
-                className="font-bold flex items-center gap-1"
+      {/* Spacious, Structured Course Item (Decluttered, Non-AI Look) */}
+      <div className="rounded-2xl border border-[#C7C2BA] bg-white p-6 flex flex-col justify-between space-y-4 hover:border-[#142446]/40 transition-colors">
+        
+        {/* Top Metadata Row */}
+        <div className="space-y-3">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <span
+                className={`inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-0.5 rounded-full ${
+                  isNSSTA
+                    ? "bg-[#142446] text-white"
+                    : "bg-[#FAF9F6] text-[#142446] border border-[#C7C2BA]"
+                }`}
               >
                 {isNSSTA ? (
-                  <Building2 className="w-3 h-3 text-blue-800" />
+                  <Building2 className="w-3 h-3" />
                 ) : (
-                  <GraduationCap className="w-3 h-3 text-orange-700" />
+                  <GraduationCap className="w-3 h-3" />
                 )}
                 <span>{course.source}</span>
-              </Badge>
+              </span>
 
-              {/* Delivery Mode Badge */}
-              <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-600 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200">
-                <Clock className="w-2.5 h-2.5 text-slate-400" />
-                <span>{course.deliveryMode.split("(")[0].trim()}</span>
+              <span className="text-[11px] text-[#475A6F] font-medium">
+                {course.deliveryMode.split("(")[0].trim()} · {course.duration}
               </span>
             </div>
 
-            {/* Relevance Score Pill if passed */}
             {typeof relevanceScore === "number" && (
-              <div className="flex items-center gap-1 bg-emerald-50 border border-emerald-200 text-emerald-800 px-2 py-0.5 rounded-full text-xs font-bold shadow-xs">
-                <Sparkles className="w-3 h-3 text-emerald-600" />
-                <span>{relevanceScore}% Match</span>
-              </div>
+              <span className="text-[11px] font-bold text-[#142446] px-2 py-0.5 rounded bg-[#F3E7D1] border border-[#C7C2BA] shrink-0">
+                {relevanceScore}% Gap Fit
+              </span>
             )}
           </div>
 
-          {/* Course Code & Title */}
-          <div className="mb-2">
-            <span className="text-[11px] font-mono font-semibold text-slate-400 block mb-0.5">
+          {/* Title and Organization */}
+          <div>
+            <span className="text-[11px] font-mono text-[#475A6F] block">
               {course.code}
             </span>
-            <h3 className="font-bold text-slate-900 text-base leading-snug group-hover:text-blue-900 transition-colors line-clamp-2">
+            <h3 className="text-base font-bold text-[#142446] leading-snug mt-0.5">
               {course.name}
             </h3>
+            <p className="text-xs text-[#475A6F] mt-1">
+              {course.organisation}
+            </p>
           </div>
 
-          {/* Organisation */}
-          <p className="text-xs font-medium text-slate-500 mb-2.5 flex items-center gap-1.5">
-            <span className="truncate">{course.organisation}</span>
-          </p>
-
-          {/* Course Description */}
-          <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-4">
+          {/* Description */}
+          <p className="text-xs text-[#475A6F] leading-relaxed line-clamp-2">
             {course.description}
           </p>
 
-          {/* Recommendation Reason Banner if present */}
+          {/* Recommendation Note */}
           {recommendationReason && (
-            <div className="mb-3.5 p-2 rounded-lg bg-amber-50/80 border border-amber-200/80 text-[11px] text-amber-900 leading-snug flex items-start gap-1.5">
-              <Info className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
-              <span>{recommendationReason}</span>
-            </div>
+            <p className="text-[11px] text-[#142446] font-medium p-2 rounded-lg bg-[#FAF9F6] border border-[#C7C2BA]/60">
+              Role Recommendation: {recommendationReason}
+            </p>
           )}
-
-          {/* Competency Chips */}
-          <div className="space-y-1.5 mb-4">
-            <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-              Competencies Covered ({course.competencies.length})
-            </div>
-            <div className="flex flex-wrap gap-1.5">
-              {course.competencies.map((comp) => (
-                <span
-                  key={comp.id}
-                  className="inline-flex items-center gap-1 text-[11px] font-medium bg-slate-50 text-slate-800 border border-slate-200 px-2 py-0.5 rounded-md hover:bg-slate-100 transition-colors"
-                >
-                  <span className="truncate max-w-[180px]">{comp.name}</span>
-                  <span className="bg-blue-100 text-blue-900 text-[10px] font-bold px-1.5 py-0.2 rounded">
-                    L{comp.level}
-                  </span>
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* NSSTA Residential Calendar Notice if applicable */}
-          {course.tpacMetadata && (
-            <div className="mb-4 p-2.5 rounded-lg bg-blue-50/70 border border-blue-200 text-xs text-blue-950 space-y-1">
-              <div className="flex items-center gap-1.5 font-semibold text-blue-900 text-[11px]">
-                <Calendar className="w-3.5 h-3.5 text-blue-700" />
-                <span>Batch: {course.tpacMetadata.batchSchedule}</span>
-              </div>
-              <div className="flex items-center gap-1.5 text-slate-600 text-[11px]">
-                <MapPin className="w-3.5 h-3.5 text-slate-400" />
-                <span className="truncate">{course.tpacMetadata.venue}</span>
-              </div>
-            </div>
-          )}
-
-          {/* Quick Stats Grid */}
-          <div className="mt-auto pt-3 border-t border-slate-100 grid grid-cols-3 gap-2 text-center text-xs text-slate-600">
-            <div className="flex flex-col items-center justify-center p-1 rounded bg-slate-50">
-              <span className="text-[10px] text-slate-400 font-medium">Duration</span>
-              <span className="font-semibold text-slate-800 text-[11px] truncate w-full">
-                {course.duration}
-              </span>
-            </div>
-            <div className="flex flex-col items-center justify-center p-1 rounded bg-slate-50">
-              <span className="text-[10px] text-slate-400 font-medium">Rating</span>
-              <span className="font-semibold text-amber-700 text-[11px] flex items-center gap-0.5 justify-center">
-                <Star className="w-3 h-3 fill-amber-400 text-amber-500" />
-                {course.rating.toFixed(1)}
-              </span>
-            </div>
-            <div className="flex flex-col items-center justify-center p-1 rounded bg-slate-50">
-              <span className="text-[10px] text-slate-400 font-medium">Enrolled</span>
-              <span className="font-semibold text-slate-800 text-[11px]">
-                {course.enrolledCount.toLocaleString()}
-              </span>
-            </div>
-          </div>
         </div>
 
-        {/* Card Footer Actions */}
-        <div className="p-4 pt-2 pb-4 bg-slate-50/70 border-t border-slate-100 flex items-center justify-between gap-2">
-          <Button
-            variant="outline"
-            size="sm"
+        {/* Bottom Actions Row */}
+        <div className="pt-4 border-t border-[#C7C2BA]/40 flex items-center justify-between gap-4">
+          <button
             onClick={() => setShowDetailsModal(true)}
-            className="text-xs font-medium text-slate-700 hover:text-slate-900 flex items-center gap-1"
+            className="text-xs font-semibold text-[#142446] hover:text-[#D8921E] transition-colors"
           >
-            <BookOpen className="w-3.5 h-3.5 text-slate-500" />
-            <span>Syllabus</span>
-          </Button>
+            View Syllabus & Modules →
+          </button>
 
-          <Button
-            variant={enrolled ? "success" : isNSSTA ? "navy" : "saffron"}
-            size="sm"
-            onClick={handleEnrollClick}
-            disabled={enrolled || isEnrolling}
-            isLoading={isEnrolling}
-            className="text-xs font-semibold flex items-center gap-1.5 min-w-[110px]"
-          >
-            {enrolled ? (
-              <>
-                <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>Enrolled</span>
-              </>
-            ) : isNSSTA ? (
-              <>
-                <Building2 className="w-3.5 h-3.5" />
-                <span>Nominate / Apply</span>
-              </>
-            ) : (
-              <>
-                <GraduationCap className="w-3.5 h-3.5" />
-                <span>Enroll Free</span>
-              </>
-            )}
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant={enrolled ? "outline" : isNSSTA ? "navy" : "saffron"}
+              size="sm"
+              onClick={handleEnrollClick}
+              disabled={enrolled || isEnrolling}
+              className="text-xs font-bold"
+            >
+              {enrolled ? "Enrolled" : isNSSTA ? "Nominate / Apply" : "Enroll Free"}
+            </Button>
+          </div>
         </div>
-      </Card>
+      </div>
 
-      {/* Course Details / Syllabus Modal */}
+      {/* Details Modal */}
       {showDetailsModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-xs animate-in fade-in-50">
+        <div
+          className="fixed inset-0 z-50 bg-[#142446]/60 backdrop-blur-xs flex items-center justify-center p-4"
+          onClick={() => setShowDetailsModal(false)}
+        >
           <div
-            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl border border-slate-200 space-y-5"
+            className="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 space-y-6 shadow-2xl border border-[#C7C2BA]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="flex items-start justify-between gap-4 border-b border-slate-100 pb-4">
+            <div className="flex items-start justify-between gap-4 pb-4 border-b border-[#C7C2BA]/50">
               <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <Badge variant={isNSSTA ? "nssta" : "igot"} size="sm">
-                    {course.source}
-                  </Badge>
-                  <span className="text-xs font-mono text-slate-400">
-                    {course.code}
-                  </span>
-                </div>
-                <h2 className="text-xl font-bold text-slate-900">
+                <span className="text-xs font-mono text-[#475A6F]">{course.code}</span>
+                <h2 className="text-lg sm:text-xl font-bold text-[#142446] mt-0.5">
                   {course.name}
                 </h2>
-                <p className="text-xs text-slate-500 mt-0.5">
-                  Provided by {course.organisation} • Framework: {course.framework}
-                </p>
+                <p className="text-xs text-[#475A6F] mt-1">{course.organisation}</p>
               </div>
+
               <button
                 onClick={() => setShowDetailsModal(false)}
-                className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
-                aria-label="Close"
+                className="text-[#475A6F] hover:text-[#142446] text-xl font-bold px-2 py-1"
               >
                 ✕
               </button>
             </div>
 
-            {/* Overview & Description */}
-            <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+            {/* Course Summary */}
+            <div className="space-y-2">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#142446]">
                 Course Overview
               </h4>
-              <p className="text-sm text-slate-700 leading-relaxed">
+              <p className="text-xs text-[#475A6F] leading-relaxed">
                 {course.description}
               </p>
             </div>
 
-            {/* Target Audience Cadres */}
-            <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">
-                Target Cadres
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {course.targetAudience.map((cadre) => (
-                  <span
-                    key={cadre}
-                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-indigo-50 text-indigo-900 border border-indigo-200"
-                  >
-                    <Users className="w-3 h-3 text-indigo-700" />
-                    <span>{cadre.replace(/_/g, " ")}</span>
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Learning Outcomes */}
-            {course.learningOutcomes && course.learningOutcomes.length > 0 && (
-              <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-                  Key Learning Outcomes
-                </h4>
-                <ul className="space-y-2">
-                  {course.learningOutcomes.map((outcome, idx) => (
-                    <li
-                      key={idx}
-                      className="flex items-start gap-2 text-xs sm:text-sm text-slate-700"
-                    >
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <span>{outcome}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Modules / Curriculum */}
+            {/* Modules List */}
             {course.modules && course.modules.length > 0 && (
-              <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-                  Curriculum &amp; Modules ({course.modules.length} Modules)
+              <div className="space-y-3">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#142446]">
+                  Curriculum Modules ({course.modules.length})
                 </h4>
-                <div className="space-y-2.5">
-                  {course.modules.map((mod, idx) => (
+                <div className="space-y-2">
+                  {course.modules.map((mod, i) => (
                     <div
-                      key={mod.moduleId || idx}
-                      className="p-3 rounded-lg border border-slate-200 bg-slate-50/80"
+                      key={`mod-${i}-${mod.title}`}
+                      className="p-3 rounded-lg border border-[#C7C2BA]/60 bg-[#FAF9F6] flex items-start gap-3"
                     >
-                      <div className="flex items-center justify-between text-xs font-bold text-slate-900 mb-1">
-                        <span>
-                          Module {idx + 1}: {mod.title}
-                        </span>
-                        <span className="text-slate-500 font-normal">
-                          {mod.durationMinutes} mins
-                        </span>
+                      <span className="text-xs font-bold text-[#142446] font-mono w-5">
+                        0{i + 1}
+                      </span>
+                      <div className="flex-1">
+                        <p className="text-xs font-bold text-[#142446]">{mod.title}</p>
+                        {mod.learningOutcomes && mod.learningOutcomes.length > 0 && (
+                          <p className="text-[11px] text-[#475A6F] mt-0.5">{mod.learningOutcomes[0]}</p>
+                        )}
                       </div>
-                      {mod.learningOutcomes && (
-                        <div className="flex flex-wrap gap-1 mt-1.5">
-                          {mod.learningOutcomes.map((o, oIdx) => (
-                            <span
-                              key={oIdx}
-                              className="text-[11px] text-slate-600 bg-white px-2 py-0.5 rounded border border-slate-200"
-                            >
-                              • {o}
-                            </span>
-                          ))}
-                        </div>
-                      )}
+                      <span className="text-[10px] font-medium text-[#475A6F]">
+                        {mod.durationMinutes}m
+                      </span>
                     </div>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* NSSTA Institutional Details */}
-            {course.tpacMetadata && (
-              <div className="p-4 rounded-xl bg-blue-50 border border-blue-200 text-xs space-y-2">
-                <div className="font-bold text-blue-900 text-sm flex items-center gap-2">
-                  <Building2 className="w-4 h-4 text-blue-700" />
-                  <span>NSSTA Greater Noida Training Facility</span>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-700">
-                  <div>
-                    <span className="text-slate-500">Batch Schedule:</span>{" "}
-                    <strong>{course.tpacMetadata.batchSchedule}</strong>
-                  </div>
-                  <div>
-                    <span className="text-slate-500">Venue:</span>{" "}
-                    <strong>{course.tpacMetadata.venue}</strong>
-                  </div>
-                  <div>
-                    <span className="text-slate-500">Course Director:</span>{" "}
-                    <strong>{course.tpacMetadata.courseDirector}</strong>
-                  </div>
-                  <div>
-                    <span className="text-slate-500">Nomination Deadline:</span>{" "}
-                    <strong>{course.tpacMetadata.nominationDeadline}</strong>
-                  </div>
-                </div>
-              </div>
-            )}
-
             {/* Modal Actions */}
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
-              <Button
-                variant="outline"
-                size="md"
-                onClick={() => setShowDetailsModal(false)}
+            <div className="pt-4 border-t border-[#C7C2BA]/40 flex items-center justify-between">
+              <a
+                href={(course as any).url || "https://igotkarmayogi.gov.in"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#142446] hover:text-[#D8921E]"
               >
-                Close
-              </Button>
+                <span>Open in iGOT Portal</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+
               <Button
-                variant={enrolled ? "success" : isNSSTA ? "navy" : "saffron"}
-                size="md"
+                variant={enrolled ? "outline" : isNSSTA ? "navy" : "saffron"}
+                size="sm"
                 onClick={handleEnrollClick}
                 disabled={enrolled || isEnrolling}
-                isLoading={isEnrolling}
+                className="text-xs font-bold"
               >
-                {enrolled ? "Already Enrolled" : isNSSTA ? "Apply for Nomination" : "Direct Enrollment"}
+                {enrolled ? "Already Enrolled" : isNSSTA ? "Nominate / Apply" : "Enroll Free"}
               </Button>
             </div>
           </div>

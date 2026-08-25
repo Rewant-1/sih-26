@@ -11,7 +11,6 @@ import {
   Award,
   CheckCircle2,
   HelpCircle,
-  Sparkles,
 } from "lucide-react";
 import type { Quiz, ScoringResult } from "../../lib/types";
 import { QuestionCard } from "./QuestionCard";
@@ -59,7 +58,7 @@ export function QuizRunner({
         return prev - 1;
       });
 
-      // Accumulate time spent on current question
+      // Increment time spent on active question
       setTimeSpentMap((prev) => ({
         ...prev,
         [currentQuestionId]: (prev[currentQuestionId] || 0) + 1,
@@ -78,13 +77,6 @@ export function QuizRunner({
     }));
   };
 
-  const handleToggleFlag = () => {
-    setMarkedForReview((prev) => ({
-      ...prev,
-      [currentQuestionId]: !prev[currentQuestionId],
-    }));
-  };
-
   const handleClearSelection = () => {
     setUserAnswers((prev) => {
       const next = { ...prev };
@@ -93,60 +85,54 @@ export function QuizRunner({
     });
   };
 
-  const handleNext = () => {
-    if (currentIndex < quiz.questions.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    }
+  const handleToggleFlag = () => {
+    setMarkedForReview((prev) => ({
+      ...prev,
+      [currentQuestionId]: !prev[currentQuestionId],
+    }));
   };
 
-  const handlePrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex((prev) => prev - 1);
-    }
+  const handleAutoSubmit = async () => {
+    await performSubmission();
   };
 
-  const handleAutoSubmit = () => {
-    handleSubmitQuiz();
-  };
-
-  const handleSubmitQuiz = async () => {
+  const performSubmission = async () => {
     setIsSubmitting(true);
-    setShowConfirmModal(false);
+    if (timerRef.current) clearInterval(timerRef.current);
+
+    const totalAllocatedSecs = (quiz.timeLimitMinutes || 10) * 60;
+    const timeTaken = Math.max(1, totalAllocatedSecs - timeRemaining);
 
     try {
-      // Call submit API
-      const response = await fetch("/api/quiz/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          quizId: quiz.id,
-          userId,
-          userCadre,
-          answers: userAnswers,
-          timeSpentMap,
-          markedForReview,
-        }),
-      });
+      const evalResult = evaluateQuizAttempt(
+        quiz,
+        userAnswers,
+        timeSpentMap
+      );
 
-      if (response.ok) {
-        const data = await response.json();
-        if (data.scoringResult) {
-          setScoringResult(data.scoringResult);
-          if (onFinish) onFinish(data.scoringResult);
-          setIsSubmitting(false);
-          return;
-        }
+      // Attempt to save to API
+      try {
+        await fetch("/api/quiz/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId,
+            quizId: quiz.id,
+            userCadre,
+            answers: userAnswers,
+            timeSpentMap,
+            timeTakenSeconds: timeTaken,
+            scoringResult: evalResult,
+          }),
+        });
+      } catch (err) {
+        console.warn("Could not save to submission backend API:", err);
       }
 
-      // Local fallback evaluation
-      const localResult = evaluateQuizAttempt(quiz, userAnswers, timeSpentMap);
-      setScoringResult(localResult);
-      if (onFinish) onFinish(localResult);
+      setScoringResult(evalResult);
+      if (onFinish) onFinish(evalResult);
     } catch (err) {
-      console.error("Submission failed, evaluating locally:", err);
-      const localResult = evaluateQuizAttempt(quiz, userAnswers, timeSpentMap);
-      setScoringResult(localResult);
-      if (onFinish) onFinish(localResult);
+      console.error("Evaluation error:", err);
     } finally {
       setIsSubmitting(false);
     }
@@ -189,44 +175,44 @@ export function QuizRunner({
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
       {/* Top Header Card with Timer and Progress */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-4">
+      <div className="bg-white rounded-2xl shadow-xs border border-[#C7C2BA] p-6 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <div className="flex items-center space-x-2 text-xs font-semibold text-blue-700 uppercase tracking-wider mb-1">
+            <div className="flex items-center space-x-2 text-xs font-bold text-[#475A6F] uppercase tracking-wider mb-1">
               <span>{quiz.detectedDomain}</span>
-              <span>•</span>
+              <span>·</span>
               <span>{quiz.generatorSource === "GEMINI_AI" ? "Gemini AI" : "Offline Synthesis"}</span>
             </div>
-            <h1 className="text-xl md:text-2xl font-bold text-slate-900">{quiz.title}</h1>
+            <h1 className="text-xl md:text-2xl font-bold text-[#142446]">{quiz.title}</h1>
           </div>
 
           {/* Timer Display */}
           <div
             className={`flex items-center space-x-2 px-4 py-2 rounded-xl border font-mono font-bold text-lg transition-colors ${
               isTimeCritical
-                ? "bg-rose-50 border-rose-300 text-rose-600 animate-pulse"
-                : "bg-slate-50 border-slate-200 text-slate-800"
+                ? "bg-[#FAF9F6] border-[#D8921E] text-[#D8921E]"
+                : "bg-[#FAF9F6] border-[#C7C2BA] text-[#142446]"
             }`}
           >
-            <Clock className="w-5 h-5 text-slate-500" />
+            <Clock className="w-5 h-5 text-[#475A6F]" />
             <span>{timeFormatted}</span>
           </div>
         </div>
 
         {/* Progress Bar & Stat Indicator */}
         <div className="space-y-1.5 pt-2">
-          <div className="flex justify-between text-xs font-semibold text-slate-600">
+          <div className="flex justify-between text-xs font-semibold text-[#475A6F]">
             <span>
               Progress: {answeredCount} of {totalCount} answered ({progressPercent}%)
             </span>
-            <span className="text-amber-600 font-bold">
+            <span className="text-[#142446] font-bold">
               {Object.values(markedForReview).filter(Boolean).length} flagged
             </span>
           </div>
 
-          <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+          <div className="w-full bg-[#FAF9F6] border border-[#C7C2BA]/60 h-2.5 rounded-full overflow-hidden">
             <div
-              className="bg-blue-600 h-full rounded-full transition-all duration-300"
+              className="bg-[#142446] h-full rounded-full transition-all duration-300"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -248,66 +234,81 @@ export function QuizRunner({
       )}
 
       {/* Bottom Navigation & Question Grid Card */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-6">
+      <div className="bg-white rounded-2xl shadow-xs border border-[#C7C2BA] p-6 space-y-4">
         {/* Navigation Buttons */}
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center justify-between">
           <button
-            onClick={handlePrev}
+            onClick={() => setCurrentIndex((prev) => Math.max(0, prev - 1))}
             disabled={currentIndex === 0}
-            className="flex items-center space-x-1 px-4 py-2.5 border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold rounded-xl text-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex items-center space-x-1.5 px-4 py-2 rounded-lg border border-[#C7C2BA] bg-white text-[#142446] text-xs font-bold hover:bg-[#FAF9F6] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
           >
             <ChevronLeft className="w-4 h-4" />
             <span>Previous</span>
           </button>
 
-          <button
-            onClick={() => setShowConfirmModal(true)}
-            className="flex items-center space-x-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-semibold rounded-xl text-sm transition-all shadow-md"
-          >
-            <Send className="w-4 h-4" />
-            <span>Submit Quiz</span>
-          </button>
-
-          <button
-            onClick={handleNext}
-            disabled={currentIndex === totalCount - 1}
-            className="flex items-center space-x-1 px-4 py-2.5 border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold rounded-xl text-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed"
-          >
-            <span>Next</span>
-            <ChevronRight className="w-4 h-4" />
-          </button>
+          {currentIndex < totalCount - 1 ? (
+            <button
+              onClick={() => setCurrentIndex((prev) => Math.min(totalCount - 1, prev + 1))}
+              className="flex items-center space-x-1.5 px-6 py-2 rounded-lg bg-[#142446] text-white text-xs font-bold hover:bg-[#1e3460] transition-colors"
+            >
+              <span>Next</span>
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          ) : (
+            <button
+              onClick={() => setShowConfirmModal(true)}
+              className="flex items-center space-x-1.5 px-6 py-2 rounded-lg bg-[#D8921E] text-white text-xs font-bold hover:bg-[#c27f14] shadow-xs transition-colors"
+            >
+              <Send className="w-4 h-4" />
+              <span>Submit Assessment</span>
+            </button>
+          )}
         </div>
 
-        {/* Question Index Grid */}
-        <div className="pt-4 border-t border-slate-100">
-          <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
-            Question Navigator
+        {/* Question Palette / Bubble Jump Strip */}
+        <div className="pt-4 border-t border-[#C7C2BA]/40">
+          <div className="flex items-center justify-between text-xs text-[#475A6F] mb-3">
+            <span className="font-bold text-[#142446]">Question Navigator:</span>
+            <div className="flex items-center space-x-3 text-[11px]">
+              <span className="flex items-center space-x-1">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#142446]" />
+                <span>Answered</span>
+              </span>
+              <span className="flex items-center space-x-1">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#D8921E]" />
+                <span>Flagged</span>
+              </span>
+              <span className="flex items-center space-x-1">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#FAF9F6] border border-[#C7C2BA]" />
+                <span>Unvisited</span>
+              </span>
+            </div>
           </div>
+
           <div className="flex flex-wrap gap-2">
             {quiz.questions.map((q, idx) => {
-              const isCurrent = idx === currentIndex;
               const isAnswered = userAnswers[q.id] !== undefined;
-              const isFlagged = markedForReview[q.id];
+              const isFlagged = Boolean(markedForReview[q.id]);
+              const isCurrent = currentIndex === idx;
 
-              let btnClasses = "border-slate-200 bg-white text-slate-700 hover:border-slate-300";
-              if (isCurrent) {
-                btnClasses = "border-blue-600 bg-blue-600 text-white shadow-sm ring-2 ring-blue-300";
-              } else if (isFlagged) {
-                btnClasses = "border-amber-400 bg-amber-50 text-amber-900 font-bold";
+              let style = "bg-white text-[#475A6F] border-[#C7C2BA] hover:bg-[#FAF9F6]";
+              if (isFlagged) {
+                style = "bg-[#D8921E] text-white border-[#D8921E] font-bold";
               } else if (isAnswered) {
-                btnClasses = "border-emerald-400 bg-emerald-50 text-emerald-900 font-medium";
+                style = "bg-[#142446] text-white border-[#142446] font-bold";
+              }
+
+              if (isCurrent) {
+                style += " ring-2 ring-[#142446] ring-offset-1 font-bold";
               }
 
               return (
                 <button
-                  key={q.id || idx}
+                  key={q.id}
                   onClick={() => setCurrentIndex(idx)}
-                  className={`w-9 h-9 rounded-lg border text-xs font-bold transition-all relative flex items-center justify-center ${btnClasses}`}
+                  className={`w-9 h-9 rounded-lg border text-xs flex items-center justify-center transition-all ${style}`}
                 >
-                  <span>{idx + 1}</span>
-                  {isFlagged && !isCurrent && (
-                    <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber-500 rounded-full" />
-                  )}
+                  {idx + 1}
                 </button>
               );
             })}
@@ -315,38 +316,41 @@ export function QuizRunner({
         </div>
       </div>
 
-      {/* Confirmation Modal */}
+      {/* Confirmation Modal before Submit */}
       {showConfirmModal && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl border border-slate-200 space-y-4">
-            <div className="flex items-center space-x-3 text-amber-600">
-              <AlertCircle className="w-6 h-6" />
-              <h3 className="text-lg font-bold text-slate-900">Confirm Submission</h3>
+        <div className="fixed inset-0 z-50 bg-[#142446]/40 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-[#C7C2BA] space-y-4">
+            <div className="flex items-center space-x-3 text-[#142446]">
+              <AlertCircle className="w-6 h-6 text-[#D8921E]" />
+              <h3 className="text-lg font-bold">Ready to Submit?</h3>
             </div>
 
-            <p className="text-sm text-slate-600">
-              You have answered <strong className="text-slate-900">{answeredCount}</strong> out of{" "}
-              <strong className="text-slate-900">{totalCount}</strong> questions.
-              {answeredCount < totalCount && (
-                <span className="block text-rose-600 mt-1 font-medium">
-                  Warning: {totalCount - answeredCount} questions are still unanswered.
+            <p className="text-xs text-[#475A6F] leading-relaxed">
+              You have answered <span className="font-bold text-[#142446]">{answeredCount}</span> of{" "}
+              <span className="font-bold text-[#142446]">{totalCount}</span> questions.{" "}
+              {totalCount - answeredCount > 0 && (
+                <span className="text-[#D8921E] font-semibold">
+                  You have {totalCount - answeredCount} unanswered questions remaining.
                 </span>
               )}
             </p>
 
-            <div className="flex justify-end space-x-3 pt-2">
+            <div className="flex items-center justify-end space-x-3 pt-2">
               <button
                 onClick={() => setShowConfirmModal(false)}
-                className="px-4 py-2 border border-slate-300 hover:bg-slate-50 text-slate-700 rounded-lg text-sm font-semibold"
+                className="px-4 py-2 rounded-lg border border-[#C7C2BA] text-[#142446] text-xs font-semibold hover:bg-[#FAF9F6]"
               >
-                Continue Assessment
+                Return to Quiz
               </button>
               <button
-                onClick={handleSubmitQuiz}
+                onClick={() => {
+                  setShowConfirmModal(false);
+                  performSubmission();
+                }}
                 disabled={isSubmitting}
-                className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-semibold shadow-md"
+                className="px-5 py-2 rounded-lg bg-[#142446] hover:bg-[#1e3460] text-white text-xs font-bold shadow-xs"
               >
-                {isSubmitting ? "Scoring..." : "Yes, Submit Now"}
+                {isSubmitting ? "Scoring..." : "Yes, Submit Final Answers"}
               </button>
             </div>
           </div>

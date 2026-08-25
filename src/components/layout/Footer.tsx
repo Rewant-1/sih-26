@@ -1,150 +1,119 @@
 import React from "react";
 import Link from "next/link";
-import { Badge } from "@/components/ui/Badge";
-import { Award, BookOpen, ExternalLink, Globe, Shield, Sparkles } from "lucide-react";
+import Image from "next/image";
+
+const platformLinks = [
+  { href: "/assessment", label: "Self-Assessment Scores" },
+  { href: "/catalog", label: "Course Catalog" },
+  { href: "/quiz-studio", label: "AI Quiz Studio" },
+  { href: "/dashboard/learner", label: "Learner Hub" },
+  { href: "/dashboard/admin", label: "Leadership Analytics" },
+  { href: "/acbp", label: "Annual Capacity Building Plan" },
+];
+
+const institutionalLinks = [
+  { label: "Mission Karmayogi", href: "https://karmayogi.gov.in" },
+  { label: "iGOT Karmayogi Bharat", href: "https://igotkarmayogi.gov.in" },
+  { label: "NSSTA, Greater Noida", href: "#" },
+  { label: "MoSPI, Government of India", href: "https://mospi.gov.in" },
+];
 
 export function Footer() {
   return (
-    <footer className="w-full border-t border-slate-200 bg-slate-900 text-slate-300">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Col 1: Ministry Info */}
-          <div className="space-y-3 md:col-span-1">
-            <div className="flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#FF9933] text-slate-900 font-serif font-black text-lg">
-                M
-              </div>
-              <span className="font-bold text-white text-sm">
-                MoSPI Skill Intelligence
-              </span>
+    <footer className="w-full bg-[#142446] border-t border-[#1e3460] text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+        {/* Main grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-white/10">
+          {/* Brand column */}
+          <div className="md:col-span-4 space-y-4">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/karmasarthi.png"
+                alt="Karmasarthi"
+                width={200}
+                height={200}
+                className="h-[46px] w-auto object-contain bg-white/95 p-1 rounded-lg"
+              />
             </div>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Data Informatics and Innovation Division (DIID), Ministry of
-              Statistics and Programme Implementation, Government of India.
+
+            <p className="text-[13px] text-[#B7C7D9] leading-relaxed max-w-sm">
+              Competency assessment and personalized learning pathways for India&apos;s Official Statistical System — integrated with Mission Karmayogi.
             </p>
-            <div className="flex flex-wrap gap-1.5 pt-1">
-              <Badge variant="saffron" size="sm">
-                SIH 26101
-              </Badge>
-              <Badge variant="navy" size="sm" className="bg-slate-800 text-slate-200 border-slate-700">
-                FRAC 2026
-              </Badge>
+
+            <div className="text-[12px] text-[#B7C7D9]/80 leading-normal pt-1">
+              <p className="font-semibold text-[#F3E7D1]">Data Informatics & Innovation Division (DIID)</p>
+              <p>Ministry of Statistics & Programme Implementation</p>
+              <p>Government of India</p>
             </div>
           </div>
 
-          {/* Col 2: Official Pillars */}
-          <div className="space-y-2.5">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200">
-              Institutional Framework
-            </h4>
-            <ul className="space-y-2 text-xs text-slate-400">
-              <li className="flex items-center gap-1.5">
-                <Shield className="h-3.5 w-3.5 text-[#FF9933]" />
-                <span>Mission Karmayogi (CBC)</span>
-              </li>
-              <li className="flex items-center gap-1.5">
-                <Globe className="h-3.5 w-3.5 text-blue-400" />
-                <span>iGOT Karmayogi Bharat</span>
-              </li>
-              <li className="flex items-center gap-1.5">
-                <Award className="h-3.5 w-3.5 text-[#138808]" />
-                <span>NSSTA Greater Noida (TPAC)</span>
-              </li>
-              <li className="flex items-center gap-1.5">
-                <BookOpen className="h-3.5 w-3.5 text-amber-400" />
-                <span>FRAC 4-Domain Taxonomy</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 3: Quick Navigation */}
-          <div className="space-y-2.5">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200">
+          {/* Platform modules */}
+          <div className="md:col-span-3 space-y-3">
+            <h4 className="text-[11px] font-bold uppercase tracking-wider text-[#F3E7D1]">
               Platform Modules
             </h4>
-            <ul className="space-y-1.5 text-xs text-slate-400">
-              <li>
-                <Link
-                  href="/dashboard/learner"
-                  className="hover:text-white transition"
-                >
-                  Learner Dashboard & Radar
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/dashboard/admin"
-                  className="hover:text-white transition"
-                >
-                  Admin Division Heatmap
-                </Link>
-              </li>
-              <li>
-                <Link href="/acbp" className="hover:text-white transition">
-                  Annual Capacity Building Plan (ACBP)
-                </Link>
-              </li>
-              <li>
-                <Link href="/assessment" className="hover:text-white transition">
-                  Competency Self-Assessment
-                </Link>
-              </li>
-              <li>
-                <Link href="/catalog" className="hover:text-white transition">
-                  Unified Course Catalog
-                </Link>
-              </li>
-              <li>
-                <Link href="/quiz-studio" className="hover:text-white transition">
-                  AI Document-to-Quiz Studio
-                </Link>
-              </li>
+            <ul className="space-y-2">
+              {platformLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-[13px] text-[#B7C7D9] hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Col 4: Official Cadres & Divisions */}
-          <div className="space-y-2.5">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200">
-              Target Statistical Cadres
+          {/* Institutional links */}
+          <div className="md:col-span-3 space-y-3">
+            <h4 className="text-[11px] font-bold uppercase tracking-wider text-[#F3E7D1]">
+              Institutional Framework
             </h4>
-            <div className="space-y-1.5 text-xs text-slate-400">
-              <p>• Indian Statistical Service (ISS AD / DD / Dir)</p>
-              <p>• Senior Statistical Officer (SSO, Subordinate)</p>
-              <p>• Junior Statistical Officer (JSO, Subordinate)</p>
-              <div className="pt-2">
-                <span className="text-[11px] font-semibold text-slate-300 block mb-1">
-                  Key Divisions Covered:
-                </span>
-                <span className="font-mono text-[10px] text-slate-400">
-                  FOD • ESD • NAD • DIID • SDRD
-                </span>
-              </div>
-            </div>
+            <ul className="space-y-2">
+              {institutionalLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    rel="noopener noreferrer"
+                    className="text-[13px] text-[#B7C7D9] hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Statistical Cadres */}
+          <div className="md:col-span-2 space-y-3">
+            <h4 className="text-[11px] font-bold uppercase tracking-wider text-[#F3E7D1]">
+              Statistical Cadres
+            </h4>
+            <ul className="space-y-1.5 text-[12.5px] text-[#B7C7D9]">
+              <li>ISS Assistant Director</li>
+              <li>Senior Statistical Officer</li>
+              <li>Junior Statistical Officer</li>
+              <li className="pt-2 text-[11px] text-[#F3E7D1] font-medium">
+                FOD · ESD · NAD · DIID · SDRD
+              </li>
+            </ul>
           </div>
         </div>
 
-        {/* Mock-Data Disclosure */}
-        <div className="mb-6 rounded-lg border border-amber-700/40 bg-amber-950/40 px-4 py-2.5 text-center text-xs text-amber-300/90">
-          <span className="font-semibold text-amber-200">ℹ Prototype Demo Data:</span>{" "}
-          Course catalog uses representative data, schema-matched to iGOT Karmayogi &amp; NSSTA TPAC. Assessment profiles are simulated for demonstration purposes.
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© 2026 Ministry of Statistics and Programme Implementation (MoSPI). All Rights Reserved.</p>
+        {/* Bottom bar */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11.5px] text-[#B7C7D9]/70">
+          <p>
+            © {new Date().getFullYear()} Ministry of Statistics & Programme Implementation (MoSPI). All rights reserved.
+          </p>
           <div className="flex items-center gap-4">
-            <span>GIGW & Karmayogi Standard Compliant</span>
-            <span>•</span>
-            <span className="font-mono text-[11px]">API: /api/admin/analytics</span>
+            <span className="text-[#F3E7D1]">Capacity Building Commission Aligned</span>
+            <span>·</span>
+            <span>Mission Karmayogi</span>
           </div>
         </div>
-      </div>
-
-      {/* Tricolor Bottom Accent */}
-      <div className="h-1 w-full flex">
-        <div className="h-full w-1/3 bg-[#FF9933]" />
-        <div className="h-full w-1/3 bg-white" />
-        <div className="h-full w-1/3 bg-[#138808]" />
       </div>
     </footer>
   );
