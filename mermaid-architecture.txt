@@ -1,0 +1,36 @@
+flowchart TD
+    classDef t1Card fill:#142446,stroke:#D8921E,stroke-width:2px,color:#FFFFFF;
+    classDef t2Card fill:#FFFFFF,stroke:#142446,stroke-width:1.5px,color:#142446;
+    classDef t3Card fill:#F3E7D1,stroke:#475A6F,stroke-width:1.5px,color:#142446;
+    classDef t4Card fill:#1e3460,stroke:#D8921E,stroke-width:1.5px,color:#FFFFFF;
+
+    subgraph T1["TIER 1: PRESENTATION & ROLE INTERACTION LAYER"]
+        UI1["Learner Hub & Radar<br/>• ISS AD / SSO / JSO Personas<br/>• 29-Skill Polar Radar Chart<br/>• 1-Click Course Enrolment"]:::t1Card
+        UI2["Leadership Command Hub<br/>• 5-Division Heatmap (FOD/ESD/NAD)<br/>• Automated ACBP 2026-27 Plan<br/>• 1-Click CSV Export for CBC"]:::t1Card
+        UI3["AI Assessment Studio<br/>• NSS / CPI / SNA Manual Ingestion<br/>• Bloom-Weighted Auto-Grading<br/>• Verified Source Citations"]:::t1Card
+    end
+
+    subgraph T2["TIER 2: AI & AGENTIC ORCHESTRATION ENGINE"]
+        A1["FRAC Gap Engine (R1)<br/>• Δ = max(0, Benchmark - Assessed)<br/>• Temporal Decay: exp(-λΔt)<br/>• Role Deficit Index (RDI)"]:::t2Card
+        A2["Dual Recommender (R2)<br/>• +1 Single-Step Level Progression<br/>• iGOT + NSSTA Catalog Match<br/>• Explainable Pedagogical Reason"]:::t2Card
+        A3["Cognitive Quiz Synthesizer<br/>• Gemini Flash Fallback Chain<br/>• 6 Bloom Levels (Remember→Create)<br/>• 100% Offline Synthesis Fallback"]:::t2Card
+        A4["ACBP Batch Optimizer<br/>• Division Deficiency Aggregator<br/>• Knapsack Capacity Formulation<br/>• CBC Schedule & Urgency Tiers"]:::t2Card
+    end
+
+    subgraph T3["TIER 3: DOMAIN KNOWLEDGE & TELEMETRY CORE"]
+        K1[("FRAC Taxonomy Graph<br/>• 29 Official Skills across 4 Domains<br/>• 145 Level 1-5 Rubric Descriptors")]:::t3Card
+        K2[("Cadre Benchmark Matrix<br/>• ISS AD · SSO · JSO Targets<br/>• Mandatory Role Profiles")]:::t3Card
+        K3[("MoSPI Vector Vault<br/>• NSS 79th Round Manuals<br/>• CPI Circulars & SNA 2008")]:::t3Card
+        K4[("Telemetry & Audit Store<br/>• Per-Question Response Latency<br/>• DPDPA 2023 Compliant Logs")]:::t3Card
+    end
+
+    subgraph T4["TIER 4: NATIONAL DIGITAL PUBLIC INFRASTRUCTURE (DPI)"]
+        G1["iGOT Karmayogi Bharat<br/>(Sunbird-CB API / Course Catalog)"]:::t4Card
+        G2["NSSTA Greater Noida<br/>(TPAC Residential Calendar)"]:::t4Card
+        G3["Capacity Building Commission<br/>(CBC National ACBP Standards)"]:::t4Card
+        G4["Jan Parichay & Security<br/>(NIC SSO / MeghRaj Compliance)"]:::t4Card
+    end
+
+    UI1 & UI2 & UI3 -->|"Assessment Ratings & Uploads"| T2
+    T2 <-->|"Taxonomy & Vector Embeddings"| T3
+    T2 <-->|"Catalog Sync & Course Nomination"| T4

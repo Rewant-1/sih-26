@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -73,13 +73,15 @@ const capsuleNavLinks = [
   },
 ];
 
-export function Header({
-  activeUserId,
-  onUserChange,
-}: {
+interface HeaderProps {
   activeUserId?: string;
   onUserChange?: (userId: string) => void;
-}) {
+}
+
+function HeaderContent({
+  activeUserId,
+  onUserChange,
+}: HeaderProps) {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -287,5 +289,19 @@ export function Header({
         </div>
       </header>
     </div>
+  );
+}
+
+export function Header(props: HeaderProps) {
+  return (
+    <Suspense
+      fallback={
+        <div className="w-full bg-[#142446] h-12 flex items-center px-4">
+          <span className="text-xs text-white/70">Loading Ministry Portal...</span>
+        </div>
+      }
+    >
+      <HeaderContent {...props} />
+    </Suspense>
   );
 }

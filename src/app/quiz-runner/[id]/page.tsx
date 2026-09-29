@@ -8,10 +8,16 @@ interface QuizRunnerPageProps {
   params: {
     id: string;
   };
+  searchParams?: {
+    user?: string;
+  };
 }
 
-export default async function QuizRunnerPage({ params }: QuizRunnerPageProps) {
+export default async function QuizRunnerPage({ params, searchParams }: QuizRunnerPageProps) {
   const { id } = params;
+  const userId = searchParams?.user || "usr-jso-rajesh";
+  const user = (await repository.getUserProfile(userId)) || (await repository.getUserProfile("usr-jso-rajesh"));
+  const userCadre = user?.cadre || "JUNIOR_STATISTICAL_OFFICER";
   const quiz = await repository.getQuizById(id);
 
   if (!quiz) {
@@ -28,7 +34,7 @@ export default async function QuizRunnerPage({ params }: QuizRunnerPageProps) {
           </p>
           <div className="pt-2">
             <a
-              href="/quiz-studio"
+              href={`/quiz-studio?user=${userId}`}
               className="inline-flex items-center space-x-2 px-5 py-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-sm font-semibold transition-all"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -46,7 +52,7 @@ export default async function QuizRunnerPage({ params }: QuizRunnerPageProps) {
         {/* Navigation Breadcrumb */}
         <div className="flex items-center justify-between">
           <a
-            href="/quiz-studio"
+            href={`/quiz-studio?user=${userId}`}
             className="inline-flex items-center space-x-1.5 text-xs font-bold text-slate-600 hover:text-blue-700 transition-colors uppercase tracking-wider"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
@@ -54,15 +60,15 @@ export default async function QuizRunnerPage({ params }: QuizRunnerPageProps) {
           </a>
 
           <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-200 text-slate-700">
-            Session ID: {id}
+            Session ID: {id} · Officer: {user?.name || "Official"}
           </span>
         </div>
 
         {/* Quiz Runner */}
         <QuizRunner
           quiz={quiz}
-          userId="usr-jso-rajesh"
-          userCadre="JUNIOR_STATISTICAL_OFFICER"
+          userId={userId}
+          userCadre={userCadre}
         />
       </div>
     </main>

@@ -16,6 +16,7 @@ import type { Quiz, ScoringResult } from "@/lib/types";
 interface QuizReviewModalProps {
   quiz: Quiz;
   scoringResult: ScoringResult;
+  userId?: string;
   onRetake: () => void;
   onExit: () => void;
 }
@@ -23,6 +24,7 @@ interface QuizReviewModalProps {
 export function QuizReviewModal({
   quiz,
   scoringResult,
+  userId = "usr-jso-rajesh",
   onRetake,
   onExit,
 }: QuizReviewModalProps) {
@@ -344,7 +346,7 @@ export function QuizReviewModal({
         </div>
 
         {/* Footer Action Buttons */}
-        <div className="pt-6 border-t border-[#C7C2BA] flex items-center justify-between">
+        <div className="pt-6 border-t border-[#C7C2BA] flex flex-wrap items-center justify-between gap-3">
           <button
             onClick={onRetake}
             className="flex items-center space-x-1.5 px-4 py-2.5 rounded-lg border border-[#C7C2BA] bg-white text-[#142446] text-xs font-semibold hover:bg-[#FAF9F6]"
@@ -353,12 +355,21 @@ export function QuizReviewModal({
             <span>Retake Assessment</span>
           </button>
 
-          <button
-            onClick={onExit}
-            className="px-6 py-2.5 rounded-lg bg-[#142446] hover:bg-[#1e3460] text-white text-xs font-bold"
-          >
-            Done / Return to Studio
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onExit}
+              className="px-4 py-2.5 rounded-lg border border-[#C7C2BA] hover:bg-[#FAF9F6] text-[#142446] text-xs font-bold"
+            >
+              Return to Studio
+            </button>
+            <a
+              href={`/dashboard/learner?user=${userId}`}
+              className="px-5 py-2.5 rounded-lg bg-[#142446] hover:bg-[#1e3460] text-white text-xs font-bold flex items-center gap-1.5"
+            >
+              <span>View Updated Learner Hub</span>
+              <span>→</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>

@@ -101,40 +101,50 @@ Document Content:
 ${sanitized.slice(0, 15000)}
 `;
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              role: "user",
-              parts: [{ text: `${SYSTEM_PROMPT}\n\n${prompt}` }],
-            },
-          ],
-          generationConfig: {
-            responseMimeType: "application/json",
-            temperature: 0.2,
-            topP: 0.95,
-          },
-        }),
-      }
-    );
+    // Try primary and fallback Gemini models
+    const modelCandidates = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-3.6-flash"];
+    let rawJsonText: string | null = null;
 
-    if (!response.ok) {
-      const errText = await response.text();
-      console.warn(`Gemini API HTTP Error ${response.status}: ${errText}. Falling back to Offline Engine.`);
-      return generateOfflineQuiz(sanitized, fileName, options);
+    for (const model of modelCandidates) {
+      try {
+        const response = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              contents: [
+                {
+                  role: "user",
+                  parts: [{ text: `${SYSTEM_PROMPT}\n\n${prompt}` }],
+                },
+              ],
+              generationConfig: {
+                responseMimeType: "application/json",
+                temperature: 0.2,
+                topP: 0.95,
+              },
+            }),
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          rawJsonText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (rawJsonText) break;
+        } else {
+          const errText = await response.text();
+          console.warn(`Gemini model ${model} returned ${response.status}: ${errText}. Trying next candidate...`);
+        }
+      } catch (callErr) {
+        console.warn(`Error calling Gemini model ${model}:`, callErr);
+      }
     }
 
-    const data = await response.json();
-    const rawJsonText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-
     if (!rawJsonText) {
-      console.warn("Empty response from Gemini API. Falling back to Offline Engine.");
+      console.warn("No response from Gemini API models. Falling back to Offline Engine.");
       return generateOfflineQuiz(sanitized, fileName, options);
     }
 

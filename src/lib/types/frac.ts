@@ -73,4 +73,6 @@ export interface AssessmentResult {
   moderateGapsCount: number;
   proficientCount: number;
   surplusCount: number;
+  /** Role Deficit Index: weighted Euclidean norm of competency gaps (0 = no deficit) */
+  rdi?: number;
 }

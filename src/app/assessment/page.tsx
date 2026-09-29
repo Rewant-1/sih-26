@@ -7,14 +7,21 @@ import { Footer } from "@/components/layout/Footer";
 
 export const dynamic = "force-dynamic";
 
-export default async function AssessmentPage() {
+interface AssessmentPageProps {
+  searchParams?: {
+    user?: string;
+  };
+}
+
+export default async function AssessmentPage({ searchParams }: AssessmentPageProps) {
+  const userId = searchParams?.user || "usr-jso-rajesh";
   const competencies = await repository.getCompetencies();
   const benchmarks = await repository.getAllCadreBenchmarks();
-  const user = await repository.getUserProfile("usr_001");
+  const user = (await repository.getUserProfile(userId)) || (await repository.getUserProfile("usr-jso-rajesh"));
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f9f8f5]">
-      <Header />
+      <Header activeUserId={userId} />
 
       {/* Page Title Bar */}
       <div className="bg-white border-b border-[#e8e4dc]">

@@ -4,6 +4,8 @@ import { filterCourseCatalog } from "@/lib/engine/recommendation-engine";
 import type { CourseFilter, CourseSource } from "@/lib/types/sunbird";
 import type { CadreId, CompetencyDomain, ProficiencyLevel } from "@/lib/types/frac";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);

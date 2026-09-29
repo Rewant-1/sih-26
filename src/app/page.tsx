@@ -9,6 +9,8 @@ import { PlatformOverview } from "@/components/home/PlatformOverview";
 import { CompetencyMatrix } from "@/components/home/CompetencyMatrix";
 import { AssessmentWorkflow } from "@/components/home/AssessmentWorkflow";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const competencies = await repository.getCompetencies();
   const courses = await repository.getCourses();

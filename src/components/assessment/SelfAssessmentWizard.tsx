@@ -162,6 +162,9 @@ export function SelfAssessmentWizard({
 
   // Ratings State: competencyId -> Level (1..5)
   const [ratings, setRatings] = useState<Record<string, number>>(() => {
+    if (initialUser?.assessedRatings && Object.keys(initialUser.assessedRatings).length > 0) {
+      return { ...initialUser.assessedRatings };
+    }
     const initial: Record<string, number> = {};
     initialTaxonomy.forEach((comp) => {
       const benchmarkVal = activeBenchmark.benchmarks[comp.id] ?? 3;
@@ -337,12 +340,15 @@ export function SelfAssessmentWizard({
   }, [initialTaxonomy, activeBenchmark, ratings, selectedCadre]);
 
   // Submission handler
+  const targetUserId = initialUser?.id || urlUser || "usr-jso-rajesh";
   const handleSubmitAssessment = async () => {
     setIsSubmitting(true);
     try {
       const submissionData = {
-        userId: initialUser?.id || "usr_001",
+        userId: targetUserId,
+        cadre: activeBenchmark.cadreId,
         cadreId: selectedCadre,
+        division: officerDivision,
         completedAt: new Date().toISOString(),
         ratings,
         domainScores: liveResult.domainScores,
@@ -362,11 +368,11 @@ export function SelfAssessmentWizard({
 
       if (res.ok) {
         const saved = await res.json();
-        setPersistedResult(saved.submission || submissionData);
+        setPersistedResult(saved.result || saved.submission || submissionData);
         setSavedSuccess(true);
         setCurrentStep(5);
         if (onSaveAssessment) {
-          onSaveAssessment(saved.submission || submissionData);
+          onSaveAssessment(saved.result || saved.submission || submissionData);
         }
       }
     } catch (err) {
@@ -1075,9 +1081,14 @@ export function SelfAssessmentWizard({
               </div>
 
               <div className="flex items-center gap-3">
-                <Link href="/catalog">
+                <Link href={`/dashboard/learner?user=${targetUserId}`}>
                   <Button className="bg-[#142446] hover:bg-[#1e3460] text-white gap-2 text-sm font-semibold">
-                    Explore iGOT & NSSTA Catalog <ArrowRight className="w-4 h-4" />
+                    View Learner Dashboard & Radar <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </Link>
+                <Link href={`/catalog?user=${targetUserId}`}>
+                  <Button variant="outline" className="border-[#C7C2BA] text-[#142446] hover:bg-[#FAF9F6] gap-2 text-sm font-semibold">
+                    Browse Course Catalog
                   </Button>
                 </Link>
               </div>

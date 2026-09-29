@@ -153,9 +153,10 @@ export function QuizRunner({
       <QuizReviewModal
         quiz={quiz}
         scoringResult={scoringResult}
+        userId={userId}
         onRetake={handleRetake}
         onExit={() => {
-          window.location.href = "/quiz-studio";
+          window.location.href = `/quiz-studio?user=${userId}`;
         }}
       />
     );

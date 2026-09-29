@@ -22,6 +22,7 @@ import { CompetencyRadarChart, RadarDataPoint } from "@/components/dashboard/Com
 import { SkillGapCard } from "@/components/dashboard/SkillGapCard";
 import { LearningRoadmap } from "@/components/dashboard/LearningRoadmap";
 import { repository } from "@/lib/storage/repository";
+import { recommendCoursesForGaps } from "@/lib/engine/recommendation-engine";
 import type {
   UserProfile,
   Competency,
@@ -30,6 +31,7 @@ import type {
   SunbirdCBCourse,
   CourseRecommendation,
   CompetencyDomain,
+  QuizAttempt,
 } from "@/lib/types";
 
 function LearnerDashboardContent() {
@@ -41,6 +43,7 @@ function LearnerDashboardContent() {
   const [allCompetencies, setAllCompetencies] = useState<Competency[]>([]);
   const [benchmark, setBenchmark] = useState<CadreBenchmark | null>(null);
   const [courses, setCourses] = useState<SunbirdCBCourse[]>([]);
+  const [quizAttempts, setQuizAttempts] = useState<QuizAttempt[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   // Load all required data
@@ -48,16 +51,18 @@ function LearnerDashboardContent() {
     async function loadData() {
       setIsLoading(true);
       try {
-        const [userData, comps, allCourses] = await Promise.all([
+        const [userData, comps, allCourses, attempts] = await Promise.all([
           repository.getUserProfile(userId),
           repository.getCompetencies(),
           repository.getCourses(),
+          repository.getQuizAttempts ? repository.getQuizAttempts(userId) : Promise.resolve([]),
         ]);
 
         const currentProfile = userData || (await repository.getUserProfile("usr-jso-rajesh"));
         setUser(currentProfile);
         setAllCompetencies(comps);
         setCourses(allCourses);
+        setQuizAttempts(attempts || []);
 
         if (currentProfile) {
           const cadreBench = await repository.getCadreBenchmarks(currentProfile.cadre);
@@ -176,31 +181,12 @@ function LearnerDashboardContent() {
     fullMark: 5,
   }));
 
-  // Recommendations
-  const recommendations: CourseRecommendation[] = [];
-  gaps.forEach((gap) => {
-    if (gap.gap === 0 && gap.severity === "PROFICIENT") return;
-
-    const matchedCourse = courses.find((c) =>
-      c.competencies.some((cmp) => cmp.id === gap.competencyId)
-    );
-
-    if (matchedCourse) {
-      const isCadreMatch = matchedCourse.targetAudience.includes(user.cadre);
-      recommendations.push({
-        course: matchedCourse,
-        targetCompetencyId: gap.competencyId,
-        targetCompetencyName: gap.competencyName,
-        relevanceScore: gap.severity === "CRITICAL" ? 95 : 82,
-        cadreMatch: isCadreMatch,
-        estimatedEffortHours: matchedCourse.durationMinutes / 60,
-        sourceBadge: matchedCourse.source,
-        recommendationReason: `Directly bridges identified ${gap.severity.toLowerCase()} deficiency in ${
-          gap.competencyName
-        }.`,
-      });
-    }
-  });
+  // Recommendations via Multi-Factor Engine
+  const recommendations: CourseRecommendation[] = recommendCoursesForGaps(
+    gaps,
+    user.cadre,
+    courses
+  );
 
   // KPIs
   const criticalCount = gaps.filter((g) => g.severity === "CRITICAL").length;
@@ -381,43 +367,67 @@ function LearnerDashboardContent() {
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-3 pt-4">
-                  {/* Record 1 */}
-                  <div className="p-3 rounded-xl border border-[#C7C2BA] bg-[#FAF9F6] space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-xs text-[#142446]">
-                        NSS 79th Round Operational Manual
-                      </span>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-white text-[#142446] border border-[#C7C2BA]">
-                        88% Score
-                      </span>
-                    </div>
-                    <p className="text-[11px] text-[#475A6F]">
-                      Evaluated: Sampling Design & CAPI Operations · 5 Questions
-                    </p>
-                    <div className="flex justify-between items-center text-[10px] text-[#475A6F] font-mono pt-1 border-t border-[#C7C2BA]/40">
-                      <span>Bloom: Apply & Analyze</span>
-                      <span>15 Aug 2026</span>
-                    </div>
-                  </div>
+                  {quizAttempts && quizAttempts.length > 0 ? (
+                    quizAttempts.slice(-3).reverse().map((attempt) => (
+                      <div key={attempt.id} className="p-3 rounded-xl border border-[#C7C2BA] bg-[#FAF9F6] space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-xs text-[#142446] line-clamp-1">
+                            {attempt.quizTitle}
+                          </span>
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-white text-[#142446] border border-[#C7C2BA]">
+                            {attempt.weightedScorePercentage}% Score
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-[#475A6F]">
+                          Raw: {attempt.scoringResult.correctCount}/{attempt.scoringResult.totalQuestions} ({attempt.rawScorePercentage}%) · {Math.round(attempt.timeSpentSeconds)}s duration
+                        </p>
+                        <div className="flex justify-between items-center text-[10px] text-[#475A6F] font-mono pt-1 border-t border-[#C7C2BA]/40">
+                          <span>Bloom: Weighted Assessment</span>
+                          <span>{new Date(attempt.completedAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}</span>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <>
+                      {/* Record 1 */}
+                      <div className="p-3 rounded-xl border border-[#C7C2BA] bg-[#FAF9F6] space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-xs text-[#142446]">
+                            NSS 79th Round Operational Manual
+                          </span>
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-white text-[#142446] border border-[#C7C2BA]">
+                            88% Score
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-[#475A6F]">
+                          Evaluated: Sampling Design & CAPI Operations · 5 Questions
+                        </p>
+                        <div className="flex justify-between items-center text-[10px] text-[#475A6F] font-mono pt-1 border-t border-[#C7C2BA]/40">
+                          <span>Bloom: Apply & Analyze</span>
+                          <span>15 Aug 2026</span>
+                        </div>
+                      </div>
 
-                  {/* Record 2 */}
-                  <div className="p-3 rounded-xl border border-[#C7C2BA] bg-[#FAF9F6] space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-xs text-[#142446]">
-                        CPI Base 2012 Index Compilation
-                      </span>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-white text-[#142446] border border-[#C7C2BA]">
-                        74% Score
-                      </span>
-                    </div>
-                    <p className="text-[11px] text-[#475A6F]">
-                      Evaluated: Price Relatives & Index Numbers · 5 Questions
-                    </p>
-                    <div className="flex justify-between items-center text-[10px] text-[#475A6F] font-mono pt-1 border-t border-[#C7C2BA]/40">
-                      <span>Bloom: Understand & Apply</span>
-                      <span>18 Aug 2026</span>
-                    </div>
-                  </div>
+                      {/* Record 2 */}
+                      <div className="p-3 rounded-xl border border-[#C7C2BA] bg-[#FAF9F6] space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-xs text-[#142446]">
+                            CPI Base 2012 Index Compilation
+                          </span>
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-white text-[#142446] border border-[#C7C2BA]">
+                            74% Score
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-[#475A6F]">
+                          Evaluated: Price Relatives & Index Numbers · 5 Questions
+                        </p>
+                        <div className="flex justify-between items-center text-[10px] text-[#475A6F] font-mono pt-1 border-t border-[#C7C2BA]/40">
+                          <span>Bloom: Understand & Apply</span>
+                          <span>18 Aug 2026</span>
+                        </div>
+                      </div>
+                    </>
+                  )}
 
                   {/* Quiz Generator Prompt Card (Light Theme, No Gradients) */}
                   <div className="rounded-xl border border-[#C7C2BA] bg-[#FAF9F6] p-4 text-xs space-y-2">

@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { Clock } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import type { Quiz } from "../../lib/types";
 import { DocumentUploader } from "../../components/quiz/DocumentUploader";
 import { QuizRunner } from "../../components/quiz/QuizRunner";
@@ -9,7 +10,16 @@ import { Header } from "../../components/layout/Header";
 import { Footer } from "../../components/layout/Footer";
 import Link from "next/link";
 
-export default function QuizStudioPage() {
+function QuizStudioContent() {
+  const searchParams = useSearchParams();
+  const userId = searchParams?.get("user") || "usr-jso-rajesh";
+  const userCadre =
+    userId === "usr-sso-priya"
+      ? "SENIOR_STATISTICAL_OFFICER"
+      : userId === "usr-ad-amit" || userId === "usr-dir-sunita"
+      ? "ISS_ASSISTANT_DIRECTOR"
+      : "JUNIOR_STATISTICAL_OFFICER";
+
   const [activeQuiz, setActiveQuiz] = useState<Quiz | null>(null);
 
   const handleQuizGenerated = (quiz: Quiz) => {
@@ -19,14 +29,14 @@ export default function QuizStudioPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f9f8f5]">
-      <Header />
+      <Header activeUserId={userId} />
 
       {/* Page Title Bar */}
       <div className="bg-white border-b border-[#e8e4dc]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-6 flex items-center justify-between">
           <div>
             <div className="flex items-center gap-2 text-[12px] text-[#475A6F] mb-2">
-              <Link href="/" className="hover:text-[#D8921E] transition-colors">Home</Link>
+              <Link href={`/?user=${userId}`} className="hover:text-[#D8921E] transition-colors">Home</Link>
               <span className="text-[#C7C2BA]">/</span>
               <span className="text-[#142446] font-medium">AI Quiz Studio</span>
             </div>
@@ -53,8 +63,8 @@ export default function QuizStudioPage() {
         {activeQuiz ? (
           <QuizRunner
             quiz={activeQuiz}
-            userId="usr-jso-rajesh"
-            userCadre="JUNIOR_STATISTICAL_OFFICER"
+            userId={userId}
+            userCadre={userCadre}
           />
         ) : (
           <>
@@ -145,5 +155,19 @@ export default function QuizStudioPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function QuizStudioPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#FAF9F6] flex items-center justify-center">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#142446] border-t-transparent" />
+        </div>
+      }
+    >
+      <QuizStudioContent />
+    </Suspense>
   );
 }

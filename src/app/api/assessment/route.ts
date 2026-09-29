@@ -40,44 +40,31 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { userId = "usr_001", cadre, division = "National Accounts Division (NAD)", ratings } = body;
-
-    if (!cadre) {
-      return NextResponse.json(
-        { success: false, error: "Missing required parameter: cadre" },
-        { status: 400 }
-      );
+    const { userId = "usr-jso-rajesh", division = "Field Operations Division (FOD)", ratings = {} } = body;
+    let rawCadre = body.cadre || body.cadreId || "JUNIOR_STATISTICAL_OFFICER";
+    let normalizedCadre: CadreId = "JUNIOR_STATISTICAL_OFFICER";
+    if (rawCadre === "cadre_sso" || rawCadre === "SENIOR_STATISTICAL_OFFICER" || rawCadre === "SSO") {
+      normalizedCadre = "SENIOR_STATISTICAL_OFFICER";
+    } else if (rawCadre === "cadre_iss_ad" || rawCadre === "ISS_ASSISTANT_DIRECTOR" || rawCadre === "ISS_AD") {
+      normalizedCadre = "ISS_ASSISTANT_DIRECTOR";
     }
 
-    const validCadres: CadreId[] = [
-      "ISS_ASSISTANT_DIRECTOR",
-      "SENIOR_STATISTICAL_OFFICER",
-      "JUNIOR_STATISTICAL_OFFICER",
-    ];
-
-    if (!validCadres.includes(cadre as CadreId)) {
-      return NextResponse.json(
-        { success: false, error: `Invalid cadre identifier: ${cadre}` },
-        { status: 400 }
-      );
-    }
-
-    const benchmark = await repository.getCadreBenchmarks(cadre as CadreId);
+    const benchmark = await repository.getCadreBenchmarks(normalizedCadre);
     if (!benchmark) {
       return NextResponse.json(
-        { success: false, error: `Benchmark not found for cadre: ${cadre}` },
+        { success: false, error: `Benchmark not found for cadre: ${normalizedCadre}` },
         { status: 404 }
       );
     }
 
     const safeRatings = ratings || {};
-    const result = calculateSkillGaps(safeRatings, cadre as CadreId, benchmark, userId);
+    const result = calculateSkillGaps(safeRatings, normalizedCadre, benchmark, userId);
 
     const assessmentId = `asm_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
     const record: AssessmentRecord = {
       assessmentId,
       userId,
-      cadre: cadre as CadreId,
+      cadre: normalizedCadre,
       division,
       timestamp: new Date().toISOString(),
       ratings: safeRatings,
@@ -92,7 +79,7 @@ export async function POST(req: NextRequest) {
     if (existingUser) {
       await repository.saveUserProfile({
         ...existingUser,
-        cadre: cadre as CadreId,
+        cadre: normalizedCadre,
         division,
         lastAssessmentDate: record.timestamp,
         currentAssessmentId: assessmentId,

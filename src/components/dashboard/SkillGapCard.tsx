@@ -144,7 +144,7 @@ export function SkillGapCard({ gaps, userId = "usr-jso-rajesh" }: SkillGapCardPr
                       {item.competencyName}
                     </h4>
                     <p className="text-xs text-[#475A6F] leading-relaxed line-clamp-2">
-                      {item.description}
+                      {item.suggestedAction}
                     </p>
                   </div>
 

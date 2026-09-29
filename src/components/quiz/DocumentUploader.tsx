@@ -69,6 +69,30 @@ Rule 3: Numerical variables prone to outlier re-identification (Total Annual Inc
 Rule 4: All official datasets must be accompanied by SDMX 2.1 Data Structure Definitions (DSD) and Data Documentation Initiative (DDI-Codebook) XML metadata schemas.
 Rule 5: Dissemination must adhere to the 8 phases of Generic Statistical Business Process Model (GSBPM Version 5.1).`,
   },
+  {
+    title: "National Accounts Statistics – SUT & GVA (SNA 2008)",
+    domain: "Technical Competencies",
+    snippet:
+      "Supply and Use Tables (SUT), Gross Value Added (GVA) at basic prices, FISIM allocation, and double deflation methodology.",
+    fullContent: `NATIONAL ACCOUNTS DIVISION (NAD) - METHODOLOGY NOTE ON GVA COMPILATION (SNA 2008)
+CHAPTER 4: SUPPLY AND USE TABLES AND DOUBLE DEFLATION
+4.1 Gross Value Added (GVA) at basic prices is defined as Output at basic prices minus Intermediate Consumption at purchasers' prices.
+4.2 Basic price is the amount receivable by the producer from the purchaser for a unit of a good or service produced, deducting any tax payable and adding any subsidy receivable on that unit.
+4.3 Financial Intermediation Services Indirectly Measured (FISIM) is allocated across user industries based on sectoral loan and deposit proportions rather than treated as unallocated intermediate consumption.
+4.4 Double deflation requires deflating gross output using specific output price indices (WPI/CPI) and intermediate inputs using input-weighted commodity indices to obtain real constant price GVA.`,
+  },
+  {
+    title: "Annual Survey of Industries (ASI) – Schedule Scrutiny",
+    domain: "Behavioural & Managerial Competencies",
+    snippet:
+      "Factories Act 1948 frame, Block C capital reconciliation, gross output estimation, and field supervision audit trails.",
+    fullContent: `FIELD OPERATIONS DIVISION / ESD - ANNUAL SURVEY OF INDUSTRIES OPERATIONAL MANUAL
+SECTION 5: PRIMARY SCRUTINY AND ETHICAL AUDIT PROTOCOLS
+5.1 Frame Coverage: All registered factories under Sections 2m(i) and 2m(ii) of the Factories Act 1948 employing 10 or more workers with power, or 20 or more workers without power.
+5.2 Block C Scrutiny: Total fixed capital consists of Land, Buildings, Plant & Machinery, and Capital Work in Progress. Closing net book value must strictly equal Opening value + Additions - Deductions - Depreciation during the accounting year.
+5.3 Discrepancy Reconciliation: Supervisors must cross-verify Ex-factory value of output with excise/GST returns and verify fuel consumption against electricity bills before certifying Schedule Part-I.
+5.4 Ethical Code & Field Independence: Field officers are bound by confidentiality under Section 11 of the Collection of Statistics Act 2008.`,
+  },
 ];
 
 export function DocumentUploader({ onQuizGenerated }: DocumentUploaderProps) {

@@ -41,6 +41,45 @@ export const CADRE_CRITICALITY = (benchmarkLevel: number): number => {
   return 0.85;
 };
 
+/**
+ * Domain-specific temporal decay rates (λ per month).
+ * Statistical skills decay faster (methodology evolves with each survey round),
+ * while behavioural competencies are more stable.
+ * Half-life ≈ ln(2)/λ months: STAT≈5.8mo, TECH≈6.9mo, GOV≈8.7mo, BEH≈13.9mo
+ */
+export const DECAY_RATES: Record<string, number> = {
+  STAT: 0.12,
+  TECH: 0.10,
+  GOV: 0.08,
+  BEH: 0.05,
+  "Statistical Competencies": 0.12,
+  "Technical Competencies": 0.10,
+  "Digital Governance & Data Stewardship": 0.08,
+  "Behavioural & Managerial Competencies": 0.05,
+};
+
+/**
+ * Temporal Skill Decay: L̂_curr(c_j, Δt) = L_curr(c_j) · exp(-λ_j · Δt)
+ *
+ * Applies exponential decay to an assessed level based on months elapsed
+ * since last assessment. Clamped to [1, 5] range.
+ *
+ * @param assessedLevel - Current proficiency level (1-5)
+ * @param domain - Domain code or full domain name
+ * @param monthsSinceAssessment - Months since last assessment (Δt)
+ * @returns Decayed proficiency level, clamped to [1, 5]
+ */
+export function applyTemporalDecay(
+  assessedLevel: number,
+  domain: string,
+  monthsSinceAssessment: number
+): number {
+  if (monthsSinceAssessment <= 0) return assessedLevel;
+  const lambda = DECAY_RATES[domain] || 0.08;
+  const decayed = assessedLevel * Math.exp(-lambda * monthsSinceAssessment);
+  return Math.max(1, Math.min(5, Number(decayed.toFixed(2))));
+}
+
 // Map of competency ID to metadata for fast lookup
 export const COMPETENCY_METADATA: Record<
   string,
@@ -145,7 +184,8 @@ export function calculateSkillGaps(
   assessedRatings: Record<string, number>,
   cadre: CadreId,
   benchmarks: CadreBenchmark,
-  userId: string = "user-current"
+  userId: string = "user-current",
+  monthsSinceAssessment: number = 0
 ): AssessmentResult {
   const benchmarkMap = benchmarks.benchmarks || {};
   const gaps: SkillGap[] = [];
@@ -165,12 +205,21 @@ export function calculateSkillGaps(
     new Set([...Object.keys(benchmarkMap), ...taxonomyData.map((t) => t.id)])
   );
 
+  // RDI accumulator: Σ w_d · (B_d - A_d)²
+  let rdiWeightedSumSq = 0;
+  let rdiTotalWeight = 0;
+
   for (const compId of allCompetencyIds) {
     const bLevel = benchmarkMap[compId] || 3;
-    const aLevel = assessedRatings[compId] ?? 1;
+    let aLevel = assessedRatings[compId] ?? 1;
     const meta = COMPETENCY_METADATA[compId];
     const domain = meta ? meta.domain : getDomainFromCompetencyId(compId);
     const domainCode = meta ? meta.domainCode : compId.substring(0, 4);
+
+    // Apply temporal decay if months elapsed > 0
+    if (monthsSinceAssessment > 0) {
+      aLevel = applyTemporalDecay(aLevel, domainCode, monthsSinceAssessment);
+    }
 
     const gapResult = computeSkillGap(
       compId,
@@ -186,7 +235,19 @@ export function calculateSkillGaps(
       domainTotals[domain].assessedSum += gapResult.assessedLevel;
       domainTotals[domain].benchmarkSum += gapResult.benchmarkLevel;
     }
+
+    // RDI: weighted squared gap contribution
+    const dw = DOMAIN_WEIGHTS[domainCode] || 1.0;
+    const gapDelta = Math.max(0, bLevel - gapResult.assessedLevel);
+    rdiWeightedSumSq += dw * gapDelta * gapDelta;
+    rdiTotalWeight += dw;
   }
+
+  // Role Deficit Index = sqrt(Σ w_d · (B_d - A_d)²)
+  // Normalized: divide by sqrt(totalWeight) to keep scale ~0-4
+  const rdi = rdiTotalWeight > 0
+    ? Number((Math.sqrt(rdiWeightedSumSq) / Math.sqrt(rdiTotalWeight)).toFixed(3))
+    : 0;
 
   // Calculate Domain-Level Proficiency Index (DPI) for each domain
   const domainScores: Record<CompetencyDomain, number> = {
@@ -248,5 +309,6 @@ export function calculateSkillGaps(
     moderateGapsCount,
     proficientCount,
     surplusCount,
+    rdi,
   };
 }
